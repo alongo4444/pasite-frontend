@@ -25,10 +25,20 @@ const CULTURE_SHIPS = [
 
 class SearchPage extends React.Component {
 
-    state = {
-        data: CULTURE_SHIPS.slice(),
-        value: []
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: CULTURE_SHIPS.slice(),
+            result_table: [],
+            value: []
+        };
+
+        this.delta.bind(this);
+    }
+
+
 
     handleChange = (event) => {
         this.setState({
@@ -42,11 +52,18 @@ class SearchPage extends React.Component {
         });
     }
 
+
+
+    delta(res){
+        this.setState({result_table: res.data});
+    }
+
     async getResults(){
             axios
                 .get("http://127.0.0.1:8801/api/v1/genes")
                 .then((res) => {
-                    console.log(res)
+                    this.delta.bind(this);
+                    console.log(this.state.result_table)
                 });
     }
 
