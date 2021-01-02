@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom';
 import * as ReactDOM from 'react-dom';
 import {MultiSelect} from '@progress/kendo-react-dropdowns';
 import {filterBy} from '@progress/kendo-data-query';
+import axios from "axios";
 
 const CULTURE_SHIPS = [
         {text: "Grapes 🍇", id: "grapes"},
@@ -25,6 +26,7 @@ const CULTURE_SHIPS = [
 class SearchPage extends React.Component {
 
     state = {
+        data: CULTURE_SHIPS.slice(),
         value: []
     };
 
@@ -34,6 +36,19 @@ class SearchPage extends React.Component {
         });
     }
 
+    filterChange = (event) => {
+        this.setState({
+            data: filterBy(CULTURE_SHIPS.slice(), event.filter)
+        });
+    }
+
+    async getResults(){
+            axios
+                .get("http://127.0.0.1:8801/api/v1/genes")
+                .then((res) => {
+                    console.log(res)
+                });
+    }
 
     render() {
         return (
@@ -60,11 +75,13 @@ class SearchPage extends React.Component {
 
                             <Col sm="4">
                                 <MultiSelect
-                                    data={CULTURE_SHIPS}
+                                    data={this.state.data}
                                     onChange={this.handleChange}
                                     value={this.state.value}
                                     textField="text"
                                     dataItemKey="id"
+                                    filterable={true}
+                                    onFilterChange={this.filterChange}
                                 />
                             </Col>
                         </Form.Group>
@@ -168,7 +185,7 @@ class SearchPage extends React.Component {
                         </Form.Group>
 
                         <div style={{textAlign: "center"}}>
-                            <Link to={{
+                            <Link onClick={this.getResults} to={{
                                 pathname: '/results',
                                 state: {myArrayVariableName: this.state.value} // send the selected items as a parameter to the result page
                             }}><Button>Search</Button></Link>
