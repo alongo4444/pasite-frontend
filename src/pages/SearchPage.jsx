@@ -20,16 +20,25 @@ const CULTURE_SHIPS = [
         {text: "Apple 🍎", id: "apple"},
         {text: "Tangerine 🍊", id: "tangerine"},
         {text: "Pineapple 🍍", id: "pineapple"},
-        {text: "Peach 🍑", id: "peach"}
+        {text: "Peach 🍑", id: "peach"},
 ]
 
 class SearchPage extends React.Component {
 
-    state = {
-        data: CULTURE_SHIPS.slice(),
-        result_table: [],
-        value: []
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: CULTURE_SHIPS.slice(),
+            result_table: [],
+            value: []
+        };
+
+        this.delta.bind(this);
+    }
+
+
 
     handleChange = (event) => {
         this.setState({
@@ -43,12 +52,18 @@ class SearchPage extends React.Component {
         });
     }
 
+
+
+    delta(res){
+        this.setState({result_table: res.data});
+    }
+
     async getResults(){
             axios
-                .get("http://127.0.0.1:8801/api/v1/genes", { crossdomain: true })
+                .get("http://127.0.0.1:8801/api/v1/genes")
                 .then((res) => {
-                    this.setState({result_table: res.data});
-                    console.log(this.state.result_table);
+                    this.delta.bind(this);
+                    console.log(this.state.result_table)
                 });
     }
 
