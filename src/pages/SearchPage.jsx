@@ -19,7 +19,7 @@ const CULTURE_SHIPS = [
         {text: "Apple 🍎", id: "apple"},
         {text: "Tangerine 🍊", id: "tangerine"},
         {text: "Pineapple 🍍", id: "pineapple"},
-        {text: "Peach 🍑", id: "peach"},
+        {text: "Peach 🍑", id: "peach"}
 ]
 
 class SearchPage extends React.Component {
