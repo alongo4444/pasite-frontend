@@ -27,6 +27,7 @@ class SearchPage extends React.Component {
 
     state = {
         data: CULTURE_SHIPS.slice(),
+        result_table: [],
         value: []
     };
 
@@ -44,9 +45,10 @@ class SearchPage extends React.Component {
 
     async getResults(){
             axios
-                .get("http://127.0.0.1:8801/api/v1/genes")
+                .get("http://127.0.0.1:8801/api/v1/genes", { crossdomain: true })
                 .then((res) => {
-                    console.log(res)
+                    this.setState({result_table: res.data});
+                    console.log(this.state.result_table);
                 });
     }
 
