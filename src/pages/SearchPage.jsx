@@ -31,7 +31,6 @@ class SearchPage extends React.Component {
 
         this.state = {
             data: CULTURE_SHIPS.slice(),
-            result_table: [],
             value: []
         };
 
@@ -50,21 +49,6 @@ class SearchPage extends React.Component {
         this.setState({
             data: filterBy(CULTURE_SHIPS.slice(), event.filter)
         });
-    }
-
-
-
-    delta(res){
-        this.setState({result_table: res.data});
-    }
-
-    async getResults(){
-            axios
-                .get("http://127.0.0.1:8801/api/v1/genes")
-                .then((res) => {
-                    this.delta.bind(this);
-                    console.log(this.state.result_table)
-                });
     }
 
     render() {
@@ -202,7 +186,7 @@ class SearchPage extends React.Component {
                         </Form.Group>
 
                         <div style={{textAlign: "center"}}>
-                            <Link onClick={this.getResults} to={{
+                            <Link to={{
                                 pathname: '/results',
                                 state: {myArrayVariableName: this.state.value} // send the selected items as a parameter to the result page
                             }}><Button>Search</Button></Link>

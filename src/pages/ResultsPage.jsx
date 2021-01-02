@@ -1,9 +1,21 @@
 import React, {Component} from "react";
 import PhiloTreeC from "../components/PhiloTreeC";
 import FadeIn from "react-fade-in";
+import axios from "axios";
 
 class ResultsPage extends Component {
-    static = {};
+    static = {
+        result_table: []
+    };
+
+    componentDidMount() {
+        axios
+            .get("http://127.0.0.1:8801/api/v1/genes")
+            .then((res) => {
+                this.setState({ result_table: res.data });
+                console.log(this.state.result_table)
+            });
+    }
 
     render() {
         const params = this.props.history.location.state.myArrayVariableName; // get the selected items from the search page (sent from the SearchPage component)
