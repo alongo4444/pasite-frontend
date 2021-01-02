@@ -33,7 +33,7 @@ class NavBarC extends Component{
                         </Nav.Item>
                     </Nav>
                 </Card.Header>
-                <Card.Body  style={{overflow: "auto"}}>
+                <Card.Body  style={{overflow: "auto",paddingTop:"0"}}>
                     <span className="cb">
                     <Card.Text>
                         <Switch>

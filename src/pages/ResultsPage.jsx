@@ -3,10 +3,11 @@ import PhiloTreeC from "../components/PhiloTreeC";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator'
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import '../styles/ResultsPage.css';
 
 class ResultsPage extends Component {
-    static = {
+    state = {
         result_table: []
     };
 
@@ -27,7 +28,7 @@ class ResultsPage extends Component {
             {dataField: "end_y", text: "end_y"},
             {dataField: "geneID_y", text: "geneID_y"},
             {dataField: "genomic_accession_y", text: "genomic_accession_y"},
-            {dataField: "name_y", text: "name_y"},
+            {dataField: "name_y", text: "name_y", sort: true},
             {dataField: "product_accession_y", text: "product_accession_y"},
             {dataField: "product_length_y", text: "product_length_y"},
             {dataField: "product_sequence", text: "product_sequence"},
@@ -41,7 +42,7 @@ class ResultsPage extends Component {
             <div>
                 <FadeIn>
                     <BootstrapTable
-                        kayField="name"
+                        keyField="name"
                         data={this.state.result_table}
                         columns={columns}
                         pagination={paginationFactory()}
