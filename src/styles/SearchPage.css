@@ -1,0 +1,37 @@
+.search-form{
+
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.form-tip{
+    font-size: 12px;
+}
+
+
+.card{
+    text-align: left;
+}
+
+.imgr{
+    object-fit: cover;
+    object-position: 20% 0;
+    width: 280px;
+    height: 130px;
+    border-radius: 15px;
+}
+
+.imgr_wr{
+    text-align: center;
+}
+
+.multi-select {
+    --rmsc-main: #4285f4;
+    --rmsc-hover: #a1c4ec;
+    --rmsc-selected: #e2e6ea;
+    --rmsc-border: #ccc;
+    --rmsc-gray: #6a8fc6;
+    --rmsc-bg: #fff;
+    --rmsc-p: 10px; /* Spacing */
+    --rmsc-radius: 4px; /* Radius */
+    --rmsc-h: 38px; /* Height */
+}

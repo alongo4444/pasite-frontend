@@ -1,0 +1,18 @@
+.card {
+    margin: 40px;
+    margin-top: 0px;
+    font-family: Arial;
+    text-align: center;
+    height: 950px;
+}
+
+.c_footer{
+    font-family: Arial;
+    font-size: 10px;
+    text-align: center;
+}
+
+.cb{
+    verticalAlign: middle;
+    margin:auto;
+}

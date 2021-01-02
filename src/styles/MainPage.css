@@ -1,0 +1,39 @@
+.news{
+    background-color: black;
+    border: 2px solid black;
+}
+
+.car_image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
+
+.slidecaption {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.xbootstrap {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.desc{
+    text-align: center;
+    background-color: rgba(166, 188, 166, 0.2);
+    border-radius: 15px;
+    padding: 10px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.main_c{
+    margin: 10px;
+    height: 714px;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: left;
+    font-size: 14px;
+}
+
