@@ -26,18 +26,10 @@ const CULTURE_SHIPS = [
 class SearchPage extends React.Component {
 
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            data: CULTURE_SHIPS.slice(),
-            value: []
-        };
-
-        this.delta.bind(this);
-    }
-
-
+    state = {
+        data: CULTURE_SHIPS.slice(),
+        value: []
+    };
 
     handleChange = (event) => {
         this.setState({

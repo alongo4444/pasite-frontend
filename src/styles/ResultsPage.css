@@ -1,0 +1,7 @@
+th {
+    position: sticky;
+    top: 0;
+    background-color: #769ae5;
+    border-width: 2px;
+    opacity: 0.9;
+}
