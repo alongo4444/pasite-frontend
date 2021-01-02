@@ -42,7 +42,7 @@ class ResultsPage extends Component {
                 <FadeIn>
                     <BootstrapTable
                         kayField="name"
-                        data={this.state.result_table}
+                        data={this.static.result_table}
                         columns={columns}
                         pagination={paginationFactory()}
                         />
