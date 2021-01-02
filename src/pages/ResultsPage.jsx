@@ -17,7 +17,7 @@ class ResultsPage extends Component {
                     </div>
                     <ol>
                         {params.map((item) => (
-                            <li>{item['label']}</li>
+                            <li>{item['text']}</li>
                         ))}
                     </ol>
                 </FadeIn>
