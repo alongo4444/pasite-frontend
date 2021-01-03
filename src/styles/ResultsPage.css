@@ -5,3 +5,11 @@ th {
     border-width: 2px;
     opacity: 0.9;
 }
+
+tr:hover {
+    background-color: #c9deff;
+}
+
+.reset-expansion-style{
+    background-color: #f0f1ff;
+}

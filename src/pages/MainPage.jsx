@@ -28,21 +28,21 @@ class MainPage extends Component {
                 <Container style={{maxHeight: "1080px"}} fluid>
                     <Row xs={1}  >
                         <Col md={3}>
-                            <Row>
-                            <Card style={{height:"365px", textAlign: 'left'}}>
+                            <Row >
+                            <Card style={{textAlign: 'left'}}>
                             <Card.Header><Bell/> News</Card.Header>
-                            <Card.Body>
-                                <Card.Text>
+                            <Card.Body className="sidecards">
+                                <Card.Text >
                                     With supporting text below as a natural lead-in to additional content.
                                 </Card.Text>
                             </Card.Body>
                         </Card>
                             </Row>
                             <Row>
-                            <Card style={{height:"365px", textAlign: 'left'}}>
+                            <Card style={{textAlign: 'left'}}>
                                 <Card.Header><Book/> Cite Us</Card.Header>
-                                <Card.Body >
-                                    <Card.Text>
+                                <Card.Body className="sidecards">
+                                    <Card.Text >
                                         With supporting text below as a natural lead-in to additional content.
                                     </Card.Text>
                                 </Card.Body>
@@ -52,7 +52,7 @@ class MainPage extends Component {
 
                         <Col md={5} >
                             <h3 className="desc"> <FontAwesomeIcon icon={faDna} />  Welcome to Pseudomonas Aeruginosite</h3>
-                            <Card body className="main_c">
+                            <Card body className="main_c" style={{display: "inline-block"}}>
                                 <p>Pseudomonas Aeruginosa is a commonly studied pathogen in the biological research community. Its field of research is considered as a study attraction for its diverse metabolic capacity and the danger it imposes on infections in cystic fibrosis patients. Many strains of this bacteria (~5000 strains) have different genes (~6000 genes for each strain), accompanied by a growing variety of distinct defense systems, which delegates them with persistent antimicrobial-resistance attributes and unique characteristics.
                                     Due to this heavy amount of information gathered throughout the years by many laboratory tests and studies, the need for a cross-referenced information arose. Today there are many databases which portrait the plenty and diverse bacteria species and genes, but most of them provide services and tools for a broad diversity of bacterias and loses the advantage of specializing in defense systems in Pseudomonas Aeruginosa species. Besides, the available databases lack well-suited visualization and statistical tools for defense systems in P. Aeruginosa species and do not allow potential characteristics analysis between them and their immune systems.
                                     This project binds data collected by biologists and existing databases into an accessible and user-friendly web-platform, which will help researchers to map between the significant amount of information on the divergent P. Aeruginosa gene's attributes and the different known defense systems. The platform will provide information retrieval tools, statistical information analysis, and visualization implementations to better understand the data involved. Also, the application will provide supplementary information and conclusions by using different machine learning, AI, and algorithms to find the connection and resemblance between the distinct defense systems and their correlation with plain genome attributes and characteristics. Also, the platform will deal with queries (by allowing simple and advanced search methods) and will retrieve data accordingly to the user's request. The goal of this project is to supply the researchers and scientists community with a web interface to consume, map, and visualize the rather complex information on P. Aeruginosa defense systems. The project will provide tools to find the similarities between P. Aeruginosa defense systems, and ultimately serve as a tool to cover the gap between the abundant amount of research information and the organized biological data in that specific field.

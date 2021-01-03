@@ -6,6 +6,10 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import '../styles/ResultsPage.css';
 
+
+
+
+
 class ResultsPage extends Component {
     state = {
         result_table: []
@@ -24,7 +28,7 @@ class ResultsPage extends Component {
         const params = this.props.history.location.state.myArrayVariableName; // get the selected items from the search page (sent from the SearchPage component)
 
         const columns = [
-            {dataField: "dna_sequence", text: "dna_sequence"},
+            {dataField: "locus_tag_copy", text: "locus_tag_copy"},
             {dataField: "end_y", text: "end_y"},
             {dataField: "geneID_y", text: "geneID_y"},
             {dataField: "genomic_accession_y", text: "genomic_accession_y"},
@@ -37,15 +41,27 @@ class ResultsPage extends Component {
             {dataField: "symbol_y", text: "symbol_y"}
             ]
 
+        const expandRow = {
+            renderer: (row, rowIndex)  => (
+                <div className="dna_seq">
+                    <p><b>DNA Sequence:</b></p>
+                    <p>{ ` ${row['dna_sequence']}` }</p>
+
+                </div>
+            ),onlyOneExpanding: true
+        };
+
+
 
         return (
             <div>
                 <FadeIn>
                     <BootstrapTable
-                        keyField="name"
+                        keyField="locus_tag_copy"
                         data={this.state.result_table}
                         columns={columns}
                         pagination={paginationFactory()}
+                        expandRow={ expandRow }
                         />
                     <div>
                         <PhiloTreeC title={"Phylogenetic Tree"}

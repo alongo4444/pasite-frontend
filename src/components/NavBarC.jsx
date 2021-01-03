@@ -14,7 +14,7 @@ class NavBarC extends Component{
     render() {
         return (
             <div >
-            <Card style={{ border: '1px solid black' }} >
+            <Card className="card_m"  >
                 <Card.Header style={{ marginBottom: "10px" }}>
                     <Nav fill activeKey="/">
                         <Nav.Item>
@@ -33,7 +33,7 @@ class NavBarC extends Component{
                         </Nav.Item>
                     </Nav>
                 </Card.Header>
-                <Card.Body  style={{overflow: "auto",paddingTop:"0"}}>
+                <Card.Body className="body_c" >
                     <span className="cb">
                     <Card.Text>
                         <Switch>
