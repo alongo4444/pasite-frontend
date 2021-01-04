@@ -21,7 +21,7 @@ class ResultsPage extends Component {
     }
 
     render() {
-        const params = this.props.history.location.state.myArrayVariableName; // get the selected items from the search page (sent from the SearchPage component)
+        const params = this.props.history.location.state.myArrayVariableName; // get the selected items from the search page (sent from the SearchPage component).
 
         const columns = [
             {dataField: "dna_sequence", text: "dna_sequence"},
