@@ -16,6 +16,12 @@
     padding: 10px;
 }
 
+.card .sidecards{
+    height: min-content;
+    textAlign: left;
+    min-height: 300px;
+}
+
 .xbootstrap {
     color: #ffffff;
     text-shadow: 2px 2px 4px #000000;
@@ -31,9 +37,9 @@
 
 .main_c{
     margin: 10px;
-    height: 714px;
     font-family: 'Roboto Condensed', sans-serif;
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
+    height: 100%;
 }
 
