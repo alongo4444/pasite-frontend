@@ -28,7 +28,8 @@ class SearchPage extends React.Component {
 
     state = {
         data: CULTURE_SHIPS.slice(),
-        value: []
+        value: [],
+        rowsPerPage: 10
     };
 
     handleChange = (event) => {
@@ -166,12 +167,11 @@ class SearchPage extends React.Component {
                                 <p style={{textAlign: "right"}}>Number of results in page:</p>
                             </Form.Label>
                             <Col xs="auto">
-                                <Form.Control className="mb-1" as="select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <Form.Control onChange={e => this.setState({ rowsPerPage: e.target.value })} className="mb-1" as="select">
+                                    <option>10</option>
+                                    <option>25</option>
+                                    <option>30</option>
+                                    <option>50</option>
                                 </Form.Control>
                             </Col>
 
@@ -180,7 +180,7 @@ class SearchPage extends React.Component {
                         <div style={{textAlign: "center"}}>
                             <Link to={{
                                 pathname: '/results',
-                                state: {myArrayVariableName: this.state.value} // send the selected items as a parameter to the result page
+                                state: {myArrayVariableName: this.state.value, rpp: this.state.rowsPerPage} // send the selected items as a parameter to the result page
                             }}><Button>Search</Button></Link>
                         </div>
                     </Form>
