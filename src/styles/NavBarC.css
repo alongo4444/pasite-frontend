@@ -3,7 +3,7 @@
     margin-top: 0px;
     font-family: Arial;
     text-align: center;
-    height: 950px;
+
 }
 
 .c_footer{
@@ -15,4 +15,16 @@
 .cb{
     verticalAlign: middle;
     margin:auto;
+}
+
+.body_c{
+    overflow: auto;
+    paddingTop:0;
+    height: min-content;
+    max-height: 1000px;
+}
+
+.card_m{
+    min-height: 900px;
+    border: 1px solid black;
 }

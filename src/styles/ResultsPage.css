@@ -1,7 +1,56 @@
-th {
+thead tr {
     position: sticky;
     top: 0;
-    background-color: #769ae5;
+    background-color: #acc4f3;
     border-width: 2px;
     opacity: 0.9;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+thead tr:hover {
+    cursor: default;
+    background-color: #acc4f3;
+}
+
+tr:hover {
+    background-color: #ebf3ff;
+    cursor:pointer;
+}
+
+.reset-expansion-style{
+    background-color: #ffffff;
+}
+
+.accordion .card{
+    margin: 0;
+}
+
+.accordion .card-header{
+    padding: 0;
+}
+
+.accordion .card-body{
+    background-color: #f6f9ff;
+}
+
+.card-header [type=button]{
+    color: black;
+    text-align: left;
+    width: 100%;
+    background-color: #ccd9ff;
+    margin-bottom: 2px;
+}
+
+.card-header [type=button]:hover{
+    text-align: left;
+    width: 100%;
+    background-color: #85a0f1;
+    margin-bottom: 2px;
+}
+
+.seq_c{
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
 }

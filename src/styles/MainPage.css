@@ -16,6 +16,16 @@
     padding: 10px;
 }
 
+.card .sidecards{
+    height: min-content;
+    textAlign: left;
+    min-height: 300px;
+}
+
+.card .sidecards:hover{
+    background-color: rgb(247, 250, 255);
+}
+
 .xbootstrap {
     color: #ffffff;
     text-shadow: 2px 2px 4px #000000;
@@ -31,9 +41,32 @@
 
 .main_c{
     margin: 10px;
-    height: 714px;
     font-family: 'Roboto Condensed', sans-serif;
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
+    height: 100%;
 }
 
+.slide1_style{
+    background-image: url("../assets/backgrounds/main-bg5.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.aws-btn {
+    --slider-height-percentage: 100%;
+    --slider-transition-duration: 575ms;
+    --organic-arrow-thickness: 4px;
+    --organic-arrow-border-radius: 0px;
+    --organic-arrow-height: 40px;
+    --organic-arrow-color: #6a6a6a;
+    --control-button-width: 10%;
+    --control-button-height: 25%;
+    --control-button-background: transparent;
+    --control-bullet-color: #6a6a6a;
+    --control-bullet-active-color: #6a6a6a;
+    --loader-bar-color: #851515;
+    --loader-bar-height: 6px;
+
+}

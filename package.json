@@ -20,8 +20,10 @@
     "d3-array": "^2.9.1",
     "d3-fetch": "^2.0.0",
     "d3-shape": "^2.0.0",
+    "node-sass": "^4.14.1",
     "phylotree": "^1.0.0-alpha.22",
     "react": "^17.0.1",
+    "react-awesome-slider": "^4.1.0",
     "react-bootstrap": "^1.4.0",
     "react-bootstrap-icons": "^1.1.0",
     "react-bootstrap-table-next": "^4.0.3",
@@ -36,6 +38,9 @@
     "react-router": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-select": "^3.1.1",
+    "react-svg-pan-zoom": "^3.9.0",
+    "react-svg-pan-zoom-loader": "^1.4.1",
+    "react-zoom-pan-pinch": "^1.6.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
