@@ -12,15 +12,16 @@ import {filterBy} from '@progress/kendo-data-query';
 import axios from "axios";
 
 const CULTURE_SHIPS = [
-        {text: "Grapes 🍇", id: "grapes"},
-        {text: "Mango 🥭", id: "mango"},
-        {text: "Strawberry 🍓", id: "strawberry", disabled: true},
-        {text: "Watermelon 🍉", id: "watermelon"},
-        {text: "Pear 🍐", id: "pear"},
-        {text: "Apple 🍎", id: "apple"},
-        {text: "Tangerine 🍊", id: "tangerine"},
-        {text: "Pineapple 🍍", id: "pineapple"},
-        {text: "Peach 🍑", id: "peach"},
+    {text: "PAO1", id: "pao1"}
+    // {text: "Grapes 🍇", id: "grapes"},
+    // {text: "Mango 🥭", id: "mango"},
+    // {text: "Strawberry 🍓", id: "strawberry", disabled: true},
+    // {text: "Watermelon 🍉", id: "watermelon"},
+    // {text: "Pear 🍐", id: "pear"},
+    // {text: "Apple 🍎", id: "apple"},
+    // {text: "Tangerine 🍊", id: "tangerine"},
+    // {text: "Pineapple 🍍", id: "pineapple"},
+    // {text: "Peach 🍑", id: "peach"},
 ]
 
 class SearchPage extends React.Component {
@@ -29,7 +30,7 @@ class SearchPage extends React.Component {
     state = {
         data: CULTURE_SHIPS.slice(),
         value: [],
-        rowsPerPage: 10
+        rpp: 10
     };
 
     handleChange = (event) => {
@@ -167,7 +168,8 @@ class SearchPage extends React.Component {
                                 <p style={{textAlign: "right"}}>Number of results in page:</p>
                             </Form.Label>
                             <Col xs="auto">
-                                <Form.Control onChange={e => this.setState({ rowsPerPage: e.target.value })} className="mb-1" as="select">
+                                <Form.Control className="mb-1" as="select"           value={this.state.rpp}
+                                              onChange={e => this.setState({ rpp: e.target.value })}>
                                     <option>10</option>
                                     <option>25</option>
                                     <option>30</option>
@@ -180,7 +182,8 @@ class SearchPage extends React.Component {
                         <div style={{textAlign: "center"}}>
                             <Link to={{
                                 pathname: '/results',
-                                state: {myArrayVariableName: this.state.value, rpp: this.state.rowsPerPage} // send the selected items as a parameter to the result page
+                                state: {myArrayVariableName: this.state.value,
+                                    rpp: this.state.rpp} // send the selected items as a parameter to the result page
                             }}><Button>Search</Button></Link>
                         </div>
                     </Form>

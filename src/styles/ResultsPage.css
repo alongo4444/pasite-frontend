@@ -29,6 +29,10 @@ tr:hover {
     padding: 0;
 }
 
+.accordion .card-body{
+    background-color: #f6f9ff;
+}
+
 .card-header [type=button]{
     color: black;
     text-align: left;

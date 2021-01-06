@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import '../styles/NavBarC.css';
 import SearchPage from "../pages/SearchPage";
 import ResultsPage from "../pages/ResultsPage";
+import BrowsePage from "../pages/BrowsePage";
 import MainPage from "../pages/MainPage";
 import { BrowserRouter as Switch } from "react-router-dom";
 import { Route } from "react-router";
@@ -15,7 +16,7 @@ class NavBarC extends Component{
         return (
             <div >
             <Card className="card_m"  >
-                <Card.Header style={{ marginBottom: "10px" }}>
+                <Card.Header style={{marginBottom: "20px"}}>
                     <Nav fill activeKey="/">
                         <Nav.Item>
                             <Nav.Link href="/">Home</Nav.Link>
@@ -24,7 +25,7 @@ class NavBarC extends Component{
                             <Nav.Link href="/search">Search</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link eventKey="link-2">Link</Nav.Link>
+                            <Nav.Link href="/browse">Browse</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link eventKey="disabled" disabled>
@@ -33,14 +34,16 @@ class NavBarC extends Component{
                         </Nav.Item>
                     </Nav>
                 </Card.Header>
-                <Card.Body className="body_c" >
+                <Card.Body className="body_c" style={{ padding: '0px'}} >
                     <span className="cb">
                     <Card.Text>
                         <Switch>
-                            <Route path="/search" component={SearchPage}>
-                            </Route>
-                            <Route path="/results" component={ResultsPage}>
-                            </Route>
+                            <Route path="/search" component={SearchPage}/>
+
+                            <Route path="/results" component={ResultsPage}/>
+
+                            <Route path="/browse" component={BrowsePage}/>
+
                             <Route exact path="/">
                                 <MainPage component={MainPage} />
                             </Route>
