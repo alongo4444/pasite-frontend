@@ -57,8 +57,8 @@ class SearchPage extends React.Component {
                                 <p style={{textAlign: "right"}}></p>
                             </Form.Label>
                             <Col sm="4">
-                                <div className="imgr_wr">
-                                    <img className="imgr" src={searchlogo}/>
+                                <div className="imgr_wr" >
+                                    <img style={{display: "inline-block"}} className="imgr" src={searchlogo}/>
                                 </div>
                             </Col>
                         </Form.Group>

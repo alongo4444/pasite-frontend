@@ -141,7 +141,7 @@ class MainPage extends Component {
                     {/*    </Row>*/}
 
                     {/*</Container>*/}
-                    <div style={{width:"98%",marginLeft:"1%"}}>
+                    <div style={{width: "98%", marginLeft: "1%"}}>
                         {/*<AwesomeSlider*/}
                         {/*    animation="foldOutAnimation"*/}
                         {/*    cssModule={[CoreStyles, AnimationStyles]}*/}
@@ -153,40 +153,53 @@ class MainPage extends Component {
                         <Carousel>
                             <Carousel.Item>
                                 <img
-                                    style={{height:"750px"}}
+                                    style={{height: "750px", objectFit: 'cover'}}
                                     className="d-block w-100"
                                     src={slide4}
                                     alt="First slide"
                                 />
                                 <Carousel.Caption>
-                                    <h1>Pseudomonoas AeruginoSite</h1>
+                                    <div className="caption_wrper">
+                                    <div className="slidecaption">
+                                        <h1>Pseudomonoas AeruginoSite</h1>
+                                    </div>
+                                    </div>
                                     {/*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*/}
                                 </Carousel.Caption>
                             </Carousel.Item>
                             <Carousel.Item>
                                 <img
-                                    style={{height:"750px"}}
+                                    style={{height: "750px", objectFit: 'cover'}}
                                     className="d-block w-100"
                                     src={slide5}
-                                    alt="Third slide"
+                                    alt="Second slide"
                                 />
 
                                 <Carousel.Caption>
-                                    <h3>Web-platform for exploration of the bacteria Pseudomonas Aeruginosa</h3>
-                                    <p>Explore strains,genes and defense systems using advanced visualization and tabular tools for convenient research  </p>
+                                    <div className="caption_wrper">
+                                    <div className="slidecaption">
+                                        <h3>Web-platform for exploration of the bacteria Pseudomonas Aeruginosa</h3>
+                                        <p>Explore strains,genes and defense systems using advanced visualization and
+                                            tabular tools for convenient research </p>
+                                    </div>
+                                    </div>
                                 </Carousel.Caption>
                             </Carousel.Item>
                             <Carousel.Item>
                                 <img
-                                    style={{height:"750px"}}
+                                    style={{height: "750px", objectFit: 'cover'}}
                                     className="d-block w-100"
                                     src={slide6}
                                     alt="Third slide"
                                 />
 
                                 <Carousel.Caption>
-                                    <h3>Contact us and Citation</h3>
-                                    <p>Let us know if anything is missing or any feedback</p>
+                                    <div className="caption_wrper">
+                                    <div className="slidecaption">
+                                        <h3>Contact us and Citation</h3>
+                                        <p>Let us know if anything is missing or any feedback</p>
+                                    </div>
+                                    </div>
                                 </Carousel.Caption>
                             </Carousel.Item>
                         </Carousel>
