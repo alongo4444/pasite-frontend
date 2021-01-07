@@ -2,7 +2,7 @@ import NavBarC from "./components/NavBarC";
 import './App.css';
 import title from './assets/images/title.png';
 import {BrowserRouter as Router} from "react-router-dom";
-
+import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 
 function App() {
     return (
