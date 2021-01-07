@@ -40,83 +40,89 @@ class ResultsPage extends Component {
         return (
             <div>
                 <FadeIn>
-                    <div style={{overflow: "hidden"}}>
-                        <>
-                            <Navigation
-                                // you can use your own router's api to get pathname
-                                activeItemId="/management/members"
-                                onSelect={({itemId}) => {
-                                    // maybe push to the route
-                                }}
-                                items={[
-                                    {
-                                        title: 'Dashboard',
-                                        itemId: '/dashboard',
-                                        // you can use your own custom Icon component as well
-                                        // icon is optional
-                                        elemBefore: () => <Icon name="inbox"/>,
-                                    },
-                                    {
-                                        title: 'Management',
-                                        itemId: '/management',
-                                        elemBefore: () => <Icon name="users"/>,
-                                        subNav: [
-                                            {
-                                                title: 'Projects',
-                                                itemId: '/management/projects',
-                                            },
-                                            {
-                                                title: 'Members',
-                                                itemId: '/management/members',
-                                            },
-                                        ],
-                                    },
-                                    {
-                                        title: 'Another Item',
-                                        itemId: '/another',
-                                        subNav: [
-                                            {
-                                                title: 'Teams',
-                                                itemId: '/management/teams',
-                                            },
-                                        ],
-                                    },
-                                ]}
-                            />
-                        </>
-                        <TransformWrapper
-                            defaultScale={1}
-                            defaultPositionX={200}
-                            defaultPositionY={100}
-                        >
-                            {({zoomIn, zoomOut, resetTransform, ...rest}) => (
-                                <React.Fragment>
-                                    <div style={{marginLeft: "60%"}} className="tools">
-                                        <IconButton onClick={zoomIn} color="primary" aria-label="upload picture"
-                                                    component="span">
-                                            <ZoomIn/>
-                                        </IconButton>
-                                        <IconButton onClick={zoomOut} color="primary" aria-label="upload picture"
-                                                    component="span">
-                                            <ZoomOut/>
-                                        </IconButton>
-                                        <IconButton onClick={resetTransform} color="primary" aria-label="upload picture"
-                                                    component="span">
-                                            <ArrowsFullscreen/>
-                                        </IconButton>
-                                    </div>
-                                    {!this.state.loaded && (
-                                        <div style={{marginLeft: "50%"}}><Spinner animation="border" variant="primary"/>
-                                        </div>)}
-                                    <TransformComponent>
+                    <div style={{width:"100%",overflow: "hidden"}}>
+                        <div style={{width:"20%",float: "left"}}>
+                            <>
+                                <Navigation
+                                    // you can use your own router's api to get pathname
+                                    activeItemId="/management/members"
+                                    onSelect={({itemId}) => {
+                                        // maybe push to the route
+                                    }}
+                                    items={[
+                                        {
+                                            title: 'Dashboard',
+                                            itemId: '/dashboard',
+                                            // you can use your own custom Icon component as well
+                                            // icon is optional
+                                            elemBefore: () => <Icon name="inbox"/>,
+                                        },
+                                        {
+                                            title: 'Management',
+                                            itemId: '/management',
+                                            elemBefore: () => <Icon name="users"/>,
+                                            subNav: [
+                                                {
+                                                    title: 'Projects',
+                                                    itemId: '/management/projects',
+                                                },
+                                                {
+                                                    title: 'Members',
+                                                    itemId: '/management/members',
+                                                },
+                                            ],
+                                        },
+                                        {
+                                            title: 'Another Item',
+                                            itemId: '/another',
+                                            subNav: [
+                                                {
+                                                    title: 'Teams',
+                                                    itemId: '/management/teams',
+                                                },
+                                            ],
+                                        },
+                                    ]}
+                                />
+                            </>
+                        </div>
+                        <div>
+                            <TransformWrapper
+                                defaultScale={1}
+                                defaultPositionX={200}
+                                defaultPositionY={100}
+                            >
+                                {({zoomIn, zoomOut, resetTransform, ...rest}) => (
+                                    <React.Fragment>
+                                        <div style={{marginLeft: "50%"}} className="tools">
+                                            <IconButton onClick={zoomIn} color="primary" aria-label="upload picture"
+                                                        component="span">
+                                                <ZoomIn/>
+                                            </IconButton>
+                                            <IconButton onClick={zoomOut} color="primary" aria-label="upload picture"
+                                                        component="span">
+                                                <ZoomOut/>
+                                            </IconButton>
+                                            <IconButton onClick={resetTransform} color="primary"
+                                                        aria-label="upload picture"
+                                                        component="span">
+                                                <ArrowsFullscreen/>
+                                            </IconButton>
+                                        </div>
+                                        {!this.state.loaded && (
+                                            <div style={{marginLeft: "52%"}}><Spinner animation="border"
+                                                                                      variant="primary"/>
+                                            </div>)}
+                                        <TransformComponent>
 
 
-                                        <img style={{height: "65%", width: "65%", marginLeft: "30%"}}
-                                             src={this.state.source}/>
-                                    </TransformComponent>
-                                </React.Fragment>
-                            )}
-                        </TransformWrapper>
+                                            <img style={{height: "65%", width: "65%", marginLeft: "10%"}}
+                                                 src={this.state.source}/>
+                                        </TransformComponent>
+                                    </React.Fragment>
+                                )}
+                            </TransformWrapper>
+                        </div>
                     </div>
                 </FadeIn>
             </div>
