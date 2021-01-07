@@ -1,13 +1,19 @@
 import React, {Component} from "react";
 import FadeIn from "react-fade-in";
-import '../styles/ResultsPage.css'
+import '../styles/BrowsePage.css'
 import {ReactSvgPanZoomLoader} from 'react-svg-pan-zoom-loader';
 import axios from "axios";
-import {ReactSVGPanZoom} from "react-svg-pan-zoom";
-
+import {useRef, useEffect} from 'react';
+import Lightbox from "react-awesome-lightbox";
+import "react-awesome-lightbox/build/style.css";
 
 
 class ResultsPage extends Component {
+
+
+
+
+
     state = {
         source: []
     };
@@ -30,12 +36,20 @@ class ResultsPage extends Component {
     }
 
 
+
+
     render() {
 
+        let images = [
+            {
+                url:this.state.source,
+                title:"image title 1"
+            },
+            ]
         return (
             <div>
                 <FadeIn>
-                    <img src={this.state.source}/>
+                    <Lightbox images={images}/>
                 </FadeIn>
             </div>
         )
