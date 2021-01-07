@@ -27,11 +27,7 @@ class NavBarC extends Component{
                         <Nav.Item>
                             <Nav.Link href="/browse">Browse</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="disabled" disabled>
-                                Disabled
-                            </Nav.Link>
-                        </Nav.Item>
+
                     </Nav>
                 </Card.Header>
                 <Card.Body className="body_c" style={{ padding: '0px'}} >
