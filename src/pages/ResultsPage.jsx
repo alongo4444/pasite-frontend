@@ -6,7 +6,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import '../styles/ResultsPage.css';
 import {Button, Accordion, Card} from "react-bootstrap";
-import {faDna, faDisease} from "@fortawesome/free-solid-svg-icons";
+import {faDna, faDisease, faShieldVirus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
