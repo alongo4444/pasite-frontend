@@ -154,9 +154,9 @@ class ResultsPage extends Component {
         if (char == 'A')
             return 'red'
         else if (char == 'T') {
-            return 'lightgreen'
+            return 'green'
         } else if (char == 'G') {
-            return 'black'
+            return 'brown'
         }
         return 'blue'
     }
