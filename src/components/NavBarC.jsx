@@ -5,6 +5,7 @@ import '../styles/NavBarC.css';
 import SearchPage from "../pages/SearchPage";
 import ResultsPage from "../pages/ResultsPage";
 import BrowsePage from "../pages/BrowsePage";
+import DownloadPage from "../pages/DownloadPage";
 import MainPage from "../pages/MainPage";
 import { BrowserRouter as Switch } from "react-router-dom";
 import { Route } from "react-router";
@@ -27,7 +28,9 @@ class NavBarC extends Component{
                         <Nav.Item>
                             <Nav.Link href="/browse">Browse</Nav.Link>
                         </Nav.Item>
-
+                        <Nav.Item>
+                            <Nav.Link href="/download">Download</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                 </Card.Header>
                 <Card.Body className="body_c" style={{ padding: '0px'}} >
@@ -39,6 +42,8 @@ class NavBarC extends Component{
                             <Route path="/results" component={ResultsPage}/>
 
                             <Route path="/browse" component={BrowsePage}/>
+
+                            <Route path="/download" component={DownloadPage}/>
 
                             <Route exact path="/">
                                 <MainPage component={MainPage} />

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import FadeIn from "react-fade-in";
-import '../styles/ResultsPage.css'
+import '../styles/BrowsePage.css'
 import axios from "axios";
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import IconButton from '@material-ui/core/IconButton';
@@ -10,7 +10,7 @@ import {Navigation} from 'react-minimal-side-navigation';
 import Icon from "awesome-react-icons";
 
 
-class ResultsPage extends Component {
+class BrowsePage extends Component {
     state = {
         source: [],
         loaded: false
@@ -131,4 +131,4 @@ class ResultsPage extends Component {
 
 }
 
-export default ResultsPage;
+export default BrowsePage;
