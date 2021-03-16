@@ -53,8 +53,7 @@ export default function DownloadPage() {
                                 <Col sm={9}>
                                     <Tab.Content>
                                         <Tab.Pane eventKey="first">
-                                        <StrainForm/>
-
+                                            <StrainForm/>
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="second">
                                             test
