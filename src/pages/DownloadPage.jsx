@@ -22,7 +22,7 @@ export default function DownloadPage() {
         let myAxios = axios.create({
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
-        myAxios.get('http://127.0.0.1:8801/api/v1/test_genes',{params})
+        myAxios.get('http://127.0.0.1:8801/api/v1/download_genes',{params})
             .then((res) => {
             FileDownload(res.data, 'report.csv');
         }); // URL : https://path/to/api?foo=5&foo=2
@@ -53,8 +53,7 @@ export default function DownloadPage() {
                                 <Col sm={9}>
                                     <Tab.Content>
                                         <Tab.Pane eventKey="first">
-                                        <StrainForm/>
-
+                                            <StrainForm/>
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="second">
                                             test
