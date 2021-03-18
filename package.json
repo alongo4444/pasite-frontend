@@ -49,6 +49,7 @@
     "react-svg-pan-zoom": "^3.9.0",
     "react-svg-pan-zoom-loader": "^1.4.1",
     "react-zoom-pan-pinch": "^1.6.1",
+    "typescript": "^4.2.3",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
