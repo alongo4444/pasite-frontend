@@ -3,10 +3,7 @@ import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
 import axios from "axios";
 import {Form, Col, Row, Button, Modal} from "react-bootstrap";
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
+import AutocompleteC from "../components/AutocompleteC";
 function sleep(delay = 0) {
     return new Promise((resolve) => {
         setTimeout(resolve, delay);
@@ -93,36 +90,6 @@ export default function SearchPage() {
 
 
 
-    React.useEffect(() => {
-        let active = true;
-
-        if (!loading) {
-            return undefined;
-        }
-
-        (async () => {
-            const response = await fetch('http://127.0.0.1:8801/api/v1/strains');
-            await sleep(1e3); // For demo purposes.
-            const countries = await response.json();
-            if (active) {
-                setOptions(countries.filter(x=> x.name != null))
-            }
-
-        })();
-
-        return () => {
-            active = false;
-        };
-    },[loading]);
-
-    React.useEffect(() => {
-        if (!open) {
-            setOptions([]);
-        }
-    }, [open]);
-
-
-
     function getData() {
 
         let selectedC = [];
@@ -134,8 +101,12 @@ export default function SearchPage() {
         }
 
         let selectedAS=[];
-        for (let key in selectedA) {
-            selectedAS.push(selectedA[key]['key'])
+        if(Array.isArray(selectedA)) {
+            for (let key in selectedA) {
+                selectedAS.push(selectedA[key]['key'])
+            }
+        }else{
+            selectedAS.push(selectedA['key']);
         }
 
         if(selectedC.length == 0){
@@ -195,6 +166,9 @@ export default function SearchPage() {
         );
     }
 
+    const getSelected = (selected) => {
+        setSelectedA(selected)
+    }
 
     return (
             <div >
@@ -210,47 +184,7 @@ export default function SearchPage() {
                             </Form.Label>
                         </Form.Group>
 
-                        <Form.Group as={Row} controlId="selectStrain">
-                            <Form.Label className="wrapper" column sm="4">
-                                <p style={{textAlign: "right"}}>Select single/multiple strain/s:</p>
-                            </Form.Label>
-
-                            <Col sm="4">
-                                <Autocomplete
-                                    id="asynchronous-demo"
-                                    multiple={true}
-                                    style={{ width: 800 }}
-                                    open={open}
-                                    onOpen={() => {
-                                        setOpen(true);
-                                    }}
-                                    onClose={() => {
-                                        setOpen(false);
-                                    }}
-                                    onChange={(event, value) => setSelectedA(value)}
-                                    getOptionSelected={(option, value) => option.name === value.name}
-                                    getOptionLabel={(option) => option.name}
-                                    options={options}
-                                    loading={loading}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label="Choose strains..."
-                                            variant="outlined"
-                                            InputProps={{
-                                                ...params.InputProps,
-                                                endAdornment: (
-                                                    <React.Fragment>
-                                                        {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                                        {params.InputProps.endAdornment}
-                                                    </React.Fragment>
-                                                ),
-                                            }}
-                                        />
-                                    )}
-                                />
-                            </Col>
-                        </Form.Group>
+                        <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8801/api/v1/strains" labelText="Select single/multiple strain/s:" />
 
                         <div className="chkbxs">
                         <div>
