@@ -26,7 +26,7 @@ class ResultsPage extends Component {
 
     render() {
         const params = this.props.history.location.state.myArrayVariableName; // get the selected items from the search page (sent from the SearchPage component)
-        const rowsPerPages = this.props.history.location.state.rpp;
+        const rowsPerPages = this.props.history.location.state.rpp; // get the selected number of results each page from previous component
 
         const columns = [
             {dataField: "locus_tag_copy", text: "locus_tag", sort: true},
