@@ -1,0 +1,17 @@
+.textBox{
+    margin-left: 5%;
+}
+.rowC{
+    display:flex;
+    flex-direction:row;
+}
+.sidebar{
+   width: 50%;
+}
+.Phylo_Tree{
+    width: 100%;
+    margin-right: 20%;
+}
+.GenerateTree{
+    margin-left: 32%;
+}
