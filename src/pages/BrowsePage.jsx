@@ -12,6 +12,8 @@ import chroma from 'chroma-js';
 import {colourOptions} from '../utilities/colors';
 import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
+import '../assets/fonts/YesevaOne-Regular.ttf';
+import Switch from "react-switch";
 
 var qs = require('qs');
 
@@ -46,8 +48,9 @@ class BrowsePage extends Component {
             });
     }
 
-    computeTree= () => {
-        this.state.loaded = false;
+    computeTree = () => {
+        this.setState({source: []});
+        this.setState({loaded: false})
         return axios
             .get(
                 "http://127.0.0.1:8801/api/v1/strains/phyloTree", {
@@ -72,21 +75,22 @@ class BrowsePage extends Component {
                 this.setState({loaded: true})
                 this.setState({selectedFile: {}})
             }).catch((err) => console.log(err)
-        );
-
-
+            );
     };
     onFileChange = e => {
 
         // Update the state
-        e.preventDefault()
-        const reader = new FileReader()
-        console.log('here')
-        reader.onload = async (e) => {
-            const text = (e.target.result)
-            this.setState({selectedFile: text.split(/\r?\n/)})
-        };
-        reader.readAsText(e.target.files[0])
+        if(e.target.files.length>0){
+            e.preventDefault()
+            const reader = new FileReader()
+            console.log(e)
+            reader.onload = async (e) => {
+                const text = (e.target.result);
+                this.setState({selectedFile: text.split(/\r?\n/)});
+                e.target.value =null;
+            };
+            reader.readAsText(e.target.files[0])
+        }
 
     };
 
@@ -154,7 +158,8 @@ class BrowsePage extends Component {
                 </Form.Group>;
             } else {
                 return <Form.Group>
-                    <Form.File onChange={(e) =>this.onFileChange(e)} id="exampleFormControlFile1" label="Please upload a file that contains list of strains"/>
+                    <Form.File onChange={(e) => this.onFileChange(e)} id="exampleFormControlFile1"
+                               label="Please upload a file that contains list of strains"/>
                 </Form.Group>;
             }
         }
@@ -171,23 +176,22 @@ class BrowsePage extends Component {
         }
 
         return (
-            <div>
+            <div className="mainDiv">
                 <FadeIn>
                     <div className='rowC'>
                         <div className='sidebar'>
+                            <div className="instructions">choose a way to upload strains and create subtree:</div>
                             <div className="textBox">
-                                <Form.Check
-                                    onChange={setSwitchTextBox}
-                                    type="switch"
-                                    id="subTree"
-                                    label={this.state.textOrFile}
-                                    // checked={this.state.textbox}
-                                />
-
+                                <div className='rowC'>
+                                    <Switch onChange={setSwitchTextBox} checked={this.state.textbox}/> <span
+                                    className="switch">{this.state.textOrFile}</span>
+                                </div>
                                 <Form>
                                     {renderTextBox()}
                                 </Form>
                             </div>
+                            <div className="instructions">Choose the Defense Systems you would like to show:</div>
+
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 <Select
                                     closeMenuOnSelect={false}
@@ -197,7 +201,7 @@ class BrowsePage extends Component {
                                     onChange={handleChange}
                                 />
                                 <br/>
-                                <Button onClick={() =>this.computeTree()} variant="outline-primary"
+                                <Button onClick={() => this.computeTree()} variant="outline-primary"
                                         className='GenerateTree'>Generate Tree</Button>
 
                             </div>

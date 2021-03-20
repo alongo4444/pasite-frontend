@@ -15,5 +15,4 @@ export const colourOptions = [
     { value: 'darkPurple', label: 'THOERIS', color: '#4a2626'},
     { value: 'pink', label: 'GABIJA', color: '#ff00ea'},
     { value: 'brightGreen', label: 'DRUANTIA', color: '#8fff02'},
-
 ];
