@@ -1,11 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row, Button, OverlayTrigger, Tooltip} from "react-bootstrap";
-import searchlogo from '../assets/images/research.png'
-import {faQuestion} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Form, Col, Row} from "react-bootstrap";
 import FadeIn from "react-fade-in";
-import {Link} from 'react-router-dom';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
