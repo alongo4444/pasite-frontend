@@ -4,6 +4,7 @@ import {Form, Col, Row, Button, OverlayTrigger, Tooltip, Tab, Nav} from "react-b
 import {Link} from 'react-router-dom';
 import axios from "axios";
 import StrainForm from "../components/StrainForm";
+import Cluster from "../components/Cluster";
 
 export default function DownloadPage() {
 
@@ -28,11 +29,7 @@ export default function DownloadPage() {
         }); // URL : https://path/to/api?foo=5&foo=2
 
 
-        // axios
-        //     .get("http://127.0.0.1:8801/api/v1/test_genes",{params = )
-        //     .then((res) => {
-        //         FileDownload(res.data, 'report.csv');
-        //     });
+
     }
 
     return (
@@ -56,7 +53,7 @@ export default function DownloadPage() {
                                             <StrainForm/>
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="second">
-                                            test
+                                            <Cluster/>
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Col>
