@@ -142,14 +142,6 @@ class MainPage extends Component {
 
                     {/*</Container>*/}
                     <div style={{width: "98%", marginLeft: "1%"}}>
-                        {/*<AwesomeSlider*/}
-                        {/*    animation="foldOutAnimation"*/}
-                        {/*    cssModule={[CoreStyles, AnimationStyles]}*/}
-                        {/*>*/}
-                        {/*    <div data-src={slide1} />*/}
-                        {/*    <div data-src={slide2} />*/}
-                        {/*    <div data-src={slide3} />*/}
-                        {/*</AwesomeSlider>*/}
                         <Carousel>
                             <Carousel.Item>
                                 <img
@@ -204,9 +196,6 @@ class MainPage extends Component {
                             </Carousel.Item>
                         </Carousel>
                     </div>
-
-                    {/*<img src={this.state.source} />*/}
-
                 </FadeIn>
             </div>
         );

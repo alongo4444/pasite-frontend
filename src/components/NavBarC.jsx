@@ -7,9 +7,10 @@ import ResultsPage from "../pages/ResultsPage";
 import BrowsePage from "../pages/BrowsePage";
 import DownloadPage from "../pages/DownloadPage";
 import MainPage from "../pages/MainPage";
+import StrainCircosResultsPage from "../pages/StrainCircosResultsPage"
+import StrainCircosPage from "../pages/StrainCircosPage";
 import { BrowserRouter as Switch } from "react-router-dom";
 import { Route } from "react-router";
-
 
 class NavBarC extends Component{
     static = {};
@@ -24,6 +25,9 @@ class NavBarC extends Component{
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link href="/search">Search</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/CircosStrain">Circos Strain View</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link href="/browse">Browse</Nav.Link>
@@ -44,6 +48,10 @@ class NavBarC extends Component{
                             <Route path="/browse" component={BrowsePage}/>
 
                             <Route path="/download" component={DownloadPage}/>
+
+                            <Route path="/CircosStrain" component={StrainCircosPage}/>
+
+                            <Route path="/resultsCircosStrain" component={StrainCircosResultsPage}/>
 
                             <Route exact path="/">
                                 <MainPage component={MainPage} />

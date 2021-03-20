@@ -6,13 +6,7 @@ import {faQuestion} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import FadeIn from "react-fade-in";
 import {Link} from 'react-router-dom';
-import * as ReactDOM from 'react-dom';
-import {MultiSelect} from '@progress/kendo-react-dropdowns';
-import {filterBy} from '@progress/kendo-data-query';
-import axios from "axios";
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import AutocompleteC from "../components/AutocompleteC";
 
 function sleep(delay = 0) {
     return new Promise((resolve) => {
@@ -24,6 +18,7 @@ export default function SearchPage() {
     const [rpp, setRpp] = React.useState(10);
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
+    const [selectedA, setSelectedA] = React.useState(false);
     const loading = open && options.length === 0;
 
     React.useEffect(() => {
@@ -54,6 +49,11 @@ export default function SearchPage() {
         }
     }, [open]);
 
+
+    const getSelected = (selected) => {
+        setSelectedA(selected)
+    }
+
     return (
         <div className="search-form">
             <FadeIn>
@@ -75,38 +75,7 @@ export default function SearchPage() {
                         </Form.Label>
 
                         <Col sm="4">
-                            <Autocomplete
-                                id="asynchronous-demo"
-                                multiple={true}
-                                style={{ width: 800 }}
-                                open={open}
-                                onOpen={() => {
-                                    setOpen(true);
-                                }}
-                                onClose={() => {
-                                    setOpen(false);
-                                }}
-                                getOptionSelected={(option, value) => option.name === value.name}
-                                getOptionLabel={(option) => option.name}
-                                options={options}
-                                loading={loading}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label="Choose strains..."
-                                        variant="outlined"
-                                        InputProps={{
-                                            ...params.InputProps,
-                                            endAdornment: (
-                                                <React.Fragment>
-                                                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                                    {params.InputProps.endAdornment}
-                                                </React.Fragment>
-                                            ),
-                                        }}
-                                    />
-                                )}
-                            />
+                            <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8801/api/v1/strains" labelText="Select single/multiple strain/s:"/>
                         </Col>
                     </Form.Group>
 
@@ -212,7 +181,7 @@ export default function SearchPage() {
                         <Link to={{
                             pathname: '/results',
                             state: {
-                                myArrayVariableName: null, // send the selected items as a parameter to the result page
+                                myArrayVariableName: selectedA, // send the selected items as a parameter to the result page
                                 rpp: rpp //send the number of results per page as a parameter to the result page
                             }
                         }}><Button>Search</Button></Link>
