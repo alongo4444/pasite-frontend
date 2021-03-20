@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import FadeIn from "react-fade-in";
-import '../styles/ResultsPage.css'
 import axios from "axios";
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import IconButton from '@material-ui/core/IconButton';
