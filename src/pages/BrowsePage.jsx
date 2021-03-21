@@ -13,6 +13,7 @@ import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
 import '../assets/fonts/YesevaOne-Regular.ttf';
 import Switch from "react-switch";
+import AutocompleteC from "../components/AutocompleteC";
 
 var qs = require('qs');
 
@@ -26,6 +27,7 @@ class BrowsePage extends Component {
             textOrFile: 'Text Box',
             selectedOption: [],
             selectedFile: {},
+            selectedStrains: []
         }
     };
 
@@ -79,19 +81,34 @@ class BrowsePage extends Component {
     onFileChange = e => {
 
         // Update the state
-        if(e.target.files.length>0){
+        if (e.target.files.length > 0) {
             e.preventDefault()
             const reader = new FileReader()
             console.log(e)
             reader.onload = async (e) => {
                 const text = (e.target.result);
                 this.setState({selectedFile: text.split(/\r?\n/)});
-                e.target.value =null;
+                e.target.value = null;
             };
             reader.readAsText(e.target.files[0])
         }
 
     };
+
+    handleTextBox = selected => {
+
+        // Update the state
+        if (selected.length > 0) {
+            let array = [];
+
+            Object.keys(selected).map((key, index) => (
+                array.push(selected[key]['name'])
+            ))
+            this.setState({selectedStrains: array});
+        }
+
+    };
+
 
     render() {
         const handleChange = selectedOption => {
@@ -151,10 +168,9 @@ class BrowsePage extends Component {
         };
         const renderTextBox = () => {
             if (this.state.textbox == true) {
-                return <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Please enter a list strains:</Form.Label>
-                    <Form.Control as="textarea" rows={3}/>
-                </Form.Group>;
+                return <AutocompleteC multipleChoice={true} apiUrl="http://127.0.0.1:8801/api/v1/strains"
+                                      labelText=""
+                                      parentCallback={this.handleTextBox}/>;
             } else {
                 return <Form.Group>
                     <Form.File onChange={(e) => this.onFileChange(e)} id="exampleFormControlFile1"
