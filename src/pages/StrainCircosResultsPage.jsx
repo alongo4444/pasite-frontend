@@ -1,6 +1,5 @@
 import React, {Component, useState, useRef} from "react";
 import CircosStrain from "../components/CircosStrain";
-import axios from "axios";
 
 class StrainCircosResultsPage extends Component {
 
@@ -12,9 +11,9 @@ class StrainCircosResultsPage extends Component {
     render() {
         const svn = this.props.history.location.state.strainVariableName;
         return(
-            <div>
+            <span>
                 <CircosStrain svnn={svn} />
-            </div>
+            </span>
         );
     }
 }
