@@ -1,12 +1,10 @@
 import React, {useState} from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row, Button, OverlayTrigger, Tooltip, Tab, Nav} from "react-bootstrap";
-import {Link} from 'react-router-dom';
+import {Form, Col, Row, Tab, Nav} from "react-bootstrap";
 import axios from "axios";
 import StrainForm from "../components/StrainForm";
 
 export default function DownloadPage() {
-
 
     return (
                     <div style={{textAlign: "center"}}>
