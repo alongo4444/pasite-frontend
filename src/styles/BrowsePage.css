@@ -1,4 +1,40 @@
-.phylo_img{
-    height: 800px;
-    width: auto;
+.switch{
+    font-size: 20px;
+    margin-left: 2%;
+}
+.textBox{
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-bottom: 10%;
+
+}
+.rowC{
+    display:flex;
+    flex-direction:row;
+    margin-bottom: 3%;
+}
+.sidebar{
+   width: 50%;
+}
+.Phylo_Tree{
+    width: 100%;
+    margin-left: 10%;
+}
+.GenerateTree{
+    margin-left: 32%;
+}
+.instructions{
+    font-size: x-large;
+    margin-left: 5%;
+    text-align: left;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 95%;
+}
+.mainDiv{
+    font-family: Yeseva One;
+}
+@font-face {
+    font-family: 'Yeseva One';
+    src: url("../assets/fonts/YesevaOne-Regular.ttf");
 }

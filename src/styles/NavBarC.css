@@ -25,6 +25,6 @@
 }
 
 .card_m{
-    min-height: 900px;
+    height: 100%;
     border: 1px solid black;
 }

@@ -3,6 +3,7 @@ import '../styles/SearchPage.css';
 import {Form, Col, Row, Tab, Nav} from "react-bootstrap";
 import axios from "axios";
 import StrainForm from "../components/StrainForm";
+import GenesByDefenseForm from "../components/GenesByDefenseForm";
 import Cluster from "../components/Cluster_two";
 
 export default function DownloadPage() {
@@ -18,7 +19,7 @@ export default function DownloadPage() {
                                             <Nav.Link eventKey="first">Strain's Genes</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                            <Nav.Link eventKey="second">Tab 2</Nav.Link>
+                                            <Nav.Link eventKey="second">Genes by Defense System</Nav.Link>
                                         </Nav.Item>
                                     </Nav>
                                 </Col>
@@ -28,6 +29,9 @@ export default function DownloadPage() {
                                             <StrainForm/>
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="second">
+                                            <GenesByDefenseForm/>
+                                        </Tab.Pane>
+                                        <Tab.Pane eventKey="third">
                                             <Cluster/>
                                         </Tab.Pane>
                                     </Tab.Content>
