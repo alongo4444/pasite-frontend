@@ -3,7 +3,7 @@ import '../styles/SearchPage.css';
 import {Form, Col, Row, Tab, Nav} from "react-bootstrap";
 import axios from "axios";
 import StrainForm from "../components/StrainForm";
-import Cluster from "../components/Cluster";
+import Cluster from "../components/Cluster_two";
 
 export default function DownloadPage() {
 
@@ -28,7 +28,7 @@ export default function DownloadPage() {
                                             <StrainForm/>
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="second">
-                                            test
+                                            <Cluster/>
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Col>
