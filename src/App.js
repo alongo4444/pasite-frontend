@@ -9,7 +9,7 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <img className="title" src={title}/>
-                <div >
+                <div className="mainDiv">
                     <Router>
                         <NavBarC />
                     </Router>
