@@ -50,7 +50,7 @@ class DefenseSystemStrain extends Component {
                             data={this.state.result_table}
                             columns={columns} //which columns from the data to show as columns
                             pagination={paginationFactory({
-                                sizePerPage: 20,
+                                sizePerPage: 50,
                                 pageStartIndex: 1, // first page will be 0, default is 1
                                 paginationSize: 10,  // the pagination bar size, default is 5
                                 showTotal: true, // display pagination information

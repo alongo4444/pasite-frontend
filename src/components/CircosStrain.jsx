@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import '../styles/CircosStrain.css';
 
 class CircosStrain extends Component {
     state = {
