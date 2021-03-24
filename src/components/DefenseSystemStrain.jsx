@@ -8,24 +8,37 @@ import '../styles/DefenseSystemStrain.css';
 
 class DefenseSystemStrain extends Component {
     state = {
-        result_table: null,
+        result_table: [],
     };
 
     componentDidMount() {
-        axios
-            .get(
-                "http://127.0.0.1:8801/api/v1/strains/strainGenesDefSystems/"+this.props.svnn
-            )
-            .then(response => {
-                this.setState({result_table: response.data})
-            });
+        let svn = this.props.svnn;
+        let params = { svn: svn }
+        // axios
+        //     .get(
+        //         "http://127.0.0.1:8801/api/v1/strains/strainGenesDefSystems/"+this.props.svnn
+        //     )
+        //     .then(response => {
+        //         this.setState({result_table: response.data})
+        //     });
+
+        const Qs = require('qs')
+        let myAxios = axios.create({
+            paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
+        })
+        myAxios.get('http://127.0.0.1:8801/api/v1/strains/strainGenesDefSystems/',{params})
+            .then((res) => {
+                this.setState({result_table: res.data})
+            }); // URL : https://path/to/api?foo=5&foo=2
+
+
     }
     render() {
 
         const columns = [
-            {dataField: "locus_tag", text: "locus tag", sort: true},
-            {dataField: "defense_system", text: "defense system ", sort: true},
-            {dataField: "anti_crispr", text: "anti crispr", sort: true},
+            {dataField: "locus_tag", text: "locus_tag", sort: true},
+            {dataField: "defense_system", text: "defense_system ", sort: true},
+            {dataField: "anti_crispr", text: "anti_crispr", sort: true},
         ]
 
         return (
@@ -58,7 +71,5 @@ class DefenseSystemStrain extends Component {
             </div>
         )
     }
-
 }
-
 export default DefenseSystemStrain;

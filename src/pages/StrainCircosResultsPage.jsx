@@ -1,6 +1,6 @@
 import React, {Component, useState, useRef} from "react";
 import CircosStrain from "../components/CircosStrain";
-import DefenseSystemStrain from "../components/DefenseSystemStrain";
+import DefenseSystemStrain from "../components/DefenseSystemStrain"
 
 class StrainCircosResultsPage extends Component {
 
