@@ -71,11 +71,11 @@ export default function SearchPage() {
 
                     <Form.Group as={Row} controlId="selectStrain">
                         <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}>Select single/multiple strain/s:</p>
+                            <p style={{textAlign: "right"}}>{"Select single/multiple strain/s:"}</p>
                         </Form.Label>
 
                         <Col sm="4">
-                            <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains" labelText="Select single/multiple strain/s:"/>
+                            <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>
                         </Col>
                     </Form.Group>
 

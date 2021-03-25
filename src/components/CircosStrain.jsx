@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import axios from "axios";
-import InnerHTML from 'dangerously-set-html-content'
+import '../styles/CircosStrain.css';
 
 class CircosStrain extends Component {
     state = {
@@ -9,24 +8,9 @@ class CircosStrain extends Component {
     };
 
 
-    componentDidMount() {
-        axios
-            .get(
-                "http://127.0.0.1:8800/api/v1/strains/strainCircos/" + this.props.svnn,
-            )
-            .then(response => {
-                this.setState({file: response.data});
-                this.setState({loaded: true})
-            });
-
-    }
-
     render() {
-        // return (<iframe dangerouslySetInnerHTML={{ __html: this.state.file}}/>);
-
         return (
-           // <div dangerouslySetInnerHTML={{ __html: this.state.file }}/>
-             <InnerHTML html={this.state.file} />
+            <iframe src={"http://127.0.0.1:8800/api/v1/strains/strainCircos/" + this.props.svnn} width="1000" height="1000" />
         )
     }
 
