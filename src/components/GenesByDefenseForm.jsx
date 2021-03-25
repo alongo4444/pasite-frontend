@@ -128,7 +128,7 @@ export default function GenesByDefenseForm() {
         let myAxios = axios.create({
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
-        myAxios.get('http://127.0.0.1:8801/api/v1/genes/genes_by_defense',{params})
+        myAxios.get('http://127.0.0.1:8800/api/v1/genes/genes_by_defense',{params})
             .then((res) => {
                 FileDownload(res.data, 'genes_by_defense.csv');
             }); // URL : https://path/to/api?foo=5&foo=2
@@ -182,7 +182,7 @@ export default function GenesByDefenseForm() {
                         </Form.Label>
 
                         <Col sm="4">
-                            <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8801/api/v1/cluster/get_defense_system_names"/>
+                            <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/cluster/get_defense_system_names"/>
                         </Col>
                     </Form.Group>
 

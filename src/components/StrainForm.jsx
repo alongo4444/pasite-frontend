@@ -187,7 +187,7 @@ export default function StrainForm() {
                             </Form.Label>
 
                             <Col sm="4">
-                                <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8801/api/v1/strains"/>
+                                <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>
                             </Col>
                         </Form.Group>
 

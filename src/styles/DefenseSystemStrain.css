@@ -63,3 +63,13 @@ tr:hover {
 .react-bootstrap-table-page-btns-ul {
     float: none;
 }
+
+.exportB {
+    background-color: white;
+    border: 1px solid #3b3838;
+}
+
+.exportB:hover {
+    background-color: #eeeff1;
+    border: 1px solid #3b3838;
+}
