@@ -29,7 +29,7 @@ export default function SearchPage() {
         }
 
         (async () => {
-            const response = await fetch('http://127.0.0.1:8801/api/v1/strains');
+            const response = await fetch('http://127.0.0.1:8800/api/v1/strains');
             await sleep(1e3); // For demo purposes.
             const countries = await response.json();
             if (active) {
@@ -75,7 +75,7 @@ export default function SearchPage() {
                         </Form.Label>
 
                         <Col sm="4">
-                            <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8801/api/v1/strains"/>
+                            <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>
                         </Col>
                     </Form.Group>
 
