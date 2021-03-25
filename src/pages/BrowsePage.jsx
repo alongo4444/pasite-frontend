@@ -34,7 +34,7 @@ class BrowsePage extends Component {
     componentDidMount() {
         axios
             .get(
-                "http://127.0.0.1:8801/api/v1/strains/phyloTree",
+                "http://127.0.0.1:8800/api/v1/strains/phyloTree",
                 {responseType: 'arraybuffer'},
             )
             .then(response => {
@@ -54,7 +54,7 @@ class BrowsePage extends Component {
         this.setState({loaded: false})
         return axios
             .get(
-                "http://127.0.0.1:8801/api/v1/strains/phyloTree", {
+                "http://127.0.0.1:8800/api/v1/strains/phyloTree", {
                     params: {
                         systems: this.state.selectedOption.map((option) => option.label),
                         subtree: this.state.selectedFile
@@ -168,7 +168,7 @@ class BrowsePage extends Component {
         };
         const renderTextBox = () => {
             if (this.state.textbox == true) {
-                return <AutocompleteC multipleChoice={true} apiUrl="http://127.0.0.1:8801/api/v1/strains"
+                return <AutocompleteC multipleChoice={true} apiUrl="http://127.0.0.1:8800/api/v1/strains"
                                       labelText=""
                                       parentCallback={this.handleTextBox}/>;
             } else {
