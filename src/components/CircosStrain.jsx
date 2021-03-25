@@ -10,7 +10,7 @@ class CircosStrain extends Component {
 
     render() {
         return (
-            <iframe src={"http://127.0.0.1:8801/api/v1/strains/strainCircos/" + this.props.svnn} width="1000" height="1000" />
+            <iframe src={"http://127.0.0.1:8800/api/v1/strains/strainCircos/" + this.props.svnn} width="1000" height="1000" />
         )
     }
 
