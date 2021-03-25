@@ -16,7 +16,7 @@ class ResultsPage extends Component {
 
     componentDidMount() {
         axios
-            .get("http://127.0.0.1:8801/api/v1/genes")
+            .get("http://127.0.0.1:8800/api/v1/genes")
             .then((res) => {
                 this.setState({result_table: res.data});
                 console.log(this.state.result_table)

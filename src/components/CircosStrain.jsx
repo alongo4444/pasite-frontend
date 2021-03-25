@@ -12,7 +12,7 @@ class CircosStrain extends Component {
     componentDidMount() {
         axios
             .get(
-                "http://127.0.0.1:8801/api/v1/strains/strainCircos/" + this.props.svnn,
+                "http://127.0.0.1:8800/api/v1/strains/strainCircos/" + this.props.svnn,
             )
             .then(response => {
                 this.setState({file: response.data});

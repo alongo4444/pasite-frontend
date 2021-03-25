@@ -128,7 +128,7 @@ export default function StrainForm() {
         let myAxios = axios.create({
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
-        myAxios.get('http://127.0.0.1:8801/api/v1/download_genes',{params})
+        myAxios.get('http://127.0.0.1:8800/api/v1/download_genes',{params})
             .then((res) => {
                 FileDownload(res.data, 'report.csv');
             }); // URL : https://path/to/api?foo=5&foo=2
@@ -181,7 +181,7 @@ export default function StrainForm() {
                             </Form.Label>
                         </Form.Group>
 
-                        <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8801/api/v1/strains" labelText="Select single/multiple strain/s:" />
+                        <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains" labelText="Select single/multiple strain/s:" />
 
                         <div className="chkbxs">
                         <div>
