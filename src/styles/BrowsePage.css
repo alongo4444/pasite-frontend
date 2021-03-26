@@ -1,6 +1,7 @@
 .switch{
-    font-size: 20px;
+    font-size: 15px;
     margin-left: 2%;
+    margin-top: 1%;
 }
 .textBox{
     margin-top: 5%;
@@ -8,28 +9,39 @@
     margin-bottom: 10%;
 
 }
+.drawer{
+    height: 50%;
+}
+.auto_complete{
+    width: 10%;
+    height: 30%;
+}
 .rowC{
     display:flex;
     flex-direction:row;
     margin-bottom: 3%;
 }
 .sidebar{
-   width: 50%;
+   width: 25%;
 }
 .Phylo_Tree{
-    width: 100%;
-    margin-left: 10%;
+    width: 70%;
+    margin-left: 3%;
+    margin-top: 2%;
 }
 .GenerateTree{
-    margin-left: 32%;
+    margin-left: 25%;
 }
 .instructions{
-    font-size: x-large;
+    font-size: medium;
     margin-left: 5%;
     text-align: left;
     margin-top: 5%;
     margin-bottom: 5%;
     width: 95%;
+}
+.myDrawer{
+    position:relative;
 }
 .mainDiv{
     font-family: Yeseva One;
