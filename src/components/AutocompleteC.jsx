@@ -57,11 +57,11 @@ export default function AutocompleteC({ apiUrl, parentCallback, multipleChoice})
         <div className="search-form">
             <FadeIn>
                 <Form.Group as={Row} controlId="selectStrain">
-                    <Col sm="4">
+                    <Col>
                         <Autocomplete
                             id="asynchronous-demo"
                             multiple={multipleChoice}
-                            style={{ width: 800 }}
+                            // style={{ width: "100%" }}
                             open={open}
                             onOpen={() => {
                                 setOpen(true);
@@ -78,8 +78,9 @@ export default function AutocompleteC({ apiUrl, parentCallback, multipleChoice})
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
-                                    label="Choose strains..."
+                                    // label="Choose strains..."
                                     variant="outlined"
+                                    size="small"
                                     InputProps={{
                                         ...params.InputProps,
                                         endAdornment: (
