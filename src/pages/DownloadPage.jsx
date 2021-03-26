@@ -21,6 +21,9 @@ export default function DownloadPage() {
                                         <Nav.Item>
                                             <Nav.Link eventKey="second">Genes by Defense System</Nav.Link>
                                         </Nav.Item>
+                                        <Nav.Item>
+                                            <Nav.Link eventKey="third">Cluster</Nav.Link>
+                                        </Nav.Item>
                                     </Nav>
                                 </Col>
                                 <Col sm={9}>
