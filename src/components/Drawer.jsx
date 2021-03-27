@@ -12,6 +12,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
+import { BsShieldShaded } from 'react-icons/bs';
+import { SiMicrogenetics } from 'react-icons/si';
+import { GiDrippingTube } from 'react-icons/gi';
 
 const drawerWidth = 240;
 
@@ -78,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer({generatingTypeHandler}) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -121,12 +124,19 @@ export default function MiniDrawer() {
                 </div>
                 <Divider/>
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItem>
-                    ))}
+
+                    <ListItem button key="defense" onClick={() => generatingTypeHandler("defense")}>
+                        <ListItemIcon><BsShieldShaded/></ListItemIcon>
+                        <ListItemText primary="Defense Systems"/>
+                    </ListItem>
+                    <ListItem button key="cluster" onClick={() => generatingTypeHandler("cluster")}>
+                        <ListItemIcon><SiMicrogenetics/></ListItemIcon>
+                        <ListItemText primary="Gene Cluster"/>
+                    </ListItem>
+                    <ListItem button key="isolation" onClick={() => generatingTypeHandler("isolation")}>
+                        <ListItemIcon><GiDrippingTube/></ListItemIcon>
+                        <ListItemText primary="Isolation Type"/>
+                    </ListItem>
                 </List>
             </Drawer>
         </div>
