@@ -15,6 +15,7 @@ import '../assets/fonts/YesevaOne-Regular.ttf';
 import Switch from "react-switch";
 import AutocompleteC from "../components/AutocompleteC";
 import MiniDrawer from "../components/Drawer";
+import Cluster from "../components/Cluster";
 
 var qs = require('qs');
 
@@ -29,7 +30,8 @@ class BrowsePage extends Component {
             selectedOption: [],
             selectedFile: {},
             selectedStrains: [],
-            isOpen:false
+            isOpen:false,
+            generateType:"defense"
         }
     };
 
@@ -129,6 +131,19 @@ class BrowsePage extends Component {
 
     };
 
+    generatingTypeHandler = Gtype => {
+        console.log(Gtype)
+        if(Gtype=="defense"){
+            this.setState({generateType: "defense"})
+        }
+        if(Gtype=="cluster"){
+            this.setState({generateType: "cluster"})
+        }
+        if(Gtype=="isolation"){
+            this.setState({generateType: "isolation"})
+        }
+    }
+
 
     render() {
         /*
@@ -213,6 +228,21 @@ class BrowsePage extends Component {
             }
         }
 
+        const renderGenerateType = () => {
+            if(this.state.generateType=="defense"){
+                return (<Select
+                    closeMenuOnSelect={false}
+                    isMulti
+                    options={colourOptions}
+                    styles={colourStyles}
+                    onChange={handleChange}
+                />)
+            }
+            if(this.state.generateType=="cluster"){
+                return(<Cluster/>)
+            }
+        }
+
         /*
         update the state of the file upload/strain selection on change
          */
@@ -244,13 +274,7 @@ class BrowsePage extends Component {
                             <div className="instructions">Choose the Defense Systems you would like to show:</div>
 
                             <div style={{width: "95%", marginLeft: "5%"}}>
-                                <Select
-                                    closeMenuOnSelect={false}
-                                    isMulti
-                                    options={colourOptions}
-                                    styles={colourStyles}
-                                    onChange={handleChange}
-                                />
+                                {renderGenerateType()}
                                 <br/>
                                 <Button onClick={() => this.computeTree()} variant="outline-primary"
                                         className='GenerateTree'>Generate Tree</Button>
@@ -297,7 +321,7 @@ class BrowsePage extends Component {
                                 )}
                             </TransformWrapper>
                             <div id="drawer">
-                                <MiniDrawer />
+                                <MiniDrawer generatingTypeHandler={this.generatingTypeHandler} />
                             </div>
                         </div>
                     </div>
