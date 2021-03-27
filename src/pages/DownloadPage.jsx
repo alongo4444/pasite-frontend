@@ -4,7 +4,7 @@ import {Form, Col, Row, Tab, Nav} from "react-bootstrap";
 import axios from "axios";
 import StrainForm from "../components/StrainForm";
 import GenesByDefenseForm from "../components/GenesByDefenseForm";
-import Cluster from "../components/Cluster_two";
+import Cluster from "../components/Cluster";
 
 export default function DownloadPage() {
 
