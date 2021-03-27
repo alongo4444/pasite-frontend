@@ -19,20 +19,14 @@ export default function GenesByDefenseForm() {
     const [selectedA, setSelectedA] = React.useState(false);
     const [checked, setChecked] = React.useState({
         // locus_tag: true,
+        genomic_accession: true,
+        start_g: true,
+        end_g: true,
+        strand: true,
         attributes_x: true,
-        chromosome_y: true,
-        genomic_accession_y: true,
-        start_y: true,
-        end_y: true,
-        strand_y: true,
-        product_accession_y: true,
-        nonredundant_refseq_y: true,
-        name_y: true,
-        symbol_y: true,
-        geneID_y: true,
-        product_length_y: true,
-        protein_sequence: true,
-        dna_sequence: true,
+        product_accession: true,
+        nonredundant_refseq: true,
+        name: true
     });
 
     /* ################################################ */
@@ -130,7 +124,7 @@ export default function GenesByDefenseForm() {
         })
         myAxios.get('http://127.0.0.1:8800/api/v1/genes/genes_by_defense',{params})
             .then((res) => {
-                FileDownload(res.data, 'genes_by_defense.csv');
+                FileDownload(res.data, 'genes_by_defense.zip');
             }); // URL : https://path/to/api?foo=5&foo=2
 
 
@@ -200,34 +194,34 @@ export default function GenesByDefenseForm() {
 
                         {/*<label for="1" className="lbl">locus_tag</label>*/}
                         {/*<input id='1' type="checkbox" name="locus_tag" onChange={() => toggleCheck("locus_tag")} checked={checked["locus_tag"]}/>*/}
-                        <label for='2' className="lbl">attributes_x</label>
-                        <input id='2' type="checkbox" name="attributes_x" onChange={() => toggleCheck("attributes_x")} checked={checked["attributes_x"]}/>
-                        <label for='3' className="lbl">chromosome_y</label>
-                        <input id='3' type="checkbox" name="chromosome_y" onChange={() => toggleCheck("chromosome_y")} checked={checked["chromosome_y"]}/>
-                        <label htmlFor='4' className="lbl">genomic_accession_y</label>
-                        <input id='4' type="checkbox" name="genomic_accession_y" onChange={() => toggleCheck("genomic_accession_y")} checked={checked["genomic_accession_y"]}/>
-                        <label htmlFor='5' className="lbl">start_y</label>
-                        <input id='5' type="checkbox" name="start_y" onChange={() => toggleCheck("start_y")} checked={checked["start_y"]}/>
-                        <label htmlFor='6' className="lbl">end_y</label>
-                        <input id='6' type="checkbox" name="end_y" onChange={() => toggleCheck("end_y")} checked={checked["end_y"]}/>
-                        <label htmlFor='7' className="lbl">strand_y</label>
-                        <input id='7' type="checkbox" name="strand_y" onChange={() => toggleCheck("strand_y")} checked={checked["strand_y"]}/>
-                        <label htmlFor='8' className="lbl">product_accession_y</label>
-                        <input id='8' type="checkbox" name="product_accession_y" onChange={() => toggleCheck("product_accession_y")} checked={checked["product_accession_y"]}/>
-                        <label htmlFor='9' className="lbl">nonredundant_refseq_y</label>
-                        <input id='9' type="checkbox" name="nonredundant_refseq_y" onChange={() => toggleCheck("nonredundant_refseq_y")} checked={checked["nonredundant_refseq_y"]}/>
-                        <label htmlFor='10' className="lbl">name_y</label>
-                        <input id='10' type="checkbox" name="name_y" onChange={() => toggleCheck("name_y")} checked={checked["name_y"]}/>
-                        <label htmlFor='11' className="lbl">symbol_y</label>
-                        <input id='11' type="checkbox" name="symbol_y" onChange={() => toggleCheck("symbol_y")} checked={checked["symbol_y"]}/>
-                        <label htmlFor='12' className="lbl">geneid_y</label>
-                        <input id='12' type="checkbox" name="geneID_y" onChange={() => toggleCheck("geneID_y")} checked={checked["geneID_y"]}/>
-                        <label htmlFor='13' className="lbl"> product_length_y</label>
-                        <input id='13' type="checkbox" name="product_length_y" onChange={() => toggleCheck("product_length_y")} checked={checked["product_length_y"]}/>
-                        <label htmlFor='14' className="lbl"> protein_sequence</label>
-                        <input id='14' type="checkbox" name="protein_sequence" onChange={() => toggleCheck("protein_sequence")} checked={checked["protein_sequence"]}/>
-                        <label htmlFor='15' className="lbl"> dna_sequence</label>
-                        <input id='15' type="checkbox" name="dna_sequence" onChange={() => toggleCheck("dna_sequence")} checked={checked["dna_sequence"]}/>
+                        <label for='2' className="lbl">genomic_accession</label>
+                        <input id='2' type="checkbox" name="genomic_accession" onChange={() => toggleCheck("genomic_accession")} checked={checked["genomic_accession"]}/>
+                        <label for='3' className="lbl">start_g</label>
+                        <input id='3' type="checkbox" name="start_g" onChange={() => toggleCheck("start_g")} checked={checked["start_g"]}/>
+                        <label htmlFor='4' className="lbl">end_g</label>
+                        <input id='4' type="checkbox" name="end_g" onChange={() => toggleCheck("end_g")} checked={checked["end_g"]}/>
+                        <label htmlFor='5' className="lbl">strand</label>
+                        <input id='5' type="checkbox" name="strand" onChange={() => toggleCheck("strand")} checked={checked["strand"]}/>
+                        <label htmlFor='6' className="lbl">attributes_x</label>
+                        <input id='6' type="checkbox" name="attributes_x" onChange={() => toggleCheck("attributes_x")} checked={checked["attributes_x"]}/>
+                        <label htmlFor='7' className="lbl">product_accession</label>
+                        <input id='7' type="checkbox" name="product_accession" onChange={() => toggleCheck("product_accession")} checked={checked["product_accession"]}/>
+                        <label htmlFor='8' className="lbl">nonredundant_refseq</label>
+                        <input id='8' type="checkbox" name="nonredundant_refseq" onChange={() => toggleCheck("nonredundant_refseq")} checked={checked["nonredundant_refseq"]}/>
+                        <label htmlFor='9' className="lbl">name</label>
+                        <input id='9' type="checkbox" name="name" onChange={() => toggleCheck("name")} checked={checked["name"]}/>
+                        {/*<label htmlFor='10' className="lbl">name_y</label>*/}
+                        {/*<input id='10' type="checkbox" name="name_y" onChange={() => toggleCheck("name_y")} checked={checked["name_y"]}/>*/}
+                        {/*<label htmlFor='11' className="lbl">symbol_y</label>*/}
+                        {/*<input id='11' type="checkbox" name="symbol_y" onChange={() => toggleCheck("symbol_y")} checked={checked["symbol_y"]}/>*/}
+                        {/*<label htmlFor='12' className="lbl">geneid_y</label>*/}
+                        {/*<input id='12' type="checkbox" name="geneID_y" onChange={() => toggleCheck("geneID_y")} checked={checked["geneID_y"]}/>*/}
+                        {/*<label htmlFor='13' className="lbl"> product_length_y</label>*/}
+                        {/*<input id='13' type="checkbox" name="product_length_y" onChange={() => toggleCheck("product_length_y")} checked={checked["product_length_y"]}/>*/}
+                        {/*<label htmlFor='14' className="lbl"> protein_sequence</label>*/}
+                        {/*<input id='14' type="checkbox" name="protein_sequence" onChange={() => toggleCheck("protein_sequence")} checked={checked["protein_sequence"]}/>*/}
+                        {/*<label htmlFor='15' className="lbl"> dna_sequence</label>*/}
+                        {/*<input id='15' type="checkbox" name="dna_sequence" onChange={() => toggleCheck("dna_sequence")} checked={checked["dna_sequence"]}/>*/}
                     </div>
 
                     <div style={{textAlign: "center"}}>
