@@ -132,7 +132,6 @@ class BrowsePage extends Component {
     };
 
     generatingTypeHandler = Gtype => {
-        console.log(Gtype)
         if(Gtype=="defense"){
             this.setState({generateType: "defense"})
         }
