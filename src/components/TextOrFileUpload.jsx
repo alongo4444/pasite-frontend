@@ -22,7 +22,7 @@ function sleep(delay = 0) {
 //parentHandleTextBox - For the autocomplete: the callback that will be called in the parent which holds this component when the user chooses an option from the autocomplete component.
 //parentFileChangeCallback -  the callback that will be called in the parent which holds this component when the user chooses a file. The file should contain the options with \n separating between them.
 //label - the description of the component for the user
-export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, parentHandleTextBox, multipleChoice, label}) {
+export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, parentHandleTextBox, multipleChoice, label, limit_length=0, parentCallbackLegnth=null}) {
 
     const [textbox, setTextbox] = React.useState(true);
     const [textOrFile, setTextOrFile] = React.useState('Text Box' );
@@ -31,7 +31,7 @@ export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, par
     const renderTextBox = () => {
         if (textbox == true) {
             return <AutocompleteC  multipleChoice={true} apiUrl={apiUrl}
-                                   parentCallback={(selected) => parentHandleTextBox(selected)} multipleChoice={multipleChoice}/>
+                                   parentCallback={(selected) => parentHandleTextBox(selected)} multipleChoice={multipleChoice} parentCallbackLegnth={parentCallbackLegnth} limit_length={limit_length}/>
         } else {
             return <Form.Group>
                 <Form.File onChange={(e) => parentFileChangeCallback(e)} id="exampleFormControlFile1"
