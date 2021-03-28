@@ -4,6 +4,8 @@ import '../styles/StrainForm.css';
 import axios from "axios";
 import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import AutocompleteC from "../components/AutocompleteC";
+import TextOrFileUpload from "./TextOrFileUpload";
+import ErrorModalC from "./ErrorModalC";
 function sleep(delay = 0) {
     return new Promise((resolve) => {
         setTimeout(resolve, delay);
@@ -18,22 +20,16 @@ export default function StrainForm() {
     const [modalShow, setModalShow] = React.useState(false);
     const [selectedA, setSelectedA] = React.useState(false);
     const [checked, setChecked] = React.useState({
-        locus_tag: true,
+        genomic_accession: true,
+        start_g: true,
+        end_g: true,
+        strand: true,
         attributes_x: true,
-        chromosome_y: true,
-        genomic_accession_y: true,
-        start_y: true,
-        end_y: true,
-        strand_y: true,
-        product_accession_y: true,
-        nonredundant_refseq_y: true,
-        name_y: true,
-        symbol_y: true,
-        geneid_y: true,
-        product_length_y: true,
-        protein_sequence: true,
-        dna_sequence: true,
+        product_accession: true,
+        nonredundant_refseq: true,
+        name: true
     });
+    const childErr = React.createRef();
 
     /* ################################################ */
     /* #### TOGGLES checK STATE BASED ON inputName #### */
@@ -128,12 +124,10 @@ export default function StrainForm() {
         let myAxios = axios.create({
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
-        myAxios.get('http://127.0.0.1:8800/api/v1/genes/download_genes',{params})
-            .then((res) => {
-                FileDownload(res.data, 'report.csv');
-            }); // URL : https://path/to/api?foo=5&foo=2
-
-
+            myAxios.get('http://127.0.0.1:8800/api/v1/genes/download_genes', {params})
+                .then((res) => {
+                    FileDownload(res.data, 'report.csv');
+                }).catch(function (error) {childErr.current.handleOpen()});
     }
 
 
@@ -167,6 +161,38 @@ export default function StrainForm() {
         setSelectedA(selected)
     }
 
+    /*
+handle file upload and load each line to array of
+integers (aka strain indexes for subtree) for subtree generating
+using selectedFile state.
+*/
+    const onFileChange = (e) => {
+
+        // Update the state
+        if (e.target.files.length > 0) {
+            e.preventDefault()
+            const reader = new FileReader()
+            console.log(e)
+            reader.onload = async (e) => {
+                const text = (e.target.result);
+                let ts = text.split(/\r?\n/);
+                let selectedAS=[];
+                let id = 0;
+                for (let key in ts) {
+                    selectedAS.push({'name':ts[key], 'id': id});
+                    id++;
+                    // selectedAS[key]['name'].push(ts[key]['name'])
+                }
+
+
+                setSelectedA(selectedAS)
+                // this.setState({selectedFile: text.split(/\r?\n/)});
+                e.target.value = null;
+            };
+            reader.readAsText(e.target.files[0])
+        }
+    };
+
     return (
             <div >
                 <FadeIn>
@@ -187,7 +213,9 @@ export default function StrainForm() {
                             </Form.Label>
 
                             <Col sm="4">
-                                <AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>
+                                {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>*/}
+                                <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/strains" multipleChoice={true} parentFileChangeCallback={onFileChange} parentHandleTextBox={getSelected} label="Please upload a file that contains a list of strains
+                            separated by new lines (/n)" />
                             </Col>
                         </Form.Group>
 
@@ -203,43 +231,52 @@ export default function StrainForm() {
                             />
                         </div>
 
-                            <label for="1" className="lbl">locus_tag</label>
-                            <input id='1' type="checkbox" name="locus_tag" onChange={() => toggleCheck("locus_tag")} checked={checked["locus_tag"]}/>
-                            <label for='2' className="lbl">attributes_x</label>
-                            <input id='2' type="checkbox" name="attributes_x" onChange={() => toggleCheck("attributes_x")} checked={checked["attributes_x"]}/>
-                            <label for='3' className="lbl">chromosome_y</label>
-                            <input id='3' type="checkbox" name="chromosome_y" onChange={() => toggleCheck("chromosome_y")} checked={checked["chromosome_y"]}/>
-                            <label htmlFor='4' className="lbl">genomic_accession_y</label>
-                            <input id='4' type="checkbox" name="genomic_accession_y" onChange={() => toggleCheck("genomic_accession_y")} checked={checked["genomic_accession_y"]}/>
-                            <label htmlFor='5' className="lbl">start_y</label>
-                            <input id='5' type="checkbox" name="start_y" onChange={() => toggleCheck("start_y")} checked={checked["start_y"]}/>
-                            <label htmlFor='6' className="lbl">end_y</label>
-                            <input id='6' type="checkbox" name="end_y" onChange={() => toggleCheck("end_y")} checked={checked["end_y"]}/>
-                            <label htmlFor='7' className="lbl">strand_y</label>
-                            <input id='7' type="checkbox" name="strand_y" onChange={() => toggleCheck("strand_y")} checked={checked["strand_y"]}/>
-                            <label htmlFor='8' className="lbl">product_accession_y</label>
-                            <input id='8' type="checkbox" name="product_accession_y" onChange={() => toggleCheck("product_accession_y")} checked={checked["product_accession_y"]}/>
-                            <label htmlFor='9' className="lbl">nonredundant_refseq_y</label>
-                            <input id='9' type="checkbox" name="nonredundant_refseq_y" onChange={() => toggleCheck("nonredundant_refseq_y")} checked={checked["nonredundant_refseq_y"]}/>
-                            <label htmlFor='10' className="lbl">name_y</label>
-                            <input id='10' type="checkbox" name="name_y" onChange={() => toggleCheck("name_y")} checked={checked["name_y"]}/>
-                            <label htmlFor='11' className="lbl">symbol_y</label>
-                            <input id='11' type="checkbox" name="symbol_y" onChange={() => toggleCheck("symbol_y")} checked={checked["symbol_y"]}/>
-                            <label htmlFor='12' className="lbl">geneid_y</label>
-                            <input id='12' type="checkbox" name="geneid_y" onChange={() => toggleCheck("geneid_y")} checked={checked["geneid_y"]}/>
-                            <label htmlFor='13' className="lbl"> product_length_y</label>
-                            <input id='13' type="checkbox" name="product_length_y" onChange={() => toggleCheck("product_length_y")} checked={checked["product_length_y"]}/>
-                            <label htmlFor='14' className="lbl"> protein_sequence</label>
-                            <input id='14' type="checkbox" name="protein_sequence" onChange={() => toggleCheck("protein_sequence")} checked={checked["protein_sequence"]}/>
-                            <label htmlFor='15' className="lbl"> dna_sequence</label>
-                            <input id='15' type="checkbox" name="dna_sequence" onChange={() => toggleCheck("dna_sequence")} checked={checked["dna_sequence"]}/>
+                            <label htmlFor='2' className="lbl">genomic_accession</label>
+                            <input id='2' type="checkbox" name="genomic_accession"
+                                   onChange={() => toggleCheck("genomic_accession")}
+                                   checked={checked["genomic_accession"]}/>
+                            <label htmlFor='3' className="lbl">start_g</label>
+                            <input id='3' type="checkbox" name="start_g" onChange={() => toggleCheck("start_g")}
+                                   checked={checked["start_g"]}/>
+                            <label htmlFor='4' className="lbl">end_g</label>
+                            <input id='4' type="checkbox" name="end_g" onChange={() => toggleCheck("end_g")}
+                                   checked={checked["end_g"]}/>
+                            <label htmlFor='5' className="lbl">strand</label>
+                            <input id='5' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
+                                   checked={checked["strand"]}/>
+                            <label htmlFor='6' className="lbl">attributes_x</label>
+                            <input id='6' type="checkbox" name="attributes_x"
+                                   onChange={() => toggleCheck("attributes_x")} checked={checked["attributes_x"]}/>
+                            <label htmlFor='7' className="lbl">product_accession</label>
+                            <input id='7' type="checkbox" name="product_accession"
+                                   onChange={() => toggleCheck("product_accession")}
+                                   checked={checked["product_accession"]}/>
+                            <label htmlFor='8' className="lbl">nonredundant_refseq</label>
+                            <input id='8' type="checkbox" name="nonredundant_refseq"
+                                   onChange={() => toggleCheck("nonredundant_refseq")}
+                                   checked={checked["nonredundant_refseq"]}/>
+                            <label htmlFor='9' className="lbl">name</label>
+                            <input id='9' type="checkbox" name="name" onChange={() => toggleCheck("name")}
+                                   checked={checked["name"]}/>
                         </div>
 
                         <div style={{textAlign: "center"}}>
                             <Button onClick={getData}>Download</Button>
                         </div>
                     </Form>
+                    {/*<Modal show={show} onHide={handleClose}>*/}
+                    {/*    <Modal.Header closeButton>*/}
+                    {/*        <Modal.Title>Modal heading</Modal.Title>*/}
+                    {/*    </Modal.Header>*/}
+                    {/*    <Modal.Body>There is a problem with the server request. Sorry for the inconvenience.</Modal.Body>*/}
+                    {/*    <Modal.Footer>*/}
+                    {/*        <Button variant="secondary" onClick={handleClose}>*/}
+                    {/*            Close*/}
+                    {/*        </Button>*/}
+                    {/*    </Modal.Footer>*/}
+                    {/*</Modal>*/}
                 </FadeIn>
+                <ErrorModalC open={false} ref={childErr}/>
             </div>
         )
     }
