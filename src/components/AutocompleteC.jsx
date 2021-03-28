@@ -1,7 +1,8 @@
 import React from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row} from "react-bootstrap";
+import {Form, Col, Row, Modal, Button} from "react-bootstrap";
 import FadeIn from "react-fade-in";
+import ErrorModalC from "./ErrorModalC";
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -14,14 +15,16 @@ function sleep(delay = 0) {
 }
 
 
-//apiUrl - the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8801/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
+//apiUrl - the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8800/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
 //parentCallback - the callback that will be called in the parent which holds this component. The parent will receive the current selected objects for each change on this component.  See DownloadPage for example or ask Alon.
 //multipleChoice - determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
 //labelText - The text which will appear in the label of the component (i.e: "Select single/multiple strain/s:").
-export default function AutocompleteC({ apiUrl, parentCallback, multipleChoice}) {
+export default function AutocompleteC({apiUrl, parentCallback, multipleChoice}) {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
     const loading = open && options.length === 0;
+
+    const childErr = React.createRef();
 
     React.useEffect(() => {
         let active = true;
@@ -31,11 +34,16 @@ export default function AutocompleteC({ apiUrl, parentCallback, multipleChoice})
 
 
         (async () => {
-            const response = await fetch(apiUrl);
-            await sleep(1e3); // For demo purposes.
-            const countries = await response.json();
-            if (active) {
-                setOptions(countries.filter(x=> x.name != null))
+            try {
+                const response = await fetch(apiUrl);
+
+                await sleep(1e3); // For demo purposes.
+                const countries = await response.json();
+                if (active) {
+                    setOptions(countries.filter(x => x.name != null))
+                }
+            } catch (e) {
+                childErr.current.handleOpen();
             }
 
         })();
@@ -43,7 +51,7 @@ export default function AutocompleteC({ apiUrl, parentCallback, multipleChoice})
         return () => {
             active = false;
         };
-    },[loading]);
+    }, [loading]);
 
     React.useEffect(() => {
         if (!open) {
@@ -52,10 +60,8 @@ export default function AutocompleteC({ apiUrl, parentCallback, multipleChoice})
     }, [open]);
 
 
-
     return (
         <div className="search-form">
-            <FadeIn>
                 <Form.Group as={Row} controlId="selectStrain">
                     <Col>
                         <Autocomplete
@@ -85,7 +91,7 @@ export default function AutocompleteC({ apiUrl, parentCallback, multipleChoice})
                                         ...params.InputProps,
                                         endAdornment: (
                                             <React.Fragment>
-                                                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                                {loading ? <CircularProgress color="inherit" size={20}/> : null}
                                                 {params.InputProps.endAdornment}
                                             </React.Fragment>
                                         ),
@@ -95,7 +101,18 @@ export default function AutocompleteC({ apiUrl, parentCallback, multipleChoice})
                         />
                     </Col>
                 </Form.Group>
-            </FadeIn>
+                {/*<Modal show={show} onHide={handleClose}>*/}
+                {/*    <Modal.Header closeButton>*/}
+                {/*        <Modal.Title>Modal heading</Modal.Title>*/}
+                {/*    </Modal.Header>*/}
+                {/*    <Modal.Body>There is a problem with the server request. Sorry for the inconvenience.</Modal.Body>*/}
+                {/*    <Modal.Footer>*/}
+                {/*        <Button variant="secondary" onClick={handleClose}>*/}
+                {/*            Close*/}
+                {/*        </Button>*/}
+                {/*    </Modal.Footer>*/}
+                {/*</Modal>*/}
+            <ErrorModalC open={false} ref={childErr}/>
         </div>
     );
 }

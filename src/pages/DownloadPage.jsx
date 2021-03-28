@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import '../styles/SearchPage.css';
 import {Form, Col, Row, Tab, Nav} from "react-bootstrap";
 import axios from "axios";
-import StrainForm from "../components/StrainForm";
+import StrainForm from "../components/StrainForm"
+import GenesByClusterC from "../components/GenesByClusterC";
 import GenesByDefenseForm from "../components/GenesByDefenseForm";
 
 export default function DownloadPage() {

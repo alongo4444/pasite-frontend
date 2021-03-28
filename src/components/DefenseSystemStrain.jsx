@@ -4,7 +4,9 @@ import FadeIn from "react-fade-in";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import '../styles/DefenseSystemStrain.css';
-
+import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
+import {faDownload, faQuestion} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class DefenseSystemStrain extends Component {
     state = {
@@ -21,7 +23,7 @@ class DefenseSystemStrain extends Component {
             });
     }
     render() {
-
+        const { ExportCSVButton } = CSVExport;
         const columns = [
             {dataField: "locus_tag", text: "locus tag", sort: true},
             {dataField: "defense_system", text: "defense system ", sort: true},
@@ -32,27 +34,61 @@ class DefenseSystemStrain extends Component {
             <div>
                 <FadeIn>
                     <div style={{height: "100%", width: "90%",marginLeft:"5%"}}>
-                        <BootstrapTable
-                            keyField="locus_tag"
+
+                        <ToolkitProvider
+                            keyField="id"
                             data={this.state.result_table}
-                            columns={columns} //which columns from the data to show as columns
-                            pagination={paginationFactory({
-                                sizePerPage: 50,
-                                pageStartIndex: 1, // first page will be 0, default is 1
-                                paginationSize: 10,  // the pagination bar size, default is 5
-                                showTotal: true, // display pagination information
-                                firstPageText: '<<', // the text of first page button
-                                prePageText: 'Prev', // the text of previous page button
-                                nextPageText: 'Next', // the text of next page button
-                                lastPageText: '>>', // the text of last page button
-                                nextPageTitle: 'Go to next', // the title of next page button
-                                prePageTitle: 'Go to previous', // the title of previous page button
-                                firstPageTitle: 'Go to first', // the title of first page button
-                                lastPageTitle: 'Go to last', // the title of last page button
-                                hideSizePerPage: false, // hide the size per page dropdown
-                                hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
-                            })}
-                        />
+                            columns={ columns }
+                            exportCSV
+                        >
+                            {
+                                props => (
+                                    <div>
+                                        <BootstrapTable  { ...props.baseProps }
+                                                         pagination={paginationFactory({
+                                                             sizePerPage: 50,
+                                                             pageStartIndex: 1, // first page will be 0, default is 1
+                                                             paginationSize: 10,  // the pagination bar size, default is 5
+                                                             showTotal: true, // display pagination information
+                                                             firstPageText: '<<', // the text of first page button
+                                                             prePageText: 'Prev', // the text of previous page button
+                                                             nextPageText: 'Next', // the text of next page button
+                                                             lastPageText: '>>', // the text of last page button
+                                                             nextPageTitle: 'Go to next', // the title of next page button
+                                                             prePageTitle: 'Go to previous', // the title of previous page button
+                                                             firstPageTitle: 'Go to first', // the title of first page button
+                                                             lastPageTitle: 'Go to last', // the title of last page button
+                                                             hideSizePerPage: false, // hide the size per page dropdown
+                                                             hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
+                                                         })}
+                                        />
+                                        <ExportCSVButton className="exportB" { ...props.csvProps }><FontAwesomeIcon icon={faDownload}/> Download to CSV</ExportCSVButton>
+                                    </div>
+                                )
+                            }
+                        </ToolkitProvider>
+
+                        {/*<BootstrapTable*/}
+                        {/*    keyField="locus_tag"*/}
+                        {/*    data={this.state.result_table}*/}
+                        {/*    columns={columns} //which columns from the data to show as columns*/}
+                        {/*    pagination={paginationFactory({*/}
+                        {/*        sizePerPage: 50,*/}
+                        {/*        pageStartIndex: 1, // first page will be 0, default is 1*/}
+                        {/*        paginationSize: 10,  // the pagination bar size, default is 5*/}
+                        {/*        showTotal: true, // display pagination information*/}
+                        {/*        firstPageText: '<<', // the text of first page button*/}
+                        {/*        prePageText: 'Prev', // the text of previous page button*/}
+                        {/*        nextPageText: 'Next', // the text of next page button*/}
+                        {/*        lastPageText: '>>', // the text of last page button*/}
+                        {/*        nextPageTitle: 'Go to next', // the title of next page button*/}
+                        {/*        prePageTitle: 'Go to previous', // the title of previous page button*/}
+                        {/*        firstPageTitle: 'Go to first', // the title of first page button*/}
+                        {/*        lastPageTitle: 'Go to last', // the title of last page button*/}
+                        {/*        hideSizePerPage: false, // hide the size per page dropdown*/}
+                        {/*        hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false*/}
+                        {/*    })}*/}
+                        {/*/>*/}
                     </div>
                 </FadeIn>
             </div>
