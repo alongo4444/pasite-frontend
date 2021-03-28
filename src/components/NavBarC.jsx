@@ -36,9 +36,9 @@ class NavBarC extends Component{
                         <Nav.Item>
                             <Nav.Link href="/download">Download</Nav.Link>
                         </Nav.Item>
-                        <NavBarC>
-                            <Nav.Link href="/CorrelationSearch">Correlation</Nav.Link>
-                        </NavBarC>
+                        <Nav.Item>
+                            <Nav.Link href="/CorrelationSearchPage">Correlation</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                 </Card.Header>
                 <Card.Body className="body_c" style={{ padding: '0px'}} >
@@ -57,7 +57,7 @@ class NavBarC extends Component{
 
                             <Route path="/resultsCircosStrain" component={StrainCircosResultsPage}/>
 
-                            <Route path="/CorrelationSearch" component={CorrelationSearchPage}/>
+                            <Route path="/CorrelationSearchPage" component={CorrelationSearchPage}/>
 
                             <Route exact path="/">
                                 <MainPage component={MainPage} />

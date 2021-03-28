@@ -22,16 +22,6 @@ export default function CorrelationSearchPage() {
             return undefined;
         }
 
-        (async () => {
-            const response = await fetch('http://127.0.0.1:8800/api/v1/strains');
-            //await sleep(1e3); // For demo purposes.
-            const strains = await response.json();
-            if (active) {
-                setOptions(strains.filter(x=> x.name != null))
-            }
-
-        })();
-
         return () => {
             active = false;
         };
@@ -53,7 +43,7 @@ export default function CorrelationSearchPage() {
 
     return (
         <div>
-            <AutocompleteC apiUrl='127.0.0.1:8800/api/v1/defense' multipleChoice={true} limit_length={2}
+            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={true} limit_length={2}
                            parentCallback={getSelected} parentCallbackLegnth={getSelectedLength}></AutocompleteC>
         </div>
     );
