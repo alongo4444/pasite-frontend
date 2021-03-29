@@ -219,7 +219,6 @@ handle file upload and load each line to array of
                         <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/cluster/get_defense_system_names"
                                           multipleChoice={true} parentFileChangeCallback={onFileChange}
                                           parentHandleTextBox={getSelected} label="Please upload a file that contains a list of defense systems separated by new lines (/n)"
-                                          parentCallbackLegnth={getSelectedLength}
                         />
                     </Col>
                 </Form.Group>

@@ -23,7 +23,7 @@ export default function AutocompleteC({
                                           apiUrl,
                                           parentCallback,
                                           multipleChoice,
-                                          limit_length = 1,
+                                          limit_length = 0,
                                           parentCallbackLegnth = null
                                       }) {
     const [open, setOpen] = React.useState(false);
