@@ -7,184 +7,216 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AutocompleteCluster from "./AutocompleteCluster";
 import {serialize} from "react-awesome-slider/src/helpers/components";
+import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
 
-export default function Cluster() {
-    const strains = [
-        {
-            name: "PAO1",
-            id: "GCF_000006765.1"
-        },
-        {
-            name: "PA14",
-            id: "GCF_000014625.1"
-        }
-    ];
-    //const strains = {'PAO1', 'PA14'};
-    const num_cluster = ['1', '2', '3'];
-    const [modalShow, setModalShow] = React.useState(false);
-    const [selected_strainA, setSelected_strainA] = React.useState(false);
-    const [selected_geneA, setSelected_geneA] = React.useState(false);
-    const [selected_strainB, setSelected_strainB] = React.useState(false);
-    const [selected_geneB, setSelected_geneB] = React.useState(false);
-    const [selected_strainC, setSelected_strainC] = React.useState(false);
-    const [selected_geneC, setSelected_geneC] = React.useState(false);
-    const [showing_one, setShowing_one] = React.useState(false);
-    const [showing_two, setShowing_two] = React.useState(false);
-    const [showing_three, setShowing_three] = React.useState(false);
+class Cluster extends Component {
+    state = {
+        strains: [
+            {
+                name: "PAO1",
+                id: "GCF_000006765.1"
+            },
+            {
+                name: "PA14",
+                id: "GCF_000014625.1"
+            }
+        ],
+        num_cluster: ['1', '2', '3'],
+        selected_strainA: false,
+        selected_strainB: false,
+        selected_strainC: false,
+        selected_geneA: false,
+        selected_geneB: false,
+        selected_geneC: false,
+        showing_one: false,
+        showing_two: false,
+        showing_three: false,
 
-    const choice_strainA = (selected) => {
-        setSelected_strainA(selected)
-        console.log(selected)
-    }
-    const choice_strainB = (selected) => {
-        setSelected_strainB(selected)
-        console.log(selected)
-    }
-    const choice_strainC = (selected) => {
-        setSelected_strainC(selected)
-        console.log(selected)
     }
 
-    const choice_geneA = (selected) => {
-        setSelected_geneA(selected)
+    choice_strainA = (selected) => {
+        this.setState({
+            selected_strainA: selected
+        })
     }
-    const choice_geneB = (selected) => {
-        setSelected_geneB(selected)
+    choice_strainB = (selected) => {
+        this.setState({
+            selected_strainB: selected
+        })
     }
-    const choice_geneC = (selected) => {
-        setSelected_geneC(selected)
+    choice_strainC = (selected) => {
+        this.setState({
+            selected_strainC: selected
+        })
     }
-    function getTree(){
+
+    choice_geneA = (selected) => {
+        this.setState({
+            selected_geneA: selected
+        })
+    }
+    choice_geneB = (selected) => {
+        this.setState({
+            selected_geneB: selected
+        })
+    }
+    choice_geneC = (selected) => {
+        this.setState({
+            selected_geneC: selected
+        })
+    }
+
+    getTree(selectedFile,selectedStrains){
         const arr = []
-        if(showing_one) {
-            arr.push(selected_strainA.name + '-' + selected_geneA)
+        if (this.state.showing_one) {
+            arr.push(this.state.selected_strainA.name + '-' + this.state.selected_geneA)
         }
-        if(showing_two) {
-            arr.push(selected_strainB.name + '-' + selected_geneB)
+        if (this.state.showing_two) {
+            arr.push(this.state.selected_strainB.name + '-' + this.state.selected_geneB)
         }
-        if(showing_three) {
-            arr.push(selected_strainC.name + '-' + selected_geneC)
+        if (this.state.showing_three) {
+            arr.push(this.state.selected_strainC.name + '-' + this.state.selected_geneC)
         }
         console.log(arr);
-        let params = {list_strain_gene: arr}
         const Qs = require('qs')
-        let myAxios = axios.create({
-            paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
-        })
-        console.log(myAxios)
-        console.log(params)
-        myAxios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree',{params})
+        return axios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree', {
+                params: {
+                    list_strain_gene: arr,
+                    subtree: selectedFile.length > 0 ? selectedFile : selectedStrains
+                },
+                paramsSerializer: function (params) {
+                    return Qs.stringify(params, {arrayFormat: 'repeat'})
+                },
+                responseType: 'arraybuffer',
+            }
+        )
     }
 
-    const show_lines = (value) => {
+    show_lines = (value) => {
         if (value == '1') {
-            setShowing_one(true)
-            setShowing_two(false)
-            setShowing_three(false)
-            setSelected_geneB("")
-            setSelected_strainB("")
-            setSelected_geneC("")
-            setSelected_strainC("")
+            this.setState({
+                    showing_one: true,
+                    showing_two: false,
+                    showing_three: false,
+                    selected_geneB: "",
+                    selected_strainB: "",
+                    selected_geneC: "",
+                    selected_strainC: "",
+                }
+            )
         }
         if (value == '2') {
-            setShowing_one(true)
-            setShowing_two(true)
-            setShowing_three(false)
+            this.setState({
+                    showing_one: true,
+                    showing_two: true,
+                    showing_three: false,
+                    selected_geneC: "",
+                    selected_strainC: "",
+                }
+            )
         }
         if (value == '3') {
-            setShowing_one(true)
-            setShowing_two(true)
-            setShowing_three(true)
+            this.setState({
+                    showing_one: true,
+                    showing_two: true,
+                    showing_three: true,
+                }
+            )
         }
     }
 
-    return (
-        <container>
-            <div>
-                <Autocomplete
-                    id="Choose_num"
-                    options={num_cluster}
-                    getOptionLabel={(option) => option}
-                    style={{width: 300}}
-                    onChange={(event, value) => show_lines(value)}
-                    renderInput={(params) => <TextField {...params} label="Choose num of gene" variant="outlined"/>}
-                />
+    render() {
+        return (
+            <container>
                 <div>
-                    {showing_one
-                        ? <div>
-                            <FadeIn>
-                                <p style={{textAlign: "left"}}>select first strain and gene</p>
-                                <Autocomplete
-                                    id="strains-combo-box"
-                                    options={strains}
-                                    getOptionLabel={(option) => option.name}
-                                    style={{width: 300}}
-                                    onChange={(event, value) => choice_strainA(value)}
-                                    renderInput={(params) => <TextField {...params} label="Choose Strain"
-                                                                        variant="outlined"/>}
-                                />
-                                <Col sm="4">
-                                    <AutocompleteCluster multipleChoice={false} true parentCallback={choice_geneA}
-                                                         apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + selected_strainA.id}
-                                                         labelText=""/>
-                                </Col>
-                            </FadeIn>
-                        </div>
-                        : null
-                    }
+                    <Autocomplete
+                        id="Choose_num"
+                        options={this.state.num_cluster}
+                        getOptionLabel={(option) => option}
+                        style={{width: 300}}
+                        onChange={(event, value) => this.show_lines(value)}
+                        renderInput={(params) => <TextField {...params} label="Choose num of gene" variant="outlined"/>}
+                    />
+                    <div>
+                        {this.state.showing_one
+                            ? <div>
+                                <FadeIn>
+                                    <p style={{textAlign: "left"}}>select first strain and gene</p>
+                                    <Autocomplete
+                                        id="strains-combo-box"
+                                        options={this.state.strains}
+                                        getOptionLabel={(option) => option.name}
+                                        style={{width: 300}}
+                                        onChange={(event, value) => this.choice_strainA(value)}
+                                        renderInput={(params) => <TextField {...params} label="Choose Strain"
+                                                                            variant="outlined"/>}
+                                    />
+                                    <Col sm="4">
+                                        <AutocompleteCluster multipleChoice={false} true
+                                                             parentCallback={this.choice_geneA}
+                                                             apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainA.id}
+                                                             labelText=""/>
+                                    </Col>
+                                </FadeIn>
+                            </div>
+                            : null
+                        }
+                    </div>
+                    <div>
+                        {this.state.showing_two
+                            ? <div>
+                                <FadeIn>
+                                    <p style={{textAlign: "left"}}>select second strain and gene</p>
+                                    <Autocomplete
+                                        id="strains-combo-box"
+                                        options={this.state.strains}
+                                        getOptionLabel={(option) => option.name}
+                                        style={{width: 300}}
+                                        onChange={(event, value) => this.choice_strainB(value)}
+                                        renderInput={(params) => <TextField {...params} label="Choose Strain"
+                                                                            variant="outlined"/>}
+                                    />
+                                    <Col sm="4">
+                                        <AutocompleteCluster multipleChoice={false} true
+                                                             parentCallback={this.choice_geneB}
+                                                             apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainB.id}
+                                                             labelText=""/>
+                                    </Col>
+                                </FadeIn>
+                            </div>
+                            : null
+                        }
+                    </div>
+                    <div>
+                        {this.state.showing_three
+                            ? <div>
+                                <FadeIn>
+                                    <p style={{textAlign: "left"}}>select third strain and gene</p>
+                                    <Autocomplete
+                                        id="strains-combo-box"
+                                        options={this.state.strains}
+                                        getOptionLabel={(option) => option.name}
+                                        style={{width: 300}}
+                                        onChange={(event, value) => this.choice_strainC(value)}
+                                        renderInput={(params) => <TextField {...params} label="Choose Strain"
+                                                                            variant="outlined"/>}
+                                    />
+                                    <Col sm="4">
+                                        <AutocompleteCluster multipleChoice={false} true
+                                                             parentCallback={this.choice_geneC}
+                                                             apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainC.id}
+                                                             labelText=""/>
+                                    </Col>
+                                </FadeIn>
+                            </div>
+                            : null
+                        }
+                    </div>
                 </div>
-                <div>
-                    {showing_two
-                        ? <div>
-                            <FadeIn>
-                                <p style={{textAlign: "left"}}>select second strain and gene</p>
-                                <Autocomplete
-                                    id="strains-combo-box"
-                                    options={strains}
-                                    getOptionLabel={(option) => option.name}
-                                    style={{width: 300}}
-                                    onChange={(event, value) => choice_strainB(value)}
-                                    renderInput={(params) => <TextField {...params} label="Choose Strain"
-                                                                        variant="outlined"/>}
-                                />
-                                <Col sm="4">
-                                    <AutocompleteCluster multipleChoice={false} true parentCallback={choice_geneB}
-                                                         apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + selected_strainB.id}
-                                                         labelText=""/>
-                                </Col>
-                            </FadeIn>
-                        </div>
-                        : null
-                    }
-                </div>
-                <div>
-                    {showing_three
-                        ? <div>
-                            <FadeIn>
-                                <p style={{textAlign: "left"}}>select third strain and gene</p>
-                                <Autocomplete
-                                    id="strains-combo-box"
-                                    options={strains}
-                                    getOptionLabel={(option) => option.name}
-                                    style={{width: 300}}
-                                    onChange={(event, value) => choice_strainC(value)}
-                                    renderInput={(params) => <TextField {...params} label="Choose Strain"
-                                                                        variant="outlined"/>}
-                                />
-                                <Col sm="4">
-                                    <AutocompleteCluster multipleChoice={false} true parentCallback={choice_geneC}
-                                                         apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + selected_strainC.id}
-                                                         labelText=""/>
-                                </Col>
-                            </FadeIn>
-                        </div>
-                        : null
-                    }
-                </div>
-            </div>
-            <div style={{textAlign: "center"}}>
-                <Button onClick={getTree}>Generate Tree</Button>
-            </div>
-        </container>
-    )
+
+            </container>
+        )
+    }
 }
+
+export default Cluster;
