@@ -6,6 +6,7 @@ import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AutocompleteCluster from "./AutocompleteCluster";
+import GenesByClusterC from "./GenesByClusterC";
 import {serialize} from "react-awesome-slider/src/helpers/components";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
 
@@ -31,6 +32,7 @@ class Cluster extends Component {
         showing_one: false,
         showing_two: false,
         showing_three: false,
+        downloadable: false
 
     }
 
@@ -79,6 +81,7 @@ class Cluster extends Component {
         }
         console.log(arr);
         const Qs = require('qs')
+        this.setState({downloadable: true})
         return axios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree', {
                 params: {
                     list_strain_gene: arr,
@@ -125,7 +128,22 @@ class Cluster extends Component {
         }
     }
 
+
+
     render() {
+
+        const showDownloadOption = () => {
+            if (this.state.downloadable == true) {
+                return(
+                    <GenesByClusterC genes={[this.state.selected_geneA,this.state.selected_geneB,this.state.selected_geneC]}/>
+                )
+            } else {
+                return (
+                    <div></div>
+                )
+            }
+        }
+
         return (
             <container>
                 <div>
@@ -212,8 +230,8 @@ class Cluster extends Component {
                             : null
                         }
                     </div>
+                    {showDownloadOption()}
                 </div>
-
             </container>
         )
     }
