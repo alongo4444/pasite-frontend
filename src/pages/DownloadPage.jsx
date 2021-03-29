@@ -4,7 +4,6 @@ import {Form, Col, Row, Tab, Nav} from "react-bootstrap";
 import axios from "axios";
 import StrainForm from "../components/StrainForm";
 import GenesByDefenseForm from "../components/GenesByDefenseForm";
-import Cluster from "../components/Cluster";
 
 export default function DownloadPage() {
 
@@ -21,9 +20,6 @@ export default function DownloadPage() {
                                         <Nav.Item>
                                             <Nav.Link eventKey="second">Genes by Defense System</Nav.Link>
                                         </Nav.Item>
-                                        <Nav.Item>
-                                            <Nav.Link eventKey="third">Cluster</Nav.Link>
-                                        </Nav.Item>
                                     </Nav>
                                 </Col>
                                 <Col sm={9}>
@@ -33,9 +29,6 @@ export default function DownloadPage() {
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="second">
                                             <GenesByDefenseForm/>
-                                        </Tab.Pane>
-                                        <Tab.Pane eventKey="third">
-                                            <Cluster/>
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Col>

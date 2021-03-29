@@ -131,7 +131,7 @@ export default function MiniDrawer({generatingTypeHandler}) {
                     </ListItem>
                     <ListItem button key="cluster" onClick={() => generatingTypeHandler("cluster")}>
                         <ListItemIcon><SiMicrogenetics/></ListItemIcon>
-                        <ListItemText primary="Gene Cluster"/>
+                        <ListItemText primary="Gene Cluster_function_class"/>
                     </ListItem>
                     <ListItem button key="isolation" onClick={() => generatingTypeHandler("isolation")}>
                         <ListItemIcon><GiDrippingTube/></ListItemIcon>
