@@ -18,6 +18,8 @@ import CoreStyles from 'react-awesome-slider/src/core/styles.scss';
 import AnimationStyles from 'react-awesome-slider/src/styled/fold-out-animation/fold-out-animation.scss';
 import axios from "axios";
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
+import GenesByClusterC from "../components/GenesByClusterC";
+
 
 class MainPage extends Component {
 

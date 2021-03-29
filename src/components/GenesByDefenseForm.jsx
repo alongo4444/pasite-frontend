@@ -165,6 +165,10 @@ export default function GenesByDefenseForm() {
         setSelectedA(selected)
     }
 
+    const getSelectedLength = () => {
+        return selectedA.length;
+    }
+
     /*
 handle file upload and load each line to array of
  integers (aka strain indexes for subtree) for subtree generating
@@ -214,8 +218,8 @@ handle file upload and load each line to array of
                         {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/cluster/get_defense_system_names"/>*/}
                         <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/cluster/get_defense_system_names"
                                           multipleChoice={true} parentFileChangeCallback={onFileChange}
-                                          parentHandleTextBox={getSelected} label="Please upload a file that contains a list of defense systems
-                            separated by new lines (/n)"/>
+                                          parentHandleTextBox={getSelected} label="Please upload a file that contains a list of defense systems separated by new lines (/n)"
+                        />
                     </Col>
                 </Form.Group>
 
