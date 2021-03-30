@@ -11,9 +11,10 @@ import AutocompleteC from "../components/AutocompleteC";
 export default function CorrelationSearchPage() {
     //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
-    const [selectedA, setSelectedA] = React.useState(false);
+    const [selectedA, setSelectedA] = React.useState([]);
     const [options, setOptions] = React.useState([]);
     const loading = open && options.length === 0;
+    const [buttonOn, setButtonOn] = React.useState(true)
 
     React.useEffect(() => {
         let active = true;
@@ -35,6 +36,12 @@ export default function CorrelationSearchPage() {
 
     const getSelected = (selected) => {
         setSelectedA(selected)
+        if (selectedA.length === 2){
+            setButtonOn(false)
+        }
+        else{
+            setButtonOn(true)
+        }
     }
 
     const getSelectedLength = () => {
@@ -45,6 +52,16 @@ export default function CorrelationSearchPage() {
         <div>
             <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={true} limit_length={2}
                            parentCallback={getSelected} parentCallbackLegnth={getSelectedLength}></AutocompleteC>
+            <div style={{textAlign: "center"}}>
+                <Link to={{
+                    pathname: '/resultsCorrelationPage',
+                    state: {
+                        //myArrayVariableName: selectedA, // send the selected items as a parameter to the result page
+                        //rpp: rpp //send the number of results per page as a parameter to the result page
+                    }
+                }}><Button disabled={buttonOn}>Search</Button></Link>
+            </div>
         </div>
+
     );
 }
