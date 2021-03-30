@@ -36,6 +36,7 @@ export default function CorrelationSearchPage() {
 
     const getSelected = (selected) => {
         setSelectedA(selected)
+        console.log(selectedA.length)
         if (selectedA.length === 2){
             setButtonOn(false)
         }
