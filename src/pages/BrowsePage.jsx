@@ -16,6 +16,7 @@ import Switch from "react-switch";
 import AutocompleteC from "../components/AutocompleteC";
 import MiniDrawer from "../components/Drawer";
 import Cluster from "../components/Cluster";
+import {Col} from "react-bootstrap";
 
 var qs = require('qs');
 
@@ -32,7 +33,8 @@ class BrowsePage extends Component {
             selectedFile: {},
             selectedStrains: [],
             isOpen: false,
-            generateType: "defense"
+            generateType: "defense",
+            checkmlst: false
         }
     };
 
@@ -275,6 +277,13 @@ class BrowsePage extends Component {
                 this.setState({textOrFile: 'Text Box'});
             }
         }
+
+        const setCheckMLST = () => {
+            let a = !this.state.checkmlst;
+            this.setState({checkmlst: a})
+            console.log(this.state.checkmlst)
+        }
+
         return (
             <div className="mainDiv">
                 <FadeIn>
@@ -295,9 +304,14 @@ class BrowsePage extends Component {
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
                                 <br/>
+                                <Form.Check
+                                    label="Display MLST across the tree"
+                                    defaultChecked={this.state.checkmlst}
+                                    onChange={setCheckMLST}
+                                />
+                                <br/>
                                 <Button onClick={() => this.computeTree()} variant="outline-primary"
                                         className='GenerateTree'>Generate Tree</Button>
-
                             </div>
                         </div>
                         <div className='Phylo_Tree'>
