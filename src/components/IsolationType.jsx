@@ -9,14 +9,24 @@ import AutocompleteCluster from "./AutocompleteCluster";
 import GenesByClusterC from "./GenesByClusterC";
 import {serialize} from "react-awesome-slider/src/helpers/components";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
-import { Multiselect } from "multiselect-react-dropdown";
+import DropdownCheckbox from "./DropdownCheckbox";
 
-export default function IsolationType() {
+
+class IsolationType extends Component {
+
+    constructor(props) {
+        super(props);
+        this.ddc = React.createRef();
+    };
+
+    render() {
         return (
-            <Multiselect
-                options={}
-                displayValue="key"
-                showCheckbox={true}
-            />
+            <div>
+                <FadeIn>
+                    <DropdownCheckbox ref={this.ddc} options={["Clinical", "Environment"]}/>
+                </FadeIn>
+            </div>
         )
+    }
 }
+export default IsolationType;

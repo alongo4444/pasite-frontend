@@ -17,6 +17,7 @@ import AutocompleteC from "../components/AutocompleteC";
 import MiniDrawer from "../components/Drawer";
 import Cluster from "../components/Cluster";
 import {Col} from "react-bootstrap";
+import IsolationType from "../components/IsolationType";
 
 var qs = require('qs');
 
@@ -24,6 +25,7 @@ class BrowsePage extends Component {
     constructor(props) {
         super(props);
         this.cluster = React.createRef();
+        this.isltype = React.createRef();
         this.state = {
             source: [],
             loaded: false,
@@ -261,6 +263,8 @@ class BrowsePage extends Component {
             }
             if (this.state.generateType == "cluster") {
                 return (<Cluster ref={this.cluster} />)
+            } else{
+                return (<IsolationType ref={this.isltype} />)
             }
         }
 
@@ -280,8 +284,9 @@ class BrowsePage extends Component {
 
         const setCheckMLST = () => {
             let a = !this.state.checkmlst;
-            this.setState({checkmlst: a})
-            console.log(this.state.checkmlst)
+            this.setState({checkmlst: a}, function () {
+                console.log(this.state.checkmlst);
+            })
         }
 
         return (
