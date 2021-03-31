@@ -34,14 +34,19 @@ export default function CorrelationSearchPage() {
         }
     }, [open]);
 
-    const getSelected = (selected) => {
-        setSelectedA(selected)
-        if (selectedA.length === 2){
+    React.useEffect(() => {
+        if (getSelectedLength() === 2){
             setButtonOn(false)
         }
         else{
             setButtonOn(true)
         }
+    }, [selectedA]);
+
+
+    const getSelected = (selected) => {
+        setSelectedA(selected)
+
     }
 
     const getSelectedLength = () => {

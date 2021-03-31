@@ -90,6 +90,7 @@
     "d3-react-axis": "0.0.3",
     "d3-scale": "^3.2.3",
     "d3-scale-chromatic": "^2.0.0",
+    "multiselect-react-dropdown": "^1.6.11",
     "underscore": "^1.12.0"
   }
 }

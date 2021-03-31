@@ -9,13 +9,14 @@ import AutocompleteCluster from "./AutocompleteCluster";
 import GenesByClusterC from "./GenesByClusterC";
 import {serialize} from "react-awesome-slider/src/helpers/components";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
+import { Multiselect } from "multiselect-react-dropdown";
 
-class Cluster extends Component {
-    // render() {
-    //     return (
-    //
-    //     )
-    // }
+export default function IsolationType() {
+        return (
+            <Multiselect
+                options={}
+                displayValue="key"
+                showCheckbox={true}
+            />
+        )
 }
-
-export default Cluster;
