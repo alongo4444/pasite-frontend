@@ -16,6 +16,8 @@ import Switch from "react-switch";
 import AutocompleteC from "../components/AutocompleteC";
 import MiniDrawer from "../components/Drawer";
 import Cluster from "../components/Cluster";
+import {Col} from "react-bootstrap";
+import IsolationType from "../components/IsolationType";
 
 var qs = require('qs');
 
@@ -23,6 +25,7 @@ class BrowsePage extends Component {
     constructor(props) {
         super(props);
         this.cluster = React.createRef();
+        this.isltype = React.createRef();
         this.state = {
             source: [],
             loaded: false,
@@ -32,7 +35,8 @@ class BrowsePage extends Component {
             selectedFile: {},
             selectedStrains: [],
             isOpen: false,
-            generateType: "defense"
+            generateType: "defense",
+            checkmlst: false
         }
     };
 
@@ -265,9 +269,11 @@ class BrowsePage extends Component {
             if (this.state.generateType == "cluster") {
                 return (
                     <div>
-                    <div>Choose the number of genes you would like to show:</div>
-                    <Cluster ref={this.cluster}/>
-                </div>)
+                        <div>Choose the number of genes you would like to show:</div>
+                        <Cluster ref={this.cluster}/>
+                    </div>)
+            } else {
+                return (<IsolationType ref={this.isltype}/>)
             }
         }
 
@@ -284,6 +290,14 @@ class BrowsePage extends Component {
                 this.setState({textOrFile: 'Text Box'});
             }
         }
+
+        const setCheckMLST = () => {
+            let a = !this.state.checkmlst;
+            this.setState({checkmlst: a}, function () {
+                console.log(this.state.checkmlst);
+            })
+        }
+
         return (
             <div className="mainDiv">
                 <FadeIn>
@@ -303,9 +317,17 @@ class BrowsePage extends Component {
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
                                 <br/>
+                                {/*<Form.Check*/}
+                                {/*    label="Display MLST across the tree"*/}
+                                {/*    defaultChecked={this.state.checkmlst}*/}
+                                {/*    onChange={setCheckMLST}*/}
+                                {/*/>*/}
+                                    <input id='1'  type="checkbox" name="mlst" onChange={setCheckMLST}/>
+                                    <label style={{paddingLeft: '10px'}} htmlFor='1'>   Display MLST across the tree</label>
+
+                                <br/>
                                 <Button onClick={() => this.computeTree()} variant="outline-primary"
                                         className='GenerateTree'>Generate Tree</Button>
-
                             </div>
                         </div>
                         <div className='Phylo_Tree'>

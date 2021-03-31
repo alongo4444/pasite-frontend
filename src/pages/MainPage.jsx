@@ -19,6 +19,7 @@ import AnimationStyles from 'react-awesome-slider/src/styled/fold-out-animation/
 import axios from "axios";
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import GenesByClusterC from "../components/GenesByClusterC";
+import DropdownCheckbox from "../components/DropdownCheckbox";
 
 
 class MainPage extends Component {
