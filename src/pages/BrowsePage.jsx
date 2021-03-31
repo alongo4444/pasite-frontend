@@ -67,7 +67,7 @@ class BrowsePage extends Component {
         let systems = []
         if (this.state.generateType == "cluster") {
             console.log("cluster")
-            return this.cluster.current.getTree(this.state.selectedFile,this.state.selectedStrains).then(response => {
+            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains).then(response => {
                 const base64 = btoa(
                     new Uint8Array(response.data).reduce(
                         (data, byte) => data + String.fromCharCode(byte),
@@ -249,16 +249,25 @@ class BrowsePage extends Component {
 
         const renderGenerateType = () => {
             if (this.state.generateType == "defense") {
-                return (<Select
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={colourOptions}
-                    styles={colourStyles}
-                    onChange={handleChange}
-                />)
+                return (
+                    <div>
+                        <div>Choose the Defense Systems you would like to show:</div>
+                        <Select
+                            closeMenuOnSelect={false}
+                            isMulti
+                            options={colourOptions}
+                            styles={colourStyles}
+                            onChange={handleChange}
+                        />
+                    </div>
+                )
             }
             if (this.state.generateType == "cluster") {
-                return (<Cluster ref={this.cluster} />)
+                return (
+                    <div>
+                    <div>Choose the number of genes you would like to show:</div>
+                    <Cluster ref={this.cluster}/>
+                </div>)
             }
         }
 
@@ -290,7 +299,6 @@ class BrowsePage extends Component {
                                     {renderTextBox()}
                                 </Form>
                             </div>
-                            <div className="instructions">Choose the Defense Systems you would like to show:</div>
 
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
