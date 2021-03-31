@@ -31,25 +31,25 @@ class CorrelationGraph extends Component {
                 //responseType: 'arraybuffer'
             })
                 .then(response => {
-                    this.setState({results: response.data})
-                    console.log(this.state.results)
+                    this.setState({results: response.data}, function (){
+                        // Create chart
+                        var chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
+
+                        // Create and configure series
+                        var series = chart.series.push(new am4plugins_venn.VennSeries())
+                        series.dataFields.category = "name";
+                        series.dataFields.value = "value";
+                        series.dataFields.intersections = "sets";
+                        series.data = [
+                            { name: this.state.defNames[0], value: this.state.results[0]['K'] },
+                            { name: this.state.defNames[1], value: this.state.results[0]['n'] },
+                            { name: this.state.defNames[0] + "\n&\n" + this.state.defNames[1] , value: this.state.results[0]['k'], sets: [this.state.defNames[0], this.state.defNames[1]] }
+                        ];
+                    })
+
                 }).catch(function (error) {
                 console.log(error);
             });
-
-            // Create chart
-            var chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
-
-            // Create and configure series
-            var series = chart.series.push(new am4plugins_venn.VennSeries())
-            series.dataFields.category = "name";
-            series.dataFields.value = "value";
-            series.dataFields.intersections = "sets";
-            series.data = [
-                { name: this.state.defNames[0], value: 10 },
-                { name: this.state.defNames[1], value: 10 },
-                { name: this.state.defNames[0] + "\n+\n" + this.state.defNames[1] , value: 3, sets: [this.state.defNames[0], this.state.defNames[1]] }
-            ];
 
         })
     }
@@ -69,6 +69,7 @@ class CorrelationGraph extends Component {
                 <div id="chartdiv" style={{ width: "100%", height: "200px" }}></div>
 
                 <FadeIn>
+
                     <div style={{height: "100%", width: "90%",marginLeft:"5%", fontSize:"14px"}}>
 
                         <ToolkitProvider
@@ -82,7 +83,7 @@ class CorrelationGraph extends Component {
                                         <BootstrapTable  { ...props.baseProps }
                                                          pagination={paginationFactory({
                                                              paginationSize: 1,  // the pagination bar size, default is 5
-                                                             lastPageText: '>>', // the text of last page button
+                                                             //lastPageText: '>>', // the text of last page button
                                                              hideSizePerPage: true, // hide the size per page dropdown
                                                              hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
                                                          })}
@@ -91,6 +92,8 @@ class CorrelationGraph extends Component {
                                 )
                             }
                         </ToolkitProvider>
+                        <h6>Notice: The P-Value is based on the Hypergeometric test</h6>
+
                     </div>
                 </FadeIn>
             </div>
