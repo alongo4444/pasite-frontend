@@ -6,6 +6,8 @@ import SearchPage from "../pages/SearchPage";
 import ResultsPage from "../pages/ResultsPage";
 import BrowsePage from "../pages/BrowsePage";
 import DownloadPage from "../pages/DownloadPage";
+import CorrelationResultsPage from "../pages/CorrelationResultsPage";
+import CorrelationSearchPage from "../pages/CorrelationSearchPage"
 import MainPage from "../pages/MainPage";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage"
 import StrainCircosPage from "../pages/StrainCircosPage";
@@ -35,6 +37,9 @@ class NavBarC extends Component{
                         <Nav.Item>
                             <Nav.Link href="/download">Download</Nav.Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/CorrelationSearchPage">Correlation</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                 </Card.Header>
                 <Card.Body className="body_c" style={{ padding: '0px'}} >
@@ -52,6 +57,10 @@ class NavBarC extends Component{
                             <Route path="/CircosStrain" component={StrainCircosPage}/>
 
                             <Route path="/resultsCircosStrain" component={StrainCircosResultsPage}/>
+
+                            <Route path="/CorrelationSearchPage" component={CorrelationSearchPage}/>
+
+                            <Route path="/resultsCorrelationPage" component={CorrelationResultsPage}/>
 
                             <Route exact path="/">
                                 <MainPage component={MainPage} />
