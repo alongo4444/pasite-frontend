@@ -253,16 +253,25 @@ class BrowsePage extends Component {
 
         const renderGenerateType = () => {
             if (this.state.generateType == "defense") {
-                return (<Select
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={colourOptions}
-                    styles={colourStyles}
-                    onChange={handleChange}
-                />)
+                return (
+                    <div>
+                        <div>Choose the Defense Systems you would like to show:</div>
+                        <Select
+                            closeMenuOnSelect={false}
+                            isMulti
+                            options={colourOptions}
+                            styles={colourStyles}
+                            onChange={handleChange}
+                        />
+                    </div>
+                )
             }
             if (this.state.generateType == "cluster") {
-                return (<Cluster ref={this.cluster}/>)
+                return (
+                    <div>
+                        <div>Choose the number of genes you would like to show:</div>
+                        <Cluster ref={this.cluster}/>
+                    </div>)
             } else {
                 return (<IsolationType ref={this.isltype}/>)
             }
@@ -304,7 +313,6 @@ class BrowsePage extends Component {
                                     {renderTextBox()}
                                 </Form>
                             </div>
-                            <div className="instructions">Choose the Defense Systems you would like to show:</div>
 
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
