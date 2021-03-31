@@ -71,7 +71,7 @@ class BrowsePage extends Component {
         let systems = []
         if (this.state.generateType == "cluster") {
             console.log("cluster")
-            return this.cluster.current.getTree(this.state.selectedFile,this.state.selectedStrains).then(response => {
+            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains).then(response => {
                 const base64 = btoa(
                     new Uint8Array(response.data).reduce(
                         (data, byte) => data + String.fromCharCode(byte),
@@ -262,9 +262,9 @@ class BrowsePage extends Component {
                 />)
             }
             if (this.state.generateType == "cluster") {
-                return (<Cluster ref={this.cluster} />)
-            } else{
-                return (<IsolationType ref={this.isltype} />)
+                return (<Cluster ref={this.cluster}/>)
+            } else {
+                return (<IsolationType ref={this.isltype}/>)
             }
         }
 
@@ -309,11 +309,14 @@ class BrowsePage extends Component {
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
                                 <br/>
-                                <Form.Check
-                                    label="Display MLST across the tree"
-                                    defaultChecked={this.state.checkmlst}
-                                    onChange={setCheckMLST}
-                                />
+                                {/*<Form.Check*/}
+                                {/*    label="Display MLST across the tree"*/}
+                                {/*    defaultChecked={this.state.checkmlst}*/}
+                                {/*    onChange={setCheckMLST}*/}
+                                {/*/>*/}
+                                    <input id='1'  type="checkbox" name="mlst" onChange={setCheckMLST}/>
+                                    <label style={{paddingLeft: '10px'}} htmlFor='1'>   Display MLST across the tree</label>
+
                                 <br/>
                                 <Button onClick={() => this.computeTree()} variant="outline-primary"
                                         className='GenerateTree'>Generate Tree</Button>
