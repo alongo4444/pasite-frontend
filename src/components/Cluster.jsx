@@ -5,7 +5,8 @@ import axios from "axios";
 import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import AutocompleteCluster from "./AutocompleteCluster";
+import AutocompleteC from "./AutocompleteC";
+
 import GenesByClusterC from "./GenesByClusterC";
 import {serialize} from "react-awesome-slider/src/helpers/components";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
@@ -54,17 +55,17 @@ class Cluster extends Component {
 
     choice_geneA = (selected) => {
         this.setState({
-            selected_geneA: selected
+            selected_geneA: selected.name
         })
     }
     choice_geneB = (selected) => {
         this.setState({
-            selected_geneB: selected
+            selected_geneB: selected.name
         })
     }
     choice_geneC = (selected) => {
         this.setState({
-            selected_geneC: selected
+            selected_geneC: selected.name
         })
     }
 
@@ -151,7 +152,7 @@ class Cluster extends Component {
                         id="Choose_num"
                         options={this.state.num_cluster}
                         getOptionLabel={(option) => option}
-                        style={{width: 300}}
+                        //style={{width: 300}}
                         onChange={(event, value) => this.show_lines(value)}
                         renderInput={(params) => <TextField {...params} label="Choose num of gene" variant="outlined"/>}
                     />
@@ -164,17 +165,15 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        style={{width: 300}}
+                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainA(value)}
                                         renderInput={(params) => <TextField {...params} label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
-                                    <Col sm="4">
-                                        <AutocompleteCluster multipleChoice={false} true
+                                        <AutocompleteC multipleChoice={false} true
                                                              parentCallback={this.choice_geneA}
                                                              apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainA.id}
-                                                             labelText=""/>
-                                    </Col>
+                                                       labelText="Choose Gene"/>
                                 </FadeIn>
                             </div>
                             : null
@@ -189,17 +188,15 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        style={{width: 300}}
+                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainB(value)}
                                         renderInput={(params) => <TextField {...params} label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
-                                    <Col sm="4">
-                                        <AutocompleteCluster multipleChoice={false} true
+                                        <AutocompleteC multipleChoice={false} true
                                                              parentCallback={this.choice_geneB}
                                                              apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainB.id}
-                                                             labelText=""/>
-                                    </Col>
+                                                             labelText="Choose Gene"/>
                                 </FadeIn>
                             </div>
                             : null
@@ -214,17 +211,16 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        style={{width: 300}}
+                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainC(value)}
                                         renderInput={(params) => <TextField {...params} label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
-                                    <Col sm="4">
-                                        <AutocompleteCluster multipleChoice={false} true
+                                        <AutocompleteC multipleChoice={false} true
                                                              parentCallback={this.choice_geneC}
                                                              apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainC.id}
-                                                             labelText=""/>
-                                    </Col>
+                                                       labelText="Choose Gene"/>
+
                                 </FadeIn>
                             </div>
                             : null
