@@ -1,4 +1,4 @@
-import React, {Component,useEffect, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
@@ -16,12 +16,16 @@ import Switch from "react-switch";
 import AutocompleteC from "../components/AutocompleteC";
 import MiniDrawer from "../components/Drawer";
 import Cluster from "../components/Cluster";
+import {Col} from "react-bootstrap";
+import IsolationType from "../components/IsolationType";
 
 var qs = require('qs');
 
 class BrowsePage extends Component {
     constructor(props) {
         super(props);
+        this.cluster = React.createRef();
+        this.isltype = React.createRef();
         this.state = {
             source: [],
             loaded: false,
@@ -30,8 +34,9 @@ class BrowsePage extends Component {
             selectedOption: [],
             selectedFile: {},
             selectedStrains: [],
-            isOpen:false,
-            generateType:"defense"
+            isOpen: false,
+            generateType: "defense",
+            checkmlst: false
         }
     };
 
@@ -63,21 +68,10 @@ class BrowsePage extends Component {
     computeTree = () => {
         this.setState({source: []});
         this.setState({loaded: false});
-        let systems =[]
-        return axios
-            .get(
-                "http://127.0.0.1:8800/api/v1/strains/phyloTree", {
-                    params: {
-                        systems: this.state.selectedOption.map((option) => option.label),
-                        subtree: this.state.selectedFile.length >0 ? this.state.selectedFile: this.state.selectedStrains
-                    },
-                    paramsSerializer: function (params) {
-                        return qs.stringify(params, {arrayFormat: 'repeat'})
-                    },
-                    responseType: 'arraybuffer',
-                }
-            )
-            .then(response => {
+        let systems = []
+        if (this.state.generateType == "cluster") {
+            console.log("cluster")
+            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains).then(response => {
                 const base64 = btoa(
                     new Uint8Array(response.data).reduce(
                         (data, byte) => data + String.fromCharCode(byte),
@@ -90,7 +84,37 @@ class BrowsePage extends Component {
                 this.setState({selectedOption: []})
             }).catch((err) => console.log(err)
             );
+
+        } else {
+            return axios
+                .get(
+                    "http://127.0.0.1:8800/api/v1/strains/phyloTree", {
+                        params: {
+                            systems: this.state.selectedOption.map((option) => option.label),
+                            subtree: this.state.selectedFile.length > 0 ? this.state.selectedFile : this.state.selectedStrains
+                        },
+                        paramsSerializer: function (params) {
+                            return qs.stringify(params, {arrayFormat: 'repeat'})
+                        },
+                        responseType: 'arraybuffer',
+                    }
+                )
+                .then(response => {
+                    const base64 = btoa(
+                        new Uint8Array(response.data).reduce(
+                            (data, byte) => data + String.fromCharCode(byte),
+                            '',
+                        ),
+                    );
+                    this.setState({source: "data:;base64," + base64});
+                    this.setState({loaded: true})
+                    this.setState({selectedFile: {}})
+                    this.setState({selectedOption: []})
+                }).catch((err) => console.log(err)
+                );
+        }
     };
+
     /*
     handle file upload and load each line to array of
      integers (aka strain indexes for subtree) for subtree generating
@@ -132,13 +156,13 @@ class BrowsePage extends Component {
     };
 
     generatingTypeHandler = Gtype => {
-        if(Gtype=="defense"){
+        if (Gtype == "defense") {
             this.setState({generateType: "defense"})
         }
-        if(Gtype=="cluster"){
+        if (Gtype == "cluster") {
             this.setState({generateType: "cluster"})
         }
-        if(Gtype=="isolation"){
+        if (Gtype == "isolation") {
             this.setState({generateType: "isolation"})
         }
     }
@@ -149,7 +173,7 @@ class BrowsePage extends Component {
         handles defense systems choice into selectedOptions state and save it.
          */
         const handleChange = selectedOption => {
-            if(selectedOption == null){
+            if (selectedOption == null) {
                 selectedOption = []
             }
             this.setState(
@@ -217,7 +241,7 @@ class BrowsePage extends Component {
          */
         const renderTextBox = () => {
             if (this.state.textbox == true) {
-                 return <AutocompleteC  multipleChoice={true} apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes"
+                return <AutocompleteC multipleChoice={true} apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes"
                                       parentCallback={this.handleTextBox}/>
             } else {
                 return <Form.Group>
@@ -228,17 +252,28 @@ class BrowsePage extends Component {
         }
 
         const renderGenerateType = () => {
-            if(this.state.generateType=="defense"){
-                return (<Select
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={colourOptions}
-                    styles={colourStyles}
-                    onChange={handleChange}
-                />)
+            if (this.state.generateType == "defense") {
+                return (
+                    <div>
+                        <div>Choose the Defense Systems you would like to show:</div>
+                        <Select
+                            closeMenuOnSelect={false}
+                            isMulti
+                            options={colourOptions}
+                            styles={colourStyles}
+                            onChange={handleChange}
+                        />
+                    </div>
+                )
             }
-            if(this.state.generateType=="cluster"){
-                return(<Cluster/>)
+            if (this.state.generateType == "cluster") {
+                return (
+                    <div>
+                        <div>Choose the number of genes you would like to show:</div>
+                        <Cluster ref={this.cluster}/>
+                    </div>)
+            } else {
+                return (<IsolationType ref={this.isltype}/>)
             }
         }
 
@@ -255,6 +290,14 @@ class BrowsePage extends Component {
                 this.setState({textOrFile: 'Text Box'});
             }
         }
+
+        const setCheckMLST = () => {
+            let a = !this.state.checkmlst;
+            this.setState({checkmlst: a}, function () {
+                console.log(this.state.checkmlst);
+            })
+        }
+
         return (
             <div className="mainDiv">
                 <FadeIn>
@@ -270,14 +313,21 @@ class BrowsePage extends Component {
                                     {renderTextBox()}
                                 </Form>
                             </div>
-                            <div className="instructions">Choose the Defense Systems you would like to show:</div>
 
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
                                 <br/>
+                                {/*<Form.Check*/}
+                                {/*    label="Display MLST across the tree"*/}
+                                {/*    defaultChecked={this.state.checkmlst}*/}
+                                {/*    onChange={setCheckMLST}*/}
+                                {/*/>*/}
+                                    <input id='1'  type="checkbox" name="mlst" onChange={setCheckMLST}/>
+                                    <label style={{paddingLeft: '10px'}} htmlFor='1'>   Display MLST across the tree</label>
+
+                                <br/>
                                 <Button onClick={() => this.computeTree()} variant="outline-primary"
                                         className='GenerateTree'>Generate Tree</Button>
-
                             </div>
                         </div>
                         <div className='Phylo_Tree'>
@@ -320,7 +370,7 @@ class BrowsePage extends Component {
                                 )}
                             </TransformWrapper>
                             <div id="drawer">
-                                <MiniDrawer generatingTypeHandler={this.generatingTypeHandler} />
+                                <MiniDrawer generatingTypeHandler={this.generatingTypeHandler}/>
                             </div>
                         </div>
                     </div>
