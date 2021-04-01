@@ -84,11 +84,13 @@ class BrowsePage extends Component {
                 this.setState({selectedOption: []})
             }).catch((err) => console.log(err)
             );
-
         } else {
+            let url = "http://127.0.0.1:8800/api/v1/strains/phyloTree"
+            if (this.state.generateType == "isolation") {
+                url = "http://127.0.0.1:8800/api/v1/isolation/isolation_tree"
+            }
             return axios
-                .get(
-                    "http://127.0.0.1:8800/api/v1/strains/phyloTree", {
+                .get(url, {
                         params: {
                             systems: this.state.selectedOption.map((option) => option.label),
                             subtree: this.state.selectedFile.length > 0 ? this.state.selectedFile : this.state.selectedStrains
