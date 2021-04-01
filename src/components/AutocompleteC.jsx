@@ -24,7 +24,8 @@ export default function AutocompleteC({
                                           parentCallback,
                                           multipleChoice,
                                           limit_length = 0,
-                                          parentCallbackLegnth = null
+                                          parentCallbackLegnth = null,
+                                          labelText =""
                                       }) {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -101,6 +102,7 @@ export default function AutocompleteC({
                             <TextField
                                 {...params}
                                 // label="Choose strains..."
+                                label = {labelText}
                                 variant="outlined"
                                 size="small"
                                 InputProps={{

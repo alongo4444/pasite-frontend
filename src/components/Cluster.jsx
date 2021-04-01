@@ -154,7 +154,7 @@ class Cluster extends Component {
                         getOptionLabel={(option) => option}
                         //style={{width: 300}}
                         onChange={(event, value) => this.show_lines(value)}
-                        renderInput={(params) => <TextField {...params} label="Choose num of gene" variant="outlined"/>}
+                        renderInput={(params) => <TextField {...params} size="small" label="Choose num of gene" variant="outlined"/>}
                     />
                     <div>
                         {this.state.showing_one
@@ -167,9 +167,10 @@ class Cluster extends Component {
                                         getOptionLabel={(option) => option.name}
                                         //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainA(value)}
-                                        renderInput={(params) => <TextField {...params} label="Choose Strain"
+                                        renderInput={(params) => <TextField {...params} size="small" label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
+                                    <br/>
                                         <AutocompleteC multipleChoice={false} true
                                                              parentCallback={this.choice_geneA}
                                                              apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainA.id}
@@ -190,9 +191,10 @@ class Cluster extends Component {
                                         getOptionLabel={(option) => option.name}
                                         //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainB(value)}
-                                        renderInput={(params) => <TextField {...params} label="Choose Strain"
+                                        renderInput={(params) => <TextField {...params} size="small" label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
+                                    <br/>
                                         <AutocompleteC multipleChoice={false} true
                                                              parentCallback={this.choice_geneB}
                                                              apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainB.id}
@@ -213,9 +215,10 @@ class Cluster extends Component {
                                         getOptionLabel={(option) => option.name}
                                         //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainC(value)}
-                                        renderInput={(params) => <TextField {...params} label="Choose Strain"
+                                        renderInput={(params) => <TextField {...params} size="small" label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
+                                    <br/>
                                         <AutocompleteC multipleChoice={false} true
                                                              parentCallback={this.choice_geneC}
                                                              apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainC.id}
