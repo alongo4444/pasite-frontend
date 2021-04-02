@@ -110,7 +110,7 @@ class BrowsePage extends Component {
                     this.setState({source: "data:;base64," + base64});
                     this.setState({loaded: true})
                     this.setState({selectedFile: {}})
-                    this.setState({selectedOption: []})
+                    // this.setState({selectedOption: []})
                 }).catch((err) => console.log(err)
                 );
         }
@@ -314,7 +314,7 @@ class BrowsePage extends Component {
                             {/*    <div className='rowC'>*/}
                             {/*        <Switch onChange={this.setSwitchTextBox} checked={this.state.textbox}/> <span*/}
                             {/*        className="switch">{this.state.textOrFile}</span>*/}
-                                <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/strains" multipleChoice={true} parentFileChangeCallback={this.onFileChange} parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
+                                <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes" multipleChoice={true} parentFileChangeCallback={this.onFileChange} parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
                             separated by new lines (/n)" />
                             {/*    </div>*/}
                             {/*    <Form>*/}
