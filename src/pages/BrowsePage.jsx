@@ -71,7 +71,7 @@ class BrowsePage extends Component {
         this.setState({loaded: false});
         let systems = []
         if (this.state.generateType == "cluster") {
-            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains).then(response => {
+            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains,this.state.checkmlst).then(response => {
                 const base64 = btoa(
                     new Uint8Array(response.data).reduce(
                         (data, byte) => data + String.fromCharCode(byte),
@@ -364,7 +364,7 @@ class BrowsePage extends Component {
                                             </IconButton>
                                         </div>
                                         {!this.state.loaded && (
-                                            <div style={{marginLeft: "52%"}}><Spinner animation="border"
+                                            <div style={{marginLeft: "45%"}}><Spinner animation="border"
                                                                                       variant="primary"/>
                                             </div>)}
                                         <TransformComponent>
