@@ -49,7 +49,9 @@ export default function AutocompleteC({
                     setOptions(countries.filter(x => x.name != null))
                 }
             } catch (e) {
-                childErr.current.handleOpen();
+                if(childErr.current) {
+                    childErr.current.handleOpen();
+                }
             }
 
         })();

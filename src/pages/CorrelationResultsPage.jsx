@@ -7,7 +7,7 @@ class CorrelationResultsPage extends Component {
 
 
     render() {
-        const defSystems = this.props.history.location.state.myArrayVariableName;
+        const defSystems = this.props.myArrayVariableName;
         console.log(defSystems)
         return(
             <div>

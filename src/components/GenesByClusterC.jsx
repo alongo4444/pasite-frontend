@@ -32,6 +32,8 @@ export default function GenesByClusterC({genes}) {
             }).catch(function (error) {childErr.current.handleOpen()});
     }
 
+
+
     return (
         <div className="search-form">
             <CSVorFastaC ref={fileSelect}/>
