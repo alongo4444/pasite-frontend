@@ -1,5 +1,7 @@
 import React, {Component, useState, useRef} from "react";
 import CorrelationGraph from "../components/CorrelationGraph";
+import DefVSDef from "../components/CorrelationComponents/DefVSDef";
+import DefVSIsoType from "../components/CorrelationComponents/DefVSIsoType";
 
 class CorrelationResultsPage extends Component {
 
@@ -7,11 +9,24 @@ class CorrelationResultsPage extends Component {
 
 
     render() {
-        const defSystems = this.props.myArrayVariableName;
-        console.log(defSystems)
+        const items = this.props.myArrayVariableName; // The items which were selected by the user in the CorrelationSearchPage
+        const eventKey = this.props.eventK; //The current eventkey which were selected by the user in the CorrelationSearchPage
+
+        const graphResults = () => {
+            if(eventKey == 'first'){
+                return ( <CorrelationGraph eventK={eventKey} itemsSelected={items}></CorrelationGraph>)
+            } else if(eventKey == 'second'){
+
+            } else if(eventKey=='third'){
+                return ( <CorrelationGraph eventK={eventKey} itemsSelected={items}></CorrelationGraph>)
+
+            }
+        }
+
+        console.log(items)
         return(
             <div>
-            <CorrelationGraph defenseSystems={defSystems}></CorrelationGraph>
+                {graphResults()}
             </div>
         );
     }

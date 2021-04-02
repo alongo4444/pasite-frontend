@@ -4,6 +4,7 @@ import {Button, Col, Form, Nav, Row, Tab} from "react-bootstrap";
 import searchlogo from "../assets/images/research.png";
 import {Link} from "react-router-dom";
 import DefVSDef from "../components/CorrelationComponents/DefVSDef";
+import DefVSIsoType from "../components/CorrelationComponents/DefVSIsoType";
 import StrainForm from "../components/StrainForm";
 import GenesByClusterC from "../components/GenesByClusterC";
 import CorrelationResultsPage from "./CorrelationResultsPage";
@@ -25,6 +26,11 @@ class CorrelationSearchPage extends React.Component {
         this.setState({results: true})
     }
 
+    getTwoParams = (df, iso) => {
+        this.setState({params: [df[0], iso[0]]})
+        this.setState({results: true})
+    }
+
     changeResults= () => {
         this.setState({results: false})
     }
@@ -39,10 +45,10 @@ class CorrelationSearchPage extends React.Component {
                 } else if(currEvenKey=='second'){
 
                 } else{
-
+                    return (<DefVSIsoType parentCallback2={this.getTwoParams}/>)
                 }
             } else{
-                return (<CorrelationResultsPage myArrayVariableName={this.state.params}/>)
+                return (<CorrelationResultsPage eventK={this.state.key} myArrayVariableName={this.state.params}/>)
             }
         }
 
@@ -57,7 +63,10 @@ class CorrelationSearchPage extends React.Component {
                                     <Nav.Link onSelect={this.changeResults} eventKey="first">Defense System vs Defense System</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link onSelect={this.changeResults}  eventKey="second">Genes by Defense System</Nav.Link>
+                                    <Nav.Link onSelect={this.changeResults}  eventKey="second">Category vs Defense System</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link onSelect={this.changeResults}  eventKey="third">Iso Type vs Defense System</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>
@@ -68,6 +77,9 @@ class CorrelationSearchPage extends React.Component {
                                     {/*<DefVSDef/>*/}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second">
+                                    {currWindow()}
+                                </Tab.Pane>
+                                <Tab.Pane eventKey="third">
                                     {currWindow()}
                                 </Tab.Pane>
                             </Tab.Content>

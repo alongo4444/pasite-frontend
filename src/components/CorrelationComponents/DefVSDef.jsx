@@ -12,7 +12,7 @@ export default function DefVSDef({parentCallback2}) {
     const [selectedA, setSelectedA] = React.useState([]);
     const [options, setOptions] = React.useState([]);
     const loading = open && options.length === 0;
-    const [buttonOn, setButtonOn] = React.useState(true)
+    const [buttonOff, setButtonOff] = React.useState(true)
 
     React.useEffect(() => {
         let active = true;
@@ -34,10 +34,10 @@ export default function DefVSDef({parentCallback2}) {
 
     React.useEffect(() => {
         if (getSelectedLength() === 2){
-            setButtonOn(false)
+            setButtonOff(false)
         }
         else{
-            setButtonOn(true)
+            setButtonOff(true)
         }
     }, [selectedA]);
 
@@ -78,7 +78,7 @@ export default function DefVSDef({parentCallback2}) {
                     </Form.Group>
 
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => parentCallback2(selectedA)} disabled={buttonOn}>Search</Button>
+                        <Button onClick={() => parentCallback2(selectedA)} disabled={buttonOff}>Search</Button>
                     </div>
                 </Form>
             </FadeIn>
