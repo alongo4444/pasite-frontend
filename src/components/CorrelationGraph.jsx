@@ -162,9 +162,49 @@ class CorrelationGraph extends Component {
                     }
                 });
             })
-
         } else if (this.props.eventK == 'dvc') {
+            const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name]
+            this.setState({itemNames: items}, function () {
+                const Qs = require('qs')
+                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndAttribute', {
+                    params: {
+                        system: this.props.itemsSelected[0].name, category: this.props.itemsSelected[1].name
+                    },
+                    paramsSerializer: params => {
+                        return Qs.stringify(params, {arrayFormat: 'repeat'})
+                    },
+                    //responseType: 'arraybuffer'
+                })
+                    .then(response => {
+                        this.setState({results: response.data[0]}, function () {
+                            // Create chart
+                            let chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
 
+                            // Create and configure series
+                            let series = chart.series.push(new am4plugins_venn.VennSeries())
+                            series.dataFields.category = "name";
+                            series.dataFields.value = "value";
+                            series.dataFields.intersections = "sets";
+                            series.data = [
+                                {name: this.state.itemNames[0], value: this.state.results['K']},
+                                {name: this.state.itemNames[1], value: this.state.results['n']},
+                                {
+                                    name: this.state.itemNames[0] + "\n&\n" + this.state.itemNames[1],
+                                    value: this.state.results['k'],
+                                    sets: [this.state.itemNames[0], this.state.itemNames[1]]
+                                }
+
+                            ];
+                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
+                            console.log(series.data);
+                        })
+
+                    }).catch(function (error) {
+                    // if (this.childErr.current) {
+                    //     this.childErr.current.handleOpen()
+                    // }
+                });
+            })
         } else if (this.props.eventK == 'dvi') {
             const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name]
             this.setState({itemNames: items}, function () {
@@ -208,7 +248,7 @@ class CorrelationGraph extends Component {
                     // }
                 });
             })
-        } else if (this.props.eventK == 'dvcl'){
+        } else if (this.props.eventK == 'dvcl') {
             const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name, this.props.itemsSelected[2].name]
             this.setState({itemNames: items}, function () {
                 const Qs = require('qs')
@@ -251,7 +291,7 @@ class CorrelationGraph extends Component {
                     // }
                 });
             })
-        }else if (this.props.eventK == 'clvi'){
+        } else if (this.props.eventK == 'clvi') {
             const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name, this.props.itemsSelected[2].name]
             this.setState({itemNames: items}, function () {
                 const Qs = require('qs')
@@ -315,11 +355,12 @@ class CorrelationGraph extends Component {
         ]
 
         let getGraph = () => {
-            return (
-                <div>
-                    <div id="chartdiv" style={{width: "100%", height: "200px"}}></div>
-                </div>
-            )
+            if(this.props.eventK!='dvc')
+                return (
+                    <div>
+                        <div id="chartdiv" style={{width: "100%", height: "450px"}}></div>
+                    </div>
+                )
         }
 
         return (
@@ -327,7 +368,9 @@ class CorrelationGraph extends Component {
 
 
                 <FadeIn>
-
+                    <div style={{textAlign: 'center'}}>
+                        <h1>Test</h1>
+                    </div>
                     {getGraph()}
 
                     <div style={{height: "100%", width: "90%", marginLeft: "5%", fontSize: "14px"}}>
@@ -355,6 +398,7 @@ class CorrelationGraph extends Component {
                         <h6>Notice: The P-Value is based on the Hypergeometric test</h6>
 
                     </div>
+
                 </FadeIn>
                 <ErrorModalC open={false} ref={this.childErr}/>
             </div>

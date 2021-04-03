@@ -13,6 +13,7 @@ import '../styles/CorrelationSearchPage.css'
 import DrawerCorrelation from "../components/CorrelationComponents/DrawerCorrelation";
 import DefVSCluster from "../components/CorrelationComponents/DefVSCluster";
 import ClusterVSIsoType from "../components/CorrelationComponents/ClusterVSIsoType";
+import DefVSCat from "../components/CorrelationComponents/DefVSCat";
 
 
 class CorrelationSearchPage extends React.Component {
@@ -84,7 +85,7 @@ class CorrelationSearchPage extends React.Component {
                 if (currEvenKey == 'dvd') {
                     return (<DefVSDef parentCallback2={this.getParams}/>)
                 } else if (currEvenKey == 'dvc') {
-
+                    return (<DefVSCat parentCallback2={this.getTwoParams}/>)
                 } else if (currEvenKey == 'dvi') {
                     return (<DefVSIsoType parentCallback2={this.getTwoParams}/>)
                 } else if (currEvenKey == 'dvcl') {

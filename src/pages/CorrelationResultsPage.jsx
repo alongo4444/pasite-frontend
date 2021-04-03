@@ -2,7 +2,6 @@ import React, {Component, useState, useRef} from "react";
 import CorrelationGraph from "../components/CorrelationGraph";
 import DefVSDef from "../components/CorrelationComponents/DefVSDef";
 import DefVSIsoType from "../components/CorrelationComponents/DefVSIsoType";
-import GraphDefVSIsoType from "../components/CorrelationComponents/GraphDefVSIsoType";
 
 class CorrelationResultsPage extends Component {
 

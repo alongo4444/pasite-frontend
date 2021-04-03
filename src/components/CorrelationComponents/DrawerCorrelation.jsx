@@ -15,6 +15,8 @@ import List from '@material-ui/core/List';
 import { BsShieldShaded } from 'react-icons/bs';
 import { SiMicrogenetics } from 'react-icons/si';
 import { GiDrippingTube } from 'react-icons/gi';
+import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const drawerWidth = 400;
 
@@ -126,7 +128,7 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                 <List>
 
                     <ListItem button key="dvd" onClick={() => generatingTypeHandler("dvd")}>
-                        <ListItemIcon><BsShieldShaded/></ListItemIcon>
+                        <ListItemIcon><BsShieldShaded/><BsShieldShaded/></ListItemIcon>
                         <ListItemText primary="Defense system vs Defense system"/>
                     </ListItem>
                     <ListItem button key="dvc" onClick={() => generatingTypeHandler("dvc")}>
@@ -134,15 +136,15 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                         <ListItemText primary="Defense system vs Category"/>
                     </ListItem>
                     <ListItem button key="dvi" onClick={() => generatingTypeHandler("dvi")}>
-                        <ListItemIcon><GiDrippingTube/></ListItemIcon>
+                        <ListItemIcon><BsShieldShaded/><GiDrippingTube/></ListItemIcon>
                         <ListItemText primary="Defense system vs Isolation Type"/>
                     </ListItem>
                     <ListItem button key="dvcl" onClick={() => generatingTypeHandler("dvcl")}>
-                        <ListItemIcon><GiDrippingTube/></ListItemIcon>
+                        <ListItemIcon><BsShieldShaded/><SiMicrogenetics/></ListItemIcon>
                         <ListItemText primary="Defense system vs Cluster"/>
                     </ListItem>
                     <ListItem button key="clvi" onClick={() => generatingTypeHandler("clvi")}>
-                        <ListItemIcon><GiDrippingTube/></ListItemIcon>
+                        <ListItemIcon><SiMicrogenetics/><GiDrippingTube/></ListItemIcon>
                         <ListItemText primary="Cluster vs Isolation Type"/>
                     </ListItem>
                 </List>

@@ -21,7 +21,6 @@ import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import GenesByClusterC from "../components/GenesByClusterC";
 import DropdownCheckbox from "../components/DropdownCheckbox";
 import CorrelationGraph from "../components/CorrelationGraph";
-import GraphDefVSIsoType from "../components/CorrelationComponents/GraphDefVSIsoType";
 import CorrelationResultsPage from "./CorrelationResultsPage";
 
 

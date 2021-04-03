@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
-// calculates the correlation between one defense system to an ISO Type
+// calculates the correlation between one defense system to a cluster Type
 export default function DefVSCluster({parentCallback2}) {
     //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
