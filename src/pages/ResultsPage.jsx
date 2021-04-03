@@ -28,16 +28,15 @@ class ResultsPage extends Component {
         const rowsPerPages = this.props.history.location.state.rpp; // get the selected number of results each page from previous component
 
         const columns = [
-            {dataField: "locus_tag_copy", text: "locus_tag", sort: true},
-            {dataField: "genomic_accession_y", text: "genomic_accession_y", sort: true},
-            {dataField: "geneID_y", text: "geneID", sort: true},
-            {dataField: "name_y", text: "name", sort: true},
-            {dataField: "symbol_y", text: "symbol", sort: true},
-            {dataField: "start_y", text: "start", sort: true},
-            {dataField: "end_y", text: "end", sort: true},
-            {dataField: "product_length_y", text: "product_length", sort: true},
-            {dataField: "product_accession_y", text: "product_accession", sort: true},
-            {dataField: "strand_y", text: "strand", sort: true}
+            {dataField: "locus_tag", text: "locus_tag", sort: true},
+            {dataField: "genomic_accession", text: "genomic accession", sort: true},
+            {dataField: "start", text: "start", sort: true},
+            {dataField: "end", text: "end", sort: true},
+            {dataField: "strand", text: "strand", sort: true},
+            {dataField: "name", text: "name", sort: true},
+            {dataField: "symbol", text: "symbol", sort: true},
+            {dataField: "dna_sequence", text: "dna sequence", sort: true},
+            {dataField: "protein_sequence", text: "protein sequence", sort: true}
         ]
 
         const dna_char_to_color = {

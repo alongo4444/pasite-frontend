@@ -79,88 +79,6 @@ export default function SearchPage() {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} controlId="displaySettings">
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}></p>
-                        </Form.Label>
-
-                        <>
-                            {['top'].map((placement) => (
-                                <OverlayTrigger
-                                    key={placement}
-                                    placement={placement}
-                                    overlay={
-                                        <Tooltip id={`tooltip-${placement}`}>
-                                            Tooltip on <strong>{placement}</strong>.
-                                        </Tooltip>
-                                    }
-                                >
-                                    <p style={{fontSize: "11px"}}><FontAwesomeIcon icon={faQuestion}/></p>
-                                </OverlayTrigger>
-                            ))}
-                        </>
-
-
-                        <Col xs="5">
-                            <Form.Check
-                                label="Display the distribution across the tree"
-                            />
-                        </Col>
-
-
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}></p>
-                        </Form.Label>
-
-                        <>
-                            {['top'].map((placement) => (
-                                <OverlayTrigger
-                                    key={placement}
-                                    placement={placement}
-                                    overlay={
-                                        <Tooltip id={`tooltip-${placement}`}>
-                                            Tooltip on <strong>{placement}</strong>.
-                                        </Tooltip>
-                                    }
-                                >
-                                    <p style={{fontSize: "11px"}}><FontAwesomeIcon icon={faQuestion}/></p>
-                                </OverlayTrigger>
-                            ))}
-                        </>
-                        <Col xs="5">
-                            <Form.Check
-                                label="Display the distribution of the system on the genome"
-                            />
-                        </Col>
-
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}></p>
-                        </Form.Label>
-
-                        <>
-                            {['top'].map((placement) => (
-                                <OverlayTrigger
-                                    key={placement}
-                                    placement={placement}
-                                    overlay={
-                                        <Tooltip id={`tooltip-${placement}`}>
-                                            Tooltip on <strong>{placement}</strong>.
-                                        </Tooltip>
-                                    }
-                                >
-                                    <p style={{fontSize: "11px"}}><FontAwesomeIcon icon={faQuestion}/></p>
-                                </OverlayTrigger>
-                            ))}
-                        </>
-                        <Col xs="5">
-                        <span>
-                        <Form.Check
-                            label="Display a ranked list of the clusters that correlate based on their presence/absence"
-                        />
-                        </span>
-                        </Col>
-                    </Form.Group>
-
                     <Form.Group as={Row} controlId="numResults">
                         <Form.Label className="wrapper" column sm="4">
                             <p style={{textAlign: "right"}}>Number of results in page:</p>
@@ -172,6 +90,7 @@ export default function SearchPage() {
                                 <option>25</option>
                                 <option>30</option>
                                 <option>50</option>
+                                <option>1000</option>
                             </Form.Control>
                         </Col>
 
