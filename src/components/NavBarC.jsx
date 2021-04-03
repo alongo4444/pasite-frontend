@@ -20,7 +20,7 @@ class NavBarC extends Component{
         return (
             <div >
             <Card className="card_m"  >
-                <Card.Header style={{marginBottom: "20px"}}>
+                <Card.Header style={{marginBottom: "1%"}}>
                     <Nav fill activeKey="/">
                         <Nav.Item>
                             <Nav.Link href="/">Home</Nav.Link>
@@ -42,7 +42,7 @@ class NavBarC extends Component{
                         </Nav.Item>
                     </Nav>
                 </Card.Header>
-                <Card.Body className="body_c" style={{ padding: '0px'}} >
+                <Card.Body className="body_c">
                     <span className="cb">
                     <Card.Text>
                         <Switch>
