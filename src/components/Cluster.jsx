@@ -82,7 +82,7 @@ class Cluster extends Component {
         }
     }
 
-    getTree(selectedFile, selectedStrains,mlst){
+    getTree(selectedFile, selectedStrains, mlst) {
         const arr = []
         if (this.state.showing_one) {
             arr.push(this.state.selected_strainA.name + '-' + this.state.selected_geneA)
