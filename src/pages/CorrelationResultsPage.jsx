@@ -2,6 +2,7 @@ import React, {Component, useState, useRef} from "react";
 import CorrelationGraph from "../components/CorrelationGraph";
 import DefVSDef from "../components/CorrelationComponents/DefVSDef";
 import DefVSIsoType from "../components/CorrelationComponents/DefVSIsoType";
+import GraphDefVSIsoType from "../components/CorrelationComponents/GraphDefVSIsoType";
 
 class CorrelationResultsPage extends Component {
 
@@ -13,13 +14,12 @@ class CorrelationResultsPage extends Component {
         const eventKey = this.props.eventK; //The current eventkey which were selected by the user in the CorrelationSearchPage
 
         const graphResults = () => {
-            if(eventKey == 'first'){
+            if(eventKey == 'dvd'){
                 return ( <CorrelationGraph eventK={eventKey} itemsSelected={items}></CorrelationGraph>)
-            } else if(eventKey == 'second'){
+            } else if(eventKey == 'dvc'){
 
-            } else if(eventKey=='third'){
-                return ( <CorrelationGraph eventK={eventKey} itemsSelected={items}></CorrelationGraph>)
-
+            } else if(eventKey=='dvi'){
+                return ( <CorrelationGraph eventK={eventKey} itemsSelected={items}/>)
             }
         }
 

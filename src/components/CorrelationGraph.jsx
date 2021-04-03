@@ -123,12 +123,55 @@ class CorrelationGraph extends Component {
     // })
 
     componentDidMount() {
-        if (this.props.eventK == 'first') {
+        if (this.props.eventK == 'dvd') {
             this.setState({itemNames: this.props.itemsSelected.map((option) => option.name)}, function () {
                 const Qs = require('qs')
                 axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystems', {
                     params: {
                         systems: this.props.itemsSelected.map((option) => option.name),
+                    },
+                    paramsSerializer: params => {
+                        return Qs.stringify(params, {arrayFormat: 'repeat'})
+                    },
+                    //responseType: 'arraybuffer'
+                })
+                    .then(response => {
+                        this.setState({results: response.data}, function () {
+                            // Create chart
+                            let chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
+                            // Create and configure series
+                            let series = chart.series.push(new am4plugins_venn.VennSeries())
+                            series.dataFields.category = "name";
+                            series.dataFields.value = "value";
+                            series.dataFields.intersections = "sets";
+                            series.data = [
+                                {name: this.state.itemNames[0], value: this.state.results[0]['K']},
+                                {name: this.state.itemNames[1], value: this.state.results[0]['n']},
+                                {
+                                    name: this.state.itemNames[0] + "\n&\n" + this.state.itemNames[1],
+                                    value: this.state.results[0]['k'],
+                                    sets: [this.state.itemNames[0], this.state.itemNames[1]]
+                                }
+                            ];
+                            console.log(series.data);
+                        })
+
+                    }).catch(function (error) {
+                    if (this.childErr.current) {
+                        this.childErr.current.handleOpen()
+                    }
+                });
+            })
+
+        } else if (this.props.eventK == 'dvc') {
+
+        } else if (this.props.eventK == 'dvi') {
+            const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name]
+            this.setState({itemNames: items}, function () {
+                const Qs = require('qs')
+                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
+                    params: {
+                        system: this.props.itemsSelected[0].name, isoType: this.props.itemsSelected[1].name
                     },
                     paramsSerializer: params => {
                         return Qs.stringify(params, {arrayFormat: 'repeat'})
@@ -153,61 +196,25 @@ class CorrelationGraph extends Component {
                                     value: this.state.results[0]['k'],
                                     sets: [this.state.itemNames[0], this.state.itemNames[1]]
                                 }
+
                             ];
+                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
                             console.log(series.data);
                         })
 
                     }).catch(function (error) {
-                    if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
-                    }
+                    // if (this.childErr.current) {
+                    //     this.childErr.current.handleOpen()
+                    // }
                 });
             })
-        } else if (this.props.eventK == 'second') {
+        }
+    }
 
-        } else if (this.props.eventK == 'third') {
-            const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name]
-            this.setState({itemNames: items}, function () {
-                const Qs = require('qs')
-                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
-                    params: {
-                        system: this.props.itemsSelected[0].name, isoType: this.props.itemsSelected[1].name
-                    },
-                    paramsSerializer: params => {
-                        return Qs.stringify(params, {arrayFormat: 'repeat'})
-                    },
-                    //responseType: 'arraybuffer'
-                })
-                    .then(response => {
-                        this.setState({results: response.data}, function () {
-                            // Create chart
-                            let chart2 = am4core.create("chartdiv2", am4plugins_venn.VennDiagram);
 
-                            // Create and configure series
-                            let series2 = chart2.series.push(new am4plugins_venn.VennSeries())
-                            series2.dataFields.category = "name";
-                            series2.dataFields.value = "value";
-                            series2.dataFields.intersections = "sets";
-                            series2.data = [
-                                {name: this.state.itemNames[0], value: this.state.results[0]['K']},
-                                {name: this.state.itemNames[1], value: this.state.results[0]['n']},
-                                {
-                                    name: this.state.itemNames[0] + "\n&\n" + this.state.itemNames[1],
-                                    value: this.state.results[0]['k'],
-                                    sets: [this.state.itemNames[0], this.state.itemNames[1]]
-                                }
-
-                            ];
-                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
-                            console.log(series2.data);
-                        })
-
-                    }).catch(function (error) {
-                    if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
-                    }
-                });
-            })
+    componentWillUnmount() {
+        if (this.chart) {
+            this.chart.dispose();
         }
     }
 
@@ -221,7 +228,7 @@ class CorrelationGraph extends Component {
             {dataField: "pvalue", text: "P-Value", sort: false}
         ]
 
-        const getGraph = () => {
+        let getGraph = () => {
             return (
                 <div>
                     <div id="chartdiv" style={{width: "100%", height: "200px"}}></div>

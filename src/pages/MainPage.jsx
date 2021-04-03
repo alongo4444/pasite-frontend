@@ -20,6 +20,9 @@ import axios from "axios";
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import GenesByClusterC from "../components/GenesByClusterC";
 import DropdownCheckbox from "../components/DropdownCheckbox";
+import CorrelationGraph from "../components/CorrelationGraph";
+import GraphDefVSIsoType from "../components/CorrelationComponents/GraphDefVSIsoType";
+import CorrelationResultsPage from "./CorrelationResultsPage";
 
 
 class MainPage extends Component {
@@ -200,6 +203,8 @@ class MainPage extends Component {
                         </Carousel>
                     </div>
                 </FadeIn>
+                <CorrelationResultsPage eventK='first' myArrayVariableName={[{'name': 'BREX','key':1},{'name': 'ABI','key':1}]}/>
+
             </div>
         );
     }
