@@ -203,7 +203,6 @@ class MainPage extends Component {
                         </Carousel>
                     </div>
                 </FadeIn>
-                <CorrelationResultsPage eventK='first' myArrayVariableName={[{'name': 'BREX','key':1},{'name': 'ABI','key':1}]}/>
 
             </div>
         );

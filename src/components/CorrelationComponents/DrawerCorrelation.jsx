@@ -137,6 +137,14 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                         <ListItemIcon><GiDrippingTube/></ListItemIcon>
                         <ListItemText primary="Defense system vs Isolation Type"/>
                     </ListItem>
+                    <ListItem button key="dvcl" onClick={() => generatingTypeHandler("dvcl")}>
+                        <ListItemIcon><GiDrippingTube/></ListItemIcon>
+                        <ListItemText primary="Defense system vs Cluster"/>
+                    </ListItem>
+                    <ListItem button key="clvi" onClick={() => generatingTypeHandler("clvi")}>
+                        <ListItemIcon><GiDrippingTube/></ListItemIcon>
+                        <ListItemText primary="Cluster vs Isolation Type"/>
+                    </ListItem>
                 </List>
             </Drawer>
         </div>

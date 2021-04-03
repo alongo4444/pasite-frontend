@@ -208,6 +208,92 @@ class CorrelationGraph extends Component {
                     // }
                 });
             })
+        } else if (this.props.eventK == 'dvcl'){
+            const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name, this.props.itemsSelected[2].name]
+            this.setState({itemNames: items}, function () {
+                const Qs = require('qs')
+                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndCluster', {
+                    params: {
+                        system: items[0], strain: items[1], gene: items[2]
+                    },
+                    paramsSerializer: params => {
+                        return Qs.stringify(params, {arrayFormat: 'repeat'})
+                    },
+                    //responseType: 'arraybuffer'
+                })
+                    .then(response => {
+                        this.setState({results: response.data}, function () {
+                            // Create chart
+                            let chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
+
+                            // Create and configure series
+                            let series = chart.series.push(new am4plugins_venn.VennSeries())
+                            series.dataFields.category = "name";
+                            series.dataFields.value = "value";
+                            series.dataFields.intersections = "sets";
+                            series.data = [
+                                {name: this.state.itemNames[0], value: this.state.results[0]['K']},
+                                {name: this.state.itemNames[1], value: this.state.results[0]['n']},
+                                {
+                                    name: this.state.itemNames[0] + "\n&\n" + this.state.itemNames[1],
+                                    value: this.state.results[0]['k'],
+                                    sets: [this.state.itemNames[0], this.state.itemNames[1]]
+                                }
+
+                            ];
+                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
+                            console.log(series.data);
+                        })
+
+                    }).catch(function (error) {
+                    // if (this.childErr.current) {
+                    //     this.childErr.current.handleOpen()
+                    // }
+                });
+            })
+        }else if (this.props.eventK == 'clvi'){
+            const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name, this.props.itemsSelected[2].name]
+            this.setState({itemNames: items}, function () {
+                const Qs = require('qs')
+                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenClusterAndIsolationType', {
+                    params: {
+                        isoType: items[0], strain: items[1], gene: items[2]
+                    },
+                    paramsSerializer: params => {
+                        return Qs.stringify(params, {arrayFormat: 'repeat'})
+                    },
+                    //responseType: 'arraybuffer'
+                })
+                    .then(response => {
+                        this.setState({results: response.data}, function () {
+                            // Create chart
+                            let chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
+
+                            // Create and configure series
+                            let series = chart.series.push(new am4plugins_venn.VennSeries())
+                            series.dataFields.category = "name";
+                            series.dataFields.value = "value";
+                            series.dataFields.intersections = "sets";
+                            series.data = [
+                                {name: this.state.itemNames[0], value: this.state.results[0]['K']},
+                                {name: this.state.itemNames[1], value: this.state.results[0]['n']},
+                                {
+                                    name: this.state.itemNames[0] + "\n&\n" + this.state.itemNames[1],
+                                    value: this.state.results[0]['k'],
+                                    sets: [this.state.itemNames[0], this.state.itemNames[1]]
+                                }
+
+                            ];
+                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
+                            console.log(series.data);
+                        })
+
+                    }).catch(function (error) {
+                    // if (this.childErr.current) {
+                    //     this.childErr.current.handleOpen()
+                    // }
+                });
+            })
         }
     }
 

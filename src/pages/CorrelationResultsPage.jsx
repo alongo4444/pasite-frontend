@@ -13,20 +13,10 @@ class CorrelationResultsPage extends Component {
         const items = this.props.myArrayVariableName; // The items which were selected by the user in the CorrelationSearchPage
         const eventKey = this.props.eventK; //The current eventkey which were selected by the user in the CorrelationSearchPage
 
-        const graphResults = () => {
-            if(eventKey == 'dvd'){
-                return ( <CorrelationGraph eventK={eventKey} itemsSelected={items}></CorrelationGraph>)
-            } else if(eventKey == 'dvc'){
-
-            } else if(eventKey=='dvi'){
-                return ( <CorrelationGraph eventK={eventKey} itemsSelected={items}/>)
-            }
-        }
-
         console.log(items)
         return(
             <div>
-                {graphResults()}
+                <CorrelationGraph eventK={eventKey} itemsSelected={items}/>
             </div>
         );
     }

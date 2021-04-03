@@ -11,6 +11,8 @@ import CorrelationResultsPage from "./CorrelationResultsPage";
 import MiniDrawer from "../components/Drawer";
 import '../styles/CorrelationSearchPage.css'
 import DrawerCorrelation from "../components/CorrelationComponents/DrawerCorrelation";
+import DefVSCluster from "../components/CorrelationComponents/DefVSCluster";
+import ClusterVSIsoType from "../components/CorrelationComponents/ClusterVSIsoType";
 
 
 class CorrelationSearchPage extends React.Component {
@@ -29,8 +31,13 @@ class CorrelationSearchPage extends React.Component {
         this.setState({results: true})
     }
 
-    getTwoParams = (df, iso) => {
-        this.setState({params: [df[0], iso[0]]})
+    getTwoParams = (param1, param2) => {
+        this.setState({params: [param1[0], param2[0]]})
+        this.setState({results: true})
+    }
+
+    getThreeParams = (param1, param2, param3) => {
+        this.setState({params: [param1[0], param2, param3[0]]})
         this.setState({results: true})
     }
 
@@ -42,12 +49,14 @@ class CorrelationSearchPage extends React.Component {
         this.changeResults()
         if (Gtype == "dvd") {
             this.setState({generateType: "dvd"})
-        }
-        else if (Gtype == "dvc") {
+        } else if (Gtype == "dvc") {
             this.setState({generateType: "dvc"})
-        }
-        else if (Gtype == "dvi") {
+        } else if (Gtype == "dvi") {
             this.setState({generateType: "dvi"})
+        } else if (Gtype == "dvcl") {
+            this.setState({generateType: "dvcl"})
+        } else {
+            this.setState({generateType: "clvi"})
         }
     }
 
@@ -78,53 +87,58 @@ class CorrelationSearchPage extends React.Component {
 
                 } else if (currEvenKey == 'dvi') {
                     return (<DefVSIsoType parentCallback2={this.getTwoParams}/>)
+                } else if (currEvenKey == 'dvcl') {
+                    return (<DefVSCluster parentCallback2={this.getThreeParams}/>)
+                } else if (currEvenKey == 'clvi') {
+                    return (<ClusterVSIsoType parentCallback2={this.getThreeParams}/>)
                 }
+
             } else {
-                return (<CorrelationResultsPage eventK={this.state.generateType} myArrayVariableName={this.state.params}/>)
+                return (
+                    <CorrelationResultsPage eventK={this.state.generateType} myArrayVariableName={this.state.params}/>)
             }
         }
 
 
-
         return (
             <div>
-                    {/*<Tab.Container activeKey={this.state.key} onSelect={(k) => this.setState({key: k})} id="left-tabs-example" defaultActiveKey="first">*/}
-                    {/*    <h2>Correlation</h2>*/}
-                    {/*    <Row>*/}
-                    {/*        <Col sm={2}>*/}
-                    {/*            <Nav variant="pills" className="flex-column">*/}
-                    {/*                <Nav.Item>*/}
-                    {/*                    <Nav.Link onSelect={this.changeResults} eventKey="first">Defense System vs Defense System</Nav.Link>*/}
-                    {/*                </Nav.Item>*/}
-                    {/*                <Nav.Item>*/}
-                    {/*                    <Nav.Link onSelect={this.changeResults}  eventKey="second">Category vs Defense System</Nav.Link>*/}
-                    {/*                </Nav.Item>*/}
-                    {/*                <Nav.Item>*/}
-                    {/*                    <Nav.Link onSelect={this.changeResults}  eventKey="third">Iso Type vs Defense System</Nav.Link>*/}
-                    {/*                </Nav.Item>*/}
-                    {/*            </Nav>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col sm={10}>*/}
-                    {/*            <Tab.Content>*/}
-                    {/*                <Tab.Pane eventKey="first">*/}
-                    {/*                    {currWindow()}*/}
-                    {/*                </Tab.Pane>*/}
-                    {/*                <Tab.Pane eventKey="second">*/}
-                    {/*                    {currWindow()}*/}
-                    {/*                </Tab.Pane>*/}
-                    {/*                <Tab.Pane eventKey="third">*/}
-                    {/*                    {currWindow()}*/}
-                    {/*                </Tab.Pane>*/}
-                    {/*            </Tab.Content>*/}
-                    {/*        </Col>*/}
-                    {/*    </Row>*/}
-                    {/*</Tab.Container>*/}
+                {/*<Tab.Container activeKey={this.state.key} onSelect={(k) => this.setState({key: k})} id="left-tabs-example" defaultActiveKey="first">*/}
+                {/*    <h2>Correlation</h2>*/}
+                {/*    <Row>*/}
+                {/*        <Col sm={2}>*/}
+                {/*            <Nav variant="pills" className="flex-column">*/}
+                {/*                <Nav.Item>*/}
+                {/*                    <Nav.Link onSelect={this.changeResults} eventKey="first">Defense System vs Defense System</Nav.Link>*/}
+                {/*                </Nav.Item>*/}
+                {/*                <Nav.Item>*/}
+                {/*                    <Nav.Link onSelect={this.changeResults}  eventKey="second">Category vs Defense System</Nav.Link>*/}
+                {/*                </Nav.Item>*/}
+                {/*                <Nav.Item>*/}
+                {/*                    <Nav.Link onSelect={this.changeResults}  eventKey="third">Iso Type vs Defense System</Nav.Link>*/}
+                {/*                </Nav.Item>*/}
+                {/*            </Nav>*/}
+                {/*        </Col>*/}
+                {/*        <Col sm={10}>*/}
+                {/*            <Tab.Content>*/}
+                {/*                <Tab.Pane eventKey="first">*/}
+                {/*                    {currWindow()}*/}
+                {/*                </Tab.Pane>*/}
+                {/*                <Tab.Pane eventKey="second">*/}
+                {/*                    {currWindow()}*/}
+                {/*                </Tab.Pane>*/}
+                {/*                <Tab.Pane eventKey="third">*/}
+                {/*                    {currWindow()}*/}
+                {/*                </Tab.Pane>*/}
+                {/*            </Tab.Content>*/}
+                {/*        </Col>*/}
+                {/*    </Row>*/}
+                {/*</Tab.Container>*/}
 
-                    {currWindow()}
+                {currWindow()}
 
-                    <div id="drawer">
-                        <DrawerCorrelation generatingTypeHandler={this.generatingTypeHandler}/>
-                    </div>
+                <div id="drawer">
+                    <DrawerCorrelation generatingTypeHandler={this.generatingTypeHandler}/>
+                </div>
             </div>
         );
     }

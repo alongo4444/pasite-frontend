@@ -4,19 +4,32 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import searchlogo from "../../assets/images/research.png"
 import {Link} from "react-router-dom";
 import AutocompleteC from "../AutocompleteC"
-import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import {faPlusCircle, faAngleDoubleDown} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 // calculates the correlation between one defense system to an ISO Type
-export default function DefVSIsoType({parentCallback2}) {
+export default function DefVSCluster({parentCallback2}) {
     //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
     const [selectedDF, setSelectedDF] = React.useState([]);
-    const [selectedIso, setSelectedIso] = React.useState([]);
     const [selected, setSelected] = React.useState([]);
     const [options, setOptions] = React.useState([]);
     const loading = open && options.length === 0;
-    const [buttonOff, setButtonOff] = React.useState(true)
+    const [buttonOff, setButtonOff] = React.useState(true);
+    const [selected_strain, setSelected_strain] = React.useState([]);
+    const [selected_gene, setSelected_gene] = React.useState([]);
+    const [strains, setStrains] = React.useState([
+        {
+            name: "PAO1",
+            id: "GCF_000006765.1"
+        },
+        {
+            name: "PA14",
+            id: "GCF_000014625.1"
+        }
+    ])
 
     React.useEffect(() => {
         let active = true;
@@ -40,7 +53,7 @@ export default function DefVSIsoType({parentCallback2}) {
         // let arr = selectedDF.concat(selectedIso);
         // setSelected(arr)
         console.log(selectedDF)
-        let arr = selectedDF.concat(selectedIso);
+        let arr = selectedDF.concat(selected_gene);
         if (arr.length === 2) {
             setButtonOff(false)
         } else {
@@ -51,23 +64,14 @@ export default function DefVSIsoType({parentCallback2}) {
     React.useEffect(() => {
         // let arr = selectedDF.concat(selectedIso);
         // setSelected(arr)
-        console.log(selectedIso)
-        let arr = selectedIso.concat(selectedDF);
+        console.log(selected_gene)
+        let arr = selected_gene.concat(selectedDF);
         if (arr.length === 2) {
             setButtonOff(false)
         } else {
             setButtonOff(true)
         }
-    }, [selectedIso]);
-
-
-    React.useEffect(() => {
-        if (getSelected() === 2) {
-            setButtonOff(false)
-        } else {
-            setButtonOff(true)
-        }
-    }, [selected]);
+    }, [selected_gene]);
 
 
     const getSelectedDF = (selectedA) => {
@@ -78,20 +82,18 @@ export default function DefVSIsoType({parentCallback2}) {
         }
     }
 
-    const getSelectedISO = (selectedA) => {
+    const getSelectedGene = (selectedA) => {
         if (selectedA) {
-            setSelectedIso([selectedA]);
+            setSelected_gene([selectedA]);
         } else {
-            setSelectedIso([]);
+            setSelected_gene([]);
         }
     }
 
-    const getSelected = () => {
-        return selected.length;
-    }
 
-    const getSelectedLengthIso = () => {
-        return selectedIso.length;
+    const choice_strain = (selected) => {
+        if (selected != null)
+            setSelected_strain(selected)
     }
 
     return (
@@ -141,22 +143,43 @@ export default function DefVSIsoType({parentCallback2}) {
                                     <p style={{textAlign: "center"}}>Select a defense system</p>
                                 </Col>
                                 <Col>
-                                    <p style={{textAlign: "center"}}>Select an isolation type</p>
+                                    <p style={{textAlign: "center"}}>Select a strain and a gene</p>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}
-                                                    parentCallback={getSelectedDF} labelText="Choose a Defense System"></AutocompleteC></Col><FontAwesomeIcon
+                                                    parentCallback={getSelectedDF}></AutocompleteC></Col><FontAwesomeIcon
                                 icon={faPlusCircle}/>
-                                <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/isolation/'
-                                                    multipleChoice={false}
-                                                    parentCallback={getSelectedISO} labelText="Select an Isolation Type"></AutocompleteC></Col>
+                                <Col>
+                                    <Autocomplete
+                                        id="strains-combo-box"
+                                        labelText="Choose a Defense System"
+                                        options={strains}
+                                        getOptionLabel={(option) => option.name}
+                                        //style={{width: 300}}
+                                        onChange={(event, value) => choice_strain(value)}
+                                        renderInput={(params) => <TextField {...params} size="small"
+                                                                            label="Choose Strain"
+                                                                            variant="outlined"/>}
+                                    />
+                                    <div style={{textAlign: 'center', paddingTop: '7px', paddingBottom: '7px'}}>
+                                        <FontAwesomeIcon
+                                            icon={faAngleDoubleDown}/>
+                                    </div>
+                                    <AutocompleteC multipleChoice={false}
+                                                   parentCallback={getSelectedGene}
+                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + selected_strain.id}
+                                                   labelText="Choose Gene"
+                                                   disabled={selected_strain == ""}
+                                    />
+
+                                </Col>
                             </Row>
                         </Container>
                     </Form.Group>
 
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => parentCallback2(selectedDF, selectedIso)}
+                        <Button onClick={() => parentCallback2(selectedDF, selected_strain, selected_gene)}
                                 disabled={buttonOff}>Search</Button>
                     </div>
                 </Form>
