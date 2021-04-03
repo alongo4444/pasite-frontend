@@ -8,6 +8,11 @@ import {faPlusCircle, faAngleDoubleDown} from "@fortawesome/free-solid-svg-icons
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {BsShieldShaded} from "react-icons/bs";
+import {GiDrippingTube} from "react-icons/gi";
+import './Correlations.css'
+import {SiMicrogenetics} from "react-icons/si";
 
 // calculates the correlation between one cluster to an ISO Type
 export default function ClusterVSIsoType({parentCallback2}) {
@@ -98,46 +103,24 @@ export default function ClusterVSIsoType({parentCallback2}) {
 
     return (
         <div className="search-form">
-            <FadeIn>
-                <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}></p>
-                        </Form.Label>
-                        <Col sm="4">
-                            <div className="imgr_wr">
-                                <img style={{display: "inline-block"}} className="imgr" src={searchlogo}/>
-                            </div>
-                        </Col>
-                    </Form.Group>
 
-                    {/*<Form.Group as={Row} controlId="selectDefSys">*/}
-                    {/*    <Form.Label className="wrapper" column sm="4">*/}
-                    {/*        <p style={{textAlign: "right"}}>Select two different defense systems</p>*/}
-                    {/*    </Form.Label>*/}
-                    {/*    <Row>*/}
-                    {/*        <Col sm="2">*/}
-                    {/*            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}*/}
-                    {/*                           parentCallback={getSelected}></AutocompleteC>*/}
-                    {/*        </Col>*/}
-                    {/*        &*/}
-                    {/*        <Col sm="2">*/}
-                    {/*            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}*/}
-                    {/*                           parentCallback={getSelected}></AutocompleteC>*/}
-                    {/*        </Col>*/}
-                    {/*    </Row>*/}
-                    {/*    <Row>*/}
-                    {/*        <Col sm="2">*/}
-                    {/*            <p style={{textAlign: "right"}}>Select two different defense systems</p>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col sm="2">*/}
-                    {/*            <p style={{textAlign: "right"}}>Select two different defense systems</p>*/}
-                    {/*        </Col>*/}
-                    {/*    </Row>*/}
-                    {/*</Form.Group>*/}
+            <FadeIn>
+
+                <div className="title_s">
+                    <h1>Cluster vs Isolation Type</h1>
+                </div>
+                <Form>
 
                     <Form.Group as={Row} controlId="selectDefSys">
                         <Container>
+                            <Row >
+                                <Col className="col_s">
+                                    <ListItemIcon><SiMicrogenetics/></ListItemIcon>
+                                </Col>
+                                <Col className="col_s">
+                                    <ListItemIcon><GiDrippingTube/></ListItemIcon>
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col>
                                     <p style={{textAlign: "center"}}>Select a strain and a gene</p>

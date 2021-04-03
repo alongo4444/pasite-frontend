@@ -1,9 +1,13 @@
 import React from "react";
 import FadeIn from "react-fade-in";
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import searchlogo from "../../assets/images/research.png"
 import {Link} from "react-router-dom";
 import AutocompleteC from "../AutocompleteC"
+import './Correlations.css'
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {BsShieldShaded} from "react-icons/bs";
+import {SiHubspot} from "react-icons/si";
 
 // calculates the correlation between one defense system to another
 export default function DefVSDef({parentCallback2}) {
@@ -54,18 +58,22 @@ export default function DefVSDef({parentCallback2}) {
 
     return (
         <div className="search-form">
+
+
+
             <FadeIn>
+
+                <div className="title_s">
+                    <h1>Defense System vs Defense System</h1>
+                </div>
+
                 <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}></p>
-                        </Form.Label>
-                        <Col sm="4">
-                            <div className="imgr_wr">
-                                <img style={{display: "inline-block"}} className="imgr" src={searchlogo}/>
-                            </div>
+
+                    <Row >
+                        <Col className="col_s">
+                            <ListItemIcon><BsShieldShaded/></ListItemIcon>
                         </Col>
-                    </Form.Group>
+                    </Row>
 
                     <Form.Group as={Row} controlId="selectDefSys">
                         <Form.Label className="wrapper" column sm="4">

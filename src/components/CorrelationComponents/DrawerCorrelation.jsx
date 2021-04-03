@@ -5,6 +5,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
@@ -12,11 +13,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
-import { BsShieldShaded } from 'react-icons/bs';
-import { SiMicrogenetics } from 'react-icons/si';
-import { GiDrippingTube } from 'react-icons/gi';
+import {BsShieldShaded} from 'react-icons/bs';
+import {SiMicrogenetics, SiHubspot} from 'react-icons/si';
+import {GiDrippingTube} from 'react-icons/gi';
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const drawerWidth = 400;
 
@@ -99,11 +101,11 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
     return (
         <div className={classes.root}>
             <Drawer
-                PaperProps={{ style: { position: 'absolute' ,height:'90.7%',marginTop:'4.5%'},width:'70%' }}
-                BackdropProps={{ style: { position: 'absolute' } }}
+                PaperProps={{style: {position: 'absolute', height: '90.7%', marginTop: '4.5%'}, width: '70%'}}
+                BackdropProps={{style: {position: 'absolute'}}}
                 ModalProps={{
                     container: document.getElementById('drawer'),
-                    style: { position: 'absolute' }
+                    style: {position: 'absolute'}
                 }}
                 anchor='right'
                 variant="permanent"
@@ -128,12 +130,16 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                 <List>
 
                     <ListItem button key="dvd" onClick={() => generatingTypeHandler("dvd")}>
-                        <ListItemIcon><BsShieldShaded/><BsShieldShaded/></ListItemIcon>
-                        <ListItemText primary="Defense system vs Defense system"/>
+                        {/*<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Tooltip!</Tooltip>}>*/}
+                            <ListItemIcon>
+                                <BsShieldShaded/><BsShieldShaded/>
+                            </ListItemIcon>
+                            <ListItemText primary="Defense system vs Defense system"/>
+
                     </ListItem>
                     <ListItem button key="dvc" onClick={() => generatingTypeHandler("dvc")}>
-                        <ListItemIcon><SiMicrogenetics/></ListItemIcon>
-                        <ListItemText primary="Defense system vs Category"/>
+                        <ListItemIcon><BsShieldShaded/><SiHubspot/></ListItemIcon>
+                        <ListItemText primary="Defense system vs Attribute"/>
                     </ListItem>
                     <ListItem button key="dvi" onClick={() => generatingTypeHandler("dvi")}>
                         <ListItemIcon><BsShieldShaded/><GiDrippingTube/></ListItemIcon>

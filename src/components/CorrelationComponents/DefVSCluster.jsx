@@ -8,6 +8,11 @@ import {faPlusCircle, faAngleDoubleDown} from "@fortawesome/free-solid-svg-icons
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import './Correlations.css'
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {BsShieldShaded} from "react-icons/bs";
+import {GiDrippingTube} from "react-icons/gi";
+import {SiMicrogenetics} from "react-icons/si";
 
 // calculates the correlation between one defense system to a cluster Type
 export default function DefVSCluster({parentCallback2}) {
@@ -98,18 +103,17 @@ export default function DefVSCluster({parentCallback2}) {
 
     return (
         <div className="search-form">
+
+
+
             <FadeIn>
+
+                <div className="title_s">
+                    <h1>Defense System vs Cluster</h1>
+                </div>
+
                 <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}></p>
-                        </Form.Label>
-                        <Col sm="4">
-                            <div className="imgr_wr">
-                                <img style={{display: "inline-block"}} className="imgr" src={searchlogo}/>
-                            </div>
-                        </Col>
-                    </Form.Group>
+
 
                     {/*<Form.Group as={Row} controlId="selectDefSys">*/}
                     {/*    <Form.Label className="wrapper" column sm="4">*/}
@@ -138,6 +142,16 @@ export default function DefVSCluster({parentCallback2}) {
 
                     <Form.Group as={Row} controlId="selectDefSys">
                         <Container>
+
+                            <Row >
+                                <Col className="col_s">
+                                    <ListItemIcon><BsShieldShaded/></ListItemIcon>
+                                </Col>
+                                <Col className="col_s">
+                                    <ListItemIcon><SiMicrogenetics/></ListItemIcon>
+                                </Col>
+                            </Row>
+
                             <Row>
                                 <Col>
                                     <p style={{textAlign: "center"}}>Select a defense system</p>

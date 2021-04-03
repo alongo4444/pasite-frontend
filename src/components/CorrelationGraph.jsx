@@ -8,7 +8,14 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import FadeIn from "react-fade-in";
 import '../styles/CorrelationGraph.css';
+import './CorrelationComponents/Correlations.css'
 import ErrorModalC from "./ErrorModalC";
+import CorrelationBoxPlot from "./CorrelationBoxPlot";
+import {Col, Container, Row} from "react-bootstrap";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {BsShieldShaded, BsFillCaretRightFill} from "react-icons/bs";
+import {SiHubspot, SiMicrogenetics} from "react-icons/si";
+import {GiDrippingTube} from "react-icons/gi";
 
 am4core.useTheme(am4themes_animated);
 
@@ -20,8 +27,11 @@ class CorrelationGraph extends Component {
         super(props);
         this.childErr = React.createRef();
         this.state = {
+            title: "",
             results: [],
-            itemNames: []
+            itemNames: [],
+            withd_y: [],
+            without_y: []
         };
 
     }
@@ -124,6 +134,7 @@ class CorrelationGraph extends Component {
 
     componentDidMount() {
         if (this.props.eventK == 'dvd') {
+            // this.setState({title: 'Correlation Between:'})
             this.setState({itemNames: this.props.itemsSelected.map((option) => option.name)}, function () {
                 const Qs = require('qs')
                 axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystems', {
@@ -176,29 +187,32 @@ class CorrelationGraph extends Component {
                     //responseType: 'arraybuffer'
                 })
                     .then(response => {
-                        this.setState({results: response.data[0]}, function () {
-                            // Create chart
-                            let chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
+                        this.setState({withd_y: response.data[1]}, function () {
+                            this.setState({without_y: response.data[2]}, function () {
+                                this.setState({results: response.data[0]}, function () {
+                                    // Create chart
+                                    let chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
 
-                            // Create and configure series
-                            let series = chart.series.push(new am4plugins_venn.VennSeries())
-                            series.dataFields.category = "name";
-                            series.dataFields.value = "value";
-                            series.dataFields.intersections = "sets";
-                            series.data = [
-                                {name: this.state.itemNames[0], value: this.state.results['K']},
-                                {name: this.state.itemNames[1], value: this.state.results['n']},
-                                {
-                                    name: this.state.itemNames[0] + "\n&\n" + this.state.itemNames[1],
-                                    value: this.state.results['k'],
-                                    sets: [this.state.itemNames[0], this.state.itemNames[1]]
-                                }
+                                    // Create and configure series
+                                    let series = chart.series.push(new am4plugins_venn.VennSeries())
+                                    series.dataFields.category = "name";
+                                    series.dataFields.value = "value";
+                                    series.dataFields.intersections = "sets";
+                                    series.data = [
+                                        {name: this.state.itemNames[0], value: this.state.results['K']},
+                                        {name: this.state.itemNames[1], value: this.state.results['n']},
+                                        {
+                                            name: this.state.itemNames[0] + "\n&\n" + this.state.itemNames[1],
+                                            value: this.state.results['k'],
+                                            sets: [this.state.itemNames[0], this.state.itemNames[1]]
+                                        }
 
-                            ];
-                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
-                            console.log(series.data);
+                                    ];
+                                    // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
+                                    console.log(series.data);
+                                })
+                            })
                         })
-
                     }).catch(function (error) {
                     // if (this.childErr.current) {
                     //     this.childErr.current.handleOpen()
@@ -355,23 +369,149 @@ class CorrelationGraph extends Component {
         ]
 
         let getGraph = () => {
-            if(this.props.eventK!='dvc')
+            if (this.props.eventK != 'dvc') {
                 return (
                     <div>
                         <div id="chartdiv" style={{width: "100%", height: "450px"}}></div>
                     </div>
                 )
+            } else {
+                return (
+                    <div>
+                        <CorrelationBoxPlot withd_y={this.state.withd_y} withoutd_y={this.state.without_y}/>
+                        <br/>
+                        <br/>
+                    </div>
+                )
+            }
+        }
+
+        const corrText = () => {
+            if (this.props.eventK == 'dvd') {
+                return (
+                    <Container>
+                        <Row>
+                            <Col>
+                                Defense system:
+                            </Col>
+                            <Col>
+                                Defense system:
+                            </Col>
+                        </Row> <Row>
+                        <Col className="col_s">
+                            <ListItemIcon><BsShieldShaded className="icon_s"/>{this.props.itemsSelected[0].name}
+                            </ListItemIcon>
+                        </Col>
+                        <Col className="col_s">
+                            <ListItemIcon><BsShieldShaded className="icon_s"/>{this.props.itemsSelected[1].name}
+                            </ListItemIcon>
+                        </Col>
+                    </Row>
+                    </Container>
+                )
+            } else if (this.props.eventK == 'dvc') {
+                return (
+                    <Container>
+                        <Row>
+                            <Col>
+                                Defense system:
+                            </Col>
+                            <Col>
+                                Attribute:
+                            </Col>
+                        </Row> <Row>
+                        <Col className="col_s">
+                            <ListItemIcon><BsShieldShaded className="icon_s"/>{this.props.itemsSelected[0].name}
+                            </ListItemIcon>
+                        </Col>
+                        <Col className="col_s">
+                            <ListItemIcon><SiHubspot className="icon_s"/>{this.props.itemsSelected[1].name}
+                            </ListItemIcon>
+                        </Col>
+                    </Row>
+                    </Container>
+                )
+            } else if (this.props.eventK == 'dvi') {
+                return (
+                    <Container>
+                        <Row>
+                            <Col>
+                                Defense system:
+                            </Col>
+                            <Col>
+                                Isolation Type:
+                            </Col>
+                        </Row> <Row>
+                        <Col className="col_s">
+                            <ListItemIcon><BsShieldShaded className="icon_s"/>{this.props.itemsSelected[0].name}
+                            </ListItemIcon>
+                        </Col>
+                        <Col className="col_s">
+                            <ListItemIcon><GiDrippingTube className="icon_s"/>{this.props.itemsSelected[1].name}
+                            </ListItemIcon>
+                        </Col>
+                    </Row>
+                    </Container>
+                )
+            }else if (this.props.eventK == 'dvcl') {
+                return (
+                    <Container>
+                        <Row>
+                            <Col>
+                                Defense system:
+                            </Col>
+                            <Col>
+                                Cluster:
+                            </Col>
+                        </Row> <Row>
+                        <Col className="col_s">
+                            <ListItemIcon><BsShieldShaded className="icon_s"/>{this.props.itemsSelected[0].name}
+                            </ListItemIcon>
+                        </Col>
+                        <Col className="col_s">
+                            <ListItemIcon><SiMicrogenetics className="icon_s"/>{this.props.itemsSelected[1].name} <BsFillCaretRightFill/> {this.props.itemsSelected[2].name}
+                            </ListItemIcon>
+                        </Col>
+                    </Row>
+                    </Container>
+                )
+            } else{
+                return (
+                    <Container>
+                        <Row>
+                            <Col>
+                                Isolation Type:
+                            </Col>
+                            <Col>
+                                Cluster:
+                            </Col>
+                        </Row> <Row>
+                        <Col className="col_s">
+                            <ListItemIcon><SiMicrogenetics className="icon_s"/>{this.props.itemsSelected[0].name}
+                            </ListItemIcon>
+                        </Col>
+                        <Col className="col_s">
+                            <ListItemIcon><GiDrippingTube className="icon_s"/>{this.props.itemsSelected[1].name} <BsFillCaretRightFill/> {this.props.itemsSelected[2].name}
+                            </ListItemIcon>
+                        </Col>
+                    </Row>
+                    </Container>
+                )
+            }
         }
 
         return (
             <div>
-
-
                 <FadeIn>
-                    <div style={{textAlign: 'center'}}>
-                        <h1>Test</h1>
+
+                    <div className="title_s">
+                        <h1>Correlation Between:</h1>
+                        <br/>
+                        {corrText()}
                     </div>
-                    {getGraph()}
+                    {
+                        getGraph()
+                    }
 
                     <div style={{height: "100%", width: "90%", marginLeft: "5%", fontSize: "14px"}}>
 

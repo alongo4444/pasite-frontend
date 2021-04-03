@@ -6,6 +6,12 @@ import {Link} from "react-router-dom";
 import AutocompleteC from "../AutocompleteC"
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {BsShieldShaded} from "react-icons/bs";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {SiHubspot} from "react-icons/si";
+import ListItem from "@material-ui/core/ListItem";
+import './Correlations.css'
+import {GiDrippingTube} from "react-icons/gi";
 
 // calculates the correlation between one defense system to an ISO Type
 export default function DefVSIsoType({parentCallback2}) {
@@ -97,17 +103,11 @@ export default function DefVSIsoType({parentCallback2}) {
     return (
         <div className="search-form">
             <FadeIn>
+                <div className="title_s">
+                    <h1>Defense System vs Isolation Type</h1>
+                </div>
                 <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}></p>
-                        </Form.Label>
-                        <Col sm="4">
-                            <div className="imgr_wr">
-                                <img style={{display: "inline-block"}} className="imgr" src={searchlogo}/>
-                            </div>
-                        </Col>
-                    </Form.Group>
+
 
                     {/*<Form.Group as={Row} controlId="selectDefSys">*/}
                     {/*    <Form.Label className="wrapper" column sm="4">*/}
@@ -137,6 +137,14 @@ export default function DefVSIsoType({parentCallback2}) {
                     <Form.Group as={Row} controlId="selectDefSys">
                         <Container>
                             <Row>
+                                <Col className="col_s">
+                                    <ListItemIcon><BsShieldShaded/></ListItemIcon>
+                                </Col>
+                                <Col className="col_s">
+                                    <ListItemIcon><GiDrippingTube/></ListItemIcon>
+                                </Col>
+                            </Row>
+                            <Row>
                                 <Col>
                                     <p style={{textAlign: "center"}}>Select a defense system</p>
                                 </Col>
@@ -146,11 +154,13 @@ export default function DefVSIsoType({parentCallback2}) {
                             </Row>
                             <Row>
                                 <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}
-                                                    parentCallback={getSelectedDF} labelText="Choose a Defense System"></AutocompleteC></Col><FontAwesomeIcon
+                                                    parentCallback={getSelectedDF}
+                                                    labelText="Choose a Defense System"></AutocompleteC></Col><FontAwesomeIcon
                                 icon={faPlusCircle}/>
                                 <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/isolation/'
                                                     multipleChoice={false}
-                                                    parentCallback={getSelectedISO} labelText="Select an Isolation Type"></AutocompleteC></Col>
+                                                    parentCallback={getSelectedISO}
+                                                    labelText="Select an Isolation Type"></AutocompleteC></Col>
                             </Row>
                         </Container>
                     </Form.Group>
