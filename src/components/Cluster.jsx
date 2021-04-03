@@ -74,7 +74,8 @@ class Cluster extends Component {
     }
 
 
-    getTree(selectedFile,selectedStrains){
+
+    getTree(selectedFile,selectedStrains,mlst){
         const arr = []
         if (this.state.showing_one) {
             arr.push(this.state.selected_strainA.name + '-' + this.state.selected_geneA)
@@ -91,7 +92,8 @@ class Cluster extends Component {
         return axios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree', {
                 params: {
                     list_strain_gene: arr,
-                    subtree: selectedFile.length > 0 ? selectedFile : selectedStrains
+                    subtree: selectedFile.length > 0 ? selectedFile : selectedStrains,
+                    MLST: mlst
                 },
                 paramsSerializer: function (params) {
                     return Qs.stringify(params, {arrayFormat: 'repeat'})
