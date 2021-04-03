@@ -500,6 +500,19 @@ class CorrelationGraph extends Component {
             }
         }
 
+        const noticeText = () => {
+            if (this.props.eventK != 'dvc') {
+                return (
+                    <h6>Notice: The P-Value is based on the Hypergeometric test.</h6>
+                )
+            } else{
+                return (
+                <h6>Notice: The P-Value is based on the Mann-Whitney test.</h6>
+                )
+            }
+
+        }
+
         return (
             <div>
                 <FadeIn>
@@ -535,10 +548,10 @@ class CorrelationGraph extends Component {
                                 )
                             }
                         </ToolkitProvider>
-                        <h6>Notice: The P-Value is based on the Hypergeometric test</h6>
+
 
                     </div>
-
+                    {noticeText()}
                 </FadeIn>
                 <ErrorModalC open={false} ref={this.childErr}/>
             </div>
