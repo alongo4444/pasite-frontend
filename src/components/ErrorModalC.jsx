@@ -8,11 +8,11 @@ import TextOrFileUpload from "./TextOrFileUpload";
 class ErrorModalC extends Component {
     state = {open: this.props.open};
 
-    handleClose(){
+    handleClose = () => {
         this.setState({ open: false});
     }
 
-    handleOpen(){
+    handleOpen = () => {
         this.setState({ open: true});
     }
 

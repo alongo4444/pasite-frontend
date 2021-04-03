@@ -1,94 +1,148 @@
 import React from "react";
 import FadeIn from "react-fade-in";
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Form, Nav, Row, Tab} from "react-bootstrap";
 import searchlogo from "../assets/images/research.png";
 import {Link} from "react-router-dom";
-import AutocompleteC from "../components/AutocompleteC";
+import DefVSDef from "../components/CorrelationComponents/DefVSDef";
+import DefVSIsoType from "../components/CorrelationComponents/DefVSIsoType";
+import StrainForm from "../components/StrainForm";
+import GenesByClusterC from "../components/GenesByClusterC";
+import CorrelationResultsPage from "./CorrelationResultsPage";
+import MiniDrawer from "../components/Drawer";
+import '../styles/CorrelationSearchPage.css'
+import DrawerCorrelation from "../components/CorrelationComponents/DrawerCorrelation";
+import DefVSCluster from "../components/CorrelationComponents/DefVSCluster";
+import ClusterVSIsoType from "../components/CorrelationComponents/ClusterVSIsoType";
+import DefVSCat from "../components/CorrelationComponents/DefVSCat";
 
-export default function CorrelationSearchPage() {
-    //const [strainVariableName, setStrainVariableName] = React.useState("")
-    const [open, setOpen] = React.useState(false);
-    const [selectedA, setSelectedA] = React.useState([]);
-    const [options, setOptions] = React.useState([]);
-    const loading = open && options.length === 0;
-    const [buttonOn, setButtonOn] = React.useState(true)
 
-    React.useEffect(() => {
-        let active = true;
+class CorrelationSearchPage extends React.Component {
 
-        if (!loading) {
-            return undefined;
-        }
-
-        return () => {
-            active = false;
+    constructor(props) {
+        super(props);
+        this.state = {
+            results: false, //flag to show if the result is shown or not
+            params: [], //holds the params for the calculations in the result window
+            generateType: 'dvd' //holds the current eventKey of the tabs (which tab was selected last)
         };
-    },[loading]);
+    };
 
-    React.useEffect(() => {
-        if (!open) {
-            setOptions([]);
+    getParams = (params) => {
+        this.setState({params: params})
+        this.setState({results: true})
+    }
+
+    getTwoParams = (param1, param2) => {
+        this.setState({params: [param1[0], param2[0]]})
+        this.setState({results: true})
+    }
+
+    getThreeParams = (param1, param2, param3) => {
+        this.setState({params: [param1[0], param2, param3[0]]})
+        this.setState({results: true})
+    }
+
+    changeResults = () => {
+        this.setState({results: false})
+    }
+
+    generatingTypeHandler = Gtype => {
+        this.changeResults()
+        if (Gtype == "dvd") {
+            this.setState({generateType: "dvd"})
+        } else if (Gtype == "dvc") {
+            this.setState({generateType: "dvc"})
+        } else if (Gtype == "dvi") {
+            this.setState({generateType: "dvi"})
+        } else if (Gtype == "dvcl") {
+            this.setState({generateType: "dvcl"})
+        } else {
+            this.setState({generateType: "clvi"})
         }
-    }, [open]);
-
-    React.useEffect(() => {
-        if (getSelectedLength() === 2){
-            setButtonOn(false)
-        }
-        else{
-            setButtonOn(true)
-        }
-    }, [selectedA]);
-
-
-    const getSelected = (selected) => {
-        setSelectedA(selected)
-
     }
 
 
-    const getSelectedLength = () => {
-        return selectedA.length;
+    render() {
+
+        // const currWindow = () => {
+        //     if (this.state.results == false) {
+        //         let currEvenKey = this.state.key  //holds the current eventKey of the tabs (which tab was selected last)
+        //         if (currEvenKey == 'first') {
+        //             return (<DefVSDef parentCallback2={this.getParams}/>)
+        //         } else if (currEvenKey == 'second') {
+        //
+        //         } else {
+        //             return (<DefVSIsoType parentCallback2={this.getTwoParams}/>)
+        //         }
+        //     } else {
+        //         return (<CorrelationResultsPage eventK={this.state.key} myArrayVariableName={this.state.params}/>)
+        //     }
+        // }
+
+        const currWindow = () => {
+            if (this.state.results == false) {
+                let currEvenKey = this.state.generateType  //holds the current eventKey of the tabs (which tab was selected last)
+                if (currEvenKey == 'dvd') {
+                    return (<DefVSDef parentCallback2={this.getParams}/>)
+                } else if (currEvenKey == 'dvc') {
+                    return (<DefVSCat parentCallback2={this.getTwoParams}/>)
+                } else if (currEvenKey == 'dvi') {
+                    return (<DefVSIsoType parentCallback2={this.getTwoParams}/>)
+                } else if (currEvenKey == 'dvcl') {
+                    return (<DefVSCluster parentCallback2={this.getThreeParams}/>)
+                } else if (currEvenKey == 'clvi') {
+                    return (<ClusterVSIsoType parentCallback2={this.getThreeParams}/>)
+                }
+
+            } else {
+                return (
+                    <CorrelationResultsPage eventK={this.state.generateType} myArrayVariableName={this.state.params}/>)
+            }
+        }
+
+
+        return (
+            <div>
+                {/*<Tab.Container activeKey={this.state.key} onSelect={(k) => this.setState({key: k})} id="left-tabs-example" defaultActiveKey="first">*/}
+                {/*    <h2>Correlation</h2>*/}
+                {/*    <Row>*/}
+                {/*        <Col sm={2}>*/}
+                {/*            <Nav variant="pills" className="flex-column">*/}
+                {/*                <Nav.Item>*/}
+                {/*                    <Nav.Link onSelect={this.changeResults} eventKey="first">Defense System vs Defense System</Nav.Link>*/}
+                {/*                </Nav.Item>*/}
+                {/*                <Nav.Item>*/}
+                {/*                    <Nav.Link onSelect={this.changeResults}  eventKey="second">Category vs Defense System</Nav.Link>*/}
+                {/*                </Nav.Item>*/}
+                {/*                <Nav.Item>*/}
+                {/*                    <Nav.Link onSelect={this.changeResults}  eventKey="third">Iso Type vs Defense System</Nav.Link>*/}
+                {/*                </Nav.Item>*/}
+                {/*            </Nav>*/}
+                {/*        </Col>*/}
+                {/*        <Col sm={10}>*/}
+                {/*            <Tab.Content>*/}
+                {/*                <Tab.Pane eventKey="first">*/}
+                {/*                    {currWindow()}*/}
+                {/*                </Tab.Pane>*/}
+                {/*                <Tab.Pane eventKey="second">*/}
+                {/*                    {currWindow()}*/}
+                {/*                </Tab.Pane>*/}
+                {/*                <Tab.Pane eventKey="third">*/}
+                {/*                    {currWindow()}*/}
+                {/*                </Tab.Pane>*/}
+                {/*            </Tab.Content>*/}
+                {/*        </Col>*/}
+                {/*    </Row>*/}
+                {/*</Tab.Container>*/}
+
+                {currWindow()}
+
+                <div id="drawer">
+                    <DrawerCorrelation generatingTypeHandler={this.generatingTypeHandler}/>
+                </div>
+            </div>
+        );
     }
-
-    return (
-        <div className="search-form">
-            <FadeIn>
-                <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}></p>
-                        </Form.Label>
-                        <Col sm="4">
-                            <div className="imgr_wr">
-                                <img style={{display: "inline-block"}} className="imgr" src={searchlogo}/>
-                            </div>
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} controlId="selectDefSys">
-                        <Form.Label className="wrapper" column sm="4">
-                            <p style={{textAlign: "right"}}>Select two different defense systems</p>
-                        </Form.Label>
-                        <Col sm="4">
-                            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={true} limit_length={2}
-                                           parentCallback={getSelected} parentCallbackLegnth={getSelectedLength}></AutocompleteC>
-                        </Col>
-                    </Form.Group>
-
-                    <div style={{textAlign: "center"}}>
-                        <Link to={{
-                            pathname: '/resultsCorrelationPage',
-                            state: {
-                                myArrayVariableName: selectedA, // send the selected items as a parameter to the result page
-                                //rpp: rpp //send the number of results per page as a parameter to the result page
-                            }
-                        }}><Button disabled={buttonOn}>Search</Button></Link>
-                    </div>
-                </Form>
-            </FadeIn>
-        </div>
-
-
-    );
 }
+
+export default CorrelationSearchPage;
