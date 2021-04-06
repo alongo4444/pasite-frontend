@@ -101,7 +101,7 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
     return (
         <div className={classes.root}>
             <Drawer
-                PaperProps={{style: {position: 'absolute', height: '90.7%', marginTop: '4.5%'}, width: '70%'}}
+                PaperProps={{style: {position: 'absolute', height: '83.5%', marginTop: '4.5%'}, width: '70%'}}
                 BackdropProps={{style: {position: 'absolute'}}}
                 ModalProps={{
                     container: document.getElementById('drawer'),

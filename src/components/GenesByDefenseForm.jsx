@@ -216,7 +216,7 @@ handle file upload and load each line to array of
 
                     <Col sm="4">
                         {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/cluster/get_defense_system_names"/>*/}
-                        <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/cluster/get_defense_system_names"
+                        <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/defense/"
                                           multipleChoice={true} parentFileChangeCallback={onFileChange}
                                           parentHandleTextBox={getSelected} label="Please upload a file that contains a list of defense systems separated by new lines (/n)"
                         />
