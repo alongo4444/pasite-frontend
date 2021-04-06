@@ -112,7 +112,7 @@ class ResultsPage extends Component {
                 <FadeIn>
                     <div style={{height: "100%", width: "90%",marginLeft:"5%"}}>
                         <BootstrapTable
-                            keyField="locus_tag_copy"
+                            keyField="locus_tag"
                             data={this.state.result_table}
                             columns={columns} //which columns from the data to show as columns
                             pagination={paginationFactory({
