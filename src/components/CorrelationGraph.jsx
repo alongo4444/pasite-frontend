@@ -123,7 +123,7 @@ class CorrelationGraph extends Component {
     // })
 
     componentDidMount() {
-        if (this.props.eventK == 'first') {
+        if (this.props.eventK === 'first') {
             this.setState({itemNames: this.props.itemsSelected.map((option) => option.name)}, function () {
                 const Qs = require('qs')
                 axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystems', {
@@ -154,7 +154,6 @@ class CorrelationGraph extends Component {
                                     sets: [this.state.itemNames[0], this.state.itemNames[1]]
                                 }
                             ];
-                            console.log(series.data);
                         })
 
                     }).catch(function (error) {
@@ -163,9 +162,9 @@ class CorrelationGraph extends Component {
                     }
                 });
             })
-        } else if (this.props.eventK == 'second') {
+        } else if (this.props.eventK === 'second') {
 
-        } else if (this.props.eventK == 'third') {
+        } else if (this.props.eventK === 'third') {
             const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name]
             this.setState({itemNames: items}, function () {
                 const Qs = require('qs')
@@ -181,10 +180,10 @@ class CorrelationGraph extends Component {
                     .then(response => {
                         this.setState({results: response.data}, function () {
                             // Create chart
-                            let chart2 = am4core.create("chartdiv2", am4plugins_venn.VennDiagram);
+                            let chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
 
                             // Create and configure series
-                            let series2 = chart2.series.push(new am4plugins_venn.VennSeries())
+                            let series2 = chart.series.push(new am4plugins_venn.VennSeries())
                             series2.dataFields.category = "name";
                             series2.dataFields.value = "value";
                             series2.dataFields.intersections = "sets";
@@ -203,6 +202,7 @@ class CorrelationGraph extends Component {
                         })
 
                     }).catch(function (error) {
+                        console.log("tomerrrr")
                     if (this.childErr.current) {
                         this.childErr.current.handleOpen()
                     }
@@ -221,6 +221,7 @@ class CorrelationGraph extends Component {
             {dataField: "pvalue", text: "P-Value", sort: false}
         ]
 
+        /*
         const getGraph = () => {
             return (
                 <div>
@@ -228,14 +229,13 @@ class CorrelationGraph extends Component {
                 </div>
             )
         }
-
+        */
         return (
             <div>
 
 
                 <FadeIn>
-
-                    {getGraph()}
+                    <div id="chartdiv" style={{width: "100%", height: "200px"}}></div>
 
                     <div style={{height: "100%", width: "90%", marginLeft: "5%", fontSize: "14px"}}>
 
