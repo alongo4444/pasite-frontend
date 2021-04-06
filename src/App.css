@@ -6,7 +6,15 @@ body {
 }
 
 .title{
-    padding-left: 30px;
+    padding-left: 2%;
     width: 30%;
     height: auto;
+}
+
+.mainDiv{
+    min-height: 80%;
+}
+
+.App{
+    height: 100%;
 }

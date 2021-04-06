@@ -1,20 +1,20 @@
-.news{
-    background-color: black;
-    border: 2px solid black;
-}
+/*.news{*/
+/*    background-color: black;*/
+/*    border: 2px solid black;*/
+/*}*/
 
-.car_image{
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 300px;
-}
+/*.car_image{*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    min-height: 50%;*/
+/*}*/
 
 .slidecaption {
 
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 20px;
-    padding: 10px;
+    padding: 5%;
 }
 
 .caption_wrper{
@@ -41,17 +41,17 @@
     text-align: center;
     background-color: rgba(166, 188, 166, 0.2);
     border-radius: 15px;
-    padding: 10px;
+    padding: 5%;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-.main_c{
-    margin: 10px;
-    font-family: 'Roboto Condensed', sans-serif;
-    text-align: left;
-    font-size: 16px;
-    height: 100%;
-}
+/*.main_c{*/
+/*    margin: 10px;*/
+/*    font-family: 'Roboto Condensed', sans-serif;*/
+/*    text-align: left;*/
+/*    font-size: 16px;*/
+/*    height: 100%;*/
+/*}*/
 
 .slide1_style{
     background-image: url("../assets/backgrounds/main-bg5.jpg");

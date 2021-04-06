@@ -1,6 +1,6 @@
 .card {
-    margin: 40px;
-    margin-top: 0px;
+    margin: 2%;
+    margin-top: 0%;
     font-family: Arial;
     text-align: center;
 
@@ -17,14 +17,19 @@
     margin:auto;
 }
 
+.card-body{
+    min-height: 80%;
+}
+
 .body_c{
     overflow: auto;
     paddingTop:0;
     height: min-content;
-    max-height: 1000px;
+    max-height: 80%;
 }
 
 .card_m{
     height: 100%;
     border: 1px solid black;
+
 }

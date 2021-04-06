@@ -16,9 +16,10 @@ import Switch from "react-switch";
 import AutocompleteC from "../components/AutocompleteC";
 import MiniDrawer from "../components/Drawer";
 import Cluster from "../components/Cluster";
-import {Col} from "react-bootstrap";
 import IsolationType from "../components/IsolationType";
 import GenesByClusterC from "../components/GenesByClusterC";
+import TextOrFileUpload from "../components/TextOrFileUpload";
+import {Col} from "react-bootstrap";
 
 var qs = require('qs');
 
@@ -72,8 +73,7 @@ class BrowsePage extends Component {
         this.setState({loaded: false});
         let systems = []
         if (this.state.generateType == "cluster") {
-            console.log("cluster")
-            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains).then(response => {
+            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains,this.state.checkmlst).then(response => {
                 const base64 = btoa(
                     new Uint8Array(response.data).reduce(
                         (data, byte) => data + String.fromCharCode(byte),
@@ -96,7 +96,8 @@ class BrowsePage extends Component {
                 .get(url, {
                         params: {
                             systems: this.state.selectedOption.map((option) => option.label),
-                            subtree: this.state.selectedFile.length > 0 ? this.state.selectedFile : this.state.selectedStrains
+                            subtree: this.state.selectedFile.length > 0 ? this.state.selectedFile : this.state.selectedStrains,
+                            MLST: this.state.checkmlst
                         },
                         paramsSerializer: function (params) {
                             return qs.stringify(params, {arrayFormat: 'repeat'})
@@ -114,7 +115,7 @@ class BrowsePage extends Component {
                     this.setState({source: "data:;base64," + base64});
                     this.setState({loaded: true})
                     this.setState({selectedFile: {}})
-                    this.setState({selectedOption: []})
+                    // this.setState({selectedOption: []})
                 }).catch((err) => console.log(err)
                 );
         }
@@ -131,7 +132,6 @@ class BrowsePage extends Component {
         if (e.target.files.length > 0) {
             e.preventDefault()
             const reader = new FileReader()
-            console.log(e)
             reader.onload = async (e) => {
                 const text = (e.target.result);
                 this.setState({selectedFile: text.split(/\r?\n/)});
@@ -148,7 +148,7 @@ class BrowsePage extends Component {
      */
 
     handleTextBox = selected => {
-
+        console.log(selected)
         // Update the state
         if (selected.length > 0) {
             let array = [];
@@ -172,6 +172,20 @@ class BrowsePage extends Component {
         }
     }
 
+    /*
+    update the state of the file upload/strain selection on change
+     */
+    setSwitchTextBox = () => {
+        if (this.state.textbox == true) {
+            this.setState({textbox: false});
+            this.setState({textOrFile: 'File Upload'});
+
+        } else {
+            this.setState({textbox: true});
+            this.setState({textOrFile: 'Text Box'});
+        }
+    }
+
 
     render() {
         /*
@@ -186,6 +200,7 @@ class BrowsePage extends Component {
                 () => console.log(`Option selected:`, this.state.selectedOption)
             );
         };
+
         /*
         color the defense systems options in the autocomplete box.
         also, handles multi value selection in it.
@@ -256,6 +271,10 @@ class BrowsePage extends Component {
             }
         }
 
+        /*
+        render choice of drawer into the defense systems/cluster/isolation type
+        section and component
+         */
         const renderGenerateType = () => {
             if (this.state.generateType == "defense") {
                 return (
@@ -271,6 +290,7 @@ class BrowsePage extends Component {
                     </div>
                 )
             }
+
             if (this.state.generateType == "cluster") {
                 return (
                     <div>
@@ -279,20 +299,6 @@ class BrowsePage extends Component {
                     </div>)
             } else {
                 return (<IsolationType ref={this.isltype}/>)
-            }
-        }
-
-        /*
-        update the state of the file upload/strain selection on change
-         */
-        const setSwitchTextBox = () => {
-            if (this.state.textbox == true) {
-                this.setState({textbox: false});
-                this.setState({textOrFile: 'File Upload'});
-
-            } else {
-                this.setState({textbox: true});
-                this.setState({textOrFile: 'Text Box'});
             }
         }
 
@@ -323,15 +329,17 @@ class BrowsePage extends Component {
                     <div className='rowC'>
                         <div className='sidebar'>
                             <div className="instructions">choose a way to upload strains and create subtree:</div>
-                            <div className="textBox">
-                                <div className='rowC'>
-                                    <Switch onChange={setSwitchTextBox} checked={this.state.textbox}/> <span
-                                    className="switch">{this.state.textOrFile}</span>
-                                </div>
-                                <Form>
-                                    {renderTextBox()}
-                                </Form>
-                            </div>
+                            {/*<div className="textBox">*/}
+                            {/*    <div className='rowC'>*/}
+                            {/*        <Switch onChange={this.setSwitchTextBox} checked={this.state.textbox}/> <span*/}
+                            {/*        className="switch">{this.state.textOrFile}</span>*/}
+                                <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes" multipleChoice={true} parentFileChangeCallback={this.onFileChange} parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
+                            separated by new lines (/n)" />
+                            {/*    </div>*/}
+                            {/*    <Form>*/}
+                            {/*        {renderTextBox()}*/}
+                            {/*    </Form>*/}
+                            {/*</div>*/}
 
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
@@ -342,7 +350,7 @@ class BrowsePage extends Component {
                                 {/*    onChange={setCheckMLST}*/}
                                 {/*/>*/}
                                     <input id='1'  type="checkbox" name="mlst" onChange={setCheckMLST}/>
-                                    <label style={{paddingLeft: '10px'}} htmlFor='1'>   Display MLST across the tree</label>
+                                    <label style={{paddingLeft: '5%'}} htmlFor='1'>   Display MLST across the tree</label>
 
                                 <br/>
                                 <Button onClick={() => this.computeTree()} variant="outline-primary"
@@ -373,7 +381,7 @@ class BrowsePage extends Component {
                                             </IconButton>
                                         </div>
                                         {!this.state.loaded && (
-                                            <div style={{marginLeft: "52%"}}><Spinner animation="border"
+                                            <div style={{marginLeft: "45%"}}><Spinner animation="border"
                                                                                       variant="primary"/>
                                             </div>)}
                                         <TransformComponent>

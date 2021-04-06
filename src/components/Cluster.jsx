@@ -38,43 +38,55 @@ class Cluster extends Component {
     }
 
     choice_strainA = (selected) => {
-        this.setState({
-            selected_strainA: selected
-        })
+        if (selected != null) {
+            this.setState({
+                selected_strainA: selected
+            })
+        }
     }
     choice_strainB = (selected) => {
-        this.setState({
-            selected_strainB: selected
-        })
+        if (selected != null) {
+            this.setState({
+                selected_strainB: selected
+            })
+        }
     }
+
     choice_strainC = (selected) => {
-        this.setState({
-            selected_strainC: selected
-        })
+        if (selected != null) {
+            this.setState({
+                selected_strainC: selected
+            })
+        }
     }
 
     choice_geneA = (selected) => {
-        this.setState({
-            selected_geneA: selected.name
-        })
+        if (selected != null) {
+            this.setState({
+                selected_geneA: selected.name
+            })
+        }
     }
     choice_geneB = (selected) => {
-        this.setState({
-            selected_geneB: selected.name
-        })
+        if (selected != null) {
+            this.setState({
+                selected_geneB: selected.name
+            })
+        }
     }
     choice_geneC = (selected) => {
-        this.setState({
-            selected_geneC: selected.name
-        })
+        if (selected != null) {
+            this.setState({
+                selected_geneC: selected.name
+            })
+        }
     }
 
     getDownloadable = ()=> {
         return this.state.downloadable
     }
 
-
-    getTree(selectedFile,selectedStrains){
+    getTree(selectedFile, selectedStrains, mlst) {
         const arr = []
         if (this.state.showing_one) {
             arr.push(this.state.selected_strainA.name + '-' + this.state.selected_geneA)
@@ -91,7 +103,8 @@ class Cluster extends Component {
         return axios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree', {
                 params: {
                     list_strain_gene: arr,
-                    subtree: selectedFile.length > 0 ? selectedFile : selectedStrains
+                    subtree: selectedFile.length > 0 ? selectedFile : selectedStrains,
+                    MLST: mlst
                 },
                 paramsSerializer: function (params) {
                     return Qs.stringify(params, {arrayFormat: 'repeat'})
@@ -135,13 +148,13 @@ class Cluster extends Component {
     }
 
 
-
     render() {
 
         const showDownloadOption = () => {
             if (this.state.downloadable == true) {
-                return(
-                    <GenesByClusterC genes={[this.state.selected_geneA,this.state.selected_geneB,this.state.selected_geneC]}/>
+                return (
+                    <GenesByClusterC
+                        genes={[this.state.selected_geneA, this.state.selected_geneB, this.state.selected_geneC]}/>
                 )
             } else {
                 return (
@@ -159,7 +172,8 @@ class Cluster extends Component {
                         getOptionLabel={(option) => option}
                         //style={{width: 300}}
                         onChange={(event, value) => this.show_lines(value)}
-                        renderInput={(params) => <TextField {...params} size="small" label="Choose num of gene" variant="outlined"/>}
+                        renderInput={(params) => <TextField {...params} size="small" label="Choose num of gene"
+                                                            variant="outlined"/>}
                     />
                     <div>
                         {this.state.showing_one
@@ -172,14 +186,15 @@ class Cluster extends Component {
                                         getOptionLabel={(option) => option.name}
                                         //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainA(value)}
-                                        renderInput={(params) => <TextField {...params} size="small" label="Choose Strain"
+                                        renderInput={(params) => <TextField {...params} size="small"
+                                                                            label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
                                     <br/>
-                                        <AutocompleteC multipleChoice={false} true
-                                                             parentCallback={this.choice_geneA}
-                                                             apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainA.id}
-                                                       labelText="Choose Gene"/>
+                                    <AutocompleteC multipleChoice={false} true
+                                                   parentCallback={this.choice_geneA}
+                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainA.id}
+                                                   labelText="Choose Gene"/>
                                 </FadeIn>
                             </div>
                             : null
@@ -196,14 +211,15 @@ class Cluster extends Component {
                                         getOptionLabel={(option) => option.name}
                                         //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainB(value)}
-                                        renderInput={(params) => <TextField {...params} size="small" label="Choose Strain"
+                                        renderInput={(params) => <TextField {...params} size="small"
+                                                                            label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
                                     <br/>
-                                        <AutocompleteC multipleChoice={false} true
-                                                             parentCallback={this.choice_geneB}
-                                                             apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainB.id}
-                                                             labelText="Choose Gene"/>
+                                    <AutocompleteC multipleChoice={false} true
+                                                   parentCallback={this.choice_geneB}
+                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainB.id}
+                                                   labelText="Choose Gene"/>
                                 </FadeIn>
                             </div>
                             : null
@@ -220,14 +236,15 @@ class Cluster extends Component {
                                         getOptionLabel={(option) => option.name}
                                         //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainC(value)}
-                                        renderInput={(params) => <TextField {...params} size="small" label="Choose Strain"
+                                        renderInput={(params) => <TextField {...params} size="small"
+                                                                            label="Choose Strain"
                                                                             variant="outlined"/>}
                                     />
                                     <br/>
-                                        <AutocompleteC multipleChoice={false} true
-                                                             parentCallback={this.choice_geneC}
-                                                             apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainC.id}
-                                                       labelText="Choose Gene"/>
+                                    <AutocompleteC multipleChoice={false} true
+                                                   parentCallback={this.choice_geneC}
+                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainC.id}
+                                                   labelText="Choose Gene"/>
 
                                 </FadeIn>
                             </div>

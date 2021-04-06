@@ -20,6 +20,8 @@ import axios from "axios";
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import GenesByClusterC from "../components/GenesByClusterC";
 import DropdownCheckbox from "../components/DropdownCheckbox";
+import CorrelationGraph from "../components/CorrelationGraph";
+import CorrelationResultsPage from "./CorrelationResultsPage";
 
 
 class MainPage extends Component {
@@ -200,6 +202,7 @@ class MainPage extends Component {
                         </Carousel>
                     </div>
                 </FadeIn>
+
             </div>
         );
     }
