@@ -82,6 +82,10 @@ class Cluster extends Component {
         }
     }
 
+    getDownloadable = ()=> {
+        return this.state.downloadable
+    }
+
     getTree(selectedFile, selectedStrains, mlst) {
         const arr = []
         if (this.state.showing_one) {
@@ -247,7 +251,7 @@ class Cluster extends Component {
                             : null
                         }
                     </div>
-                    {showDownloadOption()}
+                    {/*{showDownloadOption()}*/}
                 </div>
             </container>
         )

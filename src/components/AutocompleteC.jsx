@@ -19,13 +19,15 @@ function sleep(delay = 0) {
 //parentCallback - the callback that will be called in the parent which holds this component. The parent will receive the current selected objects for each change on this component.  See DownloadPage for example or ask Alon.
 //multipleChoice - determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
 //labelText - The text which will appear in the label of the component (i.e: "Select single/multiple strain/s:").
+//disabled - Disables the autocomplete
 export default function AutocompleteC({
                                           apiUrl,
                                           parentCallback,
                                           multipleChoice,
                                           limit_length = 0,
                                           parentCallbackLegnth = null,
-                                          labelText =""
+                                          labelText ="",
+                                          disabled=false
                                       }) {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -50,7 +52,9 @@ export default function AutocompleteC({
                     setOptions(countries.filter(x => x.name != null))
                 }
             } catch (e) {
-                childErr.current.handleOpen();
+                if(childErr.current) {
+                    childErr.current.handleOpen();
+                }
             }
 
         })();
@@ -72,6 +76,7 @@ export default function AutocompleteC({
             <Form.Group as={Row} controlId="selectStrain">
                 <Col>
                     <Autocomplete
+                        disabled={disabled}
                         id="asynchronous-demo"
                         multiple={multipleChoice}
                         // style={{ width: "100%" }}

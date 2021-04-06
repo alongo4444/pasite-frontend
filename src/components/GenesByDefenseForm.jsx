@@ -226,42 +226,51 @@ handle file upload and load each line to array of
 
                 <div className="chkbxs">
                     <div>
-                        <label for="all" className="lbl">All</label>
                         <input
-                            id="all"
+                            id="all2"
                             type="checkbox"
                             onChange={(event) => selectAll(event.target.checked)}
                             checked={checkedAll}
                         />
+                        <label for="all2" className="lbl">All</label>
                     </div>
 
                     {/*<label for="1" className="lbl">locus_tag</label>*/}
                     {/*<input id='1' type="checkbox" name="locus_tag" onChange={() => toggleCheck("locus_tag")} checked={checked["locus_tag"]}/>*/}
-                    <label for='2' className="lbl">genomic_accession</label>
-                    <input id='2' type="checkbox" name="genomic_accession"
+
+                    <input id='22' type="checkbox" name="genomic_accession"
                            onChange={() => toggleCheck("genomic_accession")} checked={checked["genomic_accession"]}/>
-                    <label for='3' className="lbl">start_g</label>
-                    <input id='3' type="checkbox" name="start_g" onChange={() => toggleCheck("start_g")}
+                    <label for='22' className="lbl">genomic_accession</label>
+
+                    <input id='32' type="checkbox" name="start_g" onChange={() => toggleCheck("start_g")}
                            checked={checked["start_g"]}/>
-                    <label htmlFor='4' className="lbl">end_g</label>
-                    <input id='4' type="checkbox" name="end_g" onChange={() => toggleCheck("end_g")}
+                    <label for='32' className="lbl">start_g</label>
+
+                    <input id='42' type="checkbox" name="end_g" onChange={() => toggleCheck("end_g")}
                            checked={checked["end_g"]}/>
-                    <label htmlFor='5' className="lbl">strand</label>
-                    <input id='5' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
+                    <label htmlFor='42' className="lbl">end_g</label>
+
+                    <input id='52' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
                            checked={checked["strand"]}/>
-                    <label htmlFor='6' className="lbl">attributes_x</label>
-                    <input id='6' type="checkbox" name="attributes_x" onChange={() => toggleCheck("attributes_x")}
+                    <label htmlFor='52' className="lbl">strand</label>
+
+                    <input id='62' type="checkbox" name="attributes_x" onChange={() => toggleCheck("attributes_x")}
                            checked={checked["attributes_x"]}/>
-                    <label htmlFor='7' className="lbl">product_accession</label>
-                    <input id='7' type="checkbox" name="product_accession"
+                    <label htmlFor='62' className="lbl">attributes_x</label>
+
+                    <input id='72' type="checkbox" name="product_accession"
                            onChange={() => toggleCheck("product_accession")} checked={checked["product_accession"]}/>
-                    <label htmlFor='8' className="lbl">nonredundant_refseq</label>
-                    <input id='8' type="checkbox" name="nonredundant_refseq"
+                    <label htmlFor='72' className="lbl">product_accession</label>
+
+                    <input id='82' type="checkbox" name="nonredundant_refseq"
                            onChange={() => toggleCheck("nonredundant_refseq")}
                            checked={checked["nonredundant_refseq"]}/>
-                    <label htmlFor='9' className="lbl">name</label>
-                    <input id='9' type="checkbox" name="name" onChange={() => toggleCheck("name")}
+                    <label htmlFor='82' className="lbl">nonredundant_refseq</label>
+
+                    <input id='92' type="checkbox" name="name" onChange={() => toggleCheck("name")}
                            checked={checked["name"]}/>
+                    <label htmlFor='92' className="lbl">name</label>
+
                     {/*<label htmlFor='10' className="lbl">name_y</label>*/}
                     {/*<input id='10' type="checkbox" name="name_y" onChange={() => toggleCheck("name_y")} checked={checked["name_y"]}/>*/}
                     {/*<label htmlFor='11' className="lbl">symbol_y</label>*/}

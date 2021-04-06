@@ -17,6 +17,7 @@ import AutocompleteC from "../components/AutocompleteC";
 import MiniDrawer from "../components/Drawer";
 import Cluster from "../components/Cluster";
 import IsolationType from "../components/IsolationType";
+import GenesByClusterC from "../components/GenesByClusterC";
 import TextOrFileUpload from "../components/TextOrFileUpload";
 import {Col} from "react-bootstrap";
 
@@ -37,7 +38,8 @@ class BrowsePage extends Component {
             selectedStrains: [],
             isOpen: false,
             generateType: "defense",
-            checkmlst: false
+            checkmlst: false,
+            loadedCluster: false
         }
     };
 
@@ -82,6 +84,7 @@ class BrowsePage extends Component {
                 this.setState({loaded: true})
                 this.setState({selectedFile: {}})
                 this.setState({selectedOption: []})
+                this.setState({loadedCluster: true})
             }).catch((err) => console.log(err)
             );
         } else {
@@ -306,6 +309,20 @@ class BrowsePage extends Component {
             })
         }
 
+        const downloadCluster = () => {
+            if (this.state.generateType == "cluster" && this.cluster.current) {
+                if (this.state.loadedCluster) {
+                    return (
+                        // console.log(this.cluster.current)
+                        <GenesByClusterC
+                            genes={[this.cluster.current.state.selected_geneA, this.cluster.current.state.selected_geneB, this.cluster.current.state.selected_geneC]}/>
+                    )
+                }
+                return (<div></div>)
+            }
+        }
+
+
         return (
             <div className="mainDiv">
                 <FadeIn>
@@ -379,6 +396,7 @@ class BrowsePage extends Component {
                                     </React.Fragment>
                                 )}
                             </TransformWrapper>
+                            {downloadCluster()}
                             <div id="drawer">
                                 <MiniDrawer generatingTypeHandler={this.generatingTypeHandler}/>
                             </div>
