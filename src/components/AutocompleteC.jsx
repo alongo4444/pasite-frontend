@@ -76,6 +76,7 @@ export default function AutocompleteC({
             <Form.Group as={Row} controlId="selectStrain">
                 <Col>
                     <Autocomplete
+
                         disabled={disabled}
                         id="asynchronous-demo"
                         multiple={multipleChoice}

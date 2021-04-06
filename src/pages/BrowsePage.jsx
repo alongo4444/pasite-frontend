@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {Component, useEffect, useRef, useState} from "react";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
@@ -28,6 +28,7 @@ class BrowsePage extends Component {
         super(props);
         this.cluster = React.createRef();
         this.isltype = React.createRef();
+
         this.state = {
             source: [],
             loaded: false,
@@ -47,6 +48,7 @@ class BrowsePage extends Component {
     load empty phylogenetic tree as default tree
      */
     componentDidMount() {
+
         axios
             .get(
                 "http://127.0.0.1:8800/api/v1/strains/phyloTree",
@@ -82,7 +84,7 @@ class BrowsePage extends Component {
                 );
                 this.setState({source: "data:;base64," + base64});
                 this.setState({loaded: true})
-                this.setState({selectedFile: {}})
+                // this.setState({selectedFile: {}})
                 this.setState({selectedOption: []})
                 this.setState({loadedCluster: true})
             }).catch((err) => console.log(err)
@@ -96,7 +98,7 @@ class BrowsePage extends Component {
                 .get(url, {
                         params: {
                             systems: this.state.selectedOption.map((option) => option.label),
-                            subtree: this.state.selectedFile.length > 0 ? this.state.selectedFile : this.state.selectedStrains,
+                            subtree: this.textOrFileRef  ? this.state.selectedFile : this.state.selectedStrains,
                             MLST: this.state.checkmlst
                         },
                         paramsSerializer: function (params) {
@@ -114,7 +116,7 @@ class BrowsePage extends Component {
                     );
                     this.setState({source: "data:;base64," + base64});
                     this.setState({loaded: true})
-                    this.setState({selectedFile: {}})
+                    // this.setState({selectedFile: {}})
                     // this.setState({selectedOption: []})
                 }).catch((err) => console.log(err)
                 );
@@ -172,17 +174,19 @@ class BrowsePage extends Component {
         }
     }
 
-    /*
-    update the state of the file upload/strain selection on change
-     */
     setSwitchTextBox = () => {
         if (this.state.textbox == true) {
-            this.setState({textbox: false});
-            this.setState({textOrFile: 'File Upload'});
+            // this.setState({textbox: false});
+            this.setState({textbox: false})
+            // this.setState({textOrFile: 'File Upload'});
+            // setTextOrFile('File Upload')
 
         } else {
-            this.setState({textbox: true});
-            this.setState({textOrFile: 'Text Box'});
+            // this.setState({textbox: true});
+            this.setState({textbox: true})
+            // setTextbox(true)
+            // this.setState({textOrFile: 'Text Box'});
+            // setTextOrFile('Text Box')
         }
     }
 
@@ -322,7 +326,6 @@ class BrowsePage extends Component {
             }
         }
 
-
         return (
             <div className="mainDiv">
                 <FadeIn>
@@ -333,7 +336,7 @@ class BrowsePage extends Component {
                             {/*    <div className='rowC'>*/}
                             {/*        <Switch onChange={this.setSwitchTextBox} checked={this.state.textbox}/> <span*/}
                             {/*        className="switch">{this.state.textOrFile}</span>*/}
-                                <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes" multipleChoice={true} parentFileChangeCallback={this.onFileChange} parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
+                                <TextOrFileUpload parentChangeType={this.setSwitchTextBox} apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes" multipleChoice={true} parentFileChangeCallback={this.onFileChange} parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
                             separated by new lines (/n)" />
                             {/*    </div>*/}
                             {/*    <Form>*/}
