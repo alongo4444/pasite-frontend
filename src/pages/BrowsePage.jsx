@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {Component, useEffect, useRef, useState} from "react";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
@@ -82,8 +82,8 @@ class BrowsePage extends Component {
                 );
                 this.setState({source: "data:;base64," + base64});
                 this.setState({loaded: true})
-                this.setState({selectedFile: {}})
-                this.setState({selectedOption: []})
+                // this.setState({selectedFile: {}})
+                // this.setState({selectedOption: []})
                 this.setState({loadedCluster: true})
             }).catch((err) => console.log(err)
             );
@@ -96,7 +96,7 @@ class BrowsePage extends Component {
                 .get(url, {
                         params: {
                             systems: this.state.selectedOption.map((option) => option.label),
-                            subtree: this.state.selectedFile.length > 0 ? this.state.selectedFile : this.state.selectedStrains,
+                            subtree: this.state.textbox ==false ? this.state.selectedFile : this.state.selectedStrains,
                             MLST: this.state.checkmlst
                         },
                         paramsSerializer: function (params) {
@@ -114,8 +114,8 @@ class BrowsePage extends Component {
                     );
                     this.setState({source: "data:;base64," + base64});
                     this.setState({loaded: true})
-                    this.setState({selectedFile: {}})
-                    // this.setState({selectedOption: []})
+                    // this.setState({selectedFile: {}})
+                    // this.setState({selectedStrains: []})
                 }).catch((err) => console.log(err)
                 );
         }
@@ -175,15 +175,15 @@ class BrowsePage extends Component {
     /*
     update the state of the file upload/strain selection on change
      */
-    setSwitchTextBox = () => {
-        if (this.state.textbox == true) {
-            this.setState({textbox: false});
-            this.setState({textOrFile: 'File Upload'});
-
-        } else {
-            this.setState({textbox: true});
-            this.setState({textOrFile: 'Text Box'});
-        }
+    setSwitchTextBox = data => {
+        this.setState({textbox: data});
+        // if (this.state.textbox == true) {
+        //     this.setState({textOrFile: 'File Upload'});
+        //
+        // } else {
+        //     this.setState({textbox: true});
+        //     this.setState({textOrFile: 'Text Box'});
+        // }
     }
 
 
@@ -256,22 +256,6 @@ class BrowsePage extends Component {
         };
 
         /*
-        render the div of file upload or strain selection - according the
-         choice of the user (using switch).
-         */
-        const renderTextBox = () => {
-            if (this.state.textbox == true) {
-                return <AutocompleteC multipleChoice={true} apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes"
-                                      parentCallback={this.handleTextBox}/>
-            } else {
-                return <Form.Group>
-                    <Form.File onChange={(e) => this.onFileChange(e)} id="exampleFormControlFile1"
-                               label="Please upload a file that contains list of strains"/>
-                </Form.Group>;
-            }
-        }
-
-        /*
         render choice of drawer into the defense systems/cluster/isolation type
         section and component
          */
@@ -322,7 +306,6 @@ class BrowsePage extends Component {
             }
         }
 
-
         return (
             <div className="mainDiv">
                 <FadeIn>
@@ -333,7 +316,7 @@ class BrowsePage extends Component {
                             {/*    <div className='rowC'>*/}
                             {/*        <Switch onChange={this.setSwitchTextBox} checked={this.state.textbox}/> <span*/}
                             {/*        className="switch">{this.state.textOrFile}</span>*/}
-                                <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes" multipleChoice={true} parentFileChangeCallback={this.onFileChange} parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
+                                <TextOrFileUpload updateTextbox={this.setSwitchTextBox} apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes" multipleChoice={true} parentFileChangeCallback={this.onFileChange} parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
                             separated by new lines (/n)" />
                             {/*    </div>*/}
                             {/*    <Form>*/}

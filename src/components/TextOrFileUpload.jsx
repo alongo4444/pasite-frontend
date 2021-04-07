@@ -22,7 +22,7 @@ function sleep(delay = 0) {
 //parentHandleTextBox - For the autocomplete: the callback that will be called in the parent which holds this component when the user chooses an option from the autocomplete component.
 //parentFileChangeCallback -  the callback that will be called in the parent which holds this component when the user chooses a file. The file should contain the options with \n separating between them.
 //label - the description of the component for the user
-export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, parentHandleTextBox, multipleChoice, label, limit_length=0, parentCallbackLegnth=null}) {
+export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, parentHandleTextBox,updateTextbox=null, multipleChoice, label, limit_length=0, parentCallbackLegnth=null}) {
 
     const [textbox, setTextbox] = React.useState(true);
     const [textOrFile, setTextOrFile] = React.useState('Text Box' );
@@ -45,7 +45,7 @@ update the state of the file upload/strain selection on change
  */
     const setSwitchTextBox = () => {
         if (textbox == true) {
-            // this.setState({textbox: false});
+            // this.setState({textbox: false}
             setTextbox(false)
             // this.setState({textOrFile: 'File Upload'});
             setTextOrFile('File Upload')
@@ -57,6 +57,12 @@ update the state of the file upload/strain selection on change
             setTextOrFile('Text Box')
         }
     }
+
+    React.useEffect(() =>{
+        if (updateTextbox !=null) {
+            updateTextbox(textbox)
+        }
+    },[textbox])
 
     return (
         <div className="search-form">
