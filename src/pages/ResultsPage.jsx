@@ -66,17 +66,17 @@ class ResultsPage extends Component {
         }
 
         const expandRow = {
-            renderer: (row, rowIndex) => (
+            renderer: (row, rowIndex) => {return (
                 <div>
 
                     <Accordion defaultActiveKey={"0"}>
                         <Card>
                             <Card.Header>
-                                <Accordion.Toggle className="acrd" as={Button} variant="link" eventKey={rowIndex+"0"}>
+                                <Accordion.Toggle className="acrd" as={Button} variant="link" eventKey="0">
                                     <FontAwesomeIcon icon={faDna}/> DNA Sequence
                                 </Accordion.Toggle>
                             </Card.Header>
-                            <Accordion.Collapse eventKey={rowIndex+"0"}>
+                            <Accordion.Collapse eventKey="0">
                                 <Card.Body>
                                     {row['dna_sequence'].split("").map(char => {
                                         return <span className={"seq_c"}
@@ -87,11 +87,11 @@ class ResultsPage extends Component {
                         </Card>
                         <Card>
                             <Card.Header>
-                                <Accordion.Toggle as={Button} variant="link" eventKey={rowIndex+"1"}>
+                                <Accordion.Toggle as={Button} variant="link" eventKey="1">
                                     <FontAwesomeIcon icon={faDisease}/> Protein Sequence
                                 </Accordion.Toggle>
                             </Card.Header>
-                            <Accordion.Collapse eventKey={rowIndex+"1"}>
+                            <Accordion.Collapse eventKey="1">
                                 <Card.Body>
                                     {row['protein_sequence'].split("").map(char => {
                                         return <span className={"seq_c"}
@@ -103,7 +103,7 @@ class ResultsPage extends Component {
                     </Accordion>
 
                 </div>
-            ), onlyOneExpanding: true
+            )}, onlyOneExpanding: true
         };
 
 
@@ -112,7 +112,7 @@ class ResultsPage extends Component {
                 <FadeIn>
                     <div style={{height: "100%", width: "90%",marginLeft:"5%"}}>
                         <BootstrapTable
-                            keyField="locus_tag_copy"
+                            keyField="locus_tag"
                             data={this.state.result_table}
                             columns={columns} //which columns from the data to show as columns
                             pagination={paginationFactory({

@@ -219,13 +219,15 @@ handle file upload and load each line to array of
                         <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/defense/"
                                           multipleChoice={true} parentFileChangeCallback={onFileChange}
                                           parentHandleTextBox={getSelected} label="Please upload a file that contains a list of defense systems separated by new lines (/n)"
-                        />
+                        /><h6 className="note"><i>Note: Not selecting a defense system will return <b>all the genes in the database.</b></i></h6>
                     </Col>
                 </Form.Group>
 
 
                 <div className="chkbxs">
+                    Columns:
                     <div>
+                        <br/>
                         <input
                             id="all2"
                             type="checkbox"
@@ -284,7 +286,7 @@ handle file upload and load each line to array of
                     {/*<label htmlFor='15' className="lbl"> dna_sequence</label>*/}
                     {/*<input id='15' type="checkbox" name="dna_sequence" onChange={() => toggleCheck("dna_sequence")} checked={checked["dna_sequence"]}/>*/}
                 </div>
-
+                <br/>
                 <div style={{textAlign: "center"}}>
                     <Button onClick={getData}>Download</Button>
                 </div>
