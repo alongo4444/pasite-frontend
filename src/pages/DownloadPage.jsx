@@ -16,10 +16,10 @@ export default function DownloadPage() {
                                 <Col sm={3}>
                                     <Nav variant="pills" className="flex-column">
                                         <Nav.Item>
-                                            <Nav.Link eventKey="first">Strain's Genes</Nav.Link>
+                                            <Nav.Link eventKey="first">Genes by Strain/s</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                            <Nav.Link eventKey="second">Genes by Defense System</Nav.Link>
+                                            <Nav.Link eventKey="second">Genes by Defense System/s</Nav.Link>
                                         </Nav.Item>
                                     </Nav>
                                 </Col>

@@ -46,7 +46,7 @@ export default function AutocompleteC({
             try {
                 const response = await fetch(apiUrl);
 
-                await sleep(1e3); // For demo purposes.
+                // await sleep(1e3); // For demo purposes.
                 const countries = await response.json();
                 if (active) {
                     setOptions(countries.filter(x => x.name != null))
