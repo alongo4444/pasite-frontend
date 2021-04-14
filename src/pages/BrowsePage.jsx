@@ -75,6 +75,7 @@ class BrowsePage extends Component {
     computeTree = () => {
         this.setState({source: []});
         this.setState({loaded: false});
+        this.setState({loadedCluster: false})
         let systems = []
         if (this.state.generateType == "cluster") {
             return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains, this.state.checkmlst).then(response => {
