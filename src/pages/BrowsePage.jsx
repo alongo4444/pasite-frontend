@@ -5,21 +5,18 @@ import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import IconButton from '@material-ui/core/IconButton';
 import {ArrowsFullscreen, ZoomIn, ZoomOut} from "react-bootstrap-icons";
 import Spinner from 'react-bootstrap/Spinner'
-import Form from 'react-bootstrap/Form';
 import '../styles/BrowsePage.css';
 import chroma from 'chroma-js';
 import {colourOptions} from '../utilities/colors';
 import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
 import '../assets/fonts/YesevaOne-Regular.ttf';
-import Switch from "react-switch";
-import AutocompleteC from "../components/AutocompleteC";
 import MiniDrawer from "../components/Drawer";
 import Cluster from "../components/Cluster";
 import IsolationType from "../components/IsolationType";
 import GenesByClusterC from "../components/GenesByClusterC";
 import TextOrFileUpload from "../components/TextOrFileUpload";
-import {Col} from "react-bootstrap";
+import ErrorModalC from "../components/ErrorModalC";
 
 var qs = require('qs');
 
@@ -28,6 +25,7 @@ class BrowsePage extends Component {
         super(props);
         this.cluster = React.createRef();
         this.isltype = React.createRef();
+        this.childErr = React.createRef();
         this.state = {
             source: [],
             loaded: false,
@@ -61,7 +59,13 @@ class BrowsePage extends Component {
                 );
                 this.setState({source: "data:;base64," + base64});
                 this.setState({loaded: true})
-            });
+            }).catch((err) => {
+            this.setState({loaded: true})
+            console.log(err);
+            if (this.childErr.current) {
+                this.childErr.current.handleOpen();
+            }
+        });
     }
 
     /*
@@ -73,7 +77,7 @@ class BrowsePage extends Component {
         this.setState({loaded: false});
         let systems = []
         if (this.state.generateType == "cluster") {
-            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains,this.state.checkmlst).then(response => {
+            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains, this.state.checkmlst).then(response => {
                 const base64 = btoa(
                     new Uint8Array(response.data).reduce(
                         (data, byte) => data + String.fromCharCode(byte),
@@ -85,8 +89,46 @@ class BrowsePage extends Component {
                 // this.setState({selectedFile: {}})
                 // this.setState({selectedOption: []})
                 this.setState({loadedCluster: true})
-            }).catch((err) => console.log(err)
+            }).catch((err) => {
+                    this.setState({loaded: true})
+                    console.log(err);
+                    if (this.childErr.current) {
+                        this.childErr.current.handleOpen();
+                    }
+                }
             );
+        }
+        if (this.state.generateType == "distinct systems") {
+            let url = "http://127.0.0.1:8800/api/v1/defense/distinct_count";
+            return axios
+                .get(url, {
+                        params: {
+                            subtree: this.state.textbox == false ? this.state.selectedFile : this.state.selectedStrains,
+                            MLST: this.state.checkmlst
+                        },
+                        paramsSerializer: function (params) {
+                            return qs.stringify(params, {arrayFormat: 'repeat'})
+                        },
+                        responseType: 'arraybuffer',
+                    }
+                )
+                .then(response => {
+                    const base64 = btoa(
+                        new Uint8Array(response.data).reduce(
+                            (data, byte) => data + String.fromCharCode(byte),
+                            '',
+                        ),
+                    );
+                    this.setState({source: "data:;base64," + base64});
+                    this.setState({loaded: true})
+                }).catch((err) => {
+                        this.setState({loaded: true})
+                        console.log(err);
+                        if (this.childErr.current) {
+                            this.childErr.current.handleOpen();
+                        }
+                    }
+                );
         } else {
             let url = "http://127.0.0.1:8800/api/v1/strains/phyloTree"
             if (this.state.generateType == "isolation") {
@@ -96,7 +138,7 @@ class BrowsePage extends Component {
                 .get(url, {
                         params: {
                             systems: this.state.selectedOption.map((option) => option.label),
-                            subtree: this.state.textbox ==false ? this.state.selectedFile : this.state.selectedStrains,
+                            subtree: this.state.textbox == false ? this.state.selectedFile : this.state.selectedStrains,
                             MLST: this.state.checkmlst
                         },
                         paramsSerializer: function (params) {
@@ -116,7 +158,13 @@ class BrowsePage extends Component {
                     this.setState({loaded: true})
                     // this.setState({selectedFile: {}})
                     // this.setState({selectedStrains: []})
-                }).catch((err) => console.log(err)
+                }).catch((err) => {
+                        this.setState({loaded: true})
+                        console.log(err);
+                        if (this.childErr.current) {
+                            this.childErr.current.handleOpen();
+                        }
+                    }
                 );
         }
     };
@@ -170,6 +218,9 @@ class BrowsePage extends Component {
         if (Gtype == "isolation") {
             this.setState({generateType: "isolation"})
         }
+        if (Gtype == "distinct systems") {
+            this.setState({generateType: "distinct systems"}, () => this.computeTree());
+        }
     }
 
     /*
@@ -177,13 +228,6 @@ class BrowsePage extends Component {
      */
     setSwitchTextBox = data => {
         this.setState({textbox: data});
-        // if (this.state.textbox == true) {
-        //     this.setState({textOrFile: 'File Upload'});
-        //
-        // } else {
-        //     this.setState({textbox: true});
-        //     this.setState({textOrFile: 'Text Box'});
-        // }
     }
 
 
@@ -281,8 +325,13 @@ class BrowsePage extends Component {
                         <div>Choose the number of genes you would like to show:</div>
                         <Cluster ref={this.cluster}/>
                     </div>)
-            } else {
+            }
+            if (this.state.generateType == "isolation") {
                 return (<IsolationType ref={this.isltype}/>)
+            } else {
+                return (
+                    <div>showing the distribution of distinct count of defense systems of each strain across the
+                        tree</div>)
             }
         }
 
@@ -312,28 +361,19 @@ class BrowsePage extends Component {
                     <div className='rowC'>
                         <div className='sidebar'>
                             <div className="instructions">choose a way to upload strains and create subtree:</div>
-                            {/*<div className="textBox">*/}
-                            {/*    <div className='rowC'>*/}
-                            {/*        <Switch onChange={this.setSwitchTextBox} checked={this.state.textbox}/> <span*/}
-                            {/*        className="switch">{this.state.textOrFile}</span>*/}
-                                <TextOrFileUpload updateTextbox={this.setSwitchTextBox} apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes" multipleChoice={true} parentFileChangeCallback={this.onFileChange} parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
-                            separated by new lines (/n)" />
-                            {/*    </div>*/}
-                            {/*    <Form>*/}
-                            {/*        {renderTextBox()}*/}
-                            {/*    </Form>*/}
-                            {/*</div>*/}
+                            <TextOrFileUpload updateTextbox={this.setSwitchTextBox}
+                                              apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes"
+                                              multipleChoice={true}
+                                              parentFileChangeCallback={this.onFileChange}
+                                              parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
+                            separated by new lines (/n)"/>
 
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
                                 <br/>
-                                {/*<Form.Check*/}
-                                {/*    label="Display MLST across the tree"*/}
-                                {/*    defaultChecked={this.state.checkmlst}*/}
-                                {/*    onChange={setCheckMLST}*/}
-                                {/*/>*/}
-                                    <input id='1'  type="checkbox" name="mlst" onChange={setCheckMLST}/>
-                                    <label style={{paddingLeft: '5%'}} htmlFor='1'>   Display MLST across the tree</label>
+
+                                <input id='1' type="checkbox" name="mlst" onChange={setCheckMLST}/>
+                                <label style={{paddingLeft: '5%'}} htmlFor='1'> Display MLST across the tree</label>
 
                                 <br/>
                                 <Button onClick={() => this.computeTree()} variant="outline-primary"
@@ -387,6 +427,7 @@ class BrowsePage extends Component {
                     </div>
 
                 </FadeIn>
+                <ErrorModalC open={false} ref={this.childErr}/>
             </div>
         )
     }

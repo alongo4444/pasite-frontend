@@ -15,6 +15,7 @@ import List from '@material-ui/core/List';
 import { BsShieldShaded } from 'react-icons/bs';
 import { SiMicrogenetics } from 'react-icons/si';
 import { GiDrippingTube } from 'react-icons/gi';
+import { GiShieldEchoes } from 'react-icons/gi';
 
 const drawerWidth = 240;
 
@@ -136,6 +137,10 @@ export default function MiniDrawer({generatingTypeHandler}) {
                     <ListItem button key="isolation" onClick={() => generatingTypeHandler("isolation")}>
                         <ListItemIcon><GiDrippingTube/></ListItemIcon>
                         <ListItemText primary="Isolation Type"/>
+                    </ListItem>
+                    <ListItem button key="distinct systems" onClick={() => generatingTypeHandler("distinct systems")}>
+                        <ListItemIcon><GiShieldEchoes/></ListItemIcon>
+                        <ListItemText primary="Number of Distinct Systems"/>
                     </ListItem>
                 </List>
             </Drawer>
