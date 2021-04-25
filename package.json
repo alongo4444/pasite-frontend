@@ -28,7 +28,7 @@
     "jquery": "^3.6.0",
     "js-file-download": "^0.4.12",
     "node-sass": "^4.14.1",
-    "phylotree": "^1.0.0-alpha.22",
+    "phylotree": "^1.0.0-alpha.27",
     "qs": "^6.9.6",
     "react": "^17.0.1",
     "react-awesome-slider": "^4.1.0",
