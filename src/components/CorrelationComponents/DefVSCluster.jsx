@@ -193,7 +193,7 @@ export default function DefVSCluster({parentCallback2}) {
                     </Form.Group>
 
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => parentCallback2(selectedDF, selected_strain, selected_gene)}
+                        <Button id="dvclSearch" onClick={() => parentCallback2(selectedDF, selected_strain, selected_gene)}
                                 disabled={buttonOff}>Search</Button>
                     </div>
                 </Form>

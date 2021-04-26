@@ -137,7 +137,7 @@ class CorrelationSearchPage extends React.Component {
 
                 {currWindow()}
 
-                <div id="drawer">
+                <div className="sidebar" id="drawer">
                     <DrawerCorrelation generatingTypeHandler={this.generatingTypeHandler}/>
                 </div>
             </div>

@@ -129,7 +129,7 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                 <Divider/>
                 <List>
 
-                    <ListItem button key="dvd" onClick={() => generatingTypeHandler("dvd")}>
+                    <ListItem  button key="dvd" id="dvd" onClick={() => generatingTypeHandler("dvd")}>
                         {/*<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Tooltip!</Tooltip>}>*/}
                             <ListItemIcon>
                                 <BsShieldShaded/><BsShieldShaded/>
@@ -137,19 +137,19 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                             <ListItemText primary="Defense system vs Defense system"/>
 
                     </ListItem>
-                    <ListItem button key="dvc" onClick={() => generatingTypeHandler("dvc")}>
+                    <ListItem button key="dvc" id="dvc" onClick={() => generatingTypeHandler("dvc")}>
                         <ListItemIcon><BsShieldShaded/><SiHubspot/></ListItemIcon>
                         <ListItemText primary="Defense system vs Attribute"/>
                     </ListItem>
-                    <ListItem button key="dvi" onClick={() => generatingTypeHandler("dvi")}>
+                    <ListItem button key="dvi" id="dvi" onClick={() => generatingTypeHandler("dvi")}>
                         <ListItemIcon><BsShieldShaded/><GiDrippingTube/></ListItemIcon>
                         <ListItemText primary="Defense system vs Isolation Type"/>
                     </ListItem>
-                    <ListItem button key="dvcl" onClick={() => generatingTypeHandler("dvcl")}>
+                    <ListItem button key="dvcl" id="dvcl" onClick={() => generatingTypeHandler("dvcl")}>
                         <ListItemIcon><BsShieldShaded/><SiMicrogenetics/></ListItemIcon>
                         <ListItemText primary="Defense system vs Cluster"/>
                     </ListItem>
-                    <ListItem button key="clvi" onClick={() => generatingTypeHandler("clvi")}>
+                    <ListItem button key="clvi" id="clvi" onClick={() => generatingTypeHandler("clvi")}>
                         <ListItemIcon><SiMicrogenetics/><GiDrippingTube/></ListItemIcon>
                         <ListItemText primary="Cluster vs Isolation Type"/>
                     </ListItem>

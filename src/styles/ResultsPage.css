@@ -55,11 +55,11 @@ tr:hover {
     font-weight: bold;
 }
 
-.react-bootstrap-table-pagination-list {
-    text-align: center;
-    transform: translateX(-75%);
-}
+/*.react-bootstrap-table-pagination-list {*/
+/*    text-align: center;*/
+/*    transform: translateX(-75%);*/
+/*}*/
 
-.react-bootstrap-table-page-btns-ul {
-    float: none;
-}
+/*.react-bootstrap-table-page-btns-ul {*/
+/*    float: none;*/
+/*}*/
