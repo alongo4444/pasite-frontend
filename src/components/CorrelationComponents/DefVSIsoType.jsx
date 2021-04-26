@@ -166,7 +166,7 @@ export default function DefVSIsoType({parentCallback2}) {
                     </Form.Group>
 
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => parentCallback2(selectedDF, selectedIso)}
+                        <Button id="dviSearch" onClick={() => parentCallback2(selectedDF, selectedIso)}
                                 disabled={buttonOff}>Search</Button>
                     </div>
                 </Form>

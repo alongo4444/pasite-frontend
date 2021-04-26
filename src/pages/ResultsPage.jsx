@@ -95,7 +95,7 @@ class ResultsPage extends Component {
                                 </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="0">
-                                <Card.Body>
+                                <Card.Body id="d-seq">
                                     {row['dna_sequence'].split("").map(char => {
                                         return <span className={"seq_c"}
                                                      style={{color: this.colorCharProtein(char)}}>{`${char}`}</span>;
@@ -110,7 +110,7 @@ class ResultsPage extends Component {
                                 </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="1">
-                                <Card.Body>
+                                <Card.Body id="p-seq">
                                     {row['protein_sequence'].split("").map(char => {
                                         return <span className={"seq_c"}
                                                      style={{color: dna_char_to_color[char]}}>{`${char}`}</span>;

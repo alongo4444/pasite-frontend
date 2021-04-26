@@ -377,8 +377,8 @@ class CorrelationGraph extends Component {
                 )
             } else {
                 return (
-                    <div>
-                        <CorrelationBoxPlot withd_y={this.state.withd_y} withoutd_y={this.state.without_y}/>
+                    <div id="boxplotdiv">
+                        <CorrelationBoxPlot  withd_y={this.state.withd_y} withoutd_y={this.state.without_y}/>
                         <br/>
                         <br/>
                     </div>

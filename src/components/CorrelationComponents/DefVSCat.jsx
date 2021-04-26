@@ -140,7 +140,7 @@ export default function DefVSCat({parentCallback2}) {
                     </Form.Group>
 
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => parentCallback2(selectedDF, selectedCls)}
+                        <Button id="dvcSearch" onClick={() => parentCallback2(selectedDF, selectedCls)}
                                 disabled={buttonOff}>Search</Button>
                     </div>
                 </Form>
