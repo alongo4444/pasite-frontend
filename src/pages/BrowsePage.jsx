@@ -7,7 +7,7 @@ import {ArrowsFullscreen, ZoomIn, ZoomOut} from "react-bootstrap-icons";
 import Spinner from 'react-bootstrap/Spinner'
 import '../styles/BrowsePage.css';
 import chroma from 'chroma-js';
-import {colourOptions} from '../utilities/colors';
+// import {colourOptions} from '../utilities/colors';
 import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
 import '../assets/fonts/YesevaOne-Regular.ttf';
@@ -39,7 +39,8 @@ class BrowsePage extends Component {
             isOpen: false,
             generateType: "defense",
             checkmlst: false,
-            loadedCluster: false
+            loadedCluster: false,
+            colourOptions:{}
         }
     };
 
@@ -47,27 +48,29 @@ class BrowsePage extends Component {
     load empty phylogenetic tree as default tree
      */
     componentDidMount() {
-        axios
+        Promise.all([axios
             .get(
                 "http://127.0.0.1:8800/api/v1/strains/phyloTree",
                 {responseType: 'arraybuffer'},
-            )
-            .then(response => {
-                const base64 = btoa(
-                    new Uint8Array(response.data).reduce(
-                        (data, byte) => data + String.fromCharCode(byte),
-                        '',
-                    ),
-                );
-                this.setState({source: "data:;base64," + base64});
-                this.setState({loaded: true})
-            }).catch((err) => {
+            ),axios
+            .get(
+                "http://127.0.0.1:8800/api/v1/strains/defSystemsColors"
+            )]).then(([response,colors])=>{
+            const base64 = btoa(
+                new Uint8Array(response.data).reduce(
+                    (data, byte) => data + String.fromCharCode(byte),
+                    '',
+                ),
+            );
+            this.setState({source: "data:;base64," + base64});
+            this.setState({loaded: true});
+            this.setState({colourOptions: colors.data});
+        }).catch((err) => {
             this.setState({loaded: true})
             console.log(err);
             if (this.childErr.current) {
                 this.childErr.current.handleOpen();
-            }
-        });
+            }});
     }
 
     /*
@@ -314,7 +317,7 @@ class BrowsePage extends Component {
                         <Select
                             closeMenuOnSelect={false}
                             isMulti
-                            options={colourOptions}
+                            options={this.state.colourOptions}
                             styles={colourStyles}
                             onChange={handleChange}
                         />
