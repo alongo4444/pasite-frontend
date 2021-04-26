@@ -17,6 +17,8 @@ import IsolationType from "../components/IsolationType";
 import GenesByClusterC from "../components/GenesByClusterC";
 import TextOrFileUpload from "../components/TextOrFileUpload";
 import ErrorModalC from "../components/ErrorModalC";
+import Divider from '@material-ui/core/Divider';
+
 
 var qs = require('qs');
 
@@ -369,13 +371,16 @@ class BrowsePage extends Component {
                                               parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains
                             separated by new lines (/n)"/>
 
+                            <Divider/>
+                            <br/>
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
                                 <br/>
-
-                                <input id='1' type="checkbox" name="mlst" onChange={setCheckMLST}/>
-                                <label style={{paddingLeft: '5%'}} htmlFor='1'> Display MLST across the tree</label>
-
+                                <Divider/>
+                                <div className='rowC'>
+                                    <input style={{marginTop:'2%'}} id='1' type="checkbox" name="mlst" onChange={setCheckMLST}/>
+                                    <label style={{paddingLeft: '5%'}} htmlFor='1'> Display MLST across the tree</label>
+                                </div>
                                 <br/>
                                 <Button onClick={() => this.computeTree()} variant="outline-primary"
                                         className='GenerateTree'>Generate Tree</Button>
