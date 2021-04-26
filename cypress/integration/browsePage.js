@@ -6,8 +6,8 @@ describe("one-step actions", () => {
         cy.visit("/browse")
     })
     afterEach(()=>{
-        cy.get('img[src*="data:;"]',{timeout:10000}).should('have.attr','src')
-        cy.get('img[src*="data:;"]',{timeout:10000}).should('be.visible')
+        cy.get('img[src*="data:;"]',{timeout:15000}).should('have.attr','src')
+        cy.get('img[src*="data:;"]',{timeout:15000}).should('be.visible')
     })
     it("sidebar class exists in DOM", () =>{
         cy.get(".sidebar").should("exist");
@@ -35,7 +35,7 @@ describe("one-step actions", () => {
         cy.get('.react-switch-bg').click();
         cy.get('#exampleFormControlFile1').attachFile("../fixtures/strains");
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot('fileSubTree.png');
+        cy.get('img[src*="data:;"]',{timeout:15000}).toMatchImageSnapshot('fileSubTree.png');
     })
 
     it("check manuel strain selection", ()=>{
@@ -47,7 +47,7 @@ describe("one-step actions", () => {
         cy.get('#asynchronous-demo').type('PAO1');
         cy.get('#asynchronous-demo-option-0').click();
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot('manuelSubTree.png');
+        cy.get('img[src*="data:;"]',{timeout:15000}).toMatchImageSnapshot('manuelSubTree.png');
         /* ==== End Cypress Studio ==== */
     })
     it("check defense system selection",()=>{
@@ -59,14 +59,14 @@ describe("one-step actions", () => {
         cy.get('#react-select-3-option-10').click();
         cy.get('[style="transition: opacity 400ms ease 0s, transform 400ms ease 0s; transform: none; opacity: 1;"] > :nth-child(1)').click();
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot('4systemsTree.png');
+        cy.get('img[src*="data:;"]',{timeout:15000}).toMatchImageSnapshot('4systemsTree.png');
         /* ==== End Cypress Studio ==== */
     })
     it("get tree with MLST coloring",()=>{
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#\\31 ').check();
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot('standardTreeMLST.png');
+        cy.get('img[src*="data:;"]',{timeout:15000}).toMatchImageSnapshot('standardTreeMLST.png');
         /* ==== End Cypress Studio ==== */
     })
 
@@ -83,32 +83,7 @@ describe("one-step actions", () => {
 
     it("screenshot(visual) testing of the standard tree:", ()=>{
         cy.get('div[class="App"]').toMatchImageSnapshot('standardPage.png');
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot('standardTree.png');
+        cy.get('img[src*="data:;"]',{timeout:15000}).toMatchImageSnapshot('standardTree.png');
     })
 
-    it("test triplets of defense systems", ()=>{
-        let triplets = []
-        cy.request('http://localhost:8800/api/v1/defense/triplets').then((response)=>{
-            triplets = response.body;
-        })
-        cy.wrap(triplets).each((triple,idx)=>{
-            /* ==== Generated with Cypress Studio ==== */
-            cy.get('.css-g1d714-ValueContainer').click();
-            cy.get('#react-select-3-input').clear();
-            cy.get('#react-select-3-input').type(triple[0]);
-            cy.get('#react-select-3-option-1').click();
-            cy.get('#react-select-3-input').clear();
-            cy.get('#react-select-3-input').type(triple[1]);
-            cy.get('#react-select-3-option-3').click();
-            cy.get('#react-select-3-input').clear();
-            cy.get('#react-select-3-input').type(triple[2]);
-            cy.get('#react-select-3-option-2').click();
-            cy.get('.react-transform-element').click();
-            /* ==== End Cypress Studio ==== */
-            cy.get('.GenerateTree').click();
-            cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot(triple.join("_")+'png');
-        })
-
-
-    })
 })

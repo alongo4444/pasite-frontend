@@ -20,6 +20,7 @@ export default function SearchPage() {
     const [options, setOptions] = React.useState([]);
     const [selectedA, setSelectedA] = React.useState(false);
     const loading = open && options.length === 0;
+    const [buttonOff, setButtonOff] = React.useState(true)
 
     React.useEffect(() => {
         let active = true;
@@ -49,6 +50,18 @@ export default function SearchPage() {
         }
     }, [open]);
 
+    React.useEffect(() => {
+        if (getSelectedLength() > 0){
+            setButtonOff(false)
+        }
+        else{
+            setButtonOff(true)
+        }
+    }, [selectedA]);
+
+    const getSelectedLength = () => {
+        return selectedA.length;
+    }
 
     const getSelected = (selected) => {
         setSelectedA(selected)
@@ -103,7 +116,7 @@ export default function SearchPage() {
                                 myArrayVariableName: selectedA, // send the selected items as a parameter to the result page
                                 rpp: rpp //send the number of results per page as a parameter to the result page
                             }
-                        }}><Button>Search</Button></Link>
+                        }}><Button disabled={buttonOff}>Search</Button></Link>
                     </div>
                 </Form>
             </FadeIn>

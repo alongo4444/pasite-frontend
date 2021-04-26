@@ -80,13 +80,13 @@ export default function DefVSDef({parentCallback2}) {
                             <p style={{textAlign: "right"}}>Select two different defense systems</p>
                         </Form.Label>
                         <Col sm="4">
-                            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={true} limit_length={2}
+                            <AutocompleteC className="textBox" apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={true} limit_length={2}
                                            parentCallback={getSelected} parentCallbackLegnth={getSelectedLength} labelText="Choose Defense Systems" ></AutocompleteC>
                         </Col>
                     </Form.Group>
 
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => parentCallback2(selectedA)} disabled={buttonOff}>Search</Button>
+                        <Button id="dvdSearch" onClick={() => parentCallback2(selectedA)} disabled={buttonOff}>Search</Button>
                     </div>
                 </Form>
             </FadeIn>

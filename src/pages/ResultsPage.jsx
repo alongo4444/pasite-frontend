@@ -65,6 +65,24 @@ class ResultsPage extends Component {
 
         }
 
+        const options = {
+            pageStartIndex: 1, // first page will be 0, default is 1
+            paginationSize: 10,  // the pagination bar size, default is 5
+            sizePerPage: rowsPerPages,
+            showTotal: true, // display pagination information
+            firstPageText: '<<', // the text of first page button
+            prePageText: 'Prev', // the text of previous page button
+            nextPageText: 'Next', // the text of next page button
+            lastPageText: '>>', // the text of last page button
+            nextPageTitle: 'Go to next', // the title of next page button
+            prePageTitle: 'Go to previous', // the title of previous page button
+            firstPageTitle: 'Go to first', // the title of first page button
+            lastPageTitle: 'Go to last', // the title of last page button
+            hideSizePerPage: false, // hide the size per page dropdown
+            hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
+
+        }
+
         const expandRow = {
             renderer: (row, rowIndex) => {return (
                 <div>
@@ -77,10 +95,10 @@ class ResultsPage extends Component {
                                 </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="0">
-                                <Card.Body>
+                                <Card.Body id="d-seq">
                                     {row['dna_sequence'].split("").map(char => {
                                         return <span className={"seq_c"}
-                                                     style={{color: dna_char_to_color[char]}}>{`${char}`}</span>;
+                                                     style={{color: this.colorCharProtein(char)}}>{`${char}`}</span>;
                                     })}
                                 </Card.Body>
                             </Accordion.Collapse>
@@ -92,10 +110,10 @@ class ResultsPage extends Component {
                                 </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="1">
-                                <Card.Body>
+                                <Card.Body id="p-seq">
                                     {row['protein_sequence'].split("").map(char => {
                                         return <span className={"seq_c"}
-                                                     style={{color: this.colorCharProtein(char)}}>{`${char}`}</span>;
+                                                     style={{color: dna_char_to_color[char]}}>{`${char}`}</span>;
                                     })}
                                 </Card.Body>
                             </Accordion.Collapse>
@@ -115,22 +133,7 @@ class ResultsPage extends Component {
                             keyField="locus_tag"
                             data={this.state.result_table}
                             columns={columns} //which columns from the data to show as columns
-                            pagination={paginationFactory({
-                                sizePerPage: rowsPerPages,
-                                pageStartIndex: 1, // first page will be 0, default is 1
-                                paginationSize: 10,  // the pagination bar size, default is 5
-                                showTotal: true, // display pagination information
-                                firstPageText: '<<', // the text of first page button
-                                prePageText: 'Prev', // the text of previous page button
-                                nextPageText: 'Next', // the text of next page button
-                                lastPageText: '>>', // the text of last page button
-                                nextPageTitle: 'Go to next', // the title of next page button
-                                prePageTitle: 'Go to previous', // the title of previous page button
-                                firstPageTitle: 'Go to first', // the title of first page button
-                                lastPageTitle: 'Go to last', // the title of last page button
-                                hideSizePerPage: false, // hide the size per page dropdown
-                                hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
-                            })}
+                            pagination={ paginationFactory(options) }
                             expandRow={expandRow}
                         />
                     </div>

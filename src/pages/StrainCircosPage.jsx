@@ -74,7 +74,7 @@ export default function StrainCircosPage() {
                         </Form.Label>
 
                         <Col sm="4">
-                            <Autocomplete
+                            <Autocomplete className="textBox"
                                 id="asynchronous-demo"
                                 multiple={false}
                                 style={{ width: 800 }}
