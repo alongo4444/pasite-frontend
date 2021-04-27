@@ -21,8 +21,8 @@ export default function StrainForm() {
     const [selectedA, setSelectedA] = React.useState(false);
     const [checked, setChecked] = React.useState({
         genomic_accession: true,
-        start_g: true,
-        end_g: true,
+        start: true,
+        end: true,
         strand: true,
         attributes_x: true,
         product_accession: true,
@@ -239,13 +239,13 @@ using selectedFile state.
                                    checked={checked["genomic_accession"]}/>
                             <label htmlFor='2' className="lbl">genomic_accession</label>
 
-                            <input id='3' type="checkbox" name="start_g" onChange={() => toggleCheck("start_g")}
-                                   checked={checked["start_g"]}/>
-                            <label htmlFor='3' className="lbl">start_g</label>
+                            <input id='3' type="checkbox" name="start" onChange={() => toggleCheck("start")}
+                                   checked={checked["start"]}/>
+                            <label htmlFor='3' className="lbl">start</label>
 
-                            <input id='4' type="checkbox" name="end_g" onChange={() => toggleCheck("end_g")}
-                                   checked={checked["end_g"]}/>
-                            <label htmlFor='4' className="lbl">end_g</label>
+                            <input id='4' type="checkbox" name="end" onChange={() => toggleCheck("end")}
+                                   checked={checked["end"]}/>
+                            <label htmlFor='4' className="lbl">end</label>
 
                             <input id='5' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
                                    checked={checked["strand"]}/>
