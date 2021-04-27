@@ -23,8 +23,8 @@ export default function GenesByDefenseForm() {
     const [checked, setChecked] = React.useState({
         // locus_tag: true,
         genomic_accession: true,
-        start_g: true,
-        end_g: true,
+        start: true,
+        end: true,
         strand: true,
         attributes_x: true,
         product_accession: true,
@@ -244,13 +244,13 @@ handle file upload and load each line to array of
                            onChange={() => toggleCheck("genomic_accession")} checked={checked["genomic_accession"]}/>
                     <label for='22' className="lbl">genomic_accession</label>
 
-                    <input id='32' type="checkbox" name="start_g" onChange={() => toggleCheck("start_g")}
-                           checked={checked["start_g"]}/>
-                    <label for='32' className="lbl">start_g</label>
+                    <input id='32' type="checkbox" name="start" onChange={() => toggleCheck("start")}
+                           checked={checked["start"]}/>
+                    <label for='32' className="lbl">start</label>
 
-                    <input id='42' type="checkbox" name="end_g" onChange={() => toggleCheck("end_g")}
-                           checked={checked["end_g"]}/>
-                    <label htmlFor='42' className="lbl">end_g</label>
+                    <input id='42' type="checkbox" name="end" onChange={() => toggleCheck("end")}
+                           checked={checked["end"]}/>
+                    <label htmlFor='42' className="lbl">end</label>
 
                     <input id='52' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
                            checked={checked["strand"]}/>
