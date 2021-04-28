@@ -16,13 +16,51 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-module.exports = (on, config) => {
-
-}
+// module.exports = (on, config) => {
+//
+// }
+//
+// module.exports = (on, config) => {
+//
+// };
 
 const { initPlugin } = require('cypress-plugin-snapshots/plugin');
 
 module.exports = (on, config) => {
+
+    on('task', {
+        deleteFile(fileName) {
+            // const fs = require('fs');
+            // const downloadPath = `/cypress/downloads/`;
+            // var currentPath = process.cwd();
+            // currentPath = currentPath.replaceAll('\\','/')
+            // const absolutePath = currentPath + downloadPath + fileName;
+            // const fileStats = fs.statSync(absolutePath);
+            // const fileSize = fileStats.size;
+            //
+            // if (fs.existsSync(absolutePath) && fileSize > 0) {
+            //     try {
+            //         fs.unlinkSync(absolutePath);
+            //         console.log('File deleted');
+            //         return null;
+            //     } catch (err) {
+            //         console.log(err);
+            //     }
+            // }
+            // console.log('File is not exists');
+            // return null;
+
+            const fs = require('fs').promises;
+
+            const directory = 'cypress/downloads';
+
+            fs.rmdir(directory, { recursive: true })
+                .then(() => console.log('directory removed!'));
+            return null;
+
+        }
+    });
+
     initPlugin(on, config);
     return config;
 };

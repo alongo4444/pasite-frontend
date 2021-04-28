@@ -1,9 +1,15 @@
 import '@testing-library/cypress/add-commands';
+import * as fs from 'fs'
 
 describe("Genes by Strains", () => {
     beforeEach(() => {
         cy.visit("/download");
 
+    })
+
+    afterEach(() => {
+        cy.task('deleteFile', `report.csv`)
+        console.log('test')
     })
 
     it("textbox class exists in DOM", () =>{
@@ -40,6 +46,11 @@ describe("Genes By Defense Systems", () => {
         cy.get('#left-tabs-example-tab-second').click();
     })
 
+    afterEach(() => {
+        cy.task('deleteFile', `report.csv`)
+        console.log('test')
+    })
+
     it("download attempt", () => {
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#all2').uncheck();
@@ -60,7 +71,6 @@ describe("Genes By Defense Systems", () => {
     });
 
     it("download attempt using a file", () =>{
-        cy.readFile('cypress/downloads/report.csv').should('exist')
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#left-tabs-example-tab-second').click();
 
