@@ -46,24 +46,40 @@ class NavBarC extends Component{
                     <span className="cb">
                     <Card.Text>
                         <Switch>
-                            <Route path="/search" component={SearchPage}/>
+                            <Route path="/search">
+                                <SearchPage/>
+                            </Route>
 
-                            <Route path="/results" component={ResultsPage}/>
+                            <Route path="/results">
+                                <ResultsPage/>
+                            </Route>
 
-                            <Route path="/browse" component={BrowsePage}/>
+                            <Route path="/browse">
+                                <BrowsePage/>
+                            </Route>
 
-                            <Route path="/download" component={DownloadPage}/>
+                            <Route path="/download">
+                                <DownloadPage/>
+                            </Route>
 
-                            <Route path="/CircosStrain" component={StrainCircosPage}/>
+                            <Route path="/CircosStrain">
+                                <StrainCircosPage/>
+                            </Route>
 
-                            <Route path="/resultsCircosStrain" component={StrainCircosResultsPage}/>
+                            <Route path="/resultsCircosStrain">
+                                <StrainCircosResultsPage/>
+                            </Route>
 
-                            <Route path="/CorrelationSearchPage" component={CorrelationSearchPage}/>
+                            <Route path="/CorrelationSearchPage">
+                                <CorrelationSearchPage/>
+                            </Route>
 
-                            <Route path="/resultsCorrelationPage" component={CorrelationResultsPage}/>
+                            <Route path="/resultsCorrelationPage">
+                                <CorrelationResultsPage/>
+                                </Route>
 
                             <Route exact path="/">
-                                <MainPage component={MainPage} />
+                                <MainPage/>
                             </Route>
                         </Switch>
                     </Card.Text>
