@@ -2,6 +2,7 @@
   "name": "pasite-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://alongolo.github.io/pasite-frontend/",
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.17",
     "@fortawesome/fontawesome-free": "^5.15.1",
