@@ -124,7 +124,7 @@ export default function StrainForm() {
         let myAxios = axios.create({
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
-            myAxios.get('http://127.0.0.1:8800/api/v1/genes/download_genes', {params})
+            myAxios.get('https://paeruginosite.herokuapp.com/api/v1/genes/download_genes', {params})
                 .then((res) => {
                     FileDownload(res.data, 'report.csv');
                 }).catch(function (error) {childErr.current.handleOpen()});
@@ -213,8 +213,8 @@ using selectedFile state.
                             </Form.Label>
 
                             <Col sm="4">
-                                {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>*/}
-                                <TextOrFileUpload className="txtbox" apiUrl="http://127.0.0.1:8800/api/v1/strains" multipleChoice={true} parentFileChangeCallback={onFileChange} parentHandleTextBox={getSelected} label="Please upload a file that contains a list of strains
+                                {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="https://paeruginosite.herokuapp.com/api/v1/strains"/>*/}
+                                <TextOrFileUpload className="txtbox" apiUrl="https://paeruginosite.herokuapp.com/api/v1/strains" multipleChoice={true} parentFileChangeCallback={onFileChange} parentHandleTextBox={getSelected} label="Please upload a file that contains a list of strains
                             separated by new lines (/n)" />
                                 <h6 className="note"><i>Note: Not selecting a strain will return <b>all the genes in the database.</b></i></h6>
                             </Col>

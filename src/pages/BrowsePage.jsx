@@ -50,11 +50,11 @@ class BrowsePage extends Component {
     componentDidMount() {
         Promise.all([axios
             .get(
-                "http://127.0.0.1:8800/api/v1/strains/phyloTree",
+                "https://paeruginosite.herokuapp.com/api/v1/strains/phyloTree",
                 {responseType: 'arraybuffer'},
             ),axios
             .get(
-                "http://127.0.0.1:8800/api/v1/strains/defSystemsColors"
+                "https://paeruginosite.herokuapp.com/api/v1/strains/defSystemsColors"
             )]).then(([response,colors])=>{
             const base64 = btoa(
                 new Uint8Array(response.data).reduce(
@@ -105,7 +105,7 @@ class BrowsePage extends Component {
             );
         }
         if (this.state.generateType == "distinct systems") {
-            let url = "http://127.0.0.1:8800/api/v1/defense/distinct_count";
+            let url = "https://paeruginosite.herokuapp.com/api/v1/defense/distinct_count";
             return axios
                 .get(url, {
                         params: {
@@ -136,9 +136,9 @@ class BrowsePage extends Component {
                     }
                 );
         } else {
-            let url = "http://127.0.0.1:8800/api/v1/strains/phyloTree"
+            let url = "https://paeruginosite.herokuapp.com/api/v1/strains/phyloTree"
             if (this.state.generateType == "isolation") {
-                url = "http://127.0.0.1:8800/api/v1/isolation/isolation_tree"
+                url = "https://paeruginosite.herokuapp.com/api/v1/isolation/isolation_tree"
             }
             return axios
                 .get(url, {
@@ -368,7 +368,7 @@ class BrowsePage extends Component {
                         <div className='sidebar'>
                             <div className="instructions">choose a way to upload strains and create subtree:</div>
                             <TextOrFileUpload updateTextbox={this.setSwitchTextBox}
-                                              apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes"
+                                              apiUrl="https://paeruginosite.herokuapp.com/api/v1/strains/indexes"
                                               multipleChoice={true}
                                               parentFileChangeCallback={this.onFileChange}
                                               parentHandleTextBox={this.handleTextBox} label="Please upload a file that contains a list of strains

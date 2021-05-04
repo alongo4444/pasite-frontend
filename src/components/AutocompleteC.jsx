@@ -15,7 +15,7 @@ function sleep(delay = 0) {
 }
 
 
-//apiUrl - the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8800/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
+//apiUrl - the url of the requested HTML call to the backend (i.e: https://paeruginosite.herokuapp.com/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
 //parentCallback - the callback that will be called in the parent which holds this component. The parent will receive the current selected objects for each change on this component.  See DownloadPage for example or ask Alon.
 //multipleChoice - determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
 //labelText - The text which will appear in the label of the component (i.e: "Select single/multiple strain/s:").

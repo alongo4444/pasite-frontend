@@ -126,7 +126,7 @@ export default function GenesByDefenseForm() {
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
 
-        myAxios.get('http://127.0.0.1:8800/api/v1/genes/genes_by_defense', {params})
+        myAxios.get('https://paeruginosite.herokuapp.com/api/v1/genes/genes_by_defense', {params})
             .then((res) => {
                 FileDownload(res.data, 'genes_by_defense.csv');
             }).catch(function (error) {childErr.current.handleOpen()});
@@ -215,8 +215,8 @@ handle file upload and load each line to array of
                     </Form.Label>
 
                     <Col sm="4">
-                        {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/cluster/get_defense_system_names"/>*/}
-                        <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/defense/"
+                        {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="https://paeruginosite.herokuapp.com/api/v1/cluster/get_defense_system_names"/>*/}
+                        <TextOrFileUpload apiUrl="https://paeruginosite.herokuapp.com/api/v1/defense/"
                                           multipleChoice={true} parentFileChangeCallback={onFileChange}
                                           parentHandleTextBox={getSelected} label="Please upload a file that contains a list of defense systems separated by new lines (/n)"
                         /><h6 className="note"><i>Note: Not selecting a defense system will return <b>all the genes in the database.</b></i></h6>

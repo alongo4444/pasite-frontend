@@ -129,10 +129,10 @@ export default function DefVSCat({parentCallback2}) {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}
+                                <Col><AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/defense' multipleChoice={false}
                                                     parentCallback={getSelectedDF} labelText="Choose a Defense System"></AutocompleteC></Col><FontAwesomeIcon
                                 icon={faPlusCircle}/>
-                                <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/isolation/attributes/'
+                                <Col><AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/isolation/attributes/'
                                                     multipleChoice={false}
                                                     parentCallback={getSelectedCls} labelText="Select an attribute"></AutocompleteC></Col>
                             </Row>

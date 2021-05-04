@@ -22,7 +22,7 @@ export default function GenesByClusterC({genes}) {
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
 
-        myAxios.get('http://127.0.0.1:8800/api/v1/genes/genes_by_cluster',{params})
+        myAxios.get('https://paeruginosite.herokuapp.com/api/v1/genes/genes_by_cluster',{params})
             .then((res) => {
                 if (fileSelect.current.getCsv()) {
                     FileDownload(res.data, 'genes_by_cluster.csv')

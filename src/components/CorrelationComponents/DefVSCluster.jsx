@@ -121,12 +121,12 @@ export default function DefVSCluster({parentCallback2}) {
                     {/*    </Form.Label>*/}
                     {/*    <Row>*/}
                     {/*        <Col sm="2">*/}
-                    {/*            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}*/}
+                    {/*            <AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/defense' multipleChoice={false}*/}
                     {/*                           parentCallback={getSelected}></AutocompleteC>*/}
                     {/*        </Col>*/}
                     {/*        &*/}
                     {/*        <Col sm="2">*/}
-                    {/*            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}*/}
+                    {/*            <AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/defense' multipleChoice={false}*/}
                     {/*                           parentCallback={getSelected}></AutocompleteC>*/}
                     {/*        </Col>*/}
                     {/*    </Row>*/}
@@ -161,7 +161,7 @@ export default function DefVSCluster({parentCallback2}) {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}
+                                <Col><AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/defense' multipleChoice={false}
                                                     parentCallback={getSelectedDF}></AutocompleteC></Col><FontAwesomeIcon
                                 icon={faPlusCircle}/>
                                 <Col>
@@ -182,7 +182,7 @@ export default function DefVSCluster({parentCallback2}) {
                                     </div>
                                     <AutocompleteC multipleChoice={false}
                                                    parentCallback={getSelectedGene}
-                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + selected_strain.id}
+                                                   apiUrl={"https://paeruginosite.herokuapp.com/api/v1/cluster/get_gene_strain_id/" + selected_strain.id}
                                                    labelText="Choose Gene"
                                                    disabled={selected_strain == ""}
                                     />

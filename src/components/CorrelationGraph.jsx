@@ -44,7 +44,7 @@ class CorrelationGraph extends Component {
     // React.useEffect(() => {
     //     if (eventK == 'first') {
     //         const Qs = require('qs')
-    //         axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystems', {
+    //         axios.get('https://paeruginosite.herokuapp.com/api/v1/statistics/correlationBetweenDefenseSystems', {
     //             params: {
     //                 systems: itemsSelected.map((option) => option.name),
     //             },
@@ -60,7 +60,7 @@ class CorrelationGraph extends Component {
     //
     //     } else if (eventK == 'third') {
     //         const Qs = require('qs')
-    //         axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
+    //         axios.get('https://paeruginosite.herokuapp.com/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
     //             params: {
     //                 system: itemsSelected[0].name, isoType: itemsSelected[1].name
     //             },
@@ -111,7 +111,7 @@ class CorrelationGraph extends Component {
     //         const items = [itemsSelected[0].name, itemsSelected[1].name]
     //         setItemNames(items, function () {
     //             const Qs = require('qs')
-    //             axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
+    //             axios.get('https://paeruginosite.herokuapp.com/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
     //                 params: {
     //                     system: itemsSelected[0].name, isoType: itemsSelected[1].name
     //                 },
@@ -137,7 +137,7 @@ class CorrelationGraph extends Component {
             // this.setState({title: 'Correlation Between:'})
             this.setState({itemNames: this.props.itemsSelected.map((option) => option.name)}, function () {
                 const Qs = require('qs')
-                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystems', {
+                axios.get('https://paeruginosite.herokuapp.com/api/v1/statistics/correlationBetweenDefenseSystems', {
                     params: {
                         systems: this.props.itemsSelected.map((option) => option.name),
                     },
@@ -177,7 +177,7 @@ class CorrelationGraph extends Component {
             const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name]
             this.setState({itemNames: items}, function () {
                 const Qs = require('qs')
-                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndAttribute', {
+                axios.get('https://paeruginosite.herokuapp.com/api/v1/statistics/correlationBetweenDefenseSystemAndAttribute', {
                     params: {
                         system: this.props.itemsSelected[0].name, category: this.props.itemsSelected[1].name
                     },
@@ -223,7 +223,7 @@ class CorrelationGraph extends Component {
             const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name]
             this.setState({itemNames: items}, function () {
                 const Qs = require('qs')
-                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
+                axios.get('https://paeruginosite.herokuapp.com/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
                     params: {
                         system: this.props.itemsSelected[0].name, isoType: this.props.itemsSelected[1].name
                     },
@@ -266,7 +266,7 @@ class CorrelationGraph extends Component {
             const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name, this.props.itemsSelected[2].name]
             this.setState({itemNames: items}, function () {
                 const Qs = require('qs')
-                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndCluster', {
+                axios.get('https://paeruginosite.herokuapp.com/api/v1/statistics/correlationBetweenDefenseSystemAndCluster', {
                     params: {
                         system: items[0], strain: items[1], gene: items[2]
                     },
@@ -309,7 +309,7 @@ class CorrelationGraph extends Component {
             const items = [this.props.itemsSelected[0].name, this.props.itemsSelected[1].name, this.props.itemsSelected[2].name]
             this.setState({itemNames: items}, function () {
                 const Qs = require('qs')
-                axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenClusterAndIsolationType', {
+                axios.get('https://paeruginosite.herokuapp.com/api/v1/statistics/correlationBetweenClusterAndIsolationType', {
                     params: {
                         isoType: items[0], strain: items[1], gene: items[2]
                     },

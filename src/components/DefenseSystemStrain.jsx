@@ -16,7 +16,7 @@ class DefenseSystemStrain extends Component {
     componentDidMount() {
         axios
             .get(
-                "http://127.0.0.1:8800/api/v1/strains/strainGenesDefSystems/"+this.props.svnn
+                "https://paeruginosite.herokuapp.com/api/v1/strains/strainGenesDefSystems/"+this.props.svnn
             )
             .then(response => {
                 this.setState({result_table: response.data})

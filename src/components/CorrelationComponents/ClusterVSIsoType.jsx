@@ -147,14 +147,14 @@ export default function ClusterVSIsoType({parentCallback2}) {
                                     </div>
                                     <AutocompleteC multipleChoice={false}
                                                    parentCallback={getSelectedGene}
-                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + selected_strain.id}
+                                                   apiUrl={"https://paeruginosite.herokuapp.com/api/v1/cluster/get_gene_strain_id/" + selected_strain.id}
                                                    labelText="Choose Gene"
                                                    disabled={selected_strain == ""}
                                     />
 
                                 </Col><FontAwesomeIcon
                                 icon={faPlusCircle}/>
-                                <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/isolation/' multipleChoice={false}
+                                <Col><AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/isolation/' multipleChoice={false}
                                                     parentCallback={getSelectedIso} labelText="Select an Isolation Type"></AutocompleteC></Col>
                             </Row>
                         </Container>

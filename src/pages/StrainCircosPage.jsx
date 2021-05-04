@@ -33,7 +33,7 @@ export default function StrainCircosPage() {
         }
 
         (async () => {
-            const response = await fetch('http://127.0.0.1:8800/api/v1/strains');
+            const response = await fetch('https://paeruginosite.herokuapp.com/api/v1/strains');
             await sleep(1e3); // For demo purposes.
             const strains = await response.json();
             if (active) {

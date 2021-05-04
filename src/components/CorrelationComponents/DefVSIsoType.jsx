@@ -115,12 +115,12 @@ export default function DefVSIsoType({parentCallback2}) {
                     {/*    </Form.Label>*/}
                     {/*    <Row>*/}
                     {/*        <Col sm="2">*/}
-                    {/*            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}*/}
+                    {/*            <AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/defense' multipleChoice={false}*/}
                     {/*                           parentCallback={getSelected}></AutocompleteC>*/}
                     {/*        </Col>*/}
                     {/*        &*/}
                     {/*        <Col sm="2">*/}
-                    {/*            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}*/}
+                    {/*            <AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/defense' multipleChoice={false}*/}
                     {/*                           parentCallback={getSelected}></AutocompleteC>*/}
                     {/*        </Col>*/}
                     {/*    </Row>*/}
@@ -153,11 +153,11 @@ export default function DefVSIsoType({parentCallback2}) {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}
+                                <Col><AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/defense' multipleChoice={false}
                                                     parentCallback={getSelectedDF}
                                                     labelText="Choose a Defense System"></AutocompleteC></Col><FontAwesomeIcon
                                 icon={faPlusCircle}/>
-                                <Col><AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/isolation/'
+                                <Col><AutocompleteC apiUrl='https://paeruginosite.herokuapp.com/api/v1/isolation/'
                                                     multipleChoice={false}
                                                     parentCallback={getSelectedISO}
                                                     labelText="Select an Isolation Type"></AutocompleteC></Col>
