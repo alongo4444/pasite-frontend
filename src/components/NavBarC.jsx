@@ -13,6 +13,7 @@ import StrainCircosResultsPage from "../pages/StrainCircosResultsPage"
 import StrainCircosPage from "../pages/StrainCircosPage";
 import {HashRouter as Switch} from "react-router-dom";
 import {Route} from "react-router";
+import { Link } from "react-router-dom";
 
 class NavBarC extends Component {
     static = {};
@@ -24,22 +25,22 @@ class NavBarC extends Component {
                     <Card.Header style={{marginBottom: "2%"}}>
                         <Nav fill activeKey="/">
                             <Nav.Item>
-                                <Nav.Link href="/pasite-frontend/">Home</Nav.Link>
+                                <Nav.Link as={Link} to="/">Home</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/pasite-frontend/search">Search</Nav.Link>
+                                <Nav.Link as={Link} to="/search">Search</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/pasite-frontend/CircosStrain">Circos Strain View</Nav.Link>
+                                <Nav.Link as={Link} to="/CircosStrain">Circos Strain View</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/pasite-frontend/browse">Browse</Nav.Link>
+                                <Nav.Link as={Link} to="/browse">Browse</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/pasite-frontend/download">Download</Nav.Link>
+                                <Nav.Link as={Link} to="/download">Download</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/pasite-frontend/CorrelationSearchPage">Correlation</Nav.Link>
+                                <Nav.Link as={Link} to="/CorrelationSearchPage">Correlation</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Card.Header>
@@ -47,39 +48,39 @@ class NavBarC extends Component {
                     <span className="cb">
                     <Card.Text>
                         <Switch>
-                            <Route path="/pasite-frontend/search">
+                            <Route path="/search">
                                 <SearchPage/>
                             </Route>
 
-                            <Route path="/pasite-frontend/results">
+                            <Route path="/results">
                                 <ResultsPage/>
                             </Route>
 
-                            <Route path="/pasite-frontend/browse">
+                            <Route path="/browse">
                                 <BrowsePage/>
                             </Route>
 
-                            <Route path="/pasite-frontend/download">
+                            <Route path="/download">
                                 <DownloadPage/>
                             </Route>
 
-                            <Route path="/pasite-frontend/CircosStrain">
+                            <Route path="/CircosStrain">
                                 <StrainCircosPage/>
                             </Route>
 
-                            <Route path="/pasite-frontend/resultsCircosStrain">
+                            <Route path="/resultsCircosStrain">
                                 <StrainCircosResultsPage/>
                             </Route>
 
-                            <Route path="/pasite-frontend/CorrelationSearchPage">
+                            <Route path="/CorrelationSearchPage">
                                 <CorrelationSearchPage/>
                             </Route>
 
-                            <Route path="/pasite-frontend/resultsCorrelationPage">
+                            <Route path="/resultsCorrelationPage">
                                 <CorrelationResultsPage/>
                             </Route>
 
-                            <Route exact path="/pasite-frontend/">
+                            <Route exact path="/">
                                 <MainPage/>
                             </Route>
                         </Switch>

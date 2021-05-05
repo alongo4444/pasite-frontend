@@ -62,7 +62,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b gh-pages-4 -d build",
+    "deploy": "gh-pages -b gh-pages-5 -d build",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open"
   },

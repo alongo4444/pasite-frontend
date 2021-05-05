@@ -10,7 +10,7 @@ import {BrowserRouter, HashRouter} from "react-router-dom";
 
 ReactDOM.render(
     <React.StrictMode>
-        <HashRouter basename="/pasite-frontend">
+        <HashRouter basename="/pasite-frontend/">
             <App/>
         </HashRouter>
     </React.StrictMode>,

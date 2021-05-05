@@ -10,7 +10,7 @@ function App() {
             <header className="App-header">
                 <img className="title" src={title}/>
                 <div className="mainDiv">
-                    <Router basename="/pasite-frontend">
+                    <Router>
                         <NavBarC />
                     </Router>
                 </div>
