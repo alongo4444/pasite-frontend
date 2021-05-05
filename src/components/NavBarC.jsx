@@ -24,22 +24,22 @@ class NavBarC extends Component {
                     <Card.Header style={{marginBottom: "2%"}}>
                         <Nav fill activeKey="/">
                             <Nav.Item>
-                                <Nav.Link href="/">Home</Nav.Link>
+                                <Nav.Link href="/pasite-frontend/">Home</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/search">Search</Nav.Link>
+                                <Nav.Link href="/pasite-frontend/search">Search</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/CircosStrain">Circos Strain View</Nav.Link>
+                                <Nav.Link href="/pasite-frontend/CircosStrain">Circos Strain View</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/browse">Browse</Nav.Link>
+                                <Nav.Link href="/pasite-frontend/browse">Browse</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/download">Download</Nav.Link>
+                                <Nav.Link href="/pasite-frontend/download">Download</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/CorrelationSearchPage">Correlation</Nav.Link>
+                                <Nav.Link href="/pasite-frontend/CorrelationSearchPage">Correlation</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Card.Header>
