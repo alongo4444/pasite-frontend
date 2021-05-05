@@ -11,7 +11,7 @@ import CorrelationSearchPage from "../pages/CorrelationSearchPage"
 import MainPage from "../pages/MainPage";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage"
 import StrainCircosPage from "../pages/StrainCircosPage";
-import { BrowserRouter as Switch } from "react-router-dom";
+import { HashRouter as Switch } from "react-router-dom";
 import { Route } from "react-router";
 
 class NavBarC extends Component{
@@ -45,7 +45,7 @@ class NavBarC extends Component{
                 <Card.Body className="body_c" style={{ minHeight:'600px', padding: '0px'}} >
                     <span className="cb">
                     <Card.Text>
-                        <Switch>
+                        <Switch basename="/pasite-frontend">
                             <Route path="/search">
                                 <SearchPage/>
                             </Route>

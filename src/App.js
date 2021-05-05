@@ -1,7 +1,7 @@
 import NavBarC from "./components/NavBarC";
 import './App.css';
 import title from './assets/images/title.png';
-import {BrowserRouter as Router} from "react-router-dom";
+import {HashRouter as Router} from "react-router-dom";
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
             <header className="App-header">
                 <img className="title" src={title}/>
                 <div className="mainDiv">
-                    <Router>
+                    <Router basename="/pasite-frontend">
                         <NavBarC />
                     </Router>
                 </div>
