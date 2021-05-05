@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Card } from "react-bootstrap";
+import React, {Component} from "react";
+import {Card} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import '../styles/NavBarC.css';
 import SearchPage from "../pages/SearchPage";
@@ -11,82 +11,83 @@ import CorrelationSearchPage from "../pages/CorrelationSearchPage"
 import MainPage from "../pages/MainPage";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage"
 import StrainCircosPage from "../pages/StrainCircosPage";
-import { HashRouter as Switch } from "react-router-dom";
-import { Route } from "react-router";
+import {HashRouter as Switch} from "react-router-dom";
+import {Route} from "react-router";
 
-class NavBarC extends Component{
+class NavBarC extends Component {
     static = {};
+
     render() {
         return (
-            <div >
-            <Card className="card_m"  >
-                <Card.Header style={{marginBottom: "2%"}}>
-                    <Nav fill activeKey="/">
-                        <Nav.Item>
-                            <Nav.Link href="/">Home</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="/search">Search</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="/CircosStrain">Circos Strain View</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="/browse">Browse</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="/download">Download</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="/CorrelationSearchPage">Correlation</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Card.Header>
-                <Card.Body className="body_c" style={{ minHeight:'600px', padding: '0px'}} >
+            <div>
+                <Card className="card_m">
+                    <Card.Header style={{marginBottom: "2%"}}>
+                        <Nav fill activeKey="/">
+                            <Nav.Item>
+                                <Nav.Link href="/">Home</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/search">Search</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/CircosStrain">Circos Strain View</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/browse">Browse</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/download">Download</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/CorrelationSearchPage">Correlation</Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                    </Card.Header>
+                    <Card.Body className="body_c" style={{minHeight: '600px', padding: '0px'}}>
                     <span className="cb">
                     <Card.Text>
-                        <Switch basename="/pasite-frontend">
-                            <Route path="/search">
+                        <Switch>
+                            <Route path="/pasite-frontend/search">
                                 <SearchPage/>
                             </Route>
 
-                            <Route path="/results">
+                            <Route path="/pasite-frontend/results">
                                 <ResultsPage/>
                             </Route>
 
-                            <Route path="/browse">
+                            <Route path="/pasite-frontend/browse">
                                 <BrowsePage/>
                             </Route>
 
-                            <Route path="/download">
+                            <Route path="/pasite-frontend/download">
                                 <DownloadPage/>
                             </Route>
 
-                            <Route path="/CircosStrain">
+                            <Route path="/pasite-frontend/CircosStrain">
                                 <StrainCircosPage/>
                             </Route>
 
-                            <Route path="/resultsCircosStrain">
+                            <Route path="/pasite-frontend/resultsCircosStrain">
                                 <StrainCircosResultsPage/>
                             </Route>
 
-                            <Route path="/CorrelationSearchPage">
+                            <Route path="/pasite-frontend/CorrelationSearchPage">
                                 <CorrelationSearchPage/>
                             </Route>
 
-                            <Route path="/resultsCorrelationPage">
+                            <Route path="/pasite-frontend/resultsCorrelationPage">
                                 <CorrelationResultsPage/>
-                                </Route>
+                            </Route>
 
-                            <Route exact path="/">
+                            <Route exact path="/pasite-frontend/">
                                 <MainPage/>
                             </Route>
                         </Switch>
                     </Card.Text>
                         </span>
-                </Card.Body>
-                <Card.Footer className="c_footer">About</Card.Footer>
-            </Card>
+                    </Card.Body>
+                    <Card.Footer className="c_footer">About</Card.Footer>
+                </Card>
             </div>
         )
     }
