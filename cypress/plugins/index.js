@@ -16,13 +16,14 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-module.exports = (on, config) => {
-
-}
+// module.exports = (on, config) => {
+//
+// }
 
 const { initPlugin } = require('cypress-plugin-snapshots/plugin');
 
 module.exports = (on, config) => {
     initPlugin(on, config);
+    require('@cypress/code-coverage/task')(on, config)
     return config;
 };
