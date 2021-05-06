@@ -21,8 +21,8 @@ export default function StrainForm() {
     const [selectedA, setSelectedA] = React.useState(false);
     const [checked, setChecked] = React.useState({
         genomic_accession: true,
-        start_g: true,
-        end_g: true,
+        start: true,
+        end: true,
         strand: true,
         attributes_x: true,
         product_accession: true,
@@ -214,14 +214,17 @@ using selectedFile state.
 
                             <Col sm="4">
                                 {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>*/}
-                                <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/strains" multipleChoice={true} parentFileChangeCallback={onFileChange} parentHandleTextBox={getSelected} label="Please upload a file that contains a list of strains
+                                <TextOrFileUpload className="txtbox" apiUrl="http://127.0.0.1:8800/api/v1/strains" multipleChoice={true} parentFileChangeCallback={onFileChange} parentHandleTextBox={getSelected} label="Please upload a file that contains a list of strains
                             separated by new lines (/n)" />
+                                <h6 className="note"><i>Note: Not selecting a strain will return <b>all the genes in the database.</b></i></h6>
                             </Col>
                         </Form.Group>
 
 
                         <div className="chkbxs">
+                            Columns:
                         <div>
+                            <br/>
                             <input
                                 id="all"
                                 type="checkbox"
@@ -236,13 +239,13 @@ using selectedFile state.
                                    checked={checked["genomic_accession"]}/>
                             <label htmlFor='2' className="lbl">genomic_accession</label>
 
-                            <input id='3' type="checkbox" name="start_g" onChange={() => toggleCheck("start_g")}
-                                   checked={checked["start_g"]}/>
-                            <label htmlFor='3' className="lbl">start_g</label>
+                            <input id='3' type="checkbox" name="start" onChange={() => toggleCheck("start")}
+                                   checked={checked["start"]}/>
+                            <label htmlFor='3' className="lbl">start</label>
 
-                            <input id='4' type="checkbox" name="end_g" onChange={() => toggleCheck("end_g")}
-                                   checked={checked["end_g"]}/>
-                            <label htmlFor='4' className="lbl">end_g</label>
+                            <input id='4' type="checkbox" name="end" onChange={() => toggleCheck("end")}
+                                   checked={checked["end"]}/>
+                            <label htmlFor='4' className="lbl">end</label>
 
                             <input id='5' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
                                    checked={checked["strand"]}/>
@@ -267,7 +270,7 @@ using selectedFile state.
                             <label htmlFor='9' className="lbl">name</label>
 
                         </div>
-
+                        <br/>
                         <div style={{textAlign: "center"}}>
                             <Button onClick={getData}>Download</Button>
                         </div>

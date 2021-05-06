@@ -23,8 +23,8 @@ export default function GenesByDefenseForm() {
     const [checked, setChecked] = React.useState({
         // locus_tag: true,
         genomic_accession: true,
-        start_g: true,
-        end_g: true,
+        start: true,
+        end: true,
         strand: true,
         attributes_x: true,
         product_accession: true,
@@ -219,13 +219,15 @@ handle file upload and load each line to array of
                         <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/defense/"
                                           multipleChoice={true} parentFileChangeCallback={onFileChange}
                                           parentHandleTextBox={getSelected} label="Please upload a file that contains a list of defense systems separated by new lines (/n)"
-                        />
+                        /><h6 className="note"><i>Note: Not selecting a defense system will return <b>all the genes in the database.</b></i></h6>
                     </Col>
                 </Form.Group>
 
 
                 <div className="chkbxs">
+                    Columns:
                     <div>
+                        <br/>
                         <input
                             id="all2"
                             type="checkbox"
@@ -242,13 +244,13 @@ handle file upload and load each line to array of
                            onChange={() => toggleCheck("genomic_accession")} checked={checked["genomic_accession"]}/>
                     <label for='22' className="lbl">genomic_accession</label>
 
-                    <input id='32' type="checkbox" name="start_g" onChange={() => toggleCheck("start_g")}
-                           checked={checked["start_g"]}/>
-                    <label for='32' className="lbl">start_g</label>
+                    <input id='32' type="checkbox" name="start" onChange={() => toggleCheck("start")}
+                           checked={checked["start"]}/>
+                    <label for='32' className="lbl">start</label>
 
-                    <input id='42' type="checkbox" name="end_g" onChange={() => toggleCheck("end_g")}
-                           checked={checked["end_g"]}/>
-                    <label htmlFor='42' className="lbl">end_g</label>
+                    <input id='42' type="checkbox" name="end" onChange={() => toggleCheck("end")}
+                           checked={checked["end"]}/>
+                    <label htmlFor='42' className="lbl">end</label>
 
                     <input id='52' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
                            checked={checked["strand"]}/>
@@ -284,7 +286,7 @@ handle file upload and load each line to array of
                     {/*<label htmlFor='15' className="lbl"> dna_sequence</label>*/}
                     {/*<input id='15' type="checkbox" name="dna_sequence" onChange={() => toggleCheck("dna_sequence")} checked={checked["dna_sequence"]}/>*/}
                 </div>
-
+                <br/>
                 <div style={{textAlign: "center"}}>
                     <Button onClick={getData}>Download</Button>
                 </div>

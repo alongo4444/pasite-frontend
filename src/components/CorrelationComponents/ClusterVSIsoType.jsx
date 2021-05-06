@@ -161,7 +161,7 @@ export default function ClusterVSIsoType({parentCallback2}) {
                     </Form.Group>
 
                     <div style={{textAlign: "center"}}>
-                        <Button onClick={() => parentCallback2(selectedIso, selected_strain, selected_gene)}
+                        <Button id="clviSearch" onClick={() => parentCallback2(selectedIso, selected_strain, selected_gene)}
                                 disabled={buttonOff}>Search</Button>
                     </div>
                 </Form>
