@@ -90,9 +90,10 @@ describe("one-step actions", () => {
 describe("check all defense systems:",()=>{
     beforeEach(()=>{
         cy.visit("/browse")
+
     })
 
-    it.only("test triplets of defense systems", ()=>{
+    it("test triplets of defense systems", ()=>{
         let triplets = []
         cy.request('http://localhost:8800/api/v1/defense/triplets').then((response)=>{
             triplets = response.body;
@@ -115,5 +116,109 @@ describe("check all defense systems:",()=>{
                 cy.get('div[class*="tlfecz-indicatorContainer"]').first().click()
             })
         });
+    })
+})
+
+
+describe("check clusters trees:",()=> {
+    beforeEach(() => {
+        cy.visit("/browse");
+        cy.get('.MuiList-root > :nth-child(2)').click({force:true});
+    })
+
+    it("test one cluster at a time:", ()=>{
+        let randomGenes = []
+        cy.request('http://localhost:8800/api/v1/cluster/get_gene_strain_id/GCF_000014625.1').then((response)=>{
+            const shuffled = response.body.sort(() => 0.5 - Math.random());
+            randomGenes = shuffled.slice(0,10);
+        }).then(()=> {
+            console.log(randomGenes);
+            cy.wrap(randomGenes).each((gene, idx) => {
+                /* ==== Generated with Cypress Studio ==== */
+                cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+                // cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
+                cy.get('#Choose_num-option-0').click();
+                cy.get('#strains-combo-box').clear();
+                cy.get('#strains-combo-box').type('PA14');
+                cy.get('#strains-combo-box-option-0').click();
+                cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+                cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+                cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(gene.name);
+                cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.GenerateTree').click();
+                cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
+                cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
+                cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: gene + '_tree.png'});
+                /* ==== End Cypress Studio ==== */
+            })
+        })
+    })
+
+    it("test two clusters at a time:", ()=>{
+        let doubles = []
+        cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1').then((response)=>{
+            doubles = response.body;
+        }).then(()=> {
+            cy.wrap(doubles).each((double, idx) => {
+                /* ==== Generated with Cypress Studio ==== */
+                cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+                // cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
+                cy.get('#Choose_num-option-2').click();
+                cy.get('#strains-combo-box').clear();
+                cy.get('#strains-combo-box').type('PA14');
+                cy.get('#strains-combo-box-option-0').click();
+                cy.get(':nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+                cy.get(':nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(double[0]);
+                cy.get('#asynchronous-demo-option-0').click();
+                cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').clear();
+                cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').type('PA14');
+                cy.get('#strains-combo-box-option-0').click();
+                cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+                cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(double[1]);
+                cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.GenerateTree').click();
+                cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
+                cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
+                cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: double.join("_")+ + '_tree.png'});
+                /* ==== End Cypress Studio ==== */
+            })
+        })
+    })
+
+    it("test three clusters at a time:",()=>{
+        let triples = []
+        cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1?combinations=3').then((response)=>{
+            triples = response.body;
+        }).then(()=> {
+            cy.wrap(triples).each((triple, idx) => {
+                cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+                // cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
+                cy.get('#Choose_num-option-2').click();
+                cy.get('#strains-combo-box').clear();
+                cy.get('#strains-combo-box').type('PA14');
+                cy.get('#strains-combo-box-option-0').click();
+                /* ==== Generated with Cypress Studio ==== */
+                cy.get(':nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+                cy.get(':nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(triple[0]);
+                cy.get('#asynchronous-demo-option-0').click();
+                cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').clear();
+                cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').type('PA14');
+                cy.get('#strains-combo-box-option-0').click();
+                cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+                cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(triple[1]);
+                cy.get('#asynchronous-demo-option-0').click();
+                cy.get(':nth-child(4) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').clear();
+                cy.get(':nth-child(4) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').type('PA14');
+                cy.get('#strains-combo-box-option-0').click();
+                cy.get(':nth-child(4) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+                cy.get(':nth-child(4) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(triple[2]);
+                cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.GenerateTree').click();
+                cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
+                cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
+                cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: triple.join("_")+ + '_tree.png'});
+                /* ==== End Cypress Studio ==== */
+            })
+        })
     })
 })
