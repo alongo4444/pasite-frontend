@@ -15,20 +15,8 @@ export default function DefVSDef({parentCallback2}) {
     const [open, setOpen] = React.useState(false);
     const [selectedA, setSelectedA] = React.useState([]);
     const [options, setOptions] = React.useState([]);
-    const loading = open && options.length === 0;
     const [buttonOff, setButtonOff] = React.useState(true)
 
-    React.useEffect(() => {
-        let active = true;
-
-        if (!loading) {
-            return undefined;
-        }
-
-        return () => {
-            active = false;
-        };
-    },[loading]);
 
     React.useEffect(() => {
         if (!open) {

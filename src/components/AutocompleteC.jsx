@@ -8,13 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-function sleep(delay = 0) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
-    });
-}
-
-
 //apiUrl - the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8800/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
 //parentCallback - the callback that will be called in the parent which holds this component. The parent will receive the current selected objects for each change on this component.  See DownloadPage for example or ask Alon.
 //multipleChoice - determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
@@ -46,7 +39,6 @@ export default function AutocompleteC({
             try {
                 const response = await fetch(apiUrl);
 
-                // await sleep(1e3); // For demo purposes.
                 const countries = await response.json();
                 if (active) {
                     setOptions(countries.filter(x => x.name != null))

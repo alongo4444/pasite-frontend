@@ -35,6 +35,10 @@ describe("Simple Circos Search", () => {
         /* ==== End Cypress Studio ==== */
 
         cy.readFile('cypress/downloads/spreadsheet.csv').should('exist')
+
+        cy.task('deleteFile', `spreadsheet.csv`)
+
+
     });
 
 });

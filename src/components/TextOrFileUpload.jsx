@@ -10,12 +10,6 @@ import AutocompleteC from "./AutocompleteC";
 import Switch from "react-switch";
 import Button from "react-bootstrap/Button";
 
-function sleep(delay = 0) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
-    });
-}
-
 
 //apiUrl - For the autocomplete: the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8801/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
 //multipleChoice - For the autocomplete: determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.

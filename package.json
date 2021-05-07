@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.17",
+    "@cypress/instrument-cra": "^1.4.0",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
@@ -57,7 +58,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -83,7 +84,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-react": "^7.13.13",
+    "@cypress/code-coverage": "^3.9.5",
     "@testing-library/cypress": "^7.0.6",
+    "babel-plugin-istanbul": "^6.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "cypress": "^7.1.0",
     "cypress-file-upload": "^5.0.6",
     "cypress-iframe": "^1.0.1",

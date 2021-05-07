@@ -23,7 +23,7 @@ class ErrorModalC extends Component {
                 <Modal.Header closeButton>
                     <Modal.Title>Server Error</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>There is a problem with the server request. Sorry for the inconvenience.</Modal.Body>
+                <Modal.Body>There is a problem with the server request. We apologize for the inconvenience.</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={()=>{this.setState({open:false})}}>
                         Close
