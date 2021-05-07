@@ -21,7 +21,6 @@ export default function ClusterVSIsoType({parentCallback2}) {
     const [selectedIso, setSelectedIso] = React.useState([]);
     const [selected, setSelected] = React.useState([]);
     const [options, setOptions] = React.useState([]);
-    const loading = open && options.length === 0;
     const [buttonOff, setButtonOff] = React.useState(true);
     const [selected_strain, setSelected_strain] = React.useState([]);
     const [selected_gene, setSelected_gene] = React.useState([]);
@@ -35,18 +34,6 @@ export default function ClusterVSIsoType({parentCallback2}) {
             id: "GCF_000014625.1"
         }
     ])
-
-    React.useEffect(() => {
-        let active = true;
-
-        if (!loading) {
-            return undefined;
-        }
-
-        return () => {
-            active = false;
-        };
-    }, [loading]);
 
     React.useEffect(() => {
         if (!open) {

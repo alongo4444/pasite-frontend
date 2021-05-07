@@ -352,11 +352,11 @@ class CorrelationGraph extends Component {
     }
 
 
-    componentWillUnmount() {
-        if (this.chart) {
-            this.chart.dispose();
-        }
-    }
+    // componentWillUnmount() {
+    //     if (this.chart) {
+    //         this.chart.dispose();
+    //     }
+    // }
 
     render() {
 
