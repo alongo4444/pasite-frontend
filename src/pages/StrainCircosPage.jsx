@@ -13,11 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-function sleep(delay = 0) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
-    });
-}
+
 
 export default function StrainCircosPage() {
     const [strainVariableName, setStrainVariableName] = React.useState("")
@@ -32,9 +28,10 @@ export default function StrainCircosPage() {
             return undefined;
         }
 
+
+
         (async () => {
             const response = await fetch('http://127.0.0.1:8800/api/v1/strains');
-            await sleep(1e3); // For demo purposes.
             const strains = await response.json();
             if (active) {
                 setOptions(strains.filter(x=> x.name != null))

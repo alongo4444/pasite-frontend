@@ -121,7 +121,7 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                 }}
             >
                 <div className={classes.toolbar}>
-                    <IconButton onClick={handleDrawerOpen}>
+                    <IconButton id="drawerBut" onClick={handleDrawerOpen}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                     </IconButton>
                     Choose Display:

@@ -7,12 +7,6 @@ import TextOrFileUpload from "../components/TextOrFileUpload";
 import AutocompleteC from "../components/AutocompleteC";
 import ErrorModalC from "./ErrorModalC";
 
-function sleep(delay = 0) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
-    });
-}
-
 export default function GenesByDefenseForm() {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -165,9 +159,6 @@ export default function GenesByDefenseForm() {
         setSelectedA(selected)
     }
 
-    const getSelectedLength = () => {
-        return selectedA.length;
-    }
 
     /*
 handle file upload and load each line to array of

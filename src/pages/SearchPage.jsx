@@ -8,41 +8,12 @@ import FadeIn from "react-fade-in";
 import {Link} from 'react-router-dom';
 import AutocompleteC from "../components/AutocompleteC";
 
-function sleep(delay = 0) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
-    });
-}
-
 export default function SearchPage() {
     const [rpp, setRpp] = React.useState(10);
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
     const [selectedA, setSelectedA] = React.useState(false);
-    const loading = open && options.length === 0;
     const [buttonOff, setButtonOff] = React.useState(true)
-
-    React.useEffect(() => {
-        let active = true;
-
-        if (!loading) {
-            return undefined;
-        }
-
-        (async () => {
-            const response = await fetch('http://127.0.0.1:8800/api/v1/strains');
-            await sleep(1e3); // For demo purposes.
-            const countries = await response.json();
-            if (active) {
-                setOptions(countries.filter(x=> x.name != null))
-            }
-
-        })();
-
-        return () => {
-            active = false;
-        };
-    },[loading]);
 
     React.useEffect(() => {
         if (!open) {

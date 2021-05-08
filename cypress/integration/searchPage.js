@@ -14,14 +14,18 @@ describe("check DOM components", () => {
 
     it("test simple search", () =>{
         /* ==== Generated with Cypress Studio ==== */
+        cy.get('.btn').should('be.disabled')
         cy.get('#asynchronous-demo').click();
+
         cy.get('#asynchronous-demo-option-1').click();
+        cy.get('.btn').should('be.enabled')
         cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-4').click();
         cy.get('#numResults').select('25');
         cy.get('.btn').click();
         /* ==== End Cypress Studio ==== */
         cy.get("table").should('exist');
+
         /* ==== Generated with Cypress Studio ==== */
         cy.get(':nth-child(4) > :nth-child(3)').click();
         cy.get('[id=p-seq]').parent().should('not.have.class', 'show')
@@ -36,6 +40,7 @@ describe("check DOM components", () => {
 
         cy.get('[aria-label="locus_tag sort desc"]').should('exist')
         cy.get('[aria-label="start sort desc"]').should('not.exist')
+        cy.get("table").toMatchSnapshot();
     });
 
 });

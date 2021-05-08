@@ -6,11 +6,6 @@ import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import AutocompleteC from "../components/AutocompleteC";
 import TextOrFileUpload from "./TextOrFileUpload";
 import ErrorModalC from "./ErrorModalC";
-function sleep(delay = 0) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
-    });
-}
 
 export default function StrainForm() {
     const [open, setOpen] = React.useState(false);

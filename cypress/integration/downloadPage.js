@@ -1,9 +1,15 @@
 import '@testing-library/cypress/add-commands';
+import * as fs from 'fs'
 
 describe("Genes by Strains", () => {
     beforeEach(() => {
         cy.visit("/download");
 
+    })
+
+    afterEach(() => {
+        cy.task('deleteFile', `report.csv`)
+        console.log('test')
     })
 
     it("textbox class exists in DOM", () =>{
@@ -28,7 +34,24 @@ describe("Genes by Strains", () => {
         cy.readFile('cypress/downloads/report.csv').should('exist')
     });
 
+    it("No columns selected", () => {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get(".modal-content").should("not.exist");
 
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
+        cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-2').click();
+        cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-3').click();
+        cy.get('#all').uncheck();
+        cy.get(':nth-child(2) > :nth-child(1) > [style="text-align: center;"] > .btn').click();
+        cy.get(".modal-content").should("exist");
+        cy.get('.modal-footer > .btn').click();
+        cy.get(".modal-content").should("not.exist");
+        cy.get('#all').check();
+        /* ==== End Cypress Studio ==== */
+    });
 
 
 
@@ -38,6 +61,11 @@ describe("Genes By Defense Systems", () => {
     beforeEach(() => {
         cy.visit("/download")
         cy.get('#left-tabs-example-tab-second').click();
+    })
+
+    afterEach(() => {
+        cy.task('deleteFile', `report.csv`)
+        console.log('test')
     })
 
     it("download attempt", () => {
@@ -59,8 +87,26 @@ describe("Genes By Defense Systems", () => {
         cy.readFile('cypress/downloads/genes_by_defense.csv').should('exist')
     });
 
+    it("No columns selected", () => {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get(".modal-content").should("not.exist");
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-2').click();
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-7').click();
+        cy.get(':nth-child(1) > :nth-child(1) > .chkbxs > div > .lbl').click();
+        cy.get('#all2').uncheck();
+        cy.get(':nth-child(1) > :nth-child(1) > [style="text-align: center;"] > .btn').click();
+        cy.get(".modal-content").should("exist");
+        cy.get('.modal-footer > .btn').click();
+        cy.get(".modal-content").should("not.exist");
+        /* ==== End Cypress Studio ==== */
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('#all2').check();
+        /* ==== End Cypress Studio ==== */
+    });
+
     it("download attempt using a file", () =>{
-        cy.readFile('cypress/downloads/report.csv').should('exist')
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#left-tabs-example-tab-second').click();
 
@@ -83,6 +129,14 @@ describe("Genes By Defense Systems", () => {
         /* ==== End Cypress Studio ==== */
 
         cy.readFile('cypress/downloads/genes_by_defense.csv').should('exist')
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get(':nth-child(1) > :nth-child(1) > .row > div.col-sm-4 > .search-form > .textBox > .rowC > [style="position: relative; display: inline-block; text-align: left; opacity: 1; direction: ltr; border-radius: 14px; transition: opacity 0.25s ease 0s; touch-action: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none;"] > .react-switch-bg').click();
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-1').click();
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-2').click();
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-clearIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
+        /* ==== End Cypress Studio ==== */
     });
 
 });
