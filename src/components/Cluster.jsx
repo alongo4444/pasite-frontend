@@ -6,7 +6,7 @@ import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AutocompleteC from "./AutocompleteC";
-
+import ErrorModalC from "../components/ErrorModalC";
 import GenesByClusterC from "./GenesByClusterC";
 import {serialize} from "react-awesome-slider/src/helpers/components";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
@@ -36,7 +36,10 @@ class Cluster extends Component {
         downloadable: false
 
     }
-
+    constructor() {
+        super();
+        this.childErr = React.createRef();
+    }
     choice_strainA = (selected) => {
         if (selected != null) {
             this.setState({
@@ -111,7 +114,11 @@ class Cluster extends Component {
                 },
                 responseType: 'arraybuffer',
             }
-        )
+        ).catch((err) => {
+            console.log(err);
+            if (this.childErr.current) {
+                this.childErr.current.handleOpen();
+            }});
     }
 
     show_lines = (value) => {
@@ -253,6 +260,7 @@ class Cluster extends Component {
                     </div>
                     {/*{showDownloadOption()}*/}
                 </div>
+                <ErrorModalC open={false} ref={this.childErr}/>
             </container>
         )
     }
