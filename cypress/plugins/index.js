@@ -23,6 +23,19 @@
 const { initPlugin } = require('cypress-plugin-snapshots/plugin');
 
 module.exports = (on, config) => {
+    on('task', {
+        deleteFile(fileName) {
+
+            const fs = require('fs').promises;
+
+            const directory = 'cypress/downloads';
+
+            fs.rmdir(directory, { recursive: true })
+                .then(() => console.log('directory removed!'));
+            return null;
+
+        }
+    });
     initPlugin(on, config);
     require('@cypress/code-coverage/task')(on, config)
     return config;

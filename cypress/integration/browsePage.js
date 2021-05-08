@@ -180,7 +180,7 @@ describe("check clusters trees:",()=> {
         cy.get('.MuiList-root > :nth-child(2)').click({force:true});
     })
 
-    it("test one cluster at a time:", ()=>{
+    it.only("test one cluster at a time:", ()=>{
         let randomGenes = []
         cy.request('http://localhost:8800/api/v1/cluster/get_gene_strain_id/GCF_000014625.1').then((response)=>{
             const shuffled = response.body.sort(() => 0.5 - Math.random());
@@ -203,7 +203,22 @@ describe("check clusters trees:",()=> {
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
                 cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: gene + '_tree.png'});
+                cy.get('.col-sm-5 > :nth-child(2) > .form-check-label').click();
+                cy.get('#fastafile').check();
+                cy.get('[style="text-align: left;"] > .btn').click();
+                cy.readFile('cypress/downloads/genes_by_cluster.faa').should('exist')
+                cy.task('deleteFile','genes_by_cluster.faa')
+                cy.get('#dna').check();
+                cy.get('[style="text-align: left;"] > .btn').click();
+                cy.readFile('cypress/downloads/genes_by_cluster.faa').should('exist')
+                cy.task('deleteFile','genes_by_cluster.faa')
                 /* ==== End Cypress Studio ==== */
+                if((idx+1) % 3 ==0){
+                    cy.get('#\\31 ').check();
+                    cy.get('.GenerateTree').click();
+                    cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
+                    cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: gene + '_MLST_tree.png'});
+                }
             })
         })
     })
@@ -233,9 +248,24 @@ describe("check clusters trees:",()=> {
                 cy.get('.GenerateTree').click();
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
-                cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: double.join("_")+ + '_tree.png'});
+                cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: double.join("_") + '_tree.png'});
+                cy.get('#fastafile').check();
+                cy.get('[style="text-align: left;"] > .btn').click();
+                cy.readFile('cypress/downloads/genes_by_cluster.faa').should('exist')
+                cy.task('deleteFile','genes_by_cluster.faa')
+                cy.get('#dna').check();
+                cy.get('[style="text-align: left;"] > .btn').click();
+                cy.readFile('cypress/downloads/genes_by_cluster.faa').should('exist')
+                cy.task('deleteFile','genes_by_cluster.faa')
                 /* ==== End Cypress Studio ==== */
+                if((idx+1) % 3 ==0){
+                    cy.get('#\\31 ').check();
+                    cy.get('.GenerateTree').click();
+                    cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
+                    cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: double.join("_") + '_MLST_tree.png'});
+                }
             })
+
         })
     })
 
@@ -270,11 +300,45 @@ describe("check clusters trees:",()=> {
                 cy.get('.GenerateTree').click();
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
-                cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: triple.join("_")+ + '_tree.png'});
+                cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: triple.join("_") + '_tree.png'});
+                cy.get('#fastafile').check();
+                cy.get('[style="text-align: left;"] > .btn').click();
+                cy.readFile('cypress/downloads/genes_by_cluster.faa').should('exist')
+                cy.task('deleteFile','genes_by_cluster.faa')
+                cy.get('#dna').check();
+                cy.get('[style="text-align: left;"] > .btn').click();
+                cy.readFile('cypress/downloads/genes_by_cluster.faa').should('exist')
+                cy.task('deleteFile','genes_by_cluster.faa')
                 /* ==== End Cypress Studio ==== */
+                if((idx+1) % 3 ==0){
+                    cy.get('#\\31 ').check();
+                    cy.get('.GenerateTree').click();
+                    cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
+                    cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: triple.join("_") + '_MLST_tree.png'});
+                }
             })
         })
     })
+
+    /* === Test Created with Cypress Studio === */
+    it('tes tes test', function() {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment').click();
+        cy.get('#Choose_num').clear();
+        cy.get('#Choose_num').type('1');
+        cy.get('#Choose_num-option-0').click();
+        cy.get('#strains-combo-box').click();
+        cy.get('#strains-combo-box-option-1').click();
+        cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-0').click();
+        cy.get('.GenerateTree').click();
+        cy.get('.col-sm-5 > :nth-child(2) > .form-check-label').click();
+        cy.get('#fastafile').check();
+        cy.get('[style="text-align: left;"] > .btn').click();
+        cy.get('#dna').check();
+        cy.get('[style="text-align: left;"] > .btn').click();
+        /* ==== End Cypress Studio ==== */
+    });
 })
 
 describe("check isolation type trees:",()=> {
