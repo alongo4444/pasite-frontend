@@ -1,13 +1,15 @@
 import '@testing-library/cypress/add-commands'
+import { fixCypressSpec } from '../support'
 
 
 describe("one-step actions", () => {
+    beforeEach(fixCypressSpec(__filename))
     beforeEach(()=>{
         cy.visit("/browse")
     })
     afterEach(()=>{
-        cy.get('img[src*="data:;"]',{timeout:10000}).should('have.attr','src')
-        cy.get('img[src*="data:;"]',{timeout:10000}).should('be.visible')
+        cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
+        cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
     })
     it("sidebar class exists in DOM", () =>{
         cy.get(".sidebar").should("exist");
@@ -22,20 +24,25 @@ describe("one-step actions", () => {
         /* ==== Generated with Cypress Studio ==== */
         cy.get('.MuiList-root > :nth-child(2)').click({force:true});
         cy.findByText('Choose the number of genes you would like to show:').should('exist')
+        cy.wait(3000)
         cy.get('div[class="App"]').toMatchImageSnapshot({name:'cluster_mode.png'})
         cy.get('.MuiList-root > :nth-child(3)').click({force:true});
         // cy.findByText('choose isolation type').should('exist') // should fail
+        cy.wait(3000)
         cy.get('div[class="App"]').toMatchImageSnapshot({name:'isolationType_mode.png'})
         cy.get('.MuiList-root > :nth-child(4)').click({force:true});
         cy.findByText('showing the distribution of distinct count of defense systems of each strain across the tree').should('exist')
+        cy.wait(3000)
         cy.get('div[class="App"]').toMatchImageSnapshot({name:'distinct_count.png'})
+        cy.get('.MuiList-root > :nth-child(1)').click({force:true});
+        cy.findByText('Choose the Defense Systems you would like to show:').should('exist')
         /* ==== End Cypress Studio ==== */
     })
     it("check strains file upload",()=>{
         cy.get('.react-switch-bg').click();
         cy.get('#exampleFormControlFile1').attachFile("../fixtures/strains");
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot({name:'fileSubTree.png'});
+        cy.get('img[src*="data:;"]',{timeout:50000}).toMatchImageSnapshot({name:'fileSubTree.png'});
     })
 
     it("check manuel strain selection", ()=>{
@@ -47,7 +54,7 @@ describe("one-step actions", () => {
         cy.get('#asynchronous-demo').type('PAO1');
         cy.get('#asynchronous-demo-option-0').click();
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot({name:'manuelSubTree.png'});
+        cy.get('img[src*="data:;"]',{timeout:50000}).toMatchImageSnapshot({name:'manuelSubTree.png'});
         /* ==== End Cypress Studio ==== */
     })
     it("check defense system selection",()=>{
@@ -59,14 +66,14 @@ describe("one-step actions", () => {
         cy.get('#react-select-3-option-10').click();
         cy.get('[style="transition: opacity 400ms ease 0s, transform 400ms ease 0s; transform: none; opacity: 1;"] > :nth-child(1)').click();
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot({name:'4systemsTree.png'});
+        cy.get('img[src*="data:;"]',{timeout:50000}).toMatchImageSnapshot({name:'4systemsTree.png'});
         /* ==== End Cypress Studio ==== */
     })
     it("get tree with MLST coloring",()=>{
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#\\31 ').check();
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot({name:'standardTreeMLST.png'});
+        cy.get('img[src*="data:;"]',{timeout:50000}).toMatchImageSnapshot({name:'standardTreeMLST.png'});
         /* ==== End Cypress Studio ==== */
     })
 
@@ -83,11 +90,54 @@ describe("one-step actions", () => {
 
     it("screenshot(visual) testing of the standard tree:", ()=>{
         cy.get('div[class="App"]').toMatchImageSnapshot({name:'standardPage.png'});
-        cy.get('img[src*="data:;"]',{timeout:10000}).toMatchImageSnapshot({name:'standardTree.png'});
+        cy.get('img[src*="data:;"]',{timeout:50000}).toMatchImageSnapshot({name:'standardTree.png'});
+    })
+})
+
+describe('test catches in code via forcing network error:',()=>{
+    it('error onMount', () => {
+        cy.intercept('GET', 'api/v1/strains/*', {
+            statusCode: 500,
+        })
+        cy.visit('/browse')
+        cy.get('.modal-body').should('be.visible')
+    })
+
+    it('throw error on generate button', () => {
+        cy.visit('/browse')
+        cy.intercept('GET', 'api/v1/strains/*', {
+            statusCode: 500,
+        })
+        cy.get('.GenerateTree').click();
+        cy.get('.modal-body').should('be.visible')
+    })
+
+    it('throw error on cluster generate button', () => {
+        cy.visit('/browse')
+        cy.get('.MuiList-root > :nth-child(2)').click({force:true});
+        cy.intercept('GET', 'api/v1/cluster/*', {
+            statusCode: 500,
+        })
+        cy.get('.GenerateTree').click();
+        cy.get('.modal-body').should('be.visible')
+    })
+
+    it('throw error in distinct system mode on generate button', () => {
+        cy.visit('/browse')
+
+        cy.intercept('GET', '/api/v1/defense/*', {
+            statusCode: 500,
+        })
+        cy.get('.MuiList-root > :nth-child(4)').click({force:true});
+        cy.get('.modal-body').should('be.visible')
+        cy.get('.modal-footer').findByText('Close').click()
+        cy.get('.GenerateTree').click();
+        cy.get('.modal-body').should('be.visible')
     })
 })
 
 describe("check all defense systems:",()=>{
+    beforeEach(fixCypressSpec(__filename))
     beforeEach(()=>{
         cy.visit("/browse")
 
@@ -103,12 +153,15 @@ describe("check all defense systems:",()=>{
                 /* ==== Generated with Cypress Studio ==== */
                 cy.get('.css-g1d714-ValueContainer').click();
                 cy.get('#react-select-3-input').clear();
-                cy.get('#react-select-3-input').type(triple[0]);
-                cy.get('div[id*="react-select-3"]').first().click() //triple[0]).click();
-                cy.get('#react-select-3-input').type(triple[1]);
-                cy.get('div[id*="react-select-3"]').first().click() //triple[0]).click();
-                cy.get('#react-select-3-input').type(triple[2]);
-                cy.get('div[id*="react-select-3"]').first().click() //triple[0]).click();
+                cy.get('#react-select-3-input').type(triple[0],{force: true});
+                // cy.get('div[id*="react-select-3"]').findByText(triple[0]).click() //triple[0]).click();
+                cy.get('.css-26l3qy-menu').findByText(triple[0]).click() //triple[0]).click();
+                cy.get('#react-select-3-input').type(triple[1],{force: true});
+                // cy.get('div[id*="react-select-3"]').findByText(triple[1]).click() //triple[0]).click();
+                cy.get('.css-26l3qy-menu').findByText(triple[1]).click() //triple[0]).click();
+                cy.get('#react-select-3-input').type(triple[2],{force: true});
+                // cy.get('div[id*="react-select-3"]').findByText(triple[2]).click() //triple[0]).click();
+                cy.get('.css-26l3qy-menu').findByText(triple[2]).click() //triple[0]).click();
                 cy.get('.react-transform-element').click();
                 /* ==== End Cypress Studio ==== */
                 cy.get('.GenerateTree').click();
@@ -121,6 +174,7 @@ describe("check all defense systems:",()=>{
 
 
 describe("check clusters trees:",()=> {
+    beforeEach(fixCypressSpec(__filename))
     beforeEach(() => {
         cy.visit("/browse");
         cy.get('.MuiList-root > :nth-child(2)').click({force:true});
@@ -163,7 +217,7 @@ describe("check clusters trees:",()=> {
                 /* ==== Generated with Cypress Studio ==== */
                 cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
                 // cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
-                cy.get('#Choose_num-option-2').click();
+                cy.get('#Choose_num-option-1').click();
                 cy.get('#strains-combo-box').clear();
                 cy.get('#strains-combo-box').type('PA14');
                 cy.get('#strains-combo-box-option-0').click();
@@ -220,5 +274,21 @@ describe("check clusters trees:",()=> {
                 /* ==== End Cypress Studio ==== */
             })
         })
+    })
+})
+
+describe("check isolation type trees:",()=> {
+    beforeEach(() => {
+        cy.visit("/browse");
+        cy.get('.MuiList-root > :nth-child(3)').click({force:true});
+    })
+    it('test isolation type:',()=>{
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('.dropdown-toggle > span').click();
+        cy.get('.actions-btn').click();
+        cy.get('.GenerateTree').click();
+        cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
+        cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name:'all_isolation_types.png'});
+        /* ==== End Cypress Studio ==== */
     })
 })
