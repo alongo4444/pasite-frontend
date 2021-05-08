@@ -7,12 +7,16 @@ import '../styles/DefenseSystemStrain.css';
 import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
 import {faDownload, faQuestion} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import ErrorModalC from "../components/ErrorModalC";
 
 class DefenseSystemStrain extends Component {
     state = {
         result_table: [],
     };
-
+    constructor() {
+        super();
+        this.childErr = React.createRef();
+    }
     componentDidMount() {
         axios
             .get(
@@ -20,7 +24,11 @@ class DefenseSystemStrain extends Component {
             )
             .then(response => {
                 this.setState({result_table: response.data})
-            });
+            }).catch((err) => {
+            console.log(err);
+            if (this.childErr.current) {
+                this.childErr.current.handleOpen();
+            }});
     }
     render() {
         const { ExportCSVButton } = CSVExport;
@@ -91,6 +99,7 @@ class DefenseSystemStrain extends Component {
                         {/*/>*/}
                     </div>
                 </FadeIn>
+                <ErrorModalC open={false} ref={this.childErr}/>
             </div>
         )
     }

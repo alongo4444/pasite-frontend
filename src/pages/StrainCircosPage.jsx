@@ -12,6 +12,7 @@ import axios from "axios";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ErrorModalC from "../components/ErrorModalC";
 
 
 
@@ -20,6 +21,7 @@ export default function StrainCircosPage() {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
     const loading = open && options.length === 0;
+    const childErr = React.createRef();
 
     React.useEffect(() => {
         let active = true;
@@ -33,11 +35,20 @@ export default function StrainCircosPage() {
         (async () => {
             const response = await fetch('http://127.0.0.1:8800/api/v1/strains');
             const strains = await response.json();
+            if (!response.ok) {
+                // get error message from body or default to response status
+                const error = (strains && strains.message) || response.status;
+                return Promise.reject(error);
+            }
             if (active) {
                 setOptions(strains.filter(x=> x.name != null))
             }
 
-        })();
+        })().catch((err) => {
+            console.log(err);
+            if (childErr.current) {
+                childErr.current.handleOpen();
+                }});
 
         return () => {
             active = false;
@@ -120,6 +131,7 @@ export default function StrainCircosPage() {
                     </div>
                 </Form>
             </FadeIn>
+            <ErrorModalC open={false} ref={childErr}/>
         </div>
     );
 }

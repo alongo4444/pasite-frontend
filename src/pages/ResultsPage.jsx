@@ -7,20 +7,29 @@ import '../styles/ResultsPage.css';
 import {Button, Accordion, Card} from "react-bootstrap";
 import {faDna, faDisease, faShieldVirus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import ErrorModalC from "../components/ErrorModalC";
 
 
 class ResultsPage extends Component {
     state = {
         result_table: []
     };
-
+    constructor() {
+        super();
+        this.childErr = React.createRef();
+    }
     componentDidMount() {
         axios
             .get("http://127.0.0.1:8800/api/v1/genes")
             .then((res) => {
                 this.setState({result_table: res.data});
                 console.log(this.state.result_table)
-            });
+            }).catch((err) => {
+            this.setState({loaded: true})
+            console.log(err);
+            if (this.childErr.current) {
+                this.childErr.current.handleOpen();
+            }});
     }
 
     render() {
@@ -138,6 +147,7 @@ class ResultsPage extends Component {
                         />
                     </div>
                 </FadeIn>
+                <ErrorModalC open={false} ref={this.childErr}/>
             </div>
         )
     }
