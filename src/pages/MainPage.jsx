@@ -28,30 +28,6 @@ class MainPage extends Component {
 
     state = {source: null};
 
-    // componentDidMount() {
-    //     this.origcol = this.card.current.style.backgroundColor;
-    //     this.card.current.addEventListener('mouseenter', this.changeBackground_e)
-    //     this.card.current.addEventListener('mouseleave', this.changeBackground_l)
-    // }
-
-
-    // componentDidMount() {
-    //     axios
-    //         .get(
-    //             "http://127.0.0.1:8801/api/v1/genes",
-    //             { responseType: 'arraybuffer' },
-    //         )
-    //         .then(response => {
-    //             const base64 = btoa(
-    //                 new Uint8Array(response.data).reduce(
-    //                     (data, byte) => data + String.fromCharCode(byte),
-    //                     '',
-    //                 ),
-    //             );
-    //             this.setState({ source: "data:;base64," + base64 });
-    //         });
-    // }
-
     render() {
 
         return (
