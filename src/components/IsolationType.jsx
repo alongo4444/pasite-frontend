@@ -21,6 +21,8 @@ class IsolationType extends Component {
     render() {
         return (
             <div>
+                Choose the Desired Isolation type:
+                <br/><br/>
                 <FadeIn>
                     <DropdownCheckbox ref={this.ddc} options={["Clinical", "Environment"]}/>
                 </FadeIn>

@@ -40,8 +40,7 @@ class BrowsePage extends Component {
             generateType: "defense",
             checkmlst: false,
             loadedCluster: false,
-            colourOptions:{},
-            defOptions:{}
+            colourOptions:{}
         }
     };
 
@@ -85,7 +84,7 @@ class BrowsePage extends Component {
         this.setState({loadedCluster: false})
         let systems = []
         if (this.state.generateType == "cluster") {
-            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains, this.state.checkmlst).then(response => {
+            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains, this.state.checkmlst,this.state.textbox).then(response => {
                 const base64 = btoa(
                     new Uint8Array(response.data).reduce(
                         (data, byte) => data + String.fromCharCode(byte),
@@ -240,6 +239,18 @@ class BrowsePage extends Component {
 
 
     render() {
+
+        const resetParams = () => {
+            this.setState({selectedFile:{}})
+            this.setState({selectedStrains:[]})
+            this.setState({checkmlst:false})
+            this.setState({selectedOption: []})
+            console.log(this.state.selectedFile)
+            console.log(this.state.selectedOption)
+            console.log(this.state.selectedStrains)
+            console.log(this.state.checkmlst)
+        }
+
         /*
         handles defense systems choice into selectedOptions state and save it.
          */
@@ -323,6 +334,7 @@ class BrowsePage extends Component {
                             options={this.state.colourOptions && this.state.colourOptions.constructor === Array ? this.state.colourOptions : Array(this.state.colourOptions)}
                             styles={colourStyles}
                             onChange={handleChange}
+                            value={this.state.selectedOption}
                         />
                     </div>
                 )
@@ -383,13 +395,19 @@ class BrowsePage extends Component {
                                 {renderGenerateType()}
                                 <br/>
                                 <Divider/>
+                                <br/>
                                 <div className='rowC'>
-                                    <input style={{marginTop:'2%'}} id='1' type="checkbox" name="mlst" onChange={setCheckMLST}/>
-                                    <label style={{paddingLeft: '5%'}} htmlFor='1'> Display MLST across the tree</label>
+                                    <input style={{marginTop:'2%', marginLeft:"3%"}} id='1' type="checkbox" name="mlst" onChange={setCheckMLST} checked={this.state.checkmlst}/>
+                                    <label style={{paddingLeft: '3%'}} htmlFor='1'> Display MLST across the tree</label>
                                 </div>
                                 <br/>
-                                <Button onClick={() => this.computeTree()} variant="outline-primary"
-                                        className='GenerateTree'>Generate Tree</Button>
+                                <div class="rowC">
+                                    <Button onClick={resetParams} variant="outline-primary"
+                                            className='resetParams'>Reset Query</Button>
+                                    <Button onClick={() => this.computeTree()} variant="outline-primary"
+                                            className='GenerateTree'>Generate Tree</Button>
+                                </div>
+
                             </div>
                         </div>
                         <div className='Phylo_Tree'>
