@@ -71,6 +71,35 @@ describe("DS vs DS", () => {
         cy.get('[id=chartdiv]',{timeout:15000}).toMatchImageSnapshot('dvdGraph3.png');
         cy.get("table").should('exist');
     });
+
+    it('Error autocomplete test', () => {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.intercept('GET', 'api/v1/defense', {
+            statusCode: 500,
+        })
+
+        cy.get('#asynchronous-demo').click();
+        cy.get('.modal-body').should('be.visible')
+
+        /* ==== End Cypress Studio ==== */
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('.modal-footer > .btn').click();
+        /* ==== End Cypress Studio ==== */
+    })
+
+    it('Error results test', () => {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('#asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-3').click();
+        cy.get('#asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-5').click();
+        cy.intercept('GET', 'api/v1/statistics/*', {
+            statusCode: 500,
+        })
+        cy.get('#dvdSearch').click();
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+    })
 });
 
 describe("DS vs Attr", () => {
@@ -161,6 +190,22 @@ describe("DS vs Attr", () => {
         cy.get("[id=dvcSearch]").should("be.disabled");
         /* ==== End Cypress Studio ==== */
     });
+
+    it('Error results test', () => {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('#dvc > .MuiListItemIcon-root > [viewBox="0 0 16 16"] > [d="M8 2.25c.909 0 3.188.685 4.254 1.022a.94.94 0 01.656.773c.814 6.424-4.13 9.452-4.91 9.452V2.25z"]').click({force:true});
+        cy.get(':nth-child(1) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-4').click();
+        cy.get(':nth-child(3) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-1').click();
+        cy.intercept('GET', 'api/v1/statistics/*', {
+            statusCode: 500,
+        })
+        cy.get('#dvcSearch').click();
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+    })
+
 });
 
 describe("DS vs Iso", () => {
@@ -249,6 +294,20 @@ describe("DS vs Iso", () => {
         cy.get("[id=dviSearch]").should("be.disabled");
         /* ==== End Cypress Studio ==== */
     });
+
+    it('Error results test', () => {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get(':nth-child(1) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-4').click();
+        cy.get(':nth-child(3) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-0').click();
+        cy.intercept('GET', 'api/v1/statistics/*', {
+            statusCode: 500,
+        })
+        cy.get('#dviSearch').click();
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+    })
 
 });
 
@@ -355,6 +414,23 @@ describe("DS vs Cl", () => {
         /* ==== End Cypress Studio ==== */
     });
 
+    it('Error results test', () => {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get(':nth-child(1) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-2').click();
+        cy.get('#strains-combo-box').click();
+        cy.get('#strains-combo-box-option-1').click();
+        cy.get(':nth-child(3) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-0').click();
+        cy.intercept('GET', 'api/v1/statistics/*', {
+            statusCode: 500,
+        })
+        cy.get('#dvclSearch').click();
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+    })
+
+
 });
 
 describe("Cl vs Iso", () => {
@@ -457,6 +533,26 @@ describe("Cl vs Iso", () => {
         cy.get(':nth-child(3) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-clearIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click({force: true});
         /* ==== End Cypress Studio ==== */
     });
+
+    it('Error results test', () => {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('#clvi').click({force: true});
+        cy.get('#strains-combo-box').click();
+        cy.get('#strains-combo-box-option-1').click();
+        cy.get(':nth-child(3) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-0').click();
+        cy.get(':nth-child(1) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-1').click();
+        cy.intercept('GET', 'api/v1/statistics/*', {
+            statusCode: 500,
+        })
+        cy.get('#clviSearch').click();
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('.btn').click();
+        /* ==== End Cypress Studio ==== */
+    })
 
 });
 
