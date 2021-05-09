@@ -1,14 +1,9 @@
 import React, {Component} from "react";
 import '../styles/SearchPage.css';
 import {Form, Col, Row, Button} from "react-bootstrap";
-import axios from "axios";
-import ErrorModalC from "./ErrorModalC";
 
 
 class CSVorFastaC extends Component {
-
-    // const [csv, setCsv] = React.useState(true);
-    // const [prot, setProt] = React.useState(true);
 
     state = {
         csv: true,

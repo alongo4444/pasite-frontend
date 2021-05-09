@@ -183,13 +183,6 @@ class PhiloTreeC extends Component {
                         onClick={()=>this.alignTips("right")} style={{backgroundColor: "#6A5ACD"}}
                     />
                 </ButtonGroup>
-                {/*<div>*/}
-                {/*    <input*/}
-                {/*        type='checkbox'*/}
-                {/*        onChange={()=>this.setState({internal: !this.state.internal})}*/}
-                {/*    />*/}
-                {/*    {this.state.internal ? 'Hide' : 'Show' } internal labels*/}
-                {/*</div>*/}
             </div>
             <svg width={width} height={height}>
                 <Phylotree

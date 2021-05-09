@@ -1,10 +1,8 @@
 import React, {Component} from "react";
-import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
 import axios from "axios";
 import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import TextOrFileUpload from "../components/TextOrFileUpload";
-import AutocompleteC from "../components/AutocompleteC";
 import ErrorModalC from "./ErrorModalC";
 
 function sleep(delay = 0) {

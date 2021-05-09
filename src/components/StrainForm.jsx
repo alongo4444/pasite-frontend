@@ -3,7 +3,6 @@ import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
 import axios from "axios";
 import {Form, Col, Row, Button, Modal} from "react-bootstrap";
-import AutocompleteC from "../components/AutocompleteC";
 import TextOrFileUpload from "./TextOrFileUpload";
 import ErrorModalC from "./ErrorModalC";
 function sleep(delay = 0) {
@@ -181,12 +180,9 @@ using selectedFile state.
                 for (let key in ts) {
                     selectedAS.push({'name':ts[key], 'id': id});
                     id++;
-                    // selectedAS[key]['name'].push(ts[key]['name'])
                 }
 
-
                 setSelectedA(selectedAS)
-                // this.setState({selectedFile: text.split(/\r?\n/)});
                 e.target.value = null;
             };
             reader.readAsText(e.target.files[0])
@@ -275,17 +271,6 @@ using selectedFile state.
                             <Button onClick={getData}>Download</Button>
                         </div>
                     </Form>
-                    {/*<Modal show={show} onHide={handleClose}>*/}
-                    {/*    <Modal.Header closeButton>*/}
-                    {/*        <Modal.Title>Modal heading</Modal.Title>*/}
-                    {/*    </Modal.Header>*/}
-                    {/*    <Modal.Body>There is a problem with the server request. Sorry for the inconvenience.</Modal.Body>*/}
-                    {/*    <Modal.Footer>*/}
-                    {/*        <Button variant="secondary" onClick={handleClose}>*/}
-                    {/*            Close*/}
-                    {/*        </Button>*/}
-                    {/*    </Modal.Footer>*/}
-                    {/*</Modal>*/}
                 </FadeIn>
                 <ErrorModalC open={false} ref={childErr}/>
             </div>

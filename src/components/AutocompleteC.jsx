@@ -1,7 +1,6 @@
 import React from "react";
 import '../styles/SearchPage.css';
 import {Form, Col, Row, Modal, Button} from "react-bootstrap";
-import FadeIn from "react-fade-in";
 import ErrorModalC from "./ErrorModalC";
 
 import TextField from '@material-ui/core/TextField';
@@ -80,7 +79,6 @@ export default function AutocompleteC({
                         disabled={disabled}
                         id="asynchronous-demo"
                         multiple={multipleChoice}
-                        // style={{ width: "100%" }}
                         open={open}
                         onOpen={() => {
                             setOpen(true);
@@ -88,7 +86,6 @@ export default function AutocompleteC({
                         onClose={() => {
                             setOpen(false);
                         }}
-                        // onChange={(event, value) => setSelectedA(value)}
                         onChange={(event, value) => parentCallback(value)}
                         getOptionSelected={(option, value) => option.name === value.name}
                         getOptionLabel={(option) => option.name}
@@ -107,7 +104,6 @@ export default function AutocompleteC({
                         renderInput={(params) => (
                             <TextField
                                 {...params}
-                                // label="Choose strains..."
                                 label = {labelText}
                                 variant="outlined"
                                 size="small"
@@ -125,17 +121,6 @@ export default function AutocompleteC({
                     />
                 </Col>
             </Form.Group>
-            {/*<Modal show={show} onHide={handleClose}>*/}
-            {/*    <Modal.Header closeButton>*/}
-            {/*        <Modal.Title>Modal heading</Modal.Title>*/}
-            {/*    </Modal.Header>*/}
-            {/*    <Modal.Body>There is a problem with the server request. Sorry for the inconvenience.</Modal.Body>*/}
-            {/*    <Modal.Footer>*/}
-            {/*        <Button variant="secondary" onClick={handleClose}>*/}
-            {/*            Close*/}
-            {/*        </Button>*/}
-            {/*    </Modal.Footer>*/}
-            {/*</Modal>*/}
             <ErrorModalC open={false} ref={childErr}/>
         </div>
     );

@@ -1,14 +1,7 @@
 import React from "react";
-import FadeIn from "react-fade-in";
-import {Button, Col, Form, Nav, Row, Tab} from "react-bootstrap";
-import searchlogo from "../assets/images/research.png";
-import {Link} from "react-router-dom";
 import DefVSDef from "../components/CorrelationComponents/DefVSDef";
 import DefVSIsoType from "../components/CorrelationComponents/DefVSIsoType";
-import StrainForm from "../components/StrainForm";
-import GenesByClusterC from "../components/GenesByClusterC";
 import CorrelationResultsPage from "./CorrelationResultsPage";
-import MiniDrawer from "../components/Drawer";
 import '../styles/CorrelationSearchPage.css'
 import DrawerCorrelation from "../components/CorrelationComponents/DrawerCorrelation";
 import DefVSCluster from "../components/CorrelationComponents/DefVSCluster";
@@ -64,21 +57,6 @@ class CorrelationSearchPage extends React.Component {
 
     render() {
 
-        // const currWindow = () => {
-        //     if (this.state.results == false) {
-        //         let currEvenKey = this.state.key  //holds the current eventKey of the tabs (which tab was selected last)
-        //         if (currEvenKey == 'first') {
-        //             return (<DefVSDef parentCallback2={this.getParams}/>)
-        //         } else if (currEvenKey == 'second') {
-        //
-        //         } else {
-        //             return (<DefVSIsoType parentCallback2={this.getTwoParams}/>)
-        //         }
-        //     } else {
-        //         return (<CorrelationResultsPage eventK={this.state.key} myArrayVariableName={this.state.params}/>)
-        //     }
-        // }
-
         const currWindow = () => {
             if (this.state.results == false) {
                 let currEvenKey = this.state.generateType  //holds the current eventKey of the tabs (which tab was selected last)
@@ -103,38 +81,6 @@ class CorrelationSearchPage extends React.Component {
 
         return (
             <div>
-                {/*<Tab.Container activeKey={this.state.key} onSelect={(k) => this.setState({key: k})} id="left-tabs-example" defaultActiveKey="first">*/}
-                {/*    <h2>Correlation</h2>*/}
-                {/*    <Row>*/}
-                {/*        <Col sm={2}>*/}
-                {/*            <Nav variant="pills" className="flex-column">*/}
-                {/*                <Nav.Item>*/}
-                {/*                    <Nav.Link onSelect={this.changeResults} eventKey="first">Defense System vs Defense System</Nav.Link>*/}
-                {/*                </Nav.Item>*/}
-                {/*                <Nav.Item>*/}
-                {/*                    <Nav.Link onSelect={this.changeResults}  eventKey="second">Category vs Defense System</Nav.Link>*/}
-                {/*                </Nav.Item>*/}
-                {/*                <Nav.Item>*/}
-                {/*                    <Nav.Link onSelect={this.changeResults}  eventKey="third">Iso Type vs Defense System</Nav.Link>*/}
-                {/*                </Nav.Item>*/}
-                {/*            </Nav>*/}
-                {/*        </Col>*/}
-                {/*        <Col sm={10}>*/}
-                {/*            <Tab.Content>*/}
-                {/*                <Tab.Pane eventKey="first">*/}
-                {/*                    {currWindow()}*/}
-                {/*                </Tab.Pane>*/}
-                {/*                <Tab.Pane eventKey="second">*/}
-                {/*                    {currWindow()}*/}
-                {/*                </Tab.Pane>*/}
-                {/*                <Tab.Pane eventKey="third">*/}
-                {/*                    {currWindow()}*/}
-                {/*                </Tab.Pane>*/}
-                {/*            </Tab.Content>*/}
-                {/*        </Col>*/}
-                {/*    </Row>*/}
-                {/*</Tab.Container>*/}
-
                 {currWindow()}
 
                 <div className="sidebar" id="drawer">

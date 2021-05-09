@@ -2,14 +2,11 @@ import React, {Component} from "react";
 import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
 import axios from "axios";
-import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AutocompleteC from "./AutocompleteC";
 
 import GenesByClusterC from "./GenesByClusterC";
-import {serialize} from "react-awesome-slider/src/helpers/components";
-import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
 
 class Cluster extends Component {
     state = {
@@ -170,7 +167,6 @@ class Cluster extends Component {
                         id="Choose_num"
                         options={this.state.num_cluster}
                         getOptionLabel={(option) => option}
-                        //style={{width: 300}}
                         onChange={(event, value) => this.show_lines(value)}
                         renderInput={(params) => <TextField {...params} size="small" label="Choose num of gene"
                                                             variant="outlined"/>}
@@ -184,7 +180,6 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainA(value)}
                                         renderInput={(params) => <TextField {...params} size="small"
                                                                             label="Choose Strain"
@@ -209,7 +204,6 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainB(value)}
                                         renderInput={(params) => <TextField {...params} size="small"
                                                                             label="Choose Strain"
@@ -234,7 +228,6 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainC(value)}
                                         renderInput={(params) => <TextField {...params} size="small"
                                                                             label="Choose Strain"
@@ -251,7 +244,6 @@ class Cluster extends Component {
                             : null
                         }
                     </div>
-                    {/*{showDownloadOption()}*/}
                 </div>
             </container>
         )

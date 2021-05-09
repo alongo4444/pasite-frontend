@@ -7,7 +7,6 @@ import {ArrowsFullscreen, ZoomIn, ZoomOut} from "react-bootstrap-icons";
 import Spinner from 'react-bootstrap/Spinner'
 import '../styles/BrowsePage.css';
 import chroma from 'chroma-js';
-// import {colourOptions} from '../utilities/colors';
 import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
 import '../assets/fonts/YesevaOne-Regular.ttf';
