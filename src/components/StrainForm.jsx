@@ -122,7 +122,15 @@ export default function StrainForm() {
             myAxios.get('http://127.0.0.1:8800/api/v1/genes/download_genes', {params})
                 .then((res) => {
                     FileDownload(res.data, 'report.csv');
-                }).catch(function (error) {childErr.current.handleOpen()});
+                }).catch(function (error) {
+                    if (error['response']) {
+                        if (error['response']['status'] == 400) {
+                            childErr.current.handleOpen("One or more of the parameters is invalid.")
+                            return
+                        }
+                    }
+                        childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
+                });
     }
 
 
@@ -174,7 +182,7 @@ using selectedFile state.
                 let selectedAS=[];
                 let id = 0;
                 for (let key in ts) {
-                    selectedAS.push({'name':ts[key], 'id': id});
+                    selectedAS.push({'key':ts[key], 'id': id});
                     id++;
                     // selectedAS[key]['name'].push(ts[key]['name'])
                 }
@@ -209,7 +217,7 @@ using selectedFile state.
 
                             <Col sm="4">
                                 {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>*/}
-                                <TextOrFileUpload className="txtbox" apiUrl="http://127.0.0.1:8800/api/v1/strains" multipleChoice={true} parentFileChangeCallback={onFileChange} parentHandleTextBox={getSelected} label="Please upload a file that contains a list of strains
+                                <TextOrFileUpload className="txtbox" apiUrl="http://127.0.0.1:8800/api/v1/strains" multipleChoice={true} parentFileChangeCallback={onFileChange} parentHandleTextBox={getSelected} label="Please upload a file that contains a list of strain's assembly code
                             separated by new lines (/n)" />
                                 <h6 className="note"><i>Note: Not selecting a strain will return <b>all the genes in the database.</b></i></h6>
                             </Col>

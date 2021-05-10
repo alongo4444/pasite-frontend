@@ -71,7 +71,7 @@ class BrowsePage extends Component {
             this.setState({loaded: true})
             console.log(err);
             if (this.childErr.current) {
-                this.childErr.current.handleOpen();
+                this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
             }});
     }
 
@@ -101,7 +101,7 @@ class BrowsePage extends Component {
                     this.setState({loaded: true})
                     console.log(err);
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen();
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                     }
                 }
             );
@@ -133,7 +133,7 @@ class BrowsePage extends Component {
                         this.setState({loaded: true})
                         console.log(err);
                         if (this.childErr.current) {
-                            this.childErr.current.handleOpen();
+                            this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                         }
                     }
                 );
@@ -170,7 +170,7 @@ class BrowsePage extends Component {
                         this.setState({loaded: true})
                         console.log(err);
                         if (this.childErr.current) {
-                            this.childErr.current.handleOpen();
+                            this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                         }
                     }
                 );

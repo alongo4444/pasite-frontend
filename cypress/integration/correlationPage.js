@@ -65,11 +65,16 @@ describe("DS vs DS", () => {
         cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-6').click();
         cy.get("[id=dvdSearch]").should("not.be.disabled");
+        cy.get('#asynchronous-demo').click();
+        cy.get('.body_c').click({force: true});
         cy.get('.btn').click();
         /* ==== End Cypress Studio ==== */
 
         cy.get('[id=chartdiv]',{timeout:15000}).toMatchImageSnapshot('dvdGraph3.png');
         cy.get("table").should('exist');
+        /* ==== Generated with Cypress Studio ==== */
+
+        /* ==== End Cypress Studio ==== */
     });
 
     it('Error autocomplete test', () => {

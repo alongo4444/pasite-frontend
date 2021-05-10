@@ -156,3 +156,55 @@ it('ABI BREX research', function() {
   cy.get('#clviSearch').click();
   /* ==== End Cypress Studio ==== */
 });
+
+it('Test PA14 Research', function() {
+  cy.visit('http://localhost:3000/');
+  /* ==== Generated with Cypress Studio ==== */
+  cy.get('.carousel-control-next-icon').click();
+  cy.get('.carousel-control-next-icon').click();
+  cy.get('.carousel-control-prev-icon').click();
+  cy.get('.carousel-control-prev-icon').click();
+  cy.get(':nth-child(2) > .nav-link').click();
+  cy.get('#asynchronous-demo').click();
+  cy.get('#asynchronous-demo-option-1').click();
+  cy.get('#numResults').select('30');
+  cy.get('.btn').click();
+  cy.get(':nth-child(3) > :nth-child(5)').click();
+  cy.get('.acrd').click();
+  /* ==== Generated with Cypress Studio ==== */
+  cy.get(':nth-child(2) > .card-header > .btn').click();
+  /* ==== End Cypress Studio ==== */
+  /* ==== Generated with Cypress Studio ==== */
+  cy.get('[aria-label="start sortable"]').click();
+  cy.get('#pageDropDown').click({force:true});
+  cy.get('[style="height: 100%; width: 90%; margin-left: 5%;"]').click({force:true});
+  /* ==== Generated with Cypress Studio ==== */
+  cy.get(':nth-child(5) > .nav-link').click();
+  cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+  cy.get('#asynchronous-demo-option-1').click();
+  cy.get('#all').uncheck();
+  cy.get('[for="3"]').click();
+  cy.get('#\\33 ').check();
+  cy.get('[for="8"]').click();
+  cy.get('#\\38 ').check();
+  cy.get('[for="5"]').click();
+  cy.get('#\\35 ').check();
+  cy.get(':nth-child(2) > :nth-child(1) > [style="text-align: center;"] > .btn').click();
+  cy.readFile('cypress/downloads/report.csv').should('exist')
+  /* ==== End Cypress Studio ==== */
+  /* ==== Generated with Cypress Studio ==== */
+  cy.get(':nth-child(4) > .nav-link').click();
+  cy.get('#asynchronous-demo').click();
+  cy.get('#asynchronous-demo-option-1').click();
+  cy.get('#asynchronous-demo').click();
+  cy.get('#asynchronous-demo-option-5').click();
+  cy.get('.css-g1d714-ValueContainer').click();
+  cy.get('#react-select-3-option-2').click();
+  cy.get('#react-select-3-option-7').click();
+  cy.get(':nth-child(3) > .css-6q0nyr-Svg > path').click({force: true});
+  cy.get('#\\31 ').check();
+  cy.get('.GenerateTree').click();
+  cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: 'CP_MLST_tree.png'});
+  /* ==== End Cypress Studio ==== */
+});
+
