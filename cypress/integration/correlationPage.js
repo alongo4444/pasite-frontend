@@ -355,7 +355,7 @@ describe("DS vs Cl", () => {
         cy.get(':nth-child(1) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-0').click();
         cy.get('#strains-combo-box').click();
-        cy.get('#strains-combo-box-option-1').click();
+        cy.get('#strains-combo-box-option-0').click();
         cy.get(':nth-child(3) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-6').click();
         cy.get("[id=dvclSearch]").should("not.be.disabled");

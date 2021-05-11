@@ -92,7 +92,7 @@ export default function StrainForm() {
         }
 
         let selectedAS=[];
-        if(Array.isArray(selectedA)) {
+        if(Array.isArray(selectedA) && selectedA.length > 0) {
             for (let key in selectedA) {
                 selectedAS.push(selectedA[key]['key'])
             }

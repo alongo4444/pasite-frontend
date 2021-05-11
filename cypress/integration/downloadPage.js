@@ -49,6 +49,10 @@ describe("Genes by Strains", () => {
         cy.get('[for="2"]').click();
         cy.get('#\\32 ').check();
         /* ==== End Cypress Studio ==== */
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-clearIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click({force: true});
+        cy.get(':nth-child(2) > :nth-child(1) > [style="text-align: center;"] > .btn').click();
+        /* ==== End Cypress Studio ==== */
     });
 
     it("download error", () =>{
@@ -149,6 +153,10 @@ describe("Genes By Defense Systems", () => {
         cy.get('#\\36 2').check();
         cy.get('#\\35 2').uncheck();
         cy.get('#\\34 2').check();
+        /* ==== End Cypress Studio ==== */
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-clearIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click({force: true});
+        cy.get(':nth-child(1) > :nth-child(1) > [style="text-align: center;"] > .btn').click();
         /* ==== End Cypress Studio ==== */
     });
 
