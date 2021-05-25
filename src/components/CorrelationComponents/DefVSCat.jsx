@@ -1,12 +1,10 @@
 import React from "react";
 import FadeIn from "react-fade-in";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import searchlogo from "../../assets/images/research.png"
-import {Link} from "react-router-dom";
 import AutocompleteC from "../AutocompleteC"
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import './Correlations.css'
+import '../../styles/Correlations.css'
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {BsShieldShaded} from "react-icons/bs";
 import {SiHubspot, SiMicrogenetics} from "react-icons/si";
@@ -15,7 +13,6 @@ import {SiHubspot, SiMicrogenetics} from "react-icons/si";
  * calculates the correlation between one defense system and attribute
  */
 export default function DefVSCat({parentCallback2}) {
-    //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
     const [selectedDF, setSelectedDF] = React.useState([]);
     const [selectedCls, setSelectedCls] = React.useState([]);
@@ -31,8 +28,6 @@ export default function DefVSCat({parentCallback2}) {
     }, [open]);
 
     React.useEffect(() => {
-        // let arr = selectedDF.concat(selectedIso);
-        // setSelected(arr)
         console.log(selectedDF)
         let arr = selectedDF.concat(selectedCls);
         if (arr.length === 2) {
@@ -43,8 +38,6 @@ export default function DefVSCat({parentCallback2}) {
     }, [selectedDF]);
 
     React.useEffect(() => {
-        // let arr = selectedDF.concat(selectedIso);
-        // setSelected(arr)
         console.log(selectedCls)
         let arr = selectedCls.concat(selectedDF);
         if (arr.length === 2) {

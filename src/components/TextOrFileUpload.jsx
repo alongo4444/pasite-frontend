@@ -1,14 +1,8 @@
 import React from "react";
 import '../styles/SearchPage.css';
 import {Form, Col, Row} from "react-bootstrap";
-import FadeIn from "react-fade-in";
-
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import AutocompleteC from "./AutocompleteC";
 import Switch from "react-switch";
-import Button from "react-bootstrap/Button";
 
 
 //apiUrl - For the autocomplete: the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8801/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
@@ -35,7 +29,7 @@ export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, par
         }
     }
 
- /*
+    /*
 update the state of the file upload/strain selection on change
  */
     const setSwitchTextBox = () => {

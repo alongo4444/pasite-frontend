@@ -1,19 +1,11 @@
 import React, {Component} from "react";
 import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
-import axios from "axios";
-import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AutocompleteC from "./AutocompleteC";
 import ErrorModalC from "../components/ErrorModalC";
-import GenesByClusterC from "./GenesByClusterC";
-import {serialize} from "react-awesome-slider/src/helpers/components";
-import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
 
-/**
- * the cluster search component
- */
 class Cluster extends Component {
     state = {
         strains: [
@@ -88,11 +80,7 @@ class Cluster extends Component {
         }
     }
 
-    getDownloadable = ()=> {
-        return this.state.downloadable
-    }
-
-    getTree(selectedFile, selectedStrains, mlst) {
+    getTree(){
         const arr = []
         if (this.state.showing_one) {
             arr.push(this.state.selected_strainA.name + '-' + this.state.selected_geneA)
@@ -103,25 +91,8 @@ class Cluster extends Component {
         if (this.state.showing_three) {
             arr.push(this.state.selected_strainC.name + '-' + this.state.selected_geneC)
         }
-        console.log(arr);
-        const Qs = require('qs')
         this.setState({downloadable: true})
-        return axios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree', {
-                params: {
-                    list_strain_gene: arr,
-                    subtree: selectedFile.length > 0 ? selectedFile : selectedStrains,
-                    MLST: mlst
-                },
-                paramsSerializer: function (params) {
-                    return Qs.stringify(params, {arrayFormat: 'repeat'})
-                },
-                responseType: 'arraybuffer',
-            }
-        ).catch((err) => {
-            console.log(err);
-            if (this.childErr.current) {
-                this.childErr.current.handleOpen();
-            }});
+        return [...arr]
     }
 
     show_lines = (value) => {
@@ -160,19 +131,6 @@ class Cluster extends Component {
 
     render() {
 
-        const showDownloadOption = () => {
-            if (this.state.downloadable == true) {
-                return (
-                    <GenesByClusterC
-                        genes={[this.state.selected_geneA, this.state.selected_geneB, this.state.selected_geneC]}/>
-                )
-            } else {
-                return (
-                    <div></div>
-                )
-            }
-        }
-
         return (
             <container>
                 <div>
@@ -180,7 +138,6 @@ class Cluster extends Component {
                         id="Choose_num"
                         options={this.state.num_cluster}
                         getOptionLabel={(option) => option}
-                        //style={{width: 300}}
                         onChange={(event, value) => this.show_lines(value)}
                         renderInput={(params) => <TextField {...params} size="small" label="Choose num of gene"
                                                             variant="outlined"/>}
@@ -194,7 +151,6 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainA(value)}
                                         renderInput={(params) => <TextField {...params} size="small"
                                                                             label="Choose Strain"
@@ -219,7 +175,6 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainB(value)}
                                         renderInput={(params) => <TextField {...params} size="small"
                                                                             label="Choose Strain"
@@ -244,7 +199,6 @@ class Cluster extends Component {
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
-                                        //style={{width: 300}}
                                         onChange={(event, value) => this.choice_strainC(value)}
                                         renderInput={(params) => <TextField {...params} size="small"
                                                                             label="Choose Strain"
@@ -261,7 +215,6 @@ class Cluster extends Component {
                             : null
                         }
                     </div>
-                    {/*{showDownloadOption()}*/}
                 </div>
                 <ErrorModalC open={false} ref={this.childErr}/>
             </container>

@@ -1,16 +1,11 @@
 import React, {Component} from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row, Button} from "react-bootstrap";
-import axios from "axios";
-import ErrorModalC from "./ErrorModalC";
+import {Form, Col, Row} from "react-bootstrap";
 
 /**
  * the component that decide if to convert it to csv or to fasta
  */
 class CSVorFastaC extends Component {
-
-    // const [csv, setCsv] = React.useState(true);
-    // const [prot, setProt] = React.useState(true);
 
     state = {
         csv: true,
