@@ -11,13 +11,14 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {BsShieldShaded} from "react-icons/bs";
 import {SiMicrogenetics} from "react-icons/si";
 
-// calculates the correlation between one defense system to a cluster Type
+/**
+ * calculates the correlation between one defense system to a cluster Type
+ */
 export default function DefVSCluster({parentCallback2}) {
     const [open, setOpen] = React.useState(false);
     const [selectedDF, setSelectedDF] = React.useState([]);
     const [selected, setSelected] = React.useState([]);
     const [options, setOptions] = React.useState([]);
-    const loading = open && options.length === 0;
     const [buttonOff, setButtonOff] = React.useState(true);
     const [selected_strain, setSelected_strain] = React.useState([]);
     const [selected_gene, setSelected_gene] = React.useState([]);
@@ -31,18 +32,6 @@ export default function DefVSCluster({parentCallback2}) {
             id: "GCF_000014625.1"
         }
     ])
-
-    React.useEffect(() => {
-        let active = true;
-
-        if (!loading) {
-            return undefined;
-        }
-
-        return () => {
-            active = false;
-        };
-    }, [loading]);
 
     React.useEffect(() => {
         if (!open) {

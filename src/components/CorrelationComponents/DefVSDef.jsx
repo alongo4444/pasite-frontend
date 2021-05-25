@@ -6,25 +6,15 @@ import '../../styles/Correlations.css'
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {BsShieldShaded} from "react-icons/bs";
 
-// calculates the correlation between one defense system to another
+/**
+ * calculates the correlation between one defense system to another
+ */
 export default function DefVSDef({parentCallback2}) {
     const [open, setOpen] = React.useState(false);
     const [selectedA, setSelectedA] = React.useState([]);
     const [options, setOptions] = React.useState([]);
-    const loading = open && options.length === 0;
     const [buttonOff, setButtonOff] = React.useState(true)
 
-    React.useEffect(() => {
-        let active = true;
-
-        if (!loading) {
-            return undefined;
-        }
-
-        return () => {
-            active = false;
-        };
-    },[loading]);
 
     React.useEffect(() => {
         if (!open) {

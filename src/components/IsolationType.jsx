@@ -3,7 +3,9 @@ import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
 import DropdownCheckbox from "./DropdownCheckbox";
 
-
+/**
+ * the component of the isolation types
+ */
 class IsolationType extends Component {
 
     constructor(props) {

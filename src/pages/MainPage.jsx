@@ -22,7 +22,9 @@ import DropdownCheckbox from "../components/DropdownCheckbox";
 import CorrelationGraph from "../components/CorrelationGraph";
 import CorrelationResultsPage from "./CorrelationResultsPage";
 
-
+/**
+ * The Main page of the application
+ */
 class MainPage extends Component {
 
     state = {source: null};

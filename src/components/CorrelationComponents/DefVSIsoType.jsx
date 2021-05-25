@@ -9,27 +9,17 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import '../../styles/Correlations.css'
 import {GiDrippingTube} from "react-icons/gi";
 
-// calculates the correlation between one defense system to an ISO Type
+/**
+ * calculates the correlation between one defense system to an ISO Type
+ */
 export default function DefVSIsoType({parentCallback2}) {
     const [open, setOpen] = React.useState(false);
     const [selectedDF, setSelectedDF] = React.useState([]);
     const [selectedIso, setSelectedIso] = React.useState([]);
     const [selected, setSelected] = React.useState([]);
     const [options, setOptions] = React.useState([]);
-    const loading = open && options.length === 0;
     const [buttonOff, setButtonOff] = React.useState(true)
 
-    React.useEffect(() => {
-        let active = true;
-
-        if (!loading) {
-            return undefined;
-        }
-
-        return () => {
-            active = false;
-        };
-    }, [loading]);
 
     React.useEffect(() => {
         if (!open) {
@@ -58,15 +48,6 @@ export default function DefVSIsoType({parentCallback2}) {
     }, [selectedIso]);
 
 
-    React.useEffect(() => {
-        if (getSelected() === 2) {
-            setButtonOff(false)
-        } else {
-            setButtonOff(true)
-        }
-    }, [selected]);
-
-
     const getSelectedDF = (selectedA) => {
         if (selectedA) {
             setSelectedDF([selectedA]);
@@ -83,13 +64,6 @@ export default function DefVSIsoType({parentCallback2}) {
         }
     }
 
-    const getSelected = () => {
-        return selected.length;
-    }
-
-    const getSelectedLengthIso = () => {
-        return selectedIso.length;
-    }
 
     return (
         <div className="search-form">

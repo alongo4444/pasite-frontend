@@ -19,7 +19,9 @@ import {GiDrippingTube} from "react-icons/gi";
 
 am4core.useTheme(am4themes_animated);
 
-
+/**
+ * the Vann correlation component
+ */
 class CorrelationGraph extends Component {
 
     constructor(props) {
@@ -68,9 +70,9 @@ class CorrelationGraph extends Component {
                             console.log(series.data);
                         })
 
-                    }).catch(function (error) {
+                    }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -112,10 +114,10 @@ class CorrelationGraph extends Component {
                                 })
                             })
                         })
-                    }).catch(function (error) {
-                    // if (this.childErr.current) {
-                    //     this.childErr.current.handleOpen()
-                    // }
+                    }).catch((err) => {
+                    if (this.childErr.current) {
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
+                    }
                 });
             })
         } else if (this.props.eventK == 'dvi') {
@@ -153,10 +155,10 @@ class CorrelationGraph extends Component {
                             console.log(series.data);
                         })
 
-                    }).catch(function (error) {
-                    // if (this.childErr.current) {
-                    //     this.childErr.current.handleOpen()
-                    // }
+                    }).catch((err) => {
+                    if (this.childErr.current) {
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
+                    }
                 });
             })
         } else if (this.props.eventK == 'dvcl') {
@@ -194,10 +196,10 @@ class CorrelationGraph extends Component {
                             console.log(series.data);
                         })
 
-                    }).catch(function (error) {
-                    // if (this.childErr.current) {
-                    //     this.childErr.current.handleOpen()
-                    // }
+                    }).catch((err) => {
+                    if (this.childErr.current) {
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
+                    }
                 });
             })
         } else if (this.props.eventK == 'clvi') {
@@ -235,21 +237,21 @@ class CorrelationGraph extends Component {
                             console.log(series.data);
                         })
 
-                    }).catch(function (error) {
-                    // if (this.childErr.current) {
-                    //     this.childErr.current.handleOpen()
-                    // }
+                    }).catch((err) => {
+                    if (this.childErr.current) {
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
+                    }
                 });
             })
         }
     }
 
 
-    componentWillUnmount() {
-        if (this.chart) {
-            this.chart.dispose();
-        }
-    }
+    // componentWillUnmount() {
+    //     if (this.chart) {
+    //         this.chart.dispose();
+    //     }
+    // }
 
     render() {
 

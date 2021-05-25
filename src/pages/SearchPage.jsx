@@ -6,6 +6,9 @@ import FadeIn from "react-fade-in";
 import {Link} from 'react-router-dom';
 import AutocompleteC from "../components/AutocompleteC";
 
+/**
+ * The search Page
+ */
 export default function SearchPage() {
     const [rpp, setRpp] = React.useState(10);
     const [open, setOpen] = React.useState(false);

@@ -1,6 +1,9 @@
 import React, {Component, useState, useRef} from "react";
 import CorrelationGraph from "../components/CorrelationGraph";
 
+/**
+ * the Correlation Page - The results view
+ */
 class CorrelationResultsPage extends Component {
 
     state = {source: null};

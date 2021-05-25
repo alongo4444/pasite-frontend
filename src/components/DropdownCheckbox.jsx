@@ -1,6 +1,9 @@
 import React from "react";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 
+/**
+ * a component of drop down
+ */
 class DropdownCheckbox extends React.Component {
 
     state = {selectedOptions: []};

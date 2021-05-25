@@ -19,10 +19,15 @@
 // module.exports = (on, config) => {
 //
 // }
+//
+// module.exports = (on, config) => {
+//
+// };
 
 const { initPlugin } = require('cypress-plugin-snapshots/plugin');
 
 module.exports = (on, config) => {
+
     on('task', {
         deleteFile(fileName) {
 
@@ -36,6 +41,7 @@ module.exports = (on, config) => {
 
         }
     });
+
     initPlugin(on, config);
     require('@cypress/code-coverage/task')(on, config)
     return config;

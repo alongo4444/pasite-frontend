@@ -21,7 +21,9 @@ import WarningModalC from "../components/WarningModalC";
 
 
 var qs = require('qs');
-
+/**
+ * the Browse Page - phylogenetic trees
+ */
 class BrowsePage extends Component {
     constructor(props) {
         super(props);
@@ -74,7 +76,7 @@ class BrowsePage extends Component {
             this.setState({loaded: true})
             console.log(err);
             if (this.childErr.current) {
-                this.childErr.current.handleOpen();
+                this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
             }});
     }
 
@@ -134,7 +136,7 @@ class BrowsePage extends Component {
                         this.setState({loaded: true})
                         console.log("the error:" +err);
                         if (this.childErr.current) {
-                            this.childErr.current.handleOpen();
+                            this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                         }
                     }
                 );

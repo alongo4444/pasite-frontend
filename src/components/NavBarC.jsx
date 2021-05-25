@@ -14,6 +14,9 @@ import StrainCircosPage from "../pages/StrainCircosPage";
 import { BrowserRouter as Switch } from "react-router-dom";
 import { Route } from "react-router";
 
+/**
+ * the navigation bar component
+ */
 class NavBarC extends Component{
     static = {};
     render() {
@@ -21,7 +24,7 @@ class NavBarC extends Component{
             <div >
             <Card className="card_m"  >
                 <Card.Header style={{marginBottom: "2%"}}>
-                    <Nav fill defaultActiveKey="/">
+                    <Nav fill activeKey="/">
                         <Nav.Item>
                             <Nav.Link href="/">Home</Nav.Link>
                         </Nav.Item>

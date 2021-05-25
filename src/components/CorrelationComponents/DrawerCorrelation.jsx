@@ -78,6 +78,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * the menu of the different correlations
+ */
 export default function DrawerCorrelation({generatingTypeHandler}) {
     const classes = useStyles();
     const theme = useTheme();
@@ -114,7 +117,7 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                 }}
             >
                 <div className={classes.toolbar}>
-                    <IconButton onClick={handleDrawerOpen}>
+                    <IconButton id="drawerBut" onClick={handleDrawerOpen}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                     </IconButton>
                     Choose Display:

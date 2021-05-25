@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import '../styles/CircosStrain.css';
 
+/**
+ * the circos component (the genome html file)
+ */
 class CircosStrain extends Component {
     state = {
         file: null,

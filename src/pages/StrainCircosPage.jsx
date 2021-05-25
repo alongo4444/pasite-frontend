@@ -6,18 +6,18 @@ import {Link} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ErrorModalC from "../components/ErrorModalC";
 
-function sleep(delay = 0) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
-    });
-}
 
+/**
+ * The Strain Circos search page
+ */
 export default function StrainCircosPage() {
     const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
     const loading = open && options.length === 0;
+    const childErr = React.createRef();
 
     React.useEffect(() => {
         let active = true;
@@ -26,15 +26,25 @@ export default function StrainCircosPage() {
             return undefined;
         }
 
+
+
         (async () => {
             const response = await fetch('http://127.0.0.1:8800/api/v1/strains');
-            await sleep(1e3); // For demo purposes.
             const strains = await response.json();
+            if (!response.ok) {
+                // get error message from body or default to response status
+                const error = (strains && strains.message) || response.status;
+                return Promise.reject(error);
+            }
             if (active) {
                 setOptions(strains.filter(x=> x.name != null))
             }
 
-        })();
+        })().catch((err) => {
+            console.log(err);
+            if (childErr.current) {
+                childErr.current.handleOpen();
+                }});
 
         return () => {
             active = false;
@@ -117,6 +127,7 @@ export default function StrainCircosPage() {
                     </div>
                 </Form>
             </FadeIn>
+            <ErrorModalC open={false} ref={childErr}/>
         </div>
     );
 }

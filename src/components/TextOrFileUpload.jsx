@@ -3,12 +3,15 @@ import '../styles/SearchPage.css';
 import {Form, Col, Row} from "react-bootstrap";
 import AutocompleteC from "./AutocompleteC";
 import Switch from "react-switch";
+import Button from "react-bootstrap/Button";
+
 
 //apiUrl - For the autocomplete: the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8801/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
 //multipleChoice - For the autocomplete: determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
 //parentHandleTextBox - For the autocomplete: the callback that will be called in the parent which holds this component when the user chooses an option from the autocomplete component.
 //parentFileChangeCallback -  the callback that will be called in the parent which holds this component when the user chooses a file. The file should contain the options with \n separating between them.
 //label - the description of the component for the user
+
 export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, parentHandleTextBox,updateTextbox=null, multipleChoice, label, limit_length=0, parentCallbackLegnth=null}) {
 
     const [textbox, setTextbox] = React.useState(true);

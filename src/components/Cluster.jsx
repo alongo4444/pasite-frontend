@@ -4,6 +4,7 @@ import '../styles/StrainForm.css';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AutocompleteC from "./AutocompleteC";
+import ErrorModalC from "../components/ErrorModalC";
 
 class Cluster extends Component {
     state = {
@@ -30,7 +31,10 @@ class Cluster extends Component {
         downloadable: false
 
     }
-
+    constructor() {
+        super();
+        this.childErr = React.createRef();
+    }
     choice_strainA = (selected) => {
         if (selected != null) {
             this.setState({
@@ -212,6 +216,7 @@ class Cluster extends Component {
                         }
                     </div>
                 </div>
+                <ErrorModalC open={false} ref={this.childErr}/>
             </container>
         )
     }
