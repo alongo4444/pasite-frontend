@@ -49,7 +49,7 @@ export default function AutocompleteC({
                 }
             } catch (e) {
                 if(childErr.current) {
-                    childErr.current.handleOpen();
+                    childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                 }
             }
 
@@ -91,9 +91,7 @@ export default function AutocompleteC({
                         options={options}
                         getOptionDisabled={(() => {
                             if (parentCallbackLegnth) {
-                                if (parentCallbackLegnth() >= limit_length) {
-                                    return true
-                                }
+                                return parentCallbackLegnth() >= limit_length
                             }
                             return false
                             // parentCallbackLegnth() > 3 && false ? true : false

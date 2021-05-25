@@ -95,7 +95,7 @@ export default function GenesByDefenseForm() {
         }
 
         let selectedAS = [];
-        if (Array.isArray(selectedA)) {
+        if (Array.isArray(selectedA) && selectedA.length > 0) {
             for (let key in selectedA) {
                 selectedAS.push(selectedA[key]['name'])
             }
@@ -126,8 +126,15 @@ export default function GenesByDefenseForm() {
         myAxios.get('http://127.0.0.1:8800/api/v1/genes/genes_by_defense', {params})
             .then((res) => {
                 FileDownload(res.data, 'genes_by_defense.csv');
-            }).catch(function (error) {childErr.current.handleOpen()});
-
+            }).catch(function (error) {
+            if (error['response']) {
+                if (error['response']['status'] == 400) {
+                    childErr.current.handleOpen("One or more of the parameters is invalid.")
+                    return
+                }
+            }
+            childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
+        });
 
     }
 

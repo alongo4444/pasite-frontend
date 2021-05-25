@@ -42,7 +42,8 @@ class BrowsePage extends Component {
             generateType: "defense",
             checkmlst: false,
             loadedCluster: false,
-            colourOptions:{}
+            colourOptions:{},
+            defOptions:{}
         }
     };
 
@@ -66,12 +67,13 @@ class BrowsePage extends Component {
             );
             this.setState({source: "data:;base64," + base64});
             this.setState({loaded: true});
+            console.log(colors.data)
             this.setState({colourOptions: colors.data});
         }).catch((err) => {
             this.setState({loaded: true})
             console.log(err);
             if (this.childErr.current) {
-                this.childErr.current.handleOpen();
+                this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
             }});
     }
 
@@ -101,7 +103,7 @@ class BrowsePage extends Component {
                     this.setState({loaded: true})
                     console.log(err);
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen();
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                     }
                 }
             );
@@ -133,7 +135,7 @@ class BrowsePage extends Component {
                         this.setState({loaded: true})
                         console.log(err);
                         if (this.childErr.current) {
-                            this.childErr.current.handleOpen();
+                            this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                         }
                     }
                 );
@@ -170,7 +172,7 @@ class BrowsePage extends Component {
                         this.setState({loaded: true})
                         console.log(err);
                         if (this.childErr.current) {
-                            this.childErr.current.handleOpen();
+                            this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                         }
                     }
                 );
@@ -319,7 +321,8 @@ class BrowsePage extends Component {
                         <Select
                             closeMenuOnSelect={false}
                             isMulti
-                            options={this.state.colourOptions}
+                            // options={this.state.colourOptions}
+                            options={this.state.colourOptions && this.state.colourOptions.constructor === Array ? this.state.colourOptions : Array(this.state.colourOptions)}
                             styles={colourStyles}
                             onChange={handleChange}
                         />

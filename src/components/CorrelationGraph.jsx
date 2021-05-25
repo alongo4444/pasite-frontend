@@ -171,7 +171,7 @@ class CorrelationGraph extends Component {
 
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -217,7 +217,7 @@ class CorrelationGraph extends Component {
                         })
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -260,7 +260,7 @@ class CorrelationGraph extends Component {
 
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -303,7 +303,7 @@ class CorrelationGraph extends Component {
 
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -346,7 +346,7 @@ class CorrelationGraph extends Component {
 
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })

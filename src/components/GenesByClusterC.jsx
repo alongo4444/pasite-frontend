@@ -31,7 +31,7 @@ export default function GenesByClusterC({genes}) {
                 } else {
                     FileDownload(res.data, 'genes_by_cluster.faa')
                 }
-            }).catch(function (error) {childErr.current.handleOpen()});
+            }).catch(function (error) {childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")});
     }
 
 

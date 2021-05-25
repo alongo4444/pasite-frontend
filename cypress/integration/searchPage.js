@@ -14,9 +14,8 @@ describe("check DOM components", () => {
 
     it("test simple search", () =>{
         /* ==== Generated with Cypress Studio ==== */
-        cy.get('.btn').should('be.disabled')
-        cy.get('#asynchronous-demo').click();
-
+        cy.get('.btn').should('be.disabled');
+        cy.get('#asynchronous-demo').click().wait(1000);
         cy.get('#asynchronous-demo-option-1').click();
         cy.get('.btn').should('be.enabled')
         cy.get('#asynchronous-demo').click();
@@ -42,5 +41,14 @@ describe("check DOM components", () => {
         cy.get('[aria-label="start sort desc"]').should('not.exist')
         cy.get("table").toMatchSnapshot();
     });
+
+    it("request", () =>{
+        /* ==== Generated with Cypress Studio ==== */
+        cy.request('http://127.0.0.1:8800/api/v1/strains').then((response)=>{
+            cy.get(response.data).should('not.be.empty')
+            // cy.get(response.json()).should('not.be.empty')
+        })
+    });
+
 
 });
