@@ -1,0 +1,13 @@
+.card-header{
+    background-color: white;
+}
+
+
+
+.card_m_2{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.wrapper{
+    justify-content: flex-end;
+}

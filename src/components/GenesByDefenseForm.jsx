@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
 import axios from "axios";
-import {Form, Col, Row, Button, Modal} from "react-bootstrap";
+import {Form, Col, Row, Button, Modal, Container} from "react-bootstrap";
 import TextOrFileUpload from "../components/TextOrFileUpload";
 import AutocompleteC from "../components/AutocompleteC";
 import ErrorModalC from "./ErrorModalC";
@@ -204,6 +204,7 @@ handle file upload and load each line to array of
 
     return (
         <div>
+            <FadeIn>
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -211,12 +212,11 @@ handle file upload and load each line to array of
             <Form>
                 <br/>
                 <Form.Group as={Row} controlId="selectStrain">
-                    <Form.Label className="wrapper" column sm="4">
+                    <Form.Label style={{display: "flex", alignItems:"center", justifyContent:"flex"}} className="wrapper" column sm="4">
                         <p style={{textAlign: "right"}}>{"Select single/multiple defense system/s:"}</p>
                     </Form.Label>
 
-                    <Col sm="4">
-                        {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/cluster/get_defense_system_names"/>*/}
+                    <Col style={{textAlign:"center"}} sm="4">
                         <TextOrFileUpload apiUrl="http://127.0.0.1:8800/api/v1/defense/"
                                           multipleChoice={true} parentFileChangeCallback={onFileChange}
                                           parentHandleTextBox={getSelected} label="Please upload a file that contains a list of defense systems separated by new lines (/n)"
@@ -225,8 +225,11 @@ handle file upload and load each line to array of
                 </Form.Group>
 
 
+
                 <div className="chkbxs">
-                    Columns:
+                    <Container>
+                    <Row>
+                        <Col>
                     <div>
                         <br/>
                         <input
@@ -237,55 +240,57 @@ handle file upload and load each line to array of
                         />
                         <label for="all2" className="lbl">All</label>
                     </div>
-
-                    {/*<label for="1" className="lbl">locus_tag</label>*/}
-                    {/*<input id='1' type="checkbox" name="locus_tag" onChange={() => toggleCheck("locus_tag")} checked={checked["locus_tag"]}/>*/}
-
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm>
                     <input id='22' type="checkbox" name="genomic_accession"
                            onChange={() => toggleCheck("genomic_accession")} checked={checked["genomic_accession"]}/>
                     <label for='22' className="lbl">genomic_accession</label>
-
+                        </Col>
+                        <Col sm>
                     <input id='32' type="checkbox" name="start" onChange={() => toggleCheck("start")}
                            checked={checked["start"]}/>
                     <label for='32' className="lbl">start</label>
-
+                        </Col>
+                        <Col sm>
                     <input id='42' type="checkbox" name="end" onChange={() => toggleCheck("end")}
                            checked={checked["end"]}/>
                     <label htmlFor='42' className="lbl">end</label>
-
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm>
                     <input id='52' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
                            checked={checked["strand"]}/>
                     <label htmlFor='52' className="lbl">strand</label>
-
+                        </Col>
+                        <Col sm>
                     <input id='62' type="checkbox" name="attributes_x" onChange={() => toggleCheck("attributes_x")}
                            checked={checked["attributes_x"]}/>
                     <label htmlFor='62' className="lbl">attributes_x</label>
-
+                        </Col>
+                        <Col sm>
                     <input id='72' type="checkbox" name="product_accession"
                            onChange={() => toggleCheck("product_accession")} checked={checked["product_accession"]}/>
                     <label htmlFor='72' className="lbl">product_accession</label>
-
+                        </Col>
+                    </Row>
+                        <Row>
+                            <Col sm>
                     <input id='82' type="checkbox" name="nonredundant_refseq"
                            onChange={() => toggleCheck("nonredundant_refseq")}
                            checked={checked["nonredundant_refseq"]}/>
                     <label htmlFor='82' className="lbl">nonredundant_refseq</label>
-
+                            </Col>
+                            <Col sm>
                     <input id='92' type="checkbox" name="name" onChange={() => toggleCheck("name")}
                            checked={checked["name"]}/>
                     <label htmlFor='92' className="lbl">name</label>
-
-                    {/*<label htmlFor='10' className="lbl">name_y</label>*/}
-                    {/*<input id='10' type="checkbox" name="name_y" onChange={() => toggleCheck("name_y")} checked={checked["name_y"]}/>*/}
-                    {/*<label htmlFor='11' className="lbl">symbol_y</label>*/}
-                    {/*<input id='11' type="checkbox" name="symbol_y" onChange={() => toggleCheck("symbol_y")} checked={checked["symbol_y"]}/>*/}
-                    {/*<label htmlFor='12' className="lbl">geneid_y</label>*/}
-                    {/*<input id='12' type="checkbox" name="geneID_y" onChange={() => toggleCheck("geneID_y")} checked={checked["geneID_y"]}/>*/}
-                    {/*<label htmlFor='13' className="lbl"> product_length_y</label>*/}
-                    {/*<input id='13' type="checkbox" name="product_length_y" onChange={() => toggleCheck("product_length_y")} checked={checked["product_length_y"]}/>*/}
-                    {/*<label htmlFor='14' className="lbl"> protein_sequence</label>*/}
-                    {/*<input id='14' type="checkbox" name="protein_sequence" onChange={() => toggleCheck("protein_sequence")} checked={checked["protein_sequence"]}/>*/}
-                    {/*<label htmlFor='15' className="lbl"> dna_sequence</label>*/}
-                    {/*<input id='15' type="checkbox" name="dna_sequence" onChange={() => toggleCheck("dna_sequence")} checked={checked["dna_sequence"]}/>*/}
+                            </Col>
+                            <Col sm></Col>
+                        </Row>
+                    </Container>
                 </div>
                 <br/>
                 <div style={{textAlign: "center"}}>
@@ -293,6 +298,7 @@ handle file upload and load each line to array of
                 </div>
             </Form>
             <ErrorModalC open={false} ref={childErr}/>
+            </FadeIn>
         </div>
     )
 }

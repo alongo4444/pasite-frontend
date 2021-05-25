@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
 import axios from "axios";
-import {Form, Col, Row, Button, Modal} from "react-bootstrap";
+import {Form, Col, Row, Button, Modal, Container} from "react-bootstrap";
 import AutocompleteC from "../components/AutocompleteC";
 import TextOrFileUpload from "./TextOrFileUpload";
 import ErrorModalC from "./ErrorModalC";
@@ -207,18 +207,19 @@ using selectedFile state.
                             onHide={() => setModalShow(false)}
                         />
                     <Form>
+                        <br/>
                         <Form.Group as={Row}>
-                            <Form.Label className="wrapper" column sm="4">
+                            <Form.Label  className="wrapper" column sm="4">
                                 <p style={{textAlign: "right"}}></p>
                             </Form.Label>
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="selectStrain">
-                            <Form.Label className="wrapper" column sm="4">
+                            <Form.Label style={{display: "flex", alignItems:"center", justifyContent:"flex"}} className="wrapper" column sm="4">
                                 <p style={{textAlign: "right"}}>{"Select single/multiple strain/s:"}</p>
                             </Form.Label>
 
-                            <Col sm="4">
+                            <Col style={{textAlign:"center"}} sm="4">
                                 {/*<AutocompleteC multipleChoice={true} true parentCallback={getSelected} apiUrl="http://127.0.0.1:8800/api/v1/strains"/>*/}
                                 <TextOrFileUpload className="txtbox" apiUrl="http://127.0.0.1:8800/api/v1/strains" multipleChoice={true} parentFileChangeCallback={onFileChange} parentHandleTextBox={getSelected} label="Please upload a file that contains a list of strain's assembly code
                             separated by new lines (/n)" />
@@ -226,9 +227,10 @@ using selectedFile state.
                             </Col>
                         </Form.Group>
 
-
                         <div className="chkbxs">
-                            Columns:
+                            <Container>
+                                <Row>
+                                    <Col>
                         <div>
                             <br/>
                             <input
@@ -239,41 +241,59 @@ using selectedFile state.
                             />
                             <label for="all" className="lbl">All</label>
                         </div>
-
+                            </Col>
+                            </Row>
+                                <Row>
+                                <Col sm>
                             <input id='2' type="checkbox" name="genomic_accession"
                                    onChange={() => toggleCheck("genomic_accession")}
                                    checked={checked["genomic_accession"]}/>
                             <label htmlFor='2' className="lbl">genomic_accession</label>
-
+                                </Col>
+                                    <Col sm>
                             <input id='3' type="checkbox" name="start" onChange={() => toggleCheck("start")}
                                    checked={checked["start"]}/>
                             <label htmlFor='3' className="lbl">start</label>
-
+                                    </Col>
+                                    <Col sm>
                             <input id='4' type="checkbox" name="end" onChange={() => toggleCheck("end")}
                                    checked={checked["end"]}/>
                             <label htmlFor='4' className="lbl">end</label>
-
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm>
                             <input id='5' type="checkbox" name="strand" onChange={() => toggleCheck("strand")}
                                    checked={checked["strand"]}/>
                             <label htmlFor='5' className="lbl">strand</label>
-
+                                    </Col>
+                                    <Col sm>
                             <input id='6' type="checkbox" name="attributes_x"
                                    onChange={() => toggleCheck("attributes_x")} checked={checked["attributes_x"]}/>
                             <label htmlFor='6' className="lbl">attributes_x</label>
-
+                                    </Col>
+                                    <Col>
                             <input id='7' type="checkbox" name="product_accession"
                                    onChange={() => toggleCheck("product_accession")}
                                    checked={checked["product_accession"]}/>
                             <label htmlFor='7' className="lbl">product_accession</label>
-
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm>
                             <input id='8' type="checkbox" name="nonredundant_refseq"
                                    onChange={() => toggleCheck("nonredundant_refseq")}
                                    checked={checked["nonredundant_refseq"]}/>
                             <label htmlFor='8' className="lbl">nonredundant_refseq</label>
-
+                                    </Col>
+                                    <Col sm>
                             <input id='9' type="checkbox" name="name" onChange={() => toggleCheck("name")}
                                    checked={checked["name"]}/>
                             <label htmlFor='9' className="lbl">name</label>
+                                    </Col>
+                                    <Col sm/>
+                                </Row>
+                            </Container>
 
                         </div>
                         <br/>
@@ -281,17 +301,6 @@ using selectedFile state.
                             <Button onClick={getData}>Download</Button>
                         </div>
                     </Form>
-                    {/*<Modal show={show} onHide={handleClose}>*/}
-                    {/*    <Modal.Header closeButton>*/}
-                    {/*        <Modal.Title>Modal heading</Modal.Title>*/}
-                    {/*    </Modal.Header>*/}
-                    {/*    <Modal.Body>There is a problem with the server request. Sorry for the inconvenience.</Modal.Body>*/}
-                    {/*    <Modal.Footer>*/}
-                    {/*        <Button variant="secondary" onClick={handleClose}>*/}
-                    {/*            Close*/}
-                    {/*        </Button>*/}
-                    {/*    </Modal.Footer>*/}
-                    {/*</Modal>*/}
                 </FadeIn>
                 <ErrorModalC open={false} ref={childErr}/>
             </div>
