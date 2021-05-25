@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card } from "react-bootstrap";
+import {Card, Carousel} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import '../styles/NavBarC.css';
 import SearchPage from "../pages/SearchPage";
@@ -18,34 +18,54 @@ import { Route } from "react-router";
  * the navigation bar component
  */
 class NavBarC extends Component{
-    static = {};
+    state = {
+        currPath: "/"
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            allProjects: JSON.parse(localStorage.getItem('allProjects')) || []
+        }
+    }
+
+
     render() {
+        const changeSelected = (path) =>{
+            // this.setState({currPath: path})
+            this.setState({
+                allProjects: path
+            },() => {
+                localStorage.setItem('allProjects', JSON.stringify(this.state.allProjects))
+            });
+        }
+
         return (
             <div >
             <Card className="card_m"  >
                 <Card.Header style={{marginBottom: "2%"}}>
-                    <Nav fill activeKey="/">
-                        <Nav.Item>
+                    <Nav variant={"tabs"} fill activeKey={this.state.allProjects}>
+                        <Nav.Item onClick={() => changeSelected("/")}>
                             <Nav.Link href="/">Home</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        <Nav.Item onClick={() =>changeSelected("/search")}>
                             <Nav.Link href="/search">Search</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        <Nav.Item onClick={() =>changeSelected("/CircosStrain")}>
                             <Nav.Link href="/CircosStrain">Circos Strain View</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        <Nav.Item onClick={() =>changeSelected("/browse")}>
                             <Nav.Link href="/browse">Browse</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        <Nav.Item onClick={() =>changeSelected("/download")}>
                             <Nav.Link href="/download">Download</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        <Nav.Item onClick={() => changeSelected("/CorrelationSearchPage")}>
                             <Nav.Link href="/CorrelationSearchPage">Correlation</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Card.Header>
-                <Card.Body className="body_c" style={{ minHeight:'600px', padding: '0px'}} >
+                <Card.Body className="body_c" style={{ minHeight:'600px', padding: '0px', marginBottom: "2%"}} >
                     <span className="cb">
                     <Card.Text>
                         <Switch>

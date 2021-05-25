@@ -1,11 +1,10 @@
 import React, {Component} from "react";
+import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
 import axios from "axios";
 import {Form, Col, Row, Button, Modal, Container} from "react-bootstrap";
 import TextOrFileUpload from "../components/TextOrFileUpload";
 import ErrorModalC from "./ErrorModalC";
-import FadeIn from "react-fade-in";
-
 
 /**
  * the component of getting genes by the defense systems
