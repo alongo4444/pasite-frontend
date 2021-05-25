@@ -9,7 +9,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {BsShieldShaded} from "react-icons/bs";
 import {SiHubspot} from "react-icons/si";
 
-// calculates the correlation between one defense system to another
+/**
+ * calculates the correlation between one defense system to another
+ */
 export default function DefVSDef({parentCallback2}) {
     //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);

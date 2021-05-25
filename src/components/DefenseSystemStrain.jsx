@@ -9,6 +9,9 @@ import {faDownload, faQuestion} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ErrorModalC from "../components/ErrorModalC";
 
+/**
+ * the defense systems of a specific strain
+ */
 class DefenseSystemStrain extends Component {
     state = {
         result_table: [],

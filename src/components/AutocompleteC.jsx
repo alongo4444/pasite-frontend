@@ -8,11 +8,15 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-//apiUrl - the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8800/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
-//parentCallback - the callback that will be called in the parent which holds this component. The parent will receive the current selected objects for each change on this component.  See DownloadPage for example or ask Alon.
-//multipleChoice - determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
-//labelText - The text which will appear in the label of the component (i.e: "Select single/multiple strain/s:").
-//disabled - Disables the autocomplete
+
+/**
+ * the component of the searching module
+ * apiUrl - the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8800/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
+ * parentCallback - the callback that will be called in the parent which holds this component. The parent will receive the current selected objects for each change on this component.  See DownloadPage for example or ask Alon.
+ * multipleChoice - determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
+ * labelText - The text which will appear in the label of the component (i.e: "Select single/multiple strain/s:").
+ * disabled - Disables the autocomplete
+ */
 export default function AutocompleteC({
                                           apiUrl,
                                           parentCallback,

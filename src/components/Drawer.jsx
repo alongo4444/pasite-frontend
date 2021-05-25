@@ -82,6 +82,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * the menu of the phylogenetic trees
+ */
 export default function MiniDrawer({generatingTypeHandler}) {
     const classes = useStyles();
     const theme = useTheme();

@@ -7,6 +7,9 @@ import TextOrFileUpload from "../components/TextOrFileUpload";
 import AutocompleteC from "../components/AutocompleteC";
 import ErrorModalC from "./ErrorModalC";
 
+/**
+ * the component of getting genes by the defense systems
+ */
 export default function GenesByDefenseForm() {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);

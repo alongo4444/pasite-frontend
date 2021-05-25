@@ -5,6 +5,9 @@ import {Form, Col, Row, Button, Modal} from "react-bootstrap";
 import AutocompleteC from "../components/AutocompleteC";
 import TextOrFileUpload from "./TextOrFileUpload";
 
+/**
+ * the component of an error in the system
+ */
 class ErrorModalC extends Component {
     state = {
         open: this.props.open,

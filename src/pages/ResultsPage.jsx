@@ -9,7 +9,9 @@ import {faDna, faDisease, faShieldVirus} from "@fortawesome/free-solid-svg-icons
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ErrorModalC from "../components/ErrorModalC";
 
-
+/**
+ * Results Page after a search
+ */
 class ResultsPage extends Component {
     state = {
         result_table: []

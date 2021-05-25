@@ -13,7 +13,9 @@ import ListItem from "@material-ui/core/ListItem";
 import './Correlations.css'
 import {GiDrippingTube} from "react-icons/gi";
 
-// calculates the correlation between one defense system to an ISO Type
+/**
+ * calculates the correlation between one defense system to an ISO Type
+ */
 export default function DefVSIsoType({parentCallback2}) {
     //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);

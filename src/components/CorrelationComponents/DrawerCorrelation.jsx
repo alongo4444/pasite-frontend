@@ -85,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * the menu of the different correlations
+ */
 export default function DrawerCorrelation({generatingTypeHandler}) {
     const classes = useStyles();
     const theme = useTheme();

@@ -10,7 +10,9 @@ import {serialize} from "react-awesome-slider/src/helpers/components";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
 import DropdownCheckbox from "./DropdownCheckbox";
 
-
+/**
+ * the component of the isolation types
+ */
 class IsolationType extends Component {
 
     constructor(props) {

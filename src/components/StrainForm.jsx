@@ -7,6 +7,9 @@ import AutocompleteC from "../components/AutocompleteC";
 import TextOrFileUpload from "./TextOrFileUpload";
 import ErrorModalC from "./ErrorModalC";
 
+/**
+ * the component of choosing strains
+ */
 export default function StrainForm() {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);

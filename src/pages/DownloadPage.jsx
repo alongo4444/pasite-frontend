@@ -6,6 +6,9 @@ import StrainForm from "../components/StrainForm"
 import GenesByClusterC from "../components/GenesByClusterC";
 import GenesByDefenseForm from "../components/GenesByDefenseForm";
 
+/**
+ * The Download Page
+ */
 export default function DownloadPage() {
 
     return (
