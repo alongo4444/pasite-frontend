@@ -14,7 +14,9 @@ import {GiDrippingTube} from "react-icons/gi";
 import './Correlations.css'
 import {SiMicrogenetics} from "react-icons/si";
 
-// calculates the correlation between one cluster to an ISO Type
+/**
+ * calculates the correlation between one cluster to an ISO Type
+ */
 export default function ClusterVSIsoType({parentCallback2}) {
     //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);

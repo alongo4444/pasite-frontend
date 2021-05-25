@@ -14,6 +14,9 @@ import StrainCircosPage from "../pages/StrainCircosPage";
 import { BrowserRouter as Switch } from "react-router-dom";
 import { Route } from "react-router";
 
+/**
+ * the navigation bar component
+ */
 class NavBarC extends Component{
     static = {};
     render() {

@@ -15,7 +15,9 @@ import DefVSCluster from "../components/CorrelationComponents/DefVSCluster";
 import ClusterVSIsoType from "../components/CorrelationComponents/ClusterVSIsoType";
 import DefVSCat from "../components/CorrelationComponents/DefVSCat";
 
-
+/**
+ * the Correlation Page - the search view
+ */
 class CorrelationSearchPage extends React.Component {
 
     constructor(props) {

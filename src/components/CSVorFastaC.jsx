@@ -4,7 +4,9 @@ import {Form, Col, Row, Button} from "react-bootstrap";
 import axios from "axios";
 import ErrorModalC from "./ErrorModalC";
 
-
+/**
+ * the component that decide if to convert it to csv or to fasta
+ */
 class CSVorFastaC extends Component {
 
     // const [csv, setCsv] = React.useState(true);
