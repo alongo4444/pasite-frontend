@@ -5,16 +5,6 @@ import axios from "axios";
 import StrainForm from "../components/StrainForm"
 import GenesByClusterC from "../components/GenesByClusterC";
 import GenesByDefenseForm from "../components/GenesByDefenseForm";
-import {BrowserRouter as Switch} from "react-router-dom";
-import {Route} from "react-router";
-import SearchPage from "./SearchPage";
-import ResultsPage from "./ResultsPage";
-import BrowsePage from "./BrowsePage";
-import StrainCircosPage from "./StrainCircosPage";
-import StrainCircosResultsPage from "./StrainCircosResultsPage";
-import CorrelationSearchPage from "./CorrelationSearchPage";
-import CorrelationResultsPage from "./CorrelationResultsPage";
-import MainPage from "./MainPage";
 
 /**
  * The Download Page

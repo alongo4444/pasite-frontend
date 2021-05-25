@@ -6,6 +6,7 @@ import {Form, Col, Row, Button, Modal, Container} from "react-bootstrap";
 import TextOrFileUpload from "../components/TextOrFileUpload";
 import AutocompleteC from "../components/AutocompleteC";
 import ErrorModalC from "./ErrorModalC";
+import { Divider } from '@material-ui/core';
 
 /**
  * the component of getting genes by the defense systems

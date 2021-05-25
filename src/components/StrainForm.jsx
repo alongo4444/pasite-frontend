@@ -7,6 +7,7 @@ import AutocompleteC from "../components/AutocompleteC";
 import TextOrFileUpload from "./TextOrFileUpload";
 import ErrorModalC from "./ErrorModalC";
 
+
 /**
  * the component of choosing strains
  */
@@ -226,7 +227,6 @@ using selectedFile state.
                                 <h6 className="note"><i>Note: Not selecting a strain will return <b>all the genes in the database.</b></i></h6>
                             </Col>
                         </Form.Group>
-
                         <div className="chkbxs">
                             <Container>
                                 <Row>
