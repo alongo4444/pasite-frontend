@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row, Button} from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import axios from "axios";
 import ErrorModalC from "./ErrorModalC";
 import CSVorFastaC from "../components/CSVorFastaC";

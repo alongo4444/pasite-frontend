@@ -25,7 +25,6 @@ class CorrelationBoxPlot extends Component {
             <div>
                 <CanvasJSChart options = {options}
                 />
-                {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
             </div>
         );
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row, Modal, Button} from "react-bootstrap";
+import {Form, Col, Row} from "react-bootstrap";
 import ErrorModalC from "./ErrorModalC";
 
 import TextField from '@material-ui/core/TextField';
@@ -91,7 +91,6 @@ export default function AutocompleteC({
                                 return parentCallbackLegnth() >= limit_length
                             }
                             return false
-                            // parentCallbackLegnth() > 3 && false ? true : false
                         })
                         }
                         loading={loading}

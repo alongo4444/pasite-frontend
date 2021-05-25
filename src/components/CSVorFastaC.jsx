@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row, Button} from "react-bootstrap";
+import {Form, Col, Row} from "react-bootstrap";
 
 /**
  * the component that decide if to convert it to csv or to fasta

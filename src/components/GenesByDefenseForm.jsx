@@ -4,6 +4,8 @@ import axios from "axios";
 import {Form, Col, Row, Button, Modal, Container} from "react-bootstrap";
 import TextOrFileUpload from "../components/TextOrFileUpload";
 import ErrorModalC from "./ErrorModalC";
+import FadeIn from "react-fade-in";
+
 
 /**
  * the component of getting genes by the defense systems
@@ -188,12 +190,10 @@ handle file upload and load each line to array of
                 for (let key in ts) {
                     selectedAS.push({'name': ts[key], 'id': id});
                     id++;
-                    // selectedAS[key]['name'].push(ts[key]['name'])
                 }
 
 
                 setSelectedA(selectedAS)
-                // this.setState({selectedFile: text.split(/\r?\n/)});
                 e.target.value = null;
             };
             reader.readAsText(e.target.files[0])

@@ -1,26 +1,12 @@
 import React, {Component} from "react";
-import {Card, Fade, Container, Row, Col, Carousel} from "react-bootstrap";
-import {Bell, Book} from 'react-bootstrap-icons';
-import styles from '../styles/MainPage.css';
+import {Carousel} from "react-bootstrap";
 import FadeIn from 'react-fade-in';
-import slide1 from "../assets/images/slide1.jpg"
-import slide2 from "../assets/images/slide2.jpg"
-import slide3 from "../assets/images/slide3.jpg"
 import slide4 from "../assets/images/slide4.jpg"
 import slide5 from "../assets/images/slide5.jpg"
 import slide6 from "../assets/images/slide6.jpg"
-import {faDna, faAtom} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import AwesomeSlider from 'react-awesome-slider';
+
 import 'react-awesome-slider/dist/styles.css';
-import CoreStyles from 'react-awesome-slider/src/core/styles.scss';
-import AnimationStyles from 'react-awesome-slider/src/styled/fold-out-animation/fold-out-animation.scss';
-import axios from "axios";
-import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
-import GenesByClusterC from "../components/GenesByClusterC";
-import DropdownCheckbox from "../components/DropdownCheckbox";
-import CorrelationGraph from "../components/CorrelationGraph";
-import CorrelationResultsPage from "./CorrelationResultsPage";
+
 
 /**
  * The Main page of the application
