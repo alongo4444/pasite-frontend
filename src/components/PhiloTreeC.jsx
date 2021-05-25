@@ -115,7 +115,9 @@ function AlignTipsLeftButton(props) {
     </Button>);
 }
 
-
+/**
+ * the phylogenetic tree component
+ */
 class PhiloTreeC extends Component {
     constructor(props) {
         super(props);

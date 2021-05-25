@@ -15,7 +15,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import ErrorModalC from "../components/ErrorModalC";
 
 
-
+/**
+ * The Strain Circos search page
+ */
 export default function StrainCircosPage() {
     const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);

@@ -2,6 +2,9 @@ import {CanvasJSChart} from 'canvasjs-react-charts'
 var React = require('react');
 var Component = React.Component;
 
+/**
+ * the box plot correlation component
+ */
 class CorrelationBoxPlot extends Component {
     render() {
         const options = {
@@ -14,8 +17,8 @@ class CorrelationBoxPlot extends Component {
                 type: "boxAndWhisker",
                 // yValueFormatString: "#,##0.# \"kcal/100g\"",
                 dataPoints: [
-                    { label: "WithDef",  y: this.props.withd_y },
-                    { label: "WithoutDef",  y: this.props.withoutd_y }
+                    { label: "With Defense System",  y: this.props.withd_y },
+                    { label: "Without Defense System",  y: this.props.withoutd_y }
                 ]
             }]
         }

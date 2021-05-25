@@ -16,6 +16,7 @@ import Button from "react-bootstrap/Button";
 //parentHandleTextBox - For the autocomplete: the callback that will be called in the parent which holds this component when the user chooses an option from the autocomplete component.
 //parentFileChangeCallback -  the callback that will be called in the parent which holds this component when the user chooses a file. The file should contain the options with \n separating between them.
 //label - the description of the component for the user
+
 export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, parentHandleTextBox,updateTextbox=null, multipleChoice, label, limit_length=0, parentCallbackLegnth=null}) {
 
     const [textbox, setTextbox] = React.useState(true);
@@ -34,7 +35,7 @@ export default function TextOrFileUpload({ apiUrl, parentFileChangeCallback, par
         }
     }
 
-    /*
+ /*
 update the state of the file upload/strain selection on change
  */
     const setSwitchTextBox = () => {

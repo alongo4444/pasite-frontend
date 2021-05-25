@@ -19,7 +19,9 @@ import {GiDrippingTube} from "react-icons/gi";
 
 am4core.useTheme(am4themes_animated);
 
-
+/**
+ * the Vann correlation component
+ */
 class CorrelationGraph extends Component {
 // export default function CorrelationGraph({itemsSelected, eventK}) {
 

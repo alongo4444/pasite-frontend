@@ -5,7 +5,9 @@ import axios from "axios";
 import ErrorModalC from "./ErrorModalC";
 import CSVorFastaC from "../components/CSVorFastaC";
 
-
+/**
+ * the component choosing genes by their cluster
+ */
 export default function GenesByClusterC({genes}) {
 
     const childErr = React.createRef();

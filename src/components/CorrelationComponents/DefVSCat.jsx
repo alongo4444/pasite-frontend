@@ -11,7 +11,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {BsShieldShaded} from "react-icons/bs";
 import {SiHubspot, SiMicrogenetics} from "react-icons/si";
 
-// calculates the correlation between one defense system to an ISO Type
+/**
+ * calculates the correlation between one defense system and attribute
+ */
 export default function DefVSCat({parentCallback2}) {
     //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);

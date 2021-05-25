@@ -21,7 +21,9 @@ import Divider from '@material-ui/core/Divider';
 
 
 var qs = require('qs');
-
+/**
+ * the Browse Page - phylogenetic trees
+ */
 class BrowsePage extends Component {
     constructor(props) {
         super(props);

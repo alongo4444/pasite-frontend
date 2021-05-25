@@ -11,6 +11,9 @@ import GenesByClusterC from "./GenesByClusterC";
 import {serialize} from "react-awesome-slider/src/helpers/components";
 import StrainCircosResultsPage from "../pages/StrainCircosResultsPage";
 
+/**
+ * the cluster search component
+ */
 class Cluster extends Component {
     state = {
         strains: [

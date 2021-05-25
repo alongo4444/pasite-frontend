@@ -14,7 +14,9 @@ import {BsShieldShaded} from "react-icons/bs";
 import {GiDrippingTube} from "react-icons/gi";
 import {SiMicrogenetics} from "react-icons/si";
 
-// calculates the correlation between one defense system to a cluster Type
+/**
+ * calculates the correlation between one defense system to a cluster Type
+ */
 export default function DefVSCluster({parentCallback2}) {
     //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
