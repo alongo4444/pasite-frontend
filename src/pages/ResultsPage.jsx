@@ -46,8 +46,6 @@ class ResultsPage extends Component {
             {dataField: "strand", text: "strand", sort: true},
             {dataField: "name", text: "name", sort: true},
             {dataField: "symbol", text: "symbol", sort: true},
-            // {dataField: "dna_sequence", text: "dna sequence", sort: true},
-            // {dataField: "protein_sequence", text: "protein sequence", sort: true}
         ]
 
         const dna_char_to_color = {

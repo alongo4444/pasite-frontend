@@ -8,14 +8,10 @@ class DropdownCheckbox extends React.Component {
 
     state = {selectedOptions: []};
 
-    getSelected(){
-        return this.state.selectedOptions;
-    }
-
     render() {
         return (
             <DropdownMultiselect
-                options={this.props.options} //["Australia", "Canada", "USA", "Poland", "Spain", "France"]
+                options={this.props.options}
                 name="dropdown"
                 handleOnChange={(selected) => {
                     this.setState({selectedOptions: selected})

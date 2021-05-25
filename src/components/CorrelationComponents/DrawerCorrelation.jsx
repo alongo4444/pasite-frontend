@@ -3,9 +3,6 @@ import Drawer from '@material-ui/core/Drawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
@@ -16,9 +13,6 @@ import List from '@material-ui/core/List';
 import {BsShieldShaded} from 'react-icons/bs';
 import {SiMicrogenetics, SiHubspot} from 'react-icons/si';
 import {GiDrippingTube} from 'react-icons/gi';
-import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Tooltip from "react-bootstrap/Tooltip";
 
 const drawerWidth = 400;
 
@@ -74,7 +68,6 @@ const useStyles = makeStyles((theme) => ({
     toolbar: {
         display: 'flex',
         alignItems: 'center',
-        // justifyContent: 'flex-end',
         padding: theme.spacing(0, 1),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
@@ -133,7 +126,6 @@ export default function DrawerCorrelation({generatingTypeHandler}) {
                 <List>
 
                     <ListItem  button key="dvd" id="dvd" onClick={() => generatingTypeHandler("dvd")}>
-                        {/*<OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Tooltip!</Tooltip>}>*/}
                             <ListItemIcon>
                                 <BsShieldShaded/><BsShieldShaded/>
                             </ListItemIcon>

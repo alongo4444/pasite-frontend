@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import '../styles/StrainForm.css';
-import axios from "axios";
-import {Form, Col, Row, Button, Modal} from "react-bootstrap";
-import AutocompleteC from "../components/AutocompleteC";
-import TextOrFileUpload from "./TextOrFileUpload";
+import { Button, Modal} from "react-bootstrap";
+
 
 /**
  * the component of an error in the system
