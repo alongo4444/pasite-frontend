@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
-import axios from "axios";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AutocompleteC from "./AutocompleteC";
@@ -77,7 +76,7 @@ class Cluster extends Component {
         }
     }
 
-    getTree(){//selectedFile, selectedStrains, mlst,isTextbox) {
+    getTree(){
         const arr = []
         if (this.state.showing_one) {
             arr.push(this.state.selected_strainA.name + '-' + this.state.selected_geneA)
@@ -88,22 +87,8 @@ class Cluster extends Component {
         if (this.state.showing_three) {
             arr.push(this.state.selected_strainC.name + '-' + this.state.selected_geneC)
         }
-        // console.log(arr);
-        // const Qs = require('qs')
         this.setState({downloadable: true})
         return [...arr]
-        // return axios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree', {
-        //         params: {
-        //             list_strain_gene: arr,
-        //             subtree: isTextbox == false ? selectedFile : selectedStrains,
-        //             MLST: mlst
-        //         },
-        //         paramsSerializer: function (params) {
-        //             return Qs.stringify(params, {arrayFormat: 'repeat'})
-        //         },
-        //         responseType: 'arraybuffer',
-        //     }
-        // )
     }
 
     show_lines = (value) => {

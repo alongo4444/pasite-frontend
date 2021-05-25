@@ -69,7 +69,7 @@ class NavBarC extends Component{
                     </Card.Text>
                         </span>
                 </Card.Body>
-                <Card.Footer className="c_footer">About</Card.Footer>
+                {/*<Card.Footer className="c_footer">About</Card.Footer>*/}
             </Card>
             </div>
         )

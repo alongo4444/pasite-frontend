@@ -88,66 +88,9 @@ class BrowsePage extends Component {
         this.setState({loadedCluster: false})
         let systems = []
         if (this.state.generateType.includes("cluster")) {
-            await this.setState({list_strain_gene:[...this.cluster.current.getTree()]})//this.state.selectedFile, this.state.selectedStrains, this.state.checkmlst,this.state.textbox)})
-            //     const base64 = btoa(
-            //         new Uint8Array(response.data).reduce(
-            //             (data, byte) => data + String.fromCharCode(byte),
-            //             '',
-            //         ),
-            //     );
-            //     this.setState({source: "data:;base64," + base64});
-            //     this.setState({loaded: true})
-            //     this.setState({loadedCluster: true})
-            //     if(response.headers.get('bad_subtree').length>0 || response.headers.get('bad_systems').length>0){
-            //         if (this.childErr.current) {
-            //             this.childWar.current.handleOpen();
-            //         }
-            //     }
-            // }).catch((err) => {
-            //         this.setState({loaded: true})
-            //         console.log(err);
-            //         if (this.childErr.current) {
-            //             this.childErr.current.handleOpen();
-            //         }
-            //     }
-            // );
+            await this.setState({list_strain_gene:[...this.cluster.current.getTree()]})
         }
-        // if (this.state.generateType.includes("distinct systems")) {
-        //     // let url = "http://127.0.0.1:8800/api/v1/defense/distinct_count";
-        //     return axios
-        //         .get(url, {
-        //                 params: {
-        //                     subtree: this.state.textbox == false ? this.state.selectedFile : this.state.selectedStrains,
-        //                     MLST: this.state.checkmlst
-        //                 },
-        //                 paramsSerializer: function (params) {
-        //                     return qs.stringify(params, {arrayFormat: 'repeat'})
-        //                 },
-        //                 responseType: 'arraybuffer',
-        //             }
-        //         )
-        //         .then(response => {
-        //             const base64 = btoa(
-        //                 new Uint8Array(response.data).reduce(
-        //                     (data, byte) => data + String.fromCharCode(byte),
-        //                     '',
-        //                 ),
-        //             );
-        //             this.setState({source: "data:;base64," + base64});
-        //             this.setState({loaded: true})
-        //         }).catch((err) => {
-        //                 this.setState({loaded: true})
-        //                 console.log(err);
-        //                 if (this.childErr.current) {
-        //                     this.childErr.current.handleOpen();
-        //                 }
-        //             }
-        //         );
-        // } else {
             let url = "http://127.0.0.1:8800/api/v1/strains/phyloTree"
-            // if (this.state.generateType == "isolation") {
-            //     url = "http://127.0.0.1:8800/api/v1/isolation/isolation_tree"
-            // }
             return axios
                 .get(url, {
                         params: {
@@ -253,18 +196,6 @@ class BrowsePage extends Component {
             let newArr = [...this.state.generateType,Gtype]
             this.setState({generateType: [...newArr]});
         }
-        // if (Gtype == "defense") {
-        //
-        // }
-        // if (Gtype == "cluster") {
-        //     this.setState({generateType: "cluster"})
-        // }
-        // if (Gtype == "isolation") {
-        //     this.setState({generateType: "isolation"})
-        // }
-        // if (Gtype == "distinct systems") {
-        //     this.setState({generateType: "distinct systems"}, () => this.computeTree());
-        // }
     }
 
     /*
@@ -397,7 +328,6 @@ class BrowsePage extends Component {
             if (this.state.generateType.includes("cluster") && this.cluster.current) {
                 if (this.state.loadedCluster) {
                     return (
-                        // console.log(this.cluster.current)
                         <GenesByClusterC
                             genes={[this.cluster.current.state.selected_geneA, this.cluster.current.state.selected_geneB, this.cluster.current.state.selected_geneC]}/>
                     )
