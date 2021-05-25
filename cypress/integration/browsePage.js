@@ -180,7 +180,7 @@ describe("check clusters trees:",()=> {
         cy.get('.MuiList-root > :nth-child(2)').click({force:true});
     })
 
-    it.only("test one cluster at a time:", ()=>{
+    it("test one cluster at a time:", ()=>{
         let randomGenes = []
         cy.request('http://localhost:8800/api/v1/cluster/get_gene_strain_id/GCF_000014625.1').then((response)=>{
             const shuffled = response.body.sort(() => 0.5 - Math.random());

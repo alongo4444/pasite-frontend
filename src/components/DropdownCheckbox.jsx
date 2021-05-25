@@ -5,10 +5,6 @@ class DropdownCheckbox extends React.Component {
 
     state = {selectedOptions: []};
 
-    getSelected(){
-        return this.state.selectedOptions;
-    }
-
     render() {
         return (
             <DropdownMultiselect

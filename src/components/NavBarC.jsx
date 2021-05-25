@@ -21,7 +21,7 @@ class NavBarC extends Component{
             <div >
             <Card className="card_m"  >
                 <Card.Header style={{marginBottom: "2%"}}>
-                    <Nav fill activeKey="/">
+                    <Nav fill defaultActiveKey="/">
                         <Nav.Item>
                             <Nav.Link href="/">Home</Nav.Link>
                         </Nav.Item>

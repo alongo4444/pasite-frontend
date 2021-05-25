@@ -6,8 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AutocompleteC from "./AutocompleteC";
 
-import GenesByClusterC from "./GenesByClusterC";
-
 class Cluster extends Component {
     state = {
         strains: [
@@ -79,11 +77,7 @@ class Cluster extends Component {
         }
     }
 
-    getDownloadable = ()=> {
-        return this.state.downloadable
-    }
-
-    getTree(selectedFile, selectedStrains, mlst,isTextbox) {
+    getTree(){//selectedFile, selectedStrains, mlst,isTextbox) {
         const arr = []
         if (this.state.showing_one) {
             arr.push(this.state.selected_strainA.name + '-' + this.state.selected_geneA)
@@ -94,21 +88,22 @@ class Cluster extends Component {
         if (this.state.showing_three) {
             arr.push(this.state.selected_strainC.name + '-' + this.state.selected_geneC)
         }
-        console.log(arr);
-        const Qs = require('qs')
+        // console.log(arr);
+        // const Qs = require('qs')
         this.setState({downloadable: true})
-        return axios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree', {
-                params: {
-                    list_strain_gene: arr,
-                    subtree: isTextbox == false ? selectedFile : selectedStrains,
-                    MLST: mlst
-                },
-                paramsSerializer: function (params) {
-                    return Qs.stringify(params, {arrayFormat: 'repeat'})
-                },
-                responseType: 'arraybuffer',
-            }
-        )
+        return [...arr]
+        // return axios.get('http://127.0.0.1:8800/api/v1/cluster/cluster_tree', {
+        //         params: {
+        //             list_strain_gene: arr,
+        //             subtree: isTextbox == false ? selectedFile : selectedStrains,
+        //             MLST: mlst
+        //         },
+        //         paramsSerializer: function (params) {
+        //             return Qs.stringify(params, {arrayFormat: 'repeat'})
+        //         },
+        //         responseType: 'arraybuffer',
+        //     }
+        // )
     }
 
     show_lines = (value) => {
@@ -146,19 +141,6 @@ class Cluster extends Component {
 
 
     render() {
-
-        const showDownloadOption = () => {
-            if (this.state.downloadable == true) {
-                return (
-                    <GenesByClusterC
-                        genes={[this.state.selected_geneA, this.state.selected_geneB, this.state.selected_geneC]}/>
-                )
-            } else {
-                return (
-                    <div></div>
-                )
-            }
-        }
 
         return (
             <container>

@@ -17,6 +17,7 @@ import GenesByClusterC from "../components/GenesByClusterC";
 import TextOrFileUpload from "../components/TextOrFileUpload";
 import ErrorModalC from "../components/ErrorModalC";
 import Divider from '@material-ui/core/Divider';
+import WarningModalC from "../components/WarningModalC";
 
 
 var qs = require('qs');
@@ -27,6 +28,7 @@ class BrowsePage extends Component {
         this.cluster = React.createRef();
         this.isltype = React.createRef();
         this.childErr = React.createRef();
+        this.childWar = React.createRef()
         this.state = {
             source: [],
             loaded: false,
@@ -36,10 +38,13 @@ class BrowsePage extends Component {
             selectedFile: {},
             selectedStrains: [],
             isOpen: false,
-            generateType: "defense",
+            generateType: ["defense"],
             checkmlst: false,
             loadedCluster: false,
-            colourOptions:{}
+            colourOptions:{},
+            list_strain_gene:[],
+            badSystems: [],
+            badStrains: []
         }
     };
 
@@ -77,74 +82,80 @@ class BrowsePage extends Component {
     compute a new tree when the user click the button "generate tree"
     similar to the orginial function, this time - with query params.
      */
-    computeTree = () => {
+    async computeTree() {
         this.setState({source: []});
         this.setState({loaded: false});
         this.setState({loadedCluster: false})
         let systems = []
-        if (this.state.generateType == "cluster") {
-            return this.cluster.current.getTree(this.state.selectedFile, this.state.selectedStrains, this.state.checkmlst,this.state.textbox).then(response => {
-                const base64 = btoa(
-                    new Uint8Array(response.data).reduce(
-                        (data, byte) => data + String.fromCharCode(byte),
-                        '',
-                    ),
-                );
-                this.setState({source: "data:;base64," + base64});
-                this.setState({loaded: true})
-                // this.setState({selectedFile: {}})
-                // this.setState({selectedOption: []})
-                this.setState({loadedCluster: true})
-            }).catch((err) => {
-                    this.setState({loaded: true})
-                    console.log(err);
-                    if (this.childErr.current) {
-                        this.childErr.current.handleOpen();
-                    }
-                }
-            );
+        if (this.state.generateType.includes("cluster")) {
+            await this.setState({list_strain_gene:[...this.cluster.current.getTree()]})//this.state.selectedFile, this.state.selectedStrains, this.state.checkmlst,this.state.textbox)})
+            //     const base64 = btoa(
+            //         new Uint8Array(response.data).reduce(
+            //             (data, byte) => data + String.fromCharCode(byte),
+            //             '',
+            //         ),
+            //     );
+            //     this.setState({source: "data:;base64," + base64});
+            //     this.setState({loaded: true})
+            //     this.setState({loadedCluster: true})
+            //     if(response.headers.get('bad_subtree').length>0 || response.headers.get('bad_systems').length>0){
+            //         if (this.childErr.current) {
+            //             this.childWar.current.handleOpen();
+            //         }
+            //     }
+            // }).catch((err) => {
+            //         this.setState({loaded: true})
+            //         console.log(err);
+            //         if (this.childErr.current) {
+            //             this.childErr.current.handleOpen();
+            //         }
+            //     }
+            // );
         }
-        if (this.state.generateType == "distinct systems") {
-            let url = "http://127.0.0.1:8800/api/v1/defense/distinct_count";
-            return axios
-                .get(url, {
-                        params: {
-                            subtree: this.state.textbox == false ? this.state.selectedFile : this.state.selectedStrains,
-                            MLST: this.state.checkmlst
-                        },
-                        paramsSerializer: function (params) {
-                            return qs.stringify(params, {arrayFormat: 'repeat'})
-                        },
-                        responseType: 'arraybuffer',
-                    }
-                )
-                .then(response => {
-                    const base64 = btoa(
-                        new Uint8Array(response.data).reduce(
-                            (data, byte) => data + String.fromCharCode(byte),
-                            '',
-                        ),
-                    );
-                    this.setState({source: "data:;base64," + base64});
-                    this.setState({loaded: true})
-                }).catch((err) => {
-                        this.setState({loaded: true})
-                        console.log(err);
-                        if (this.childErr.current) {
-                            this.childErr.current.handleOpen();
-                        }
-                    }
-                );
-        } else {
+        // if (this.state.generateType.includes("distinct systems")) {
+        //     // let url = "http://127.0.0.1:8800/api/v1/defense/distinct_count";
+        //     return axios
+        //         .get(url, {
+        //                 params: {
+        //                     subtree: this.state.textbox == false ? this.state.selectedFile : this.state.selectedStrains,
+        //                     MLST: this.state.checkmlst
+        //                 },
+        //                 paramsSerializer: function (params) {
+        //                     return qs.stringify(params, {arrayFormat: 'repeat'})
+        //                 },
+        //                 responseType: 'arraybuffer',
+        //             }
+        //         )
+        //         .then(response => {
+        //             const base64 = btoa(
+        //                 new Uint8Array(response.data).reduce(
+        //                     (data, byte) => data + String.fromCharCode(byte),
+        //                     '',
+        //                 ),
+        //             );
+        //             this.setState({source: "data:;base64," + base64});
+        //             this.setState({loaded: true})
+        //         }).catch((err) => {
+        //                 this.setState({loaded: true})
+        //                 console.log(err);
+        //                 if (this.childErr.current) {
+        //                     this.childErr.current.handleOpen();
+        //                 }
+        //             }
+        //         );
+        // } else {
             let url = "http://127.0.0.1:8800/api/v1/strains/phyloTree"
-            if (this.state.generateType == "isolation") {
-                url = "http://127.0.0.1:8800/api/v1/isolation/isolation_tree"
-            }
+            // if (this.state.generateType == "isolation") {
+            //     url = "http://127.0.0.1:8800/api/v1/isolation/isolation_tree"
+            // }
             return axios
                 .get(url, {
                         params: {
-                            systems: this.state.selectedOption.map((option) => option.label),
+                            systems: this.state.generateType.includes("defense") ? this.state.selectedOption.map((option) => option.label): [],
                             subtree: this.state.textbox == false ? this.state.selectedFile : this.state.selectedStrains,
+                            list_strain_gene: this.state.generateType.includes("cluster") ? this.state.list_strain_gene : [],
+                            avg_defense_sys: this.state.generateType.includes("distinct systems"),
+                            isolation_type: this.state.generateType.includes("isolation"),
                             MLST: this.state.checkmlst
                         },
                         paramsSerializer: function (params) {
@@ -162,18 +173,29 @@ class BrowsePage extends Component {
                     );
                     this.setState({source: "data:;base64," + base64});
                     this.setState({loaded: true})
-                    // this.setState({selectedFile: {}})
-                    // this.setState({selectedStrains: []})
+                    if (this.state.generateType.includes("cluster")){
+                        this.setState({loadedCluster: true})
+                    }
+                    console.log(response.headers['bad_subtree'])
+                    if(response.headers['bad_subtree'].length>0 || response.headers['bad_systems'].length>0){
+                        this.setState({badSystems: response.headers['bad_systems']},()=>{
+                            this.setState({badStrains: response.headers['bad_subtree']},() => {
+                                if (this.childErr.current) {
+                                    this.childWar.current.handleOpen();
+                                }
+                            });
+                        });
+
+                    }
                 }).catch((err) => {
                         this.setState({loaded: true})
-                        console.log(err);
+                        console.log("the error:" +err);
                         if (this.childErr.current) {
                             this.childErr.current.handleOpen();
                         }
                     }
                 );
         }
-    };
 
     /*
     handle file upload and load each line to array of
@@ -214,19 +236,35 @@ class BrowsePage extends Component {
 
     };
 
+    arrayRemove = (arr, value) =>{
+
+        return arr.filter(function(geeks){
+            return geeks != value;
+        });
+
+    }
+
     generatingTypeHandler = Gtype => {
-        if (Gtype == "defense") {
-            this.setState({generateType: "defense"})
+        let isActive = this.state.generateType.includes(Gtype);
+        if (isActive){
+            this.setState({generateType: this.arrayRemove(this.state.generateType, Gtype)});
         }
-        if (Gtype == "cluster") {
-            this.setState({generateType: "cluster"})
+        else{
+            let newArr = [...this.state.generateType,Gtype]
+            this.setState({generateType: [...newArr]});
         }
-        if (Gtype == "isolation") {
-            this.setState({generateType: "isolation"})
-        }
-        if (Gtype == "distinct systems") {
-            this.setState({generateType: "distinct systems"}, () => this.computeTree());
-        }
+        // if (Gtype == "defense") {
+        //
+        // }
+        // if (Gtype == "cluster") {
+        //     this.setState({generateType: "cluster"})
+        // }
+        // if (Gtype == "isolation") {
+        //     this.setState({generateType: "isolation"})
+        // }
+        // if (Gtype == "distinct systems") {
+        //     this.setState({generateType: "distinct systems"}, () => this.computeTree());
+        // }
     }
 
     /*
@@ -322,9 +360,8 @@ class BrowsePage extends Component {
         section and component
          */
         const renderGenerateType = () => {
-            if (this.state.generateType == "defense") {
-                return (
-                    <div>
+                return (<div>
+                    {this.state.generateType.includes("defense") && (<div>
                         <div>Choose the Defense Systems you would like to show:</div>
                         <Select
                             closeMenuOnSelect={false}
@@ -335,24 +372,18 @@ class BrowsePage extends Component {
                             onChange={handleChange}
                             value={this.state.selectedOption}
                         />
+                        <br/><Divider/><br/>
+                    </div>)}
+                        {this.state.generateType.includes("cluster") && (<div>
+                            <div>Choose the number of genes you would like to show:</div>
+                            <Cluster ref={this.cluster}/>
+                            <br/><Divider/><br/>
+                        </div>)}
+                        {this.state.generateType.includes("isolation") &&(<div><IsolationType ref={this.isltype}/><br/><Divider/><br/></div>)}
+                        {this.state.generateType.includes("distinct systems") && (<div>showing the distribution of distinct count of defense systems of each strain across the
+                            tree<br/><Divider/><br/></div>)}
                     </div>
                 )
-            }
-
-            if (this.state.generateType == "cluster") {
-                return (
-                    <div>
-                        <div>Choose the number of genes you would like to show:</div>
-                        <Cluster ref={this.cluster}/>
-                    </div>)
-            }
-            if (this.state.generateType == "isolation") {
-                return (<IsolationType ref={this.isltype}/>)
-            } else {
-                return (
-                    <div>showing the distribution of distinct count of defense systems of each strain across the
-                        tree</div>)
-            }
         }
 
         const setCheckMLST = () => {
@@ -363,7 +394,7 @@ class BrowsePage extends Component {
         }
 
         const downloadCluster = () => {
-            if (this.state.generateType == "cluster" && this.cluster.current) {
+            if (this.state.generateType.includes("cluster") && this.cluster.current) {
                 if (this.state.loadedCluster) {
                     return (
                         // console.log(this.cluster.current)
@@ -392,9 +423,6 @@ class BrowsePage extends Component {
                             <br/>
                             <div style={{width: "95%", marginLeft: "5%"}}>
                                 {renderGenerateType()}
-                                <br/>
-                                <Divider/>
-                                <br/>
                                 <div className='rowC'>
                                     <input style={{marginTop:'2%', marginLeft:"3%"}} id='1' type="checkbox" name="mlst" onChange={setCheckMLST} checked={this.state.checkmlst}/>
                                     <label style={{paddingLeft: '3%'}} htmlFor='1'> Display MLST across the tree</label>
@@ -457,6 +485,7 @@ class BrowsePage extends Component {
 
                 </FadeIn>
                 <ErrorModalC open={false} ref={this.childErr}/>
+                <WarningModalC open={false} badSystems={this.state.badSystems} badStrains={this.state.badStrains} ref={this.childWar}/>
             </div>
         )
     }

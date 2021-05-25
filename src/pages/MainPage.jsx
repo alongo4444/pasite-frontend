@@ -3,7 +3,6 @@ import {Card, Fade, Container, Row, Col, Carousel} from "react-bootstrap";
 import {Bell, Book} from 'react-bootstrap-icons';
 import styles from '../styles/MainPage.css';
 import FadeIn from 'react-fade-in';
-import PhiloTreeC from "../components/PhiloTreeC"
 import slide1 from "../assets/images/slide1.jpg"
 import slide2 from "../assets/images/slide2.jpg"
 import slide3 from "../assets/images/slide3.jpg"
