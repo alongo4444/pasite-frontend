@@ -9,7 +9,9 @@ import {faDna, faDisease, faShieldVirus} from "@fortawesome/free-solid-svg-icons
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ErrorModalC from "../components/ErrorModalC";
 
-
+/**
+ * Results Page after a search
+ */
 class ResultsPage extends Component {
     state = {
         result_table: []
@@ -44,8 +46,6 @@ class ResultsPage extends Component {
             {dataField: "strand", text: "strand", sort: true},
             {dataField: "name", text: "name", sort: true},
             {dataField: "symbol", text: "symbol", sort: true},
-            // {dataField: "dna_sequence", text: "dna sequence", sort: true},
-            // {dataField: "protein_sequence", text: "protein sequence", sort: true}
         ]
 
         const dna_char_to_color = {

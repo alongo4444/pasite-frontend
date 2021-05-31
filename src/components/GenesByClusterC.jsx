@@ -1,11 +1,13 @@
 import React from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row, Button} from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import axios from "axios";
 import ErrorModalC from "./ErrorModalC";
 import CSVorFastaC from "../components/CSVorFastaC";
 
-
+/**
+ * the component choosing genes by their cluster
+ */
 export default function GenesByClusterC({genes}) {
 
     const childErr = React.createRef();
@@ -29,7 +31,7 @@ export default function GenesByClusterC({genes}) {
                 } else {
                     FileDownload(res.data, 'genes_by_cluster.faa')
                 }
-            }).catch(function (error) {childErr.current.handleOpen()});
+            }).catch(function (error) {childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")});
     }
 
 

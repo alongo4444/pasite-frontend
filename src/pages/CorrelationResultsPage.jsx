@@ -1,8 +1,9 @@
 import React, {Component, useState, useRef} from "react";
 import CorrelationGraph from "../components/CorrelationGraph";
-import DefVSDef from "../components/CorrelationComponents/DefVSDef";
-import DefVSIsoType from "../components/CorrelationComponents/DefVSIsoType";
 
+/**
+ * the Correlation Page - The results view
+ */
 class CorrelationResultsPage extends Component {
 
     state = {source: null};

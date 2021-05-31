@@ -1,22 +1,20 @@
 import React from "react";
 import FadeIn from "react-fade-in";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import searchlogo from "../../assets/images/research.png"
-import {Link} from "react-router-dom";
 import AutocompleteC from "../AutocompleteC"
 import {faPlusCircle, faAngleDoubleDown} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import './Correlations.css'
+import '../../styles/Correlations.css'
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {BsShieldShaded} from "react-icons/bs";
-import {GiDrippingTube} from "react-icons/gi";
 import {SiMicrogenetics} from "react-icons/si";
 
-// calculates the correlation between one defense system to a cluster Type
+/**
+ * calculates the correlation between one defense system to a cluster Type
+ */
 export default function DefVSCluster({parentCallback2}) {
-    //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
     const [selectedDF, setSelectedDF] = React.useState([]);
     const [selected, setSelected] = React.useState([]);
@@ -42,8 +40,6 @@ export default function DefVSCluster({parentCallback2}) {
     }, [open]);
 
     React.useEffect(() => {
-        // let arr = selectedDF.concat(selectedIso);
-        // setSelected(arr)
         console.log(selectedDF)
         let arr = selectedDF.concat(selected_gene);
         if (arr.length === 2) {
@@ -54,8 +50,6 @@ export default function DefVSCluster({parentCallback2}) {
     }, [selectedDF]);
 
     React.useEffect(() => {
-        // let arr = selectedDF.concat(selectedIso);
-        // setSelected(arr)
         console.log(selected_gene)
         let arr = selected_gene.concat(selectedDF);
         if (arr.length === 2) {
@@ -100,33 +94,6 @@ export default function DefVSCluster({parentCallback2}) {
                 </div>
 
                 <Form>
-
-
-                    {/*<Form.Group as={Row} controlId="selectDefSys">*/}
-                    {/*    <Form.Label className="wrapper" column sm="4">*/}
-                    {/*        <p style={{textAlign: "right"}}>Select two different defense systems</p>*/}
-                    {/*    </Form.Label>*/}
-                    {/*    <Row>*/}
-                    {/*        <Col sm="2">*/}
-                    {/*            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}*/}
-                    {/*                           parentCallback={getSelected}></AutocompleteC>*/}
-                    {/*        </Col>*/}
-                    {/*        &*/}
-                    {/*        <Col sm="2">*/}
-                    {/*            <AutocompleteC apiUrl='http://127.0.0.1:8800/api/v1/defense' multipleChoice={false}*/}
-                    {/*                           parentCallback={getSelected}></AutocompleteC>*/}
-                    {/*        </Col>*/}
-                    {/*    </Row>*/}
-                    {/*    <Row>*/}
-                    {/*        <Col sm="2">*/}
-                    {/*            <p style={{textAlign: "right"}}>Select two different defense systems</p>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col sm="2">*/}
-                    {/*            <p style={{textAlign: "right"}}>Select two different defense systems</p>*/}
-                    {/*        </Col>*/}
-                    {/*    </Row>*/}
-                    {/*</Form.Group>*/}
-
                     <Form.Group as={Row} controlId="selectDefSys">
                         <Container>
 
@@ -157,7 +124,6 @@ export default function DefVSCluster({parentCallback2}) {
                                         labelText="Choose a Defense System"
                                         options={strains}
                                         getOptionLabel={(option) => option.name}
-                                        //style={{width: 300}}
                                         onChange={(event, value) => choice_strain(value)}
                                         renderInput={(params) => <TextField {...params} size="small"
                                                                             label="Choose Strain"

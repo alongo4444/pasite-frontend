@@ -8,7 +8,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import FadeIn from "react-fade-in";
 import '../styles/CorrelationGraph.css';
-import './CorrelationComponents/Correlations.css'
+import '../styles/Correlations.css'
 import ErrorModalC from "./ErrorModalC";
 import CorrelationBoxPlot from "./CorrelationBoxPlot";
 import {Col, Container, Row} from "react-bootstrap";
@@ -19,9 +19,10 @@ import {GiDrippingTube} from "react-icons/gi";
 
 am4core.useTheme(am4themes_animated);
 
-
+/**
+ * the Vann correlation component
+ */
 class CorrelationGraph extends Component {
-// export default function CorrelationGraph({itemsSelected, eventK}) {
 
     constructor(props) {
         super(props);
@@ -36,105 +37,8 @@ class CorrelationGraph extends Component {
 
     }
 
-    // const [results, setResults] = React.useState([]);
-    // const [itemNames, setItemNames] = React.useState([]);
-    // const childErr = React.createRef();
-    //
-    //
-    // React.useEffect(() => {
-    //     if (eventK == 'first') {
-    //         const Qs = require('qs')
-    //         axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystems', {
-    //             params: {
-    //                 systems: itemsSelected.map((option) => option.name),
-    //             },
-    //             paramsSerializer: params => {
-    //                 return Qs.stringify(params, {arrayFormat: 'repeat'})
-    //             },
-    //             //responseType: 'arraybuffer'
-    //         })
-    //             .then(response => {
-    //                 setResults(response.data)
-    //             })
-    //     } else if (eventK == 'second') {
-    //
-    //     } else if (eventK == 'third') {
-    //         const Qs = require('qs')
-    //         axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
-    //             params: {
-    //                 system: itemsSelected[0].name, isoType: itemsSelected[1].name
-    //             },
-    //             paramsSerializer: params => {
-    //                 return Qs.stringify(params, {arrayFormat: 'repeat'})
-    //             },
-    //             //responseType: 'arraybuffer'
-    //         })
-    //             .then(response => {
-    //                 setResults(response.data)
-    //             })
-    //     }
-    // }, [itemsSelected]);
-    //
-    //
-    // React.useEffect(() => {
-    //
-    //     if (!results[0]) {
-    //         return undefined;
-    //     }
-    //
-    //     let chart = am4core.create("chartdiv", am4plugins_venn.VennDiagram);
-    //
-    //     // Create and configure series
-    //     let series = chart.series.push(new am4plugins_venn.VennSeries())
-    //     series.dataFields.category = "name";
-    //     series.dataFields.value = "value";
-    //     series.dataFields.intersections = "sets";
-    //     series.data = [
-    //         {name: itemNames[0], value: results[0]['K']},
-    //         {name: itemNames[1], value: results[0]['n']},
-    //         {
-    //             name: itemNames[0] + "\n&\n" + itemNames[1],
-    //             value: results[0]['k'],
-    //             sets: [itemNames[0], itemNames[1]]
-    //         }
-    //     ];
-    //     console.log(series.data);
-    // }, [results])
-    //
-    //
-    // React.useEffect(() => {
-    //     if (eventK == 'first') {
-    //         setItemNames(itemsSelected.map((option) => option.name))
-    //     } else if (eventK == 'second') {
-    //
-    //     } else if (eventK == 'third') {
-    //         const items = [itemsSelected[0].name, itemsSelected[1].name]
-    //         setItemNames(items, function () {
-    //             const Qs = require('qs')
-    //             axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystemAndIsolationType', {
-    //                 params: {
-    //                     system: itemsSelected[0].name, isoType: itemsSelected[1].name
-    //                 },
-    //                 paramsSerializer: params => {
-    //                     return Qs.stringify(params, {arrayFormat: 'repeat'})
-    //                 },
-    //                 //responseType: 'arraybuffer'
-    //             })
-    //                 .then(response => {
-    //                     setResults(response.data)
-    //
-    //                 }).catch(function (error) {
-    //                 if (childErr.current) {
-    //                     childErr.current.handleOpen()
-    //                 }
-    //             });
-    //         })
-    //     }
-    // })
-
     componentDidMount() {
         if (this.props.eventK == 'dvd') {
-            // this.setState({title: 'Correlation Between:'})
             this.setState({itemNames: this.props.itemsSelected.map((option) => option.name)}, function () {
                 const Qs = require('qs')
                 axios.get('http://127.0.0.1:8800/api/v1/statistics/correlationBetweenDefenseSystems', {
@@ -144,7 +48,6 @@ class CorrelationGraph extends Component {
                     paramsSerializer: params => {
                         return Qs.stringify(params, {arrayFormat: 'repeat'})
                     },
-                    //responseType: 'arraybuffer'
                 })
                     .then(response => {
                         this.setState({results: response.data}, function () {
@@ -169,7 +72,7 @@ class CorrelationGraph extends Component {
 
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -184,7 +87,6 @@ class CorrelationGraph extends Component {
                     paramsSerializer: params => {
                         return Qs.stringify(params, {arrayFormat: 'repeat'})
                     },
-                    //responseType: 'arraybuffer'
                 })
                     .then(response => {
                         this.setState({withd_y: response.data[1]}, function () {
@@ -208,14 +110,13 @@ class CorrelationGraph extends Component {
                                         }
 
                                     ];
-                                    // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
                                     console.log(series.data);
                                 })
                             })
                         })
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -230,7 +131,6 @@ class CorrelationGraph extends Component {
                     paramsSerializer: params => {
                         return Qs.stringify(params, {arrayFormat: 'repeat'})
                     },
-                    //responseType: 'arraybuffer'
                 })
                     .then(response => {
                         this.setState({results: response.data}, function () {
@@ -252,13 +152,12 @@ class CorrelationGraph extends Component {
                                 }
 
                             ];
-                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
                             console.log(series.data);
                         })
 
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -273,7 +172,6 @@ class CorrelationGraph extends Component {
                     paramsSerializer: params => {
                         return Qs.stringify(params, {arrayFormat: 'repeat'})
                     },
-                    //responseType: 'arraybuffer'
                 })
                     .then(response => {
                         this.setState({results: response.data}, function () {
@@ -295,13 +193,12 @@ class CorrelationGraph extends Component {
                                 }
 
                             ];
-                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
                             console.log(series.data);
                         })
 
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
@@ -316,7 +213,6 @@ class CorrelationGraph extends Component {
                     paramsSerializer: params => {
                         return Qs.stringify(params, {arrayFormat: 'repeat'})
                     },
-                    //responseType: 'arraybuffer'
                 })
                     .then(response => {
                         this.setState({results: response.data}, function () {
@@ -338,25 +234,17 @@ class CorrelationGraph extends Component {
                                 }
 
                             ];
-                            // series.data =  [{ name: "A", value: 10 }, { name: "B", value: 10 }, { name: "C", value: 10 }, { name: "X", value: 2, sets: ["A", "B"] }, { name: "Y", value: 2, sets: ["A", "C"] }, { name: "Z", value: 2, sets: ["B", "C"] }, { name: "Q", value: 1, sets: ["A", "B", "C"] }];
                             console.log(series.data);
                         })
 
                     }).catch((err) => {
                     if (this.childErr.current) {
-                        this.childErr.current.handleOpen()
+                        this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.")
                     }
                 });
             })
         }
     }
-
-
-    // componentWillUnmount() {
-    //     if (this.chart) {
-    //         this.chart.dispose();
-    //     }
-    // }
 
     render() {
 

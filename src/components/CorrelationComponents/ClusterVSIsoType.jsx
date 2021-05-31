@@ -1,22 +1,20 @@
 import React from "react";
 import FadeIn from "react-fade-in";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import searchlogo from "../../assets/images/research.png"
-import {Link} from "react-router-dom";
 import AutocompleteC from "../AutocompleteC"
 import {faPlusCircle, faAngleDoubleDown} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {BsShieldShaded} from "react-icons/bs";
 import {GiDrippingTube} from "react-icons/gi";
-import './Correlations.css'
+import '../../styles/Correlations.css'
 import {SiMicrogenetics} from "react-icons/si";
 
-// calculates the correlation between one cluster to an ISO Type
+/**
+ * calculates the correlation between one cluster to an ISO Type
+ */
 export default function ClusterVSIsoType({parentCallback2}) {
-    //const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
     const [selectedIso, setSelectedIso] = React.useState([]);
     const [selected, setSelected] = React.useState([]);
@@ -42,8 +40,6 @@ export default function ClusterVSIsoType({parentCallback2}) {
     }, [open]);
 
     React.useEffect(() => {
-        // let arr = selectedDF.concat(selectedIso);
-        // setSelected(arr)
         console.log(selectedIso)
         let arr = selectedIso.concat(selected_gene);
         if (arr.length === 2) {
@@ -54,8 +50,6 @@ export default function ClusterVSIsoType({parentCallback2}) {
     }, [selectedIso]);
 
     React.useEffect(() => {
-        // let arr = selectedDF.concat(selectedIso);
-        // setSelected(arr)
         console.log(selected_gene)
         let arr = selected_gene.concat(selectedIso);
         if (arr.length === 2) {

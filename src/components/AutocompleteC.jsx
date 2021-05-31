@@ -1,18 +1,21 @@
 import React from "react";
 import '../styles/SearchPage.css';
-import {Form, Col, Row, Modal, Button} from "react-bootstrap";
-import FadeIn from "react-fade-in";
+import {Form, Col, Row} from "react-bootstrap";
 import ErrorModalC from "./ErrorModalC";
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-//apiUrl - the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8800/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
-//parentCallback - the callback that will be called in the parent which holds this component. The parent will receive the current selected objects for each change on this component.  See DownloadPage for example or ask Alon.
-//multipleChoice - determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
-//labelText - The text which will appear in the label of the component (i.e: "Select single/multiple strain/s:").
-//disabled - Disables the autocomplete
+
+/**
+ * the component of the searching module
+ * apiUrl - the url of the requested HTML call to the backend (i.e: http://127.0.0.1:8800/api/v1/strains). The backend need to return list of dictionaries in the format: [{name: "a", key: "0"},...]
+ * parentCallback - the callback that will be called in the parent which holds this component. The parent will receive the current selected objects for each change on this component.  See DownloadPage for example or ask Alon.
+ * multipleChoice - determines the multiselect option, 'true' means multiselect enabled, 'false' otherwise.
+ * labelText - The text which will appear in the label of the component (i.e: "Select single/multiple strain/s:").
+ * disabled - Disables the autocomplete
+ */
 export default function AutocompleteC({
                                           apiUrl,
                                           parentCallback,
@@ -45,7 +48,7 @@ export default function AutocompleteC({
                 }
             } catch (e) {
                 if(childErr.current) {
-                    childErr.current.handleOpen();
+                    childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                 }
             }
 
@@ -68,11 +71,10 @@ export default function AutocompleteC({
             <Form.Group as={Row} controlId="selectStrain">
                 <Col>
                     <Autocomplete
-
+                        disableCloseOnSelect = {true}
                         disabled={disabled}
                         id="asynchronous-demo"
                         multiple={multipleChoice}
-                        // style={{ width: "100%" }}
                         open={open}
                         onOpen={() => {
                             setOpen(true);
@@ -80,26 +82,21 @@ export default function AutocompleteC({
                         onClose={() => {
                             setOpen(false);
                         }}
-                        // onChange={(event, value) => setSelectedA(value)}
                         onChange={(event, value) => parentCallback(value)}
                         getOptionSelected={(option, value) => option.name === value.name}
                         getOptionLabel={(option) => option.name}
                         options={options}
                         getOptionDisabled={(() => {
                             if (parentCallbackLegnth) {
-                                if (parentCallbackLegnth() >= limit_length) {
-                                    return true
-                                }
+                                return parentCallbackLegnth() >= limit_length
                             }
                             return false
-                            // parentCallbackLegnth() > 3 && false ? true : false
                         })
                         }
                         loading={loading}
                         renderInput={(params) => (
                             <TextField
                                 {...params}
-                                // label="Choose strains..."
                                 label = {labelText}
                                 variant="outlined"
                                 size="small"
@@ -117,17 +114,6 @@ export default function AutocompleteC({
                     />
                 </Col>
             </Form.Group>
-            {/*<Modal show={show} onHide={handleClose}>*/}
-            {/*    <Modal.Header closeButton>*/}
-            {/*        <Modal.Title>Modal heading</Modal.Title>*/}
-            {/*    </Modal.Header>*/}
-            {/*    <Modal.Body>There is a problem with the server request. Sorry for the inconvenience.</Modal.Body>*/}
-            {/*    <Modal.Footer>*/}
-            {/*        <Button variant="secondary" onClick={handleClose}>*/}
-            {/*            Close*/}
-            {/*        </Button>*/}
-            {/*    </Modal.Footer>*/}
-            {/*</Modal>*/}
             <ErrorModalC open={false} ref={childErr}/>
         </div>
     );

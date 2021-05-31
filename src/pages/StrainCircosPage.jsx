@@ -1,21 +1,17 @@
 import React, {useState} from "react";
 import {Form, Col, Row, Button, OverlayTrigger, Tooltip} from "react-bootstrap";
 import searchlogo from '../assets/images/research.png'
-import {faQuestion} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import FadeIn from "react-fade-in";
 import {Link} from 'react-router-dom';
-import * as ReactDOM from 'react-dom';
-import {MultiSelect} from '@progress/kendo-react-dropdowns';
-import {filterBy} from '@progress/kendo-data-query';
-import axios from "axios";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ErrorModalC from "../components/ErrorModalC";
 
 
-
+/**
+ * The Strain Circos search page
+ */
 export default function StrainCircosPage() {
     const [strainVariableName, setStrainVariableName] = React.useState("")
     const [open, setOpen] = React.useState(false);
