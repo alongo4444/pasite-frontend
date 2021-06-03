@@ -87,6 +87,7 @@ export default function MiniDrawer({generatingTypeHandler}) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [itemSelected, setItemSelected] = React.useState(["defense"]);
 
     const handleDrawerOpen = () => {
         if (open == true) {
@@ -95,6 +96,26 @@ export default function MiniDrawer({generatingTypeHandler}) {
             setOpen(true)
         }
     };
+
+    const arrayRemove = (arr, value) =>{
+
+        return arr.filter(function(geeks){
+            return geeks != value;
+        });
+
+    }
+
+    const handleSelectedItem = item => {
+        generatingTypeHandler(item)
+        let isActive = itemSelected.includes(item);
+        if (isActive){
+            setItemSelected(arrayRemove(itemSelected, item));
+        }
+        else{
+            let newArr = [...itemSelected,item];
+            setItemSelected([...newArr]);
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -127,19 +148,19 @@ export default function MiniDrawer({generatingTypeHandler}) {
                 <Divider/>
                 <List>
 
-                    <ListItem button key="defense" onClick={() => generatingTypeHandler("defense")}>
+                    <ListItem button selected={itemSelected.includes("defense")} key="defense" onClick={()=> handleSelectedItem("defense")}>
                         <ListItemIcon><BsShieldShaded/></ListItemIcon>
                         <ListItemText primary="Defense Systems"/>
                     </ListItem>
-                    <ListItem button key="cluster" onClick={() => generatingTypeHandler("cluster")}>
+                    <ListItem button selected={itemSelected.includes("cluster")} key="cluster" onClick={() => handleSelectedItem("cluster")}>
                         <ListItemIcon><SiMicrogenetics/></ListItemIcon>
                         <ListItemText primary="Gene Cluster"/>
                     </ListItem>
-                    <ListItem button key="isolation" onClick={() => generatingTypeHandler("isolation")}>
+                    <ListItem button selected={itemSelected.includes("isolation")} key="isolation" onClick={() => handleSelectedItem("isolation")}>
                         <ListItemIcon><GiDrippingTube/></ListItemIcon>
                         <ListItemText primary="Isolation Type"/>
                     </ListItem>
-                    <ListItem button key="distinct systems" onClick={() => generatingTypeHandler("distinct systems")}>
+                    <ListItem button selected={itemSelected.includes("distinct systems")} key="distinct systems" onClick={() => handleSelectedItem("distinct systems")}>
                         <ListItemIcon><GiShieldEchoes/></ListItemIcon>
                         <ListItemText primary="Number of Distinct Systems"/>
                     </ListItem>

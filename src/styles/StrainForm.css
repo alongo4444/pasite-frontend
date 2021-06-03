@@ -11,3 +11,13 @@
 .note{
     font-size: 12px;
 }
+
+.rowC{
+    display:flex;
+    flex-direction:row;
+    margin-bottom: 3%;
+}
+
+.space{
+    margin-left: 3%;
+}
