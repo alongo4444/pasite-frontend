@@ -15,7 +15,7 @@ describe("check DOM components", () => {
     it("test simple search", () =>{
         /* ==== Generated with Cypress Studio ==== */
         cy.get('.btn').should('be.disabled');
-        cy.get('#asynchronous-demo').click().wait(1000);
+        cy.get('#asynchronous-demo').click().wait(5000);
         cy.get('#asynchronous-demo-option-1').click();
         cy.get('.btn').should('be.enabled')
         cy.get('#asynchronous-demo').click();

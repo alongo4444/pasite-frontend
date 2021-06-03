@@ -1,6 +1,47 @@
 import '@testing-library/cypress/add-commands'
 import { fixCypressSpec } from '../support'
 
+describe('test catches in code via forcing network error:',()=>{
+    it('error onMount', () => {
+        cy.intercept('GET', 'api/v1/strains/*', {
+            statusCode: 500,
+        })
+        cy.visit('/browse')
+        cy.get('.modal-body').should('be.visible')
+    })
+
+    it('throw error on generate button', () => {
+        cy.visit('/browse')
+        cy.intercept('GET', 'api/v1/strains/*', {
+            statusCode: 500,
+        })
+        cy.get('.GenerateTree').click();
+        cy.get('.modal-body').should('be.visible')
+    })
+
+    // it('throw error on cluster generate button', () => {
+    //     cy.visit('/browse')
+    //     cy.get('.MuiList-root > :nth-child(2)').click({force:true});
+    //     cy.intercept('GET', 'api/v1/cluster/*', {
+    //         statusCode: 500,
+    //     })
+    //     cy.get('.GenerateTree').click();
+    //     cy.get('.modal-body').should('be.visible')
+    // })
+
+    it('throw error in distinct system mode on generate button', () => {
+        cy.intercept('GET', '/api/v1/strains/*', {
+            statusCode: 500,
+        })
+        cy.visit('/browse')
+        cy.get('.MuiList-root > :nth-child(4)').click({force:true});
+        cy.get('.modal-body').should('be.visible')
+        cy.get('.GenerateTree').click({force:true});
+        cy.get('.modal-footer').findByText('Close').click()
+        cy.get('.GenerateTree').click();
+        cy.get('.modal-body').should('be.visible')
+    })
+})
 
 describe("one-step actions", () => {
     beforeEach(fixCypressSpec(__filename))
@@ -35,7 +76,7 @@ describe("one-step actions", () => {
         cy.wait(3000)
         cy.get('div[class="App"]').toMatchImageSnapshot({name:'distinct_count.png'})
         cy.get('.MuiList-root > :nth-child(1)').click({force:true});
-        cy.findByText('Choose the Defense Systems you would like to show:').should('exist')
+        cy.findByText('Choose the Defense Systems you would like to show:').should('not.exist')
         /* ==== End Cypress Studio ==== */
     })
     it("check strains file upload",()=>{
@@ -53,12 +94,13 @@ describe("one-step actions", () => {
         cy.get('#asynchronous-demo').clear();
         cy.get('#asynchronous-demo').type('PAO1');
         cy.get('#asynchronous-demo-option-0').click();
-        cy.get('.GenerateTree').click();
+        cy.get('.GenerateTree').click({force: true});
         cy.get('img[src*="data:;"]',{timeout:50000}).toMatchImageSnapshot({name:'manuelSubTree.png'});
         /* ==== End Cypress Studio ==== */
     })
     it("check defense system selection",()=>{
         /* ==== Generated with Cypress Studio ==== */
+        cy.wait(2000);
         cy.get('.css-2b097c-container').click();
         cy.get('#react-select-3-option-0').click();
         cy.get('#react-select-3-option-1').click();
@@ -91,48 +133,6 @@ describe("one-step actions", () => {
     it("screenshot(visual) testing of the standard tree:", ()=>{
         cy.get('div[class="App"]').toMatchImageSnapshot({name:'standardPage.png'});
         cy.get('img[src*="data:;"]',{timeout:50000}).toMatchImageSnapshot({name:'standardTree.png'});
-    })
-})
-
-describe('test catches in code via forcing network error:',()=>{
-    it('error onMount', () => {
-        cy.intercept('GET', 'api/v1/strains/*', {
-            statusCode: 500,
-        })
-        cy.visit('/browse')
-        cy.get('.modal-body').should('be.visible')
-    })
-
-    it('throw error on generate button', () => {
-        cy.visit('/browse')
-        cy.intercept('GET', 'api/v1/strains/*', {
-            statusCode: 500,
-        })
-        cy.get('.GenerateTree').click();
-        cy.get('.modal-body').should('be.visible')
-    })
-
-    it('throw error on cluster generate button', () => {
-        cy.visit('/browse')
-        cy.get('.MuiList-root > :nth-child(2)').click({force:true});
-        cy.intercept('GET', 'api/v1/cluster/*', {
-            statusCode: 500,
-        })
-        cy.get('.GenerateTree').click();
-        cy.get('.modal-body').should('be.visible')
-    })
-
-    it('throw error in distinct system mode on generate button', () => {
-        cy.visit('/browse')
-
-        cy.intercept('GET', '/api/v1/defense/*', {
-            statusCode: 500,
-        })
-        cy.get('.MuiList-root > :nth-child(4)').click({force:true});
-        cy.get('.modal-body').should('be.visible')
-        cy.get('.modal-footer').findByText('Close').click()
-        cy.get('.GenerateTree').click();
-        cy.get('.modal-body').should('be.visible')
     })
 })
 
@@ -195,10 +195,12 @@ describe("check clusters trees:",()=> {
                 cy.get('#strains-combo-box').clear();
                 cy.get('#strains-combo-box').type('PA14');
                 cy.get('#strains-combo-box-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
                 cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
                 cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(gene.name);
                 cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get('.GenerateTree').click();
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
@@ -218,6 +220,7 @@ describe("check clusters trees:",()=> {
                     cy.get('.GenerateTree').click();
                     cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
                     cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: gene + '_MLST_tree.png'});
+                    cy.get('#\\31 ').check();
                 }
             })
         })
@@ -236,15 +239,19 @@ describe("check clusters trees:",()=> {
                 cy.get('#strains-combo-box').clear();
                 cy.get('#strains-combo-box').type('PA14');
                 cy.get('#strains-combo-box-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get(':nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
                 cy.get(':nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(double[0]);
                 cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').clear();
                 cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').type('PA14');
                 cy.get('#strains-combo-box-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
                 cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(double[1]);
                 cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get('.GenerateTree').click();
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
@@ -263,6 +270,8 @@ describe("check clusters trees:",()=> {
                     cy.get('.GenerateTree').click();
                     cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
                     cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: double.join("_") + '_MLST_tree.png'});
+                    cy.get('#\\31 ').check();
+
                 }
             })
 
@@ -281,22 +290,28 @@ describe("check clusters trees:",()=> {
                 cy.get('#strains-combo-box').clear();
                 cy.get('#strains-combo-box').type('PA14');
                 cy.get('#strains-combo-box-option-0').click();
+                cy.get('.react-transform-element').click();
                 /* ==== Generated with Cypress Studio ==== */
                 cy.get(':nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
                 cy.get(':nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(triple[0]);
                 cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').clear();
                 cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').type('PA14');
                 cy.get('#strains-combo-box-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
                 cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(triple[1]);
                 cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get(':nth-child(4) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').clear();
                 cy.get(':nth-child(4) > :nth-child(1) > :nth-child(1) > :nth-child(2) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #strains-combo-box').type('PA14');
                 cy.get('#strains-combo-box-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get(':nth-child(4) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
                 cy.get(':nth-child(4) > :nth-child(1) > :nth-child(1) > :nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type(triple[2]);
                 cy.get('#asynchronous-demo-option-0').click();
+                cy.get('.react-transform-element').click();
                 cy.get('.GenerateTree').click();
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('have.attr','src')
                 cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
@@ -315,30 +330,11 @@ describe("check clusters trees:",()=> {
                     cy.get('.GenerateTree').click();
                     cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
                     cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: triple.join("_") + '_MLST_tree.png'});
+                    cy.get('#\\31 ').check();
                 }
             })
         })
     })
-
-    /* === Test Created with Cypress Studio === */
-    it('tes tes test', function() {
-        /* ==== Generated with Cypress Studio ==== */
-        cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment').click();
-        cy.get('#Choose_num').clear();
-        cy.get('#Choose_num').type('1');
-        cy.get('#Choose_num-option-0').click();
-        cy.get('#strains-combo-box').click();
-        cy.get('#strains-combo-box-option-1').click();
-        cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
-        cy.get('#asynchronous-demo-option-0').click();
-        cy.get('.GenerateTree').click();
-        cy.get('.col-sm-5 > :nth-child(2) > .form-check-label').click();
-        cy.get('#fastafile').check();
-        cy.get('[style="text-align: left;"] > .btn').click();
-        cy.get('#dna').check();
-        cy.get('[style="text-align: left;"] > .btn').click();
-        /* ==== End Cypress Studio ==== */
-    });
 })
 
 describe("check isolation type trees:",()=> {
@@ -348,8 +344,6 @@ describe("check isolation type trees:",()=> {
     })
     it('test isolation type:',()=>{
         /* ==== Generated with Cypress Studio ==== */
-        cy.get('.dropdown-toggle > span').click();
-        cy.get('.actions-btn').click();
         cy.get('.GenerateTree').click();
         cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
         cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name:'all_isolation_types.png'});
