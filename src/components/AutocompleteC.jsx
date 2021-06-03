@@ -181,9 +181,6 @@ class AutocompleteC extends Component{
             active = false;
         })();
 
-        return () => {
-            active = false;
-        };
     }
 
     clearInput = () => {

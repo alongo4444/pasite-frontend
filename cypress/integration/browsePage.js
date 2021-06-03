@@ -143,7 +143,7 @@ describe("check all defense systems:",()=>{
 
     })
 
-    it("test triplets of defense systems", ()=>{
+    it.skip("test triplets of defense systems", ()=>{
         let triplets = []
         cy.request('http://localhost:8800/api/v1/defense/triplets').then((response)=>{
             triplets = response.body;
@@ -180,7 +180,7 @@ describe("check clusters trees:",()=> {
         cy.get('.MuiList-root > :nth-child(2)').click({force:true});
     })
 
-    it("test one cluster at a time:", ()=>{
+    it.skip("test one cluster at a time:", ()=>{
         let randomGenes = []
         cy.request('http://localhost:8800/api/v1/cluster/get_gene_strain_id/GCF_000014625.1').then((response)=>{
             const shuffled = response.body.sort(() => 0.5 - Math.random());
@@ -223,7 +223,7 @@ describe("check clusters trees:",()=> {
         })
     })
 
-    it("test two clusters at a time:", ()=>{
+    it.skip("test two clusters at a time:", ()=>{
         let doubles = []
         cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1').then((response)=>{
             doubles = response.body;
@@ -269,7 +269,7 @@ describe("check clusters trees:",()=> {
         })
     })
 
-    it("test three clusters at a time:",()=>{
+    it.skip("test three clusters at a time:",()=>{
         let triples = []
         cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1?combinations=3').then((response)=>{
             triples = response.body;
@@ -319,26 +319,6 @@ describe("check clusters trees:",()=> {
             })
         })
     })
-
-    /* === Test Created with Cypress Studio === */
-    it('tes tes test', function() {
-        /* ==== Generated with Cypress Studio ==== */
-        cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment').click();
-        cy.get('#Choose_num').clear();
-        cy.get('#Choose_num').type('1');
-        cy.get('#Choose_num-option-0').click();
-        cy.get('#strains-combo-box').click();
-        cy.get('#strains-combo-box-option-1').click();
-        cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
-        cy.get('#asynchronous-demo-option-0').click();
-        cy.get('.GenerateTree').click();
-        cy.get('.col-sm-5 > :nth-child(2) > .form-check-label').click();
-        cy.get('#fastafile').check();
-        cy.get('[style="text-align: left;"] > .btn').click();
-        cy.get('#dna').check();
-        cy.get('[style="text-align: left;"] > .btn').click();
-        /* ==== End Cypress Studio ==== */
-    });
 })
 
 describe("check isolation type trees:",()=> {
