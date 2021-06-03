@@ -94,7 +94,7 @@ describe("one-step actions", () => {
         cy.get('#asynchronous-demo').clear();
         cy.get('#asynchronous-demo').type('PAO1');
         cy.get('#asynchronous-demo-option-0').click();
-        cy.get('.GenerateTree').click();
+        cy.get('.GenerateTree').click({force: true});
         cy.get('img[src*="data:;"]',{timeout:50000}).toMatchImageSnapshot({name:'manuelSubTree.png'});
         /* ==== End Cypress Studio ==== */
     })
@@ -143,7 +143,7 @@ describe("check all defense systems:",()=>{
 
     })
 
-    it.skip("test triplets of defense systems", ()=>{
+    it("test triplets of defense systems", ()=>{
         let triplets = []
         cy.request('http://localhost:8800/api/v1/defense/triplets').then((response)=>{
             triplets = response.body;
@@ -226,7 +226,7 @@ describe("check clusters trees:",()=> {
         })
     })
 
-    it.skip("test two clusters at a time:", ()=>{
+    it("test two clusters at a time:", ()=>{
         let doubles = []
         cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1').then((response)=>{
             doubles = response.body;
@@ -278,7 +278,7 @@ describe("check clusters trees:",()=> {
         })
     })
 
-    it.skip("test three clusters at a time:",()=>{
+    it("test three clusters at a time:",()=>{
         let triples = []
         cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1?combinations=3').then((response)=>{
             triples = response.body;
@@ -344,8 +344,6 @@ describe("check isolation type trees:",()=> {
     })
     it('test isolation type:',()=>{
         /* ==== Generated with Cypress Studio ==== */
-        cy.get('.dropdown-toggle > span').click();
-        cy.get('.actions-btn').click();
         cy.get('.GenerateTree').click();
         cy.get('img[src*="data:;"]',{timeout:50000}).should('be.visible')
         cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name:'all_isolation_types.png'});
