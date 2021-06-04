@@ -122,7 +122,7 @@ export default function StrainForm() {
         let myAxios = axios.create({
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
-            myAxios.get('http://127.0.0.1:8800/api/v1/genes/download_genes', {params})
+            myAxios.get('http://127.0.0.1:8800/api/v1/genes/downloadGenes', {params})
                 .then((res) => {
                     FileDownload(res.data, 'report.csv');
                 }).catch(function (error) {

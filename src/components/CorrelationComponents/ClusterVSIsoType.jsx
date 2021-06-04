@@ -128,7 +128,7 @@ export default function ClusterVSIsoType({parentCallback2}) {
                                     </div>
                                     <AutocompleteC multipleChoice={false}
                                                    parentCallback={getSelectedGene}
-                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + selected_strain.id}
+                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/getGeneStrainId/" + selected_strain.id}
                                                    labelText="Choose Gene"
                                                    disabled={selected_strain == ""}
                                     />

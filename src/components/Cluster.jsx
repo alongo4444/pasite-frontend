@@ -159,7 +159,7 @@ class Cluster extends Component {
                                     <br/>
                                     <AutocompleteC multipleChoice={false} true
                                                    parentCallback={this.choice_geneA}
-                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainA.id}
+                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/getGeneStrainId/" + this.state.selected_strainA.id}
                                                    labelText="Choose Gene"/>
                                 </FadeIn>
                             </div>
@@ -183,7 +183,7 @@ class Cluster extends Component {
                                     <br/>
                                     <AutocompleteC multipleChoice={false} true
                                                    parentCallback={this.choice_geneB}
-                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainB.id}
+                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/getGeneStrainId/" + this.state.selected_strainB.id}
                                                    labelText="Choose Gene"/>
                                 </FadeIn>
                             </div>
@@ -207,7 +207,7 @@ class Cluster extends Component {
                                     <br/>
                                     <AutocompleteC multipleChoice={false} true
                                                    parentCallback={this.choice_geneC}
-                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/get_gene_strain_id/" + this.state.selected_strainC.id}
+                                                   apiUrl={"http://127.0.0.1:8800/api/v1/cluster/getGeneStrainId/" + this.state.selected_strainC.id}
                                                    labelText="Choose Gene"/>
 
                                 </FadeIn>

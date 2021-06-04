@@ -122,7 +122,7 @@ export default function GenesByDefenseForm() {
             paramsSerializer: params => Qs.stringify(params, {arrayFormat: 'repeat'})
         })
 
-        myAxios.get('http://127.0.0.1:8800/api/v1/genes/genes_by_defense', {params})
+        myAxios.get('http://127.0.0.1:8800/api/v1/genes/genesByDefense', {params})
             .then((res) => {
                 FileDownload(res.data, 'genes_by_defense.csv');
             }).catch(function (error) {
