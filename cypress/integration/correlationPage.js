@@ -36,10 +36,10 @@ describe("DS vs DS", () => {
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-1').click();
-        cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-4').click();
+        cy.get('#asynchronous-demo').click();
         cy.get("[id=dvdSearch]").should("not.be.disabled");
-        cy.get('.btn').click();
+        cy.get('.btn').click({force: true});
         /* ==== End Cypress Studio ==== */
 
         cy.get('[id=chartdiv]',{timeout:15000}).toMatchImageSnapshot('dvdGraph1.png');
@@ -49,8 +49,8 @@ describe("DS vs DS", () => {
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-7').click();
-        cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-1').click();
+        cy.get('#asynchronous-demo').click();
         cy.get("[id=dvdSearch]").should("not.be.disabled");
         cy.get('.btn').click();
         /* ==== End Cypress Studio ==== */
@@ -62,8 +62,8 @@ describe("DS vs DS", () => {
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-9').click();
-        cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-6').click();
+        cy.get('#asynchronous-demo').click();
         cy.get("[id=dvdSearch]").should("not.be.disabled");
         cy.get('#asynchronous-demo').click();
         cy.get('.body_c').click({force: true});
@@ -96,8 +96,8 @@ describe("DS vs DS", () => {
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-3').click();
-        cy.get('#asynchronous-demo').click();
         cy.get('#asynchronous-demo-option-5').click();
+        cy.get('#asynchronous-demo').click();
         cy.intercept('GET', 'api/v1/statistics/*', {
             statusCode: 500,
         })

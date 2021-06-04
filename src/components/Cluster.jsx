@@ -28,12 +28,16 @@ class Cluster extends Component {
         showing_one: false,
         showing_two: false,
         showing_three: false,
-        downloadable: false
+        downloadable: false,
+        ackey: true,
 
     }
     constructor() {
         super();
         this.childErr = React.createRef();
+        this.childAC1 = React.createRef();
+        this.childAC2 = React.createRef();
+        this.childAC3 = React.createRef();
     }
     choice_strainA = (selected) => {
         if (selected != null) {
@@ -128,6 +132,27 @@ class Cluster extends Component {
         }
     }
 
+    clearInput(){
+        if(this.childAC1.current) {
+            this.childAC1.current.clearInput()
+        }
+        if(this.childAC2.current) {
+            this.childAC2.current.clearInput()
+        }
+        if(this.childAC3.current) {
+            this.childAC3.current.clearInput()
+        }
+        this.setState({ackey: !this.state.ackey}) // changing the key value resets the input value
+        this.setState({selected_strainA: false})
+        this.setState({selected_strainB: false})
+        this.setState({selected_strainC: false})
+        this.setState({selected_geneA: false})
+        this.setState({selected_geneB: false})
+        this.setState({selected_geneC: false})
+        this.setState({showing_one: false})
+        this.setState({showing_two: false})
+        this.setState({showing_three: false})
+    }
 
     render() {
 
@@ -135,6 +160,7 @@ class Cluster extends Component {
             <container>
                 <div>
                     <Autocomplete
+                        key={this.state.ackey}
                         id="Choose_num"
                         options={this.state.num_cluster}
                         getOptionLabel={(option) => option}
@@ -148,6 +174,7 @@ class Cluster extends Component {
                                 <FadeIn>
                                     <p style={{textAlign: "left"}}>select first strain and gene</p>
                                     <Autocomplete
+                                        key={this.state.ackey}
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
@@ -160,7 +187,10 @@ class Cluster extends Component {
                                     <AutocompleteC multipleChoice={false} true
                                                    parentCallback={this.choice_geneA}
                                                    apiUrl={"http://127.0.0.1:8800/api/v1/cluster/getGeneStrainId/" + this.state.selected_strainA.id}
-                                                   labelText="Choose Gene"/>
+                                                   labelText="Choose Gene"
+                                                   ref = {this.childAC1}
+                                                   disableCloseOnSelect = {false}
+                                    />
                                 </FadeIn>
                             </div>
                             : null
@@ -172,6 +202,7 @@ class Cluster extends Component {
                                 <FadeIn>
                                     <p style={{textAlign: "left"}}>select second strain and gene</p>
                                     <Autocomplete
+                                        key={this.state.ackey}
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
@@ -184,7 +215,10 @@ class Cluster extends Component {
                                     <AutocompleteC multipleChoice={false} true
                                                    parentCallback={this.choice_geneB}
                                                    apiUrl={"http://127.0.0.1:8800/api/v1/cluster/getGeneStrainId/" + this.state.selected_strainB.id}
-                                                   labelText="Choose Gene"/>
+                                                   labelText="Choose Gene"
+                                                   ref = {this.childAC2}
+                                                   disableCloseOnSelect = {false}
+                                    />
                                 </FadeIn>
                             </div>
                             : null
@@ -196,6 +230,7 @@ class Cluster extends Component {
                                 <FadeIn>
                                     <p style={{textAlign: "left"}}>select third strain and gene</p>
                                     <Autocomplete
+                                        key={this.state.ackey}
                                         id="strains-combo-box"
                                         options={this.state.strains}
                                         getOptionLabel={(option) => option.name}
@@ -208,7 +243,10 @@ class Cluster extends Component {
                                     <AutocompleteC multipleChoice={false} true
                                                    parentCallback={this.choice_geneC}
                                                    apiUrl={"http://127.0.0.1:8800/api/v1/cluster/getGeneStrainId/" + this.state.selected_strainC.id}
-                                                   labelText="Choose Gene"/>
+                                                   labelText="Choose Gene"
+                                                   ref = {this.childAC3}
+                                                   disableCloseOnSelect = {false}
+                                    />
 
                                 </FadeIn>
                             </div>

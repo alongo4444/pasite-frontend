@@ -24,13 +24,18 @@ var qs = require('qs');
 /**
  * the Browse Page - phylogenetic trees
  */
+
 class BrowsePage extends Component {
+
     constructor(props) {
         super(props);
         this.cluster = React.createRef();
         this.isltype = React.createRef();
         this.childErr = React.createRef();
         this.childWar = React.createRef()
+        this.childAutoText = React.createRef();
+
+
         this.state = {
             source: [],
             loaded: false,
@@ -48,6 +53,10 @@ class BrowsePage extends Component {
             badSystems: [],
             badStrains: []
         }
+
+        this.parentFileChangeCallback = this.onFileChange.bind(this)
+        this.updateTextBox = this.setSwitchTextBox.bind(this)
+        this.parentHandleTextBox = this.handleTextBox.bind(this)
     };
 
     /*
@@ -207,19 +216,21 @@ class BrowsePage extends Component {
         this.setState({textbox: data});
     }
 
+    resetParams = () => {
+        this.setState({selectedFile:{}})
+        this.setState({selectedStrains:[]})
+        this.setState({checkmlst:false})
+        this.setState({selectedOption: []})
+        this.childAutoText.current.clearAutoComplete();
+        if(this.cluster.current) {
+            this.cluster.current.clearInput();
+        }
+
+    }
+
 
     render() {
 
-        const resetParams = () => {
-            this.setState({selectedFile:{}})
-            this.setState({selectedStrains:[]})
-            this.setState({checkmlst:false})
-            this.setState({selectedOption: []})
-            console.log(this.state.selectedFile)
-            console.log(this.state.selectedOption)
-            console.log(this.state.selectedStrains)
-            console.log(this.state.checkmlst)
-        }
 
         /*
         handles defense systems choice into selectedOptions state and save it.
@@ -344,7 +355,8 @@ class BrowsePage extends Component {
                     <div className='rowC'>
                         <div className='sidebar'>
                             <div className="instructions">choose a way to upload strains and create subtree:</div>
-                            <TextOrFileUpload updateTextbox={this.setSwitchTextBox}
+                            <TextOrFileUpload ref={this.childAutoText}
+                                              updateTextbox={this.setSwitchTextBox}
                                               apiUrl="http://127.0.0.1:8800/api/v1/strains/indexes"
                                               multipleChoice={true}
                                               parentFileChangeCallback={this.onFileChange}
@@ -361,7 +373,7 @@ class BrowsePage extends Component {
                                 </div>
                                 <br/>
                                 <div class="rowC">
-                                    <Button onClick={resetParams} variant="outline-primary"
+                                    <Button onClick={() => this.resetParams()} variant="outline-primary"
                                             className='resetParams'>Reset Query</Button>
                                     <Button onClick={() => this.computeTree()} variant="outline-primary"
                                             className='GenerateTree'>Generate Tree</Button>
