@@ -230,11 +230,9 @@ class BrowsePage extends Component {
 
 
     render() {
-
-
         /*
         handles defense systems choice into selectedOptions state and save it.
-         */
+        */
         const handleChange = selectedOption => {
             if (selectedOption == null) {
                 selectedOption = []

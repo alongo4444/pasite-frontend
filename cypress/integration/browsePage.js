@@ -148,7 +148,6 @@ describe("check all defense systems:",()=>{
         cy.request('http://localhost:8800/api/v1/defense/triplets').then((response)=>{
             triplets = response.body;
         }).then(()=>{
-            console.log(triplets);
             cy.wrap(triplets).each((triple,idx)=>{
                 /* ==== Generated with Cypress Studio ==== */
                 cy.get('.css-g1d714-ValueContainer').click();

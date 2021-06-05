@@ -7,7 +7,7 @@ import '@testing-library/cypress/add-commands'
 // check out the link below and learn how to write your first test:
 // https://on.cypress.io/writing-first-test
 /* === Test Created with Cypress Studio === */
-it('ABI BREX research', function() {
+it.skip('ABI BREX research', function() {
   /* ==== Generated with Cypress Studio ==== */
   cy.visit('http://localhost:3000/');
   cy.get('.carousel-control-next').click();
@@ -157,7 +157,7 @@ it('ABI BREX research', function() {
   /* ==== End Cypress Studio ==== */
 });
 
-it('Test PA14 Research', function() {
+it.skip('Test PA14 Research', function() {
   cy.visit('http://localhost:3000/');
   /* ==== Generated with Cypress Studio ==== */
   cy.get('.carousel-control-next-icon').click();
