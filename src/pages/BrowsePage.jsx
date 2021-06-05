@@ -214,6 +214,11 @@ class BrowsePage extends Component {
      */
     setSwitchTextBox = data => {
         this.setState({textbox: data});
+        if(data){
+            this.setState({selectedFile: []});
+        } else {
+            this.setState({selectedStrains: []});
+        }
     }
 
     resetParams = () => {
@@ -348,6 +353,8 @@ class BrowsePage extends Component {
                 return (<div></div>)
             }
         }
+
+
 
         return (
             <div className="mainDiv">
