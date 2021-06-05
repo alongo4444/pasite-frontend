@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import FadeIn from "react-fade-in";
 import '../styles/StrainForm.css';
-import DropdownCheckbox from "./DropdownCheckbox";
 import {AiFillCheckSquare} from 'react-icons/ai';
 /**
  * the component of the isolation types

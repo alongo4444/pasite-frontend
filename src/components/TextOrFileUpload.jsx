@@ -120,8 +120,10 @@ class TextOrFileUpload extends Component{
                                    parentCallback={(selected) => this.props.parentHandleTextBox(selected)} multipleChoice={this.props.multipleChoice} parentCallbackLegnth={this.props.parentCallbackLegnth} limit_length={this.props.limit_length}/>
         } else {
             return <Form.Group>
-                <Form.File key={this.state.ffKey}onChange={this.props.parentFileChangeCallback} id="exampleFormControlFile1"
-                           label={this.props.label}/>
+                <Form.File key={this.state.ffKey} onChange={this.props.parentFileChangeCallback} id="exampleFormControlFile1"
+                           label={this.props.label}
+
+                />
             </Form.Group>;
         }
     }
@@ -132,6 +134,7 @@ class TextOrFileUpload extends Component{
             // this.setState({textbox: false}
             // setTextbox(false)
             this.setState({textbox: false})
+            this.props.updateTextbox(false);
             // this.setState({textOrFile: 'File Upload'});
             // setTextOrFile('File Upload')
             this.setState({textOrFile: false})
@@ -139,6 +142,7 @@ class TextOrFileUpload extends Component{
         } else {
             // this.setState({textbox: true});
             this.setState({textbox: true})
+            this.props.updateTextbox(true);
             // this.setState({textOrFile: 'Text Box'});
             this.setState({textOrFile: 'Text Box'})
         }
