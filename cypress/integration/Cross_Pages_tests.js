@@ -90,10 +90,6 @@ it('ABI BREX research', function() {
   cy.wait(3000)
 
   cy.get(':nth-child(3) > .MuiListItemIcon-root > svg').click({force: true});
-  cy.get('.dropdown-toggle > span').click();
-  cy.get('.actions-btn').click();
-  cy.get('.GenerateTree').click();
-  cy.get('.MuiAutocomplete-clearIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click({force: true});
   cy.get('.GenerateTree').click();
   cy.wait(3000)
   cy.get('.react-switch-bg').click({force: true});
@@ -102,19 +98,21 @@ it('ABI BREX research', function() {
   cy.wait(3000)
 
   cy.get(':nth-child(5) > .nav-link').click();
-  cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();
-  cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
-  cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('pa14');
+  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear({force: true});
+  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('pa14',{force: true});
   cy.get('#asynchronous-demo-option-0').click();
-  cy.get(':nth-child(2) > :nth-child(1) > [style="text-align: center;"] > .btn').click();
+  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
+  cy.get(':nth-child(6) > .btn').click();
   cy.get('#left-tabs-example-tab-second').click();
-  cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
-  cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('ABI');
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear({force: true});
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('ABI',{force: true});
   cy.get('#asynchronous-demo-option-0').click();
-  cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
-  cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('brex');
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear({force: true});
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('brex',{force: true});
   cy.get('#asynchronous-demo-option-0').click();
-  cy.get(':nth-child(1) > :nth-child(1) > [style="text-align: center;"] > .btn').click();
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
+  cy.get(':nth-child(5) > .btn').click();
   cy.get(':nth-child(6) > .nav-link').click();
   cy.get('#asynchronous-demo').clear();
   cy.get('#asynchronous-demo').type('abi');
@@ -122,6 +120,7 @@ it('ABI BREX research', function() {
   cy.get('#asynchronous-demo').clear();
   cy.get('#asynchronous-demo').type('BRE');
   cy.get('#asynchronous-demo-option-0').click();
+  cy.get('.MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
   cy.get('#dvdSearch').click();
   cy.get('tbody > tr > :nth-child(4)').click();
   cy.get('#dvc > .MuiListItemIcon-root > [viewBox="0 0 16 16"]').click({force: true});
@@ -147,6 +146,7 @@ it('ABI BREX research', function() {
   cy.get('#dvclSearch').click();
   cy.get('#clvi > .MuiListItemIcon-root > [role="img"]').click({force: true});
   cy.get('#strains-combo-box').clear();
+  cy.get(':nth-child(1) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click({force: true});
   cy.get('#strains-combo-box').type('pa14');
   cy.get('#strains-combo-box-option-0').click();
   cy.get(':nth-child(1) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
@@ -154,7 +154,8 @@ it('ABI BREX research', function() {
   cy.get(':nth-child(3) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
   cy.get('#asynchronous-demo-option-0').click();
   cy.get('#clviSearch').click();
-  /* ==== End Cypress Studio ==== */
+  // // /* ==== End Cypress Studio ==== */
+
 });
 
 it('Test PA14 Research', function() {
@@ -180,7 +181,7 @@ it('Test PA14 Research', function() {
   cy.get('[style="height: 100%; width: 90%; margin-left: 5%;"]').click({force:true});
   /* ==== Generated with Cypress Studio ==== */
   cy.get(':nth-child(5) > .nav-link').click();
-  cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
   cy.get('#asynchronous-demo-option-1').click();
   cy.get('#all').uncheck();
   cy.get('[for="3"]').click();
@@ -189,15 +190,15 @@ it('Test PA14 Research', function() {
   cy.get('#\\38 ').check();
   cy.get('[for="5"]').click();
   cy.get('#\\35 ').check();
-  cy.get(':nth-child(2) > :nth-child(1) > [style="text-align: center;"] > .btn').click();
+  cy.get(':nth-child(6) > .btn').click();
   cy.readFile('cypress/downloads/report.csv').should('exist')
   /* ==== End Cypress Studio ==== */
   /* ==== Generated with Cypress Studio ==== */
   cy.get(':nth-child(4) > .nav-link').click();
   cy.get('#asynchronous-demo').click();
   cy.get('#asynchronous-demo-option-1').click();
-  cy.get('#asynchronous-demo').click();
   cy.get('#asynchronous-demo-option-5').click();
+  cy.get('#asynchronous-demo').click();
   cy.get('.css-g1d714-ValueContainer').click();
   cy.get('#react-select-3-option-2').click();
   cy.get('#react-select-3-option-7').click();

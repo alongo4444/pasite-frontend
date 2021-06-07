@@ -43,7 +43,7 @@ export default function StrainCircosPage() {
         })().catch((err) => {
             console.log(err);
             if (childErr.current) {
-                childErr.current.handleOpen();
+                childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                 }});
 
         return () => {
