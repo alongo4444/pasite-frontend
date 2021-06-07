@@ -205,7 +205,7 @@ it('Test PA14 Research', function() {
   cy.get(':nth-child(3) > .css-6q0nyr-Svg > path').click({force: true});
   cy.get('#\\31 ').check();
   cy.get('.GenerateTree').click();
-  cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: 'CP_MLST_tree.png'});
+  cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name: 'CP_MLST_tree.png'});
   /* ==== End Cypress Studio ==== */
 });
 

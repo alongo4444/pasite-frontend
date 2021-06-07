@@ -99,12 +99,8 @@ class TextOrFileUpload extends Component{
             textOrFile: "Text Box",
             ffKey: true
         }
-
         this.parentCallback = this.props.parentHandleTextBox.bind(this)
         this.parentCallbackLegnth = this.props.parentFileChangeCallback.bind(this);
-
-
-
     }
 
     clearAutoComplete() {
