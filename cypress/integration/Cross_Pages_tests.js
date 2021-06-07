@@ -7,7 +7,7 @@ import '@testing-library/cypress/add-commands'
 // check out the link below and learn how to write your first test:
 // https://on.cypress.io/writing-first-test
 /* === Test Created with Cypress Studio === */
-it.skip('ABI BREX research', function() {
+it('ABI BREX research', function() {
   /* ==== Generated with Cypress Studio ==== */
   cy.visit('http://localhost:3000/');
   cy.get('.carousel-control-next').click();
@@ -90,7 +90,6 @@ it.skip('ABI BREX research', function() {
   cy.wait(3000)
 
   cy.get(':nth-child(3) > .MuiListItemIcon-root > svg').click({force: true});
-  cy.get('.dropdown-toggle > span').click();
   cy.get('.actions-btn').click();
   cy.get('.GenerateTree').click();
   cy.get('.MuiAutocomplete-clearIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click({force: true});
@@ -204,7 +203,7 @@ it.skip('Test PA14 Research', function() {
   cy.get(':nth-child(3) > .css-6q0nyr-Svg > path').click({force: true});
   cy.get('#\\31 ').check();
   cy.get('.GenerateTree').click();
-  cy.get('img[src*="data:;"]', {timeout: 50000}).toMatchImageSnapshot({name: 'CP_MLST_tree.png'});
+  cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name: 'CP_MLST_tree.png'});
   /* ==== End Cypress Studio ==== */
 });
 
