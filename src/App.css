@@ -2,7 +2,7 @@ body {
     background-image: url("./assets/backgrounds/main-bg5.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-
+    font-family: Ubuntu;
 }
 
 .title{
@@ -13,8 +13,14 @@ body {
 
 .mainDiv{
     min-height: 80%;
+    font-family: Ubuntu;
 }
 
 .App{
     height: 100%;
+    font-family: Ubuntu;
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: url("./assets/fonts/Ubuntu-Regular.ttf");
 }

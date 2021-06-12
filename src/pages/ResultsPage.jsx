@@ -89,7 +89,6 @@ class ResultsPage extends Component {
             lastPageTitle: 'Go to last', // the title of last page button
             hideSizePerPage: false, // hide the size per page dropdown
             hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
-
         }
 
         const expandRow = {

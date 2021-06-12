@@ -50,8 +50,8 @@ describe("one-step actions", () => {
     })
     afterEach(()=>{
 
-        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('have.attr','src')
-        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('be.visible')
+        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('have.attr','src')
+        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('be.visible')
         cy.get('.downloadButton').should('exist')
         cy.get('.downloadButton').click()
         cy.readFile('cypress/downloads/download.svg').should('exist')
@@ -92,10 +92,10 @@ describe("one-step actions", () => {
         cy.get('.react-switch-bg').click();
         cy.get('#exampleFormControlFile1').attachFile("../fixtures/strains");
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).toMatchImageSnapshot({name:'fileSubTree.png'});
+        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).toMatchImageSnapshot({name:'fileSubTree.png'});
     })
 
-    it.only("check bad parameters",()=>{
+    it("check bad parameters",()=>{
         /* ==== Generated with Cypress Studio ==== */
         cy.get('.react-switch-bg').click();
         cy.get('#exampleFormControlFile1').attachFile("../fixtures/strainsInvalid.txt");
@@ -113,7 +113,7 @@ describe("one-step actions", () => {
         cy.get('#asynchronous-demo').type('PAO1');
         cy.get('#asynchronous-demo-option-0').click();
         cy.get('.GenerateTree').click({force: true});
-        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).toMatchImageSnapshot({name:'manuelSubTree.png'});
+        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).toMatchImageSnapshot({name:'manuelSubTree.png'});
         /* ==== End Cypress Studio ==== */
     })
     it("check defense system selection",()=>{
@@ -126,14 +126,14 @@ describe("one-step actions", () => {
         cy.get('#react-select-3-option-10').click();
         cy.get('[style="transition: opacity 400ms ease 0s, transform 400ms ease 0s; transform: none; opacity: 1;"] > :nth-child(1)').click();
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).toMatchImageSnapshot({name:'4systemsTree.png'});
+        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).toMatchImageSnapshot({name:'4systemsTree.png'});
         /* ==== End Cypress Studio ==== */
     })
     it("get tree with MLST coloring",()=>{
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#\\31 ').check();
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).toMatchImageSnapshot({name:'standardTreeMLST.png'});
+        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).toMatchImageSnapshot({name:'standardTreeMLST.png'});
         /* ==== End Cypress Studio ==== */
     })
 
@@ -186,7 +186,7 @@ describe("one-step actions", () => {
 
     it("screenshot(visual) testing of the standard tree:", ()=>{
         cy.get('div[class="App"]').toMatchImageSnapshot({name:'standardPage.png'});
-        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).toMatchImageSnapshot({name:'standardTree.png'});
+        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).toMatchImageSnapshot({name:'standardTree.png'});
     })
 })
 
@@ -218,7 +218,7 @@ describe("check all defense systems:",()=>{
                 cy.get('.react-transform-element').click();
                 /* ==== End Cypress Studio ==== */
                 cy.get('.GenerateTree').click();
-                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).toMatchImageSnapshot({name:triple.join("_")+'.png'});
+                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).toMatchImageSnapshot({name:triple.join("_")+'.png'});
                 cy.get('div[class*="tlfecz-indicatorContainer"]').first().click()
             })
         });
@@ -255,9 +255,9 @@ describe("check clusters trees:",()=> {
                 cy.get('#asynchronous-demo-option-0').click();
                 cy.get('.react-transform-element').click();
                 cy.get('.GenerateTree').click();
-                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('have.attr','src')
-                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('be.visible')
-                cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name: gene.name + '_tree.png'});
+                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('have.attr','src')
+                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('be.visible')
+                cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout:60000}).toMatchImageSnapshot({name: gene.name + '_tree.png'});
 
                 cy.get('#csvfile').check()
                 cy.get('[style="text-align: left;"] > .btn').click();
@@ -278,8 +278,8 @@ describe("check clusters trees:",()=> {
                 if((idx+1) % 3 ==0){
                     cy.get('#\\31 ').check();
                     cy.get('.GenerateTree').click();
-                    cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('be.visible')
-                    cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name: gene.name + '_MLST_tree.png'});
+                    cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('be.visible')
+                    cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout:60000}).toMatchImageSnapshot({name: gene.name + '_MLST_tree.png'});
                     cy.get('#\\31 ').check();
                 }
             })
@@ -313,9 +313,9 @@ describe("check clusters trees:",()=> {
                 cy.get('#asynchronous-demo-option-0').click();
                 cy.get('.react-transform-element').click();
                 cy.get('.GenerateTree').click();
-                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('have.attr','src')
-                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('be.visible')
-                cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name: double.join("_") + '_tree.png'});
+                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('have.attr','src')
+                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('be.visible')
+                cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout:60000}).toMatchImageSnapshot({name: double.join("_") + '_tree.png'});
                 cy.get('#fastafile').check();
                 cy.get('[style="text-align: left;"] > .btn').click();
                 cy.readFile('cypress/downloads/genes_by_cluster.faa').should('exist')
@@ -328,8 +328,8 @@ describe("check clusters trees:",()=> {
                 if((idx+1) % 3 ==0){
                     cy.get('#\\31 ').check();
                     cy.get('.GenerateTree').click();
-                    cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('be.visible')
-                    cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name: double.join("_") + '_MLST_tree.png'});
+                    cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('be.visible')
+                    cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout:60000}).toMatchImageSnapshot({name: double.join("_") + '_MLST_tree.png'});
                     cy.get('#\\31 ').check();
 
                 }
@@ -373,9 +373,9 @@ describe("check clusters trees:",()=> {
                 cy.get('#asynchronous-demo-option-0').click();
                 cy.get('.react-transform-element').click();
                 cy.get('.GenerateTree').click();
-                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('have.attr','src')
-                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('be.visible')
-                cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name: triple.join("_") + '_tree.png'});
+                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('have.attr','src')
+                cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('be.visible')
+                cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout:60000}).toMatchImageSnapshot({name: triple.join("_") + '_tree.png'});
                 cy.get('#fastafile').check();
                 cy.get('[style="text-align: left;"] > .btn').click();
                 cy.readFile('cypress/downloads/genes_by_cluster.faa').should('exist')
@@ -388,8 +388,8 @@ describe("check clusters trees:",()=> {
                 if((idx+1) % 3 ==0){
                     cy.get('#\\31 ').check();
                     cy.get('.GenerateTree').click();
-                    cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('be.visible')
-                    cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name: triple.join("_") + '_MLST_tree.png'});
+                    cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('be.visible')
+                    cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout:60000}).toMatchImageSnapshot({name: triple.join("_") + '_MLST_tree.png'});
                     cy.get('#\\31 ').check();
                 }
             })
@@ -405,8 +405,8 @@ describe("check isolation type trees:",()=> {
     it('test isolation type:',()=>{
         /* ==== Generated with Cypress Studio ==== */
         cy.get('.GenerateTree').click();
-        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).should('be.visible')
-        cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout: 50000}).toMatchImageSnapshot({name:'all_isolation_types.png'});
+        cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:60000}).should('be.visible')
+        cy.get('img[src*="data:image/svg+xml;base64,"]', {timeout:60000}).toMatchImageSnapshot({name:'all_isolation_types.png'});
         /* ==== End Cypress Studio ==== */
     })
 })

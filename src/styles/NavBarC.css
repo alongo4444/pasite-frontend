@@ -1,13 +1,13 @@
 .card {
     margin: 2%;
     margin-top: 0%;
-    font-family: Arial;
+    font-family: Ubuntu;
     text-align: center;
 
 }
 
 .c_footer{
-    font-family: Arial;
+    font-family: Ubuntu;
     font-size: 10px;
     text-align: center;
 }
@@ -32,4 +32,8 @@
     height: 100%;
     border: 1px solid black;
 
+}
+@font-face {
+    font-family: 'Ubuntu';
+    src: url("../assets/fonts/Ubuntu-Regular.ttf");
 }

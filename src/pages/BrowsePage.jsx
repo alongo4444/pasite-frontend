@@ -18,7 +18,6 @@ import TextOrFileUpload from "../components/TextOrFileUpload";
 import ErrorModalC from "../components/ErrorModalC";
 import Divider from '@material-ui/core/Divider';
 import WarningModalC from "../components/WarningModalC";
-
 var qs = require('qs');
 /**
  * the Browse Page - phylogenetic trees
