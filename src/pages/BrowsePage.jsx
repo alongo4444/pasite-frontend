@@ -19,7 +19,6 @@ import ErrorModalC from "../components/ErrorModalC";
 import Divider from '@material-ui/core/Divider';
 import WarningModalC from "../components/WarningModalC";
 
-
 var qs = require('qs');
 /**
  * the Browse Page - phylogenetic trees
@@ -77,7 +76,7 @@ class BrowsePage extends Component {
                     '',
                 ),
             );
-            this.setState({source: "data:;base64," + base64});
+            this.setState({source: "data:image/svg+xml;base64," + base64});
             this.setState({loaded: true});
             console.log(colors.data)
             this.setState({colourOptions: colors.data});
@@ -125,7 +124,7 @@ class BrowsePage extends Component {
                             '',
                         ),
                     );
-                    this.setState({source: "data:;base64," + base64});
+                    this.setState({source: "data:image/svg+xml;base64," + base64});
                     this.setState({loaded: true})
                     if (this.state.generateType.includes("cluster")){
                         this.setState({loadedCluster: true})
@@ -235,11 +234,9 @@ class BrowsePage extends Component {
 
 
     render() {
-
-
         /*
         handles defense systems choice into selectedOptions state and save it.
-         */
+        */
         const handleChange = selectedOption => {
             if (selectedOption == null) {
                 selectedOption = []
@@ -325,6 +322,7 @@ class BrowsePage extends Component {
                     </div>)}
                         {this.state.generateType.includes("cluster") && (<div>
                             <div>Choose the number of genes you would like to show:</div>
+                            <br/>
                             <Cluster ref={this.cluster}/>
                             <br/><Divider/><br/>
                         </div>)}
@@ -416,17 +414,16 @@ class BrowsePage extends Component {
                                                                                       variant="primary"/>
                                             </div>)}
                                         <TransformComponent>
-
-
-                                            <img style={{
-                                                height: "100%",
-                                                width: "100%",
-                                            }}
-                                                 src={this.state.source}/>
+                                            <img
+                                                src={this.state.source} style={{marginLeft:"18%",height:"55%",width:"55%"}}/>
                                         </TransformComponent>
                                     </React.Fragment>
                                 )}
                             </TransformWrapper>
+                            {this.state.loaded && (<a href={this.state.source} download>
+                                <Button className="downloadButton">Download Graph</Button>
+                            </a>)}
+                            <br/>
                             {downloadCluster()}
                             <div id="drawer">
                                 <MiniDrawer generatingTypeHandler={this.generatingTypeHandler}/>
