@@ -134,7 +134,8 @@ class TextOrFileUpload extends Component{
             // this.setState({textbox: false}
             // setTextbox(false)
             this.setState({textbox: false})
-            this.props.updateTextbox(false);
+            if(this.props.updateTextbox)
+                this.props.updateTextbox(false);
             // this.setState({textOrFile: 'File Upload'});
             // setTextOrFile('File Upload')
             this.setState({textOrFile: false})
@@ -142,7 +143,8 @@ class TextOrFileUpload extends Component{
         } else {
             // this.setState({textbox: true});
             this.setState({textbox: true})
-            this.props.updateTextbox(true);
+            if(this.props.updateTextbox)
+                this.props.updateTextbox(true);
             // this.setState({textOrFile: 'Text Box'});
             this.setState({textOrFile: 'Text Box'})
         }

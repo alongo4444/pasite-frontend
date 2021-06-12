@@ -30,11 +30,6 @@ export default function StrainCircosPage() {
         (async () => {
             const response = await fetch('http://127.0.0.1:8800/api/v1/strains');
             const strains = await response.json();
-            if (!response.ok) {
-                // get error message from body or default to response status
-                const error = (strains && strains.message) || response.status;
-                return Promise.reject(error);
-            }
             if (active) {
                 setOptions(strains.filter(x=> x.name != null))
             }
@@ -42,7 +37,7 @@ export default function StrainCircosPage() {
         })().catch((err) => {
             console.log(err);
             if (childErr.current) {
-                childErr.current.handleOpen();
+                childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
                 }});
 
         return () => {

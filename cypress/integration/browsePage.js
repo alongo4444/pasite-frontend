@@ -101,6 +101,11 @@ describe("one-step actions", () => {
         cy.get('#exampleFormControlFile1').attachFile("../fixtures/strainsInvalid.txt");
         cy.get('.GenerateTree').click();
         cy.get('.modal-footer > .btn').click();
+        cy.get('#exampleFormControlFile1').attachFile("../fixtures/strainsInvalid.txt");
+        cy.get('.GenerateTree').click();
+        /* ==== End Cypress Studio ==== */
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('.modal').click();
         /* ==== End Cypress Studio ==== */
     })
 
@@ -237,7 +242,7 @@ describe("check clusters trees:",()=> {
         let randomGenes = []
         cy.request('http://localhost:8800/api/v1/cluster/get_gene_strain_id/GCF_000014625.1').then((response)=>{
             const shuffled = response.body.sort(() => 0.5 - Math.random());
-            randomGenes = shuffled.slice(0,10);
+            randomGenes = shuffled.slice(0,4);
         }).then(()=> {
             console.log(randomGenes);
             cy.wrap(randomGenes).each((gene, idx) => {
@@ -286,10 +291,39 @@ describe("check clusters trees:",()=> {
         })
     })
 
+    it("test error download cluster:", ()=>{
+        cy.intercept('GET', 'api/v1/genes/*', {
+            statusCode: 500,
+        })
+
+
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('#asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-3').click();
+        cy.get('#asynchronous-demo-option-4').click();
+        cy.get('.col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
+        cy.get('.css-g1d714-ValueContainer').click();
+        cy.get('#react-select-3-option-1').click();
+        cy.get('#react-select-3-option-4').click();
+        cy.get(':nth-child(3) > .css-6q0nyr-Svg > path').click({force:true});
+        cy.get('#Choose_num').click({force:true});
+        cy.get('#Choose_num-option-0').click();
+        cy.get('#strains-combo-box').click();
+        cy.get('#strains-combo-box-option-1').click();
+        cy.get(':nth-child(4) > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-1').click();
+        cy.get('.GenerateTree').click();
+        cy.get('[style="text-align: left;"] > .btn').click();
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+    })
+
     it("test two clusters at a time:", ()=>{
         let doubles = []
         cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1').then((response)=>{
             doubles = response.body;
+            const shuffled = doubles.sort(() => 0.5 - Math.random());
+            doubles = shuffled.slice(0,4);
         }).then(()=> {
             cy.wrap(doubles).each((double, idx) => {
                 /* ==== Generated with Cypress Studio ==== */
@@ -342,6 +376,8 @@ describe("check clusters trees:",()=> {
         let triples = []
         cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1?combinations=3').then((response)=>{
             triples = response.body;
+            const shuffled = triples.sort(() => 0.5 - Math.random());
+            triples = shuffled.slice(0,4);
         }).then(()=> {
             cy.wrap(triples).each((triple, idx) => {
                 cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();

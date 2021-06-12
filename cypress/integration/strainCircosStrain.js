@@ -23,7 +23,32 @@ describe("Simple Circos Search", () => {
         cy.iframe('.circosFrame').toMatchSnapshot()
         cy.get("table").should('exist');
 
+
+
     });
+    it("test autocomplete error",() =>{
+        cy.intercept('GET', 'api/v1/strains', {
+            statusCode: 500,
+        })
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('#asynchronous-demo').click();
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+    });
+
+    it("test results error",() =>{
+        cy.intercept('GET', 'api/v1/strains/strainGenesDefSystems/*', {
+            statusCode: 500,
+        })
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('#asynchronous-demo').clear();
+        cy.get('#asynchronous-demo').type('PA14');
+        cy.get('#asynchronous-demo-option-1').click();
+        cy.get('.btn').click();
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+    });
+
 
     it("test download table as csv", () =>{
         /* ==== Generated with Cypress Studio ==== */
