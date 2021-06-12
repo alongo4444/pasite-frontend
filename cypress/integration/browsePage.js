@@ -1,7 +1,7 @@
 import '@testing-library/cypress/add-commands'
 import { fixCypressSpec } from '../support'
 
-describe.skip('test catches in code via forcing network error:',()=>{
+describe('test catches in code via forcing network error:',()=>{
     it('error onMount', () => {
         cy.intercept('GET', 'api/v1/strains/*', {
             statusCode: 500,
@@ -43,7 +43,7 @@ describe.skip('test catches in code via forcing network error:',()=>{
     })
 })
 
-describe.skip("one-step actions", () => {
+describe("one-step actions", () => {
     beforeEach(fixCypressSpec(__filename))
     beforeEach(()=>{
         cy.visit("/browse")
@@ -95,12 +95,17 @@ describe.skip("one-step actions", () => {
         cy.get('img[src*="data:image/svg+xml;base64,"]',{timeout:50000}).toMatchImageSnapshot({name:'fileSubTree.png'});
     })
 
-    it.only("check bad parameters",()=>{
+    it("check bad parameters",()=>{
         /* ==== Generated with Cypress Studio ==== */
         cy.get('.react-switch-bg').click();
         cy.get('#exampleFormControlFile1').attachFile("../fixtures/strainsInvalid.txt");
         cy.get('.GenerateTree').click();
         cy.get('.modal-footer > .btn').click();
+        cy.get('#exampleFormControlFile1').attachFile("../fixtures/strainsInvalid.txt");
+        cy.get('.GenerateTree').click();
+        /* ==== End Cypress Studio ==== */
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('.modal').click();
         /* ==== End Cypress Studio ==== */
     })
 
@@ -190,7 +195,7 @@ describe.skip("one-step actions", () => {
     })
 })
 
-describe.skip("check all defense systems:",()=>{
+describe("check all defense systems:",()=>{
     beforeEach(fixCypressSpec(__filename))
     beforeEach(()=>{
         cy.visit("/browse")
@@ -233,11 +238,11 @@ describe("check clusters trees:",()=> {
         cy.get('.MuiList-root > :nth-child(2)').click({force:true});
     })
 
-    it.skip("test one cluster at a time:", ()=>{
+    it("test one cluster at a time:", ()=>{
         let randomGenes = []
         cy.request('http://localhost:8800/api/v1/cluster/get_gene_strain_id/GCF_000014625.1').then((response)=>{
             const shuffled = response.body.sort(() => 0.5 - Math.random());
-            randomGenes = shuffled.slice(0,10);
+            randomGenes = shuffled.slice(0,4);
         }).then(()=> {
             console.log(randomGenes);
             cy.wrap(randomGenes).each((gene, idx) => {
@@ -317,6 +322,8 @@ describe("check clusters trees:",()=> {
         let doubles = []
         cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1').then((response)=>{
             doubles = response.body;
+            const shuffled = doubles.sort(() => 0.5 - Math.random());
+            doubles = shuffled.slice(0,4);
         }).then(()=> {
             cy.wrap(doubles).each((double, idx) => {
                 /* ==== Generated with Cypress Studio ==== */
@@ -369,6 +376,8 @@ describe("check clusters trees:",()=> {
         let triples = []
         cy.request('http://localhost:8800/api/v1/cluster/get_tuple_genes/GCF_000014625.1?combinations=3').then((response)=>{
             triples = response.body;
+            const shuffled = triples.sort(() => 0.5 - Math.random());
+            triples = shuffled.slice(0,4);
         }).then(()=> {
             cy.wrap(triples).each((triple, idx) => {
                 cy.get('container > :nth-child(1) > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click();

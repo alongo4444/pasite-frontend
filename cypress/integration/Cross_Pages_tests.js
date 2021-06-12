@@ -99,17 +99,17 @@ it('ABI BREX research', function() {
 
   cy.get(':nth-child(5) > .nav-link').click();
   cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').click();
-  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear({force: true});
-  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('pa14',{force: true});
+  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+  cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('pa14');
   cy.get('#asynchronous-demo-option-0').click();
   cy.get(':nth-child(3) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
   cy.get(':nth-child(6) > .btn').click();
   cy.get('#left-tabs-example-tab-second').click();
-  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear({force: true});
-  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('ABI',{force: true});
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('ABI');
   cy.get('#asynchronous-demo-option-0').click();
-  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear({force: true});
-  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('brex',{force: true});
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').clear();
+  cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > #asynchronous-demo').type('brex');
   cy.get('#asynchronous-demo-option-0').click();
   cy.get(':nth-child(2) > div.col-sm-4 > :nth-child(1) > .textBox > form > .search-form > .form-group > .col > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root > .MuiAutocomplete-endAdornment > .MuiAutocomplete-popupIndicator > .MuiIconButton-label > .MuiSvgIcon-root').click();
   cy.get(':nth-child(5) > .btn').click();
