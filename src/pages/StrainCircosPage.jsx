@@ -8,7 +8,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ErrorModalC from "../components/ErrorModalC";
 
-
 /**
  * The Strain Circos search page
  */
@@ -76,7 +75,7 @@ export default function StrainCircosPage() {
                             <Autocomplete className="textBox"
                                 id="asynchronous-demo"
                                 multiple={false}
-                                style={{ width: 800 }}
+                                style={{ width: "100%" }}
                                 open={open}
                                 onOpen={() => {
                                     setOpen(true);

@@ -4,7 +4,6 @@ thead tr {
     background-color: #acc4f3;
     border-width: 2px;
     opacity: 0.9;
-    font-family: 'Roboto Condensed', sans-serif;
 }
 
 thead tr:hover {
@@ -49,17 +48,7 @@ tr:hover {
 }
 
 .seq_c{
-    font-family: 'Roboto Condensed', sans-serif;
     text-align: left;
     font-size: 16px;
     font-weight: bold;
 }
-
-/*.react-bootstrap-table-pagination-list {*/
-/*    text-align: center;*/
-/*    transform: translateX(-75%);*/
-/*}*/
-
-/*.react-bootstrap-table-page-btns-ul {*/
-/*    float: none;*/
-/*}*/
