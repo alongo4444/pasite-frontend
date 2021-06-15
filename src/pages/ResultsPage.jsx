@@ -30,7 +30,7 @@ class ResultsPage extends Component {
             this.setState({loaded: true})
             console.log(err);
             if (this.childErr.current) {
-                this.childErr.current.handleOpen();
+                this.childErr.current.handleOpen("There is a problem with the server request. We apologize for the inconvenience.");
             }});
     }
 
@@ -89,7 +89,6 @@ class ResultsPage extends Component {
             lastPageTitle: 'Go to last', // the title of last page button
             hideSizePerPage: false, // hide the size per page dropdown
             hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
-
         }
 
         const expandRow = {

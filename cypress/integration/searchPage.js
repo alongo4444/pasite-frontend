@@ -42,6 +42,24 @@ describe("check DOM components", () => {
         cy.get("table").toMatchSnapshot();
     });
 
+    it("test results error", () =>{
+        cy.intercept('GET', 'api/v1/genes', {
+            statusCode: 500,
+        })
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('.btn').should('be.disabled');
+        cy.get('#asynchronous-demo').click()
+        cy.get('#asynchronous-demo-option-1').click();
+        cy.get('.btn').should('be.enabled')
+        cy.get('#asynchronous-demo').click();
+        cy.get('#asynchronous-demo-option-4').click();
+        cy.get('#numResults').select('25');
+        cy.get('.btn').click();
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('.modal-body').should('be.visible')
+        /* ==== End Cypress Studio ==== */
+    });
+
     it("request", () =>{
         /* ==== Generated with Cypress Studio ==== */
         cy.request('http://127.0.0.1:8800/api/v1/strains').then((response)=>{

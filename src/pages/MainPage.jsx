@@ -21,7 +21,14 @@ class MainPage extends Component {
             <div>
                 <FadeIn>
                     <div style={{width: "98%", marginLeft: "1%"}}>
-                        <Carousel>
+                        <Carousel interval={null} >
+                            <Carousel.Item>
+                                <iframe width="560" height="315"
+                                        src="https://www.youtube.com/embed/4NphfoHIxPM?controls=0"
+                                        title="YouTube video player" frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen></iframe>
+                            </Carousel.Item>
                             <Carousel.Item>
                                 <img
                                     style={{height: "750px", objectFit: 'cover'}}
@@ -72,6 +79,7 @@ class MainPage extends Component {
                                     </div>
                                 </Carousel.Caption>
                             </Carousel.Item>
+
                         </Carousel>
                     </div>
                 </FadeIn>
