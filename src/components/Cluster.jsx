@@ -54,6 +54,7 @@ class Cluster extends Component {
         }
     }
 
+    
     choice_strainC = (selected) => {
         if (selected != null) {
             this.setState({
